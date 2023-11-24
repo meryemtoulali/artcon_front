@@ -37,20 +37,18 @@ public class MainActivity extends AppCompatActivity {
         viewModel.getLoginResult().observe(this, this::handleLoginResult);
     }
 
-        private void handleLoginResult(LoginResponse result) {
-            // Check if the login was successful
-            if (result.isSuccess()) {
-                // Show a toast message
-                Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show();
-
-                // Navigate to another activity
-                Intent intent = new Intent(this, LoggedActivity.class);
-                startActivity(intent);
-                finish(); // Optional: finish the current activity to prevent going back with the back button
-            } else {
-                // If login failed, show an error message
-                Toast.makeText(this, result.getMessage(), Toast.LENGTH_SHORT).show();
-            }
+    private void handleLoginResult(LoginResponse result) {
+        // Check if the login was successful
+        if (result.isSuccess()) {
+            // Show a toast message
+            Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show();
+            // Navigate to another activity
+            Intent intent = new Intent(this, LoggedActivity.class);
+            startActivity(intent);
+            finish(); // Optional: finish the current activity to prevent going back with the back button
+        } else {
+            // If login failed, show an error message
+            Toast.makeText(this, result.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
-
+}
