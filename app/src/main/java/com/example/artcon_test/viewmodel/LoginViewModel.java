@@ -21,13 +21,15 @@ public class LoginViewModel extends ViewModel {
     // Default constructor
     public LoginViewModel() {
         // Provide the base URL for your Spring Boot backend
-        this("http://10.0.2.2:8080");
+        this("http://192.168.1.16:8080/user/");
     }
 
     // Constructor with a custom base URL
     public LoginViewModel(String baseUrl) {
+        Log.d("LoginViewModel", "Base URL: " + baseUrl);
+
         apiService = new Retrofit.Builder()
-                .baseUrl("http://10.0.2.2:8080")
+                .baseUrl("http://192.168.1.16:8080/user/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
                 .build()
