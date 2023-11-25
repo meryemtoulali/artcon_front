@@ -1,8 +1,56 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
+
+    >
     <!-- Base application theme. -->
-    <style name="Base.Theme.ArtCon_test" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Base.Theme.ArtCon_test" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/purpleBase</item>
+        <item name="colorOnPrimary">@color/whiteBase</item>
+        <item name="colorPrimaryVariant">@color/purpleDark</item>
+
+        <item name="colorSecondary">@color/pinkBase</item>
+        <item name="colorSecondaryVariant">@color/pinkDark</item>
+        <item name="colorOnSecondary">@color/blackBase</item>
+
+        <item name="android:colorBackground">@color/whiteBase</item>
+        <item name="colorOnBackground">@color/blackBase</item>
+
+        <item name="colorSurface">@color/whiteBase</item>
+        <item name="colorOnSurface">@color/blackBase</item>
+
+        <item name="colorError">@color/error</item>
+        <item name="colorOnError">@color/whiteBase</item>
+
+        <item name="android:statusBarColor">@color/whiteBase</item>
+        <item name="android:windowLightStatusBar">true</item>
+
+        <item name="android:fontFamily">@font/ubuntu</item>
+    </style>
+
+    <style name="ActionButton" parent="Base.Theme.ArtCon_test" >
+        <item name="android:background">@drawable/gradient_action</item>
+        <item name="backgroundTint">@null</item>
+        <item name="android:textColor">@color/whiteBase</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:stateListAnimator">@null</item>
+    </style>
+
+    <style name="ContinueButton" parent="Base.Theme.ArtCon_test" >
+        <item name="android:background">@drawable/continue_button</item>
+        <item name="backgroundTint">@null</item>
+        <item name="android:textColor">@color/whiteBase</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:stateListAnimator">@null</item>
+    </style>
+
+    <style name="CancelButton" parent="Base.Theme.ArtCon_test" >
+        <item name="android:background">@drawable/grey_border</item>
+        <item name="backgroundTint">@null</item>
+        <item name="android:textColor">@color/blackBase</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:stateListAnimator">@null</item>
     </style>
 
     <style name="Theme.ArtCon_test" parent="Base.Theme.ArtCon_test" />

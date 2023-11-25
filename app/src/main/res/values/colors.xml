@@ -1,5 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="blackBase">#323232</color>
+    <color name="whiteBase">#FFFFFFFF</color>
+
+    <color name="purpleBase">#AE89FE</color>
+    <color name="purpleDark">#6E4BCC</color>
+    <color name="purpleLight">#D2B6FF</color>
+    <color name="purpleDisabled">#E9E1FC</color>
+
+    <color name="pinkBase">#FFD6FF</color>
+    <color name="pinkDark">#E7C6FF</color>
+
+    <color name="blueBase">#BBD0FF</color>
+    <color name="blueDark">#A8B2FF</color>
+
+    <color name="greyBase">#DCDCE4</color>
+    <color name="greyDark">#9EA0A9</color>
+    <color name="greyLight">#F3F3F8</color>
+    <color name="greySoft">#F7F7FA</color>
+
+    <color name="error">#FF5674</color>
+    <color name="warning">#FFE485</color>
+    <color name="success">#6BF6B3</color>
 </resources>
