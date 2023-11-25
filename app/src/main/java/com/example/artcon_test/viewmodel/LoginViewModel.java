@@ -10,9 +10,8 @@ import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import com.example.artcon_test.network.ApiService;
-import com.example.artcon_test.model.LoginRequest;
 import com.example.artcon_test.model.LoginResponse;
-
+import com.example.artcon_test.model.LoginRequest;
 public class LoginViewModel extends ViewModel {
     private ApiService apiService;
 
@@ -21,19 +20,16 @@ public class LoginViewModel extends ViewModel {
 
     // Default constructor
     public LoginViewModel() {
-        // Provide a default base URL or initialize it in a way that makes sense for your app
-        this("your_default_base_url");
+        // Provide the base URL for your Spring Boot backend
+        this("http://192.168.1.16:8080/user/");
     }
 
     // Constructor with a custom base URL
     public LoginViewModel(String baseUrl) {
-        if (!baseUrl.startsWith("http://") && !baseUrl.startsWith("https://")) {
-            // If the provided URL doesn't have a scheme, add a default one (e.g., http://)
-            baseUrl = "http://" + baseUrl;
-        }
+        Log.d("LoginViewModel", "Base URL: " + baseUrl);
 
         apiService = new Retrofit.Builder()
-                .baseUrl(baseUrl)
+                .baseUrl("http://192.168.1.16:8080/user/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
                 .build()
@@ -48,12 +44,11 @@ public class LoginViewModel extends ViewModel {
         return error;
     }
 
+    // Adjusted login method to use LoginRequest instead of User
     public void login(String username, String password) {
-        LoginRequest request = new LoginRequest();
-        request.setUsername(username);
-        request.setPassword(password);
+        LoginRequest loginRequest = new LoginRequest(username, password);
 
-        apiService.login(request)
+        apiService.login(loginRequest)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
@@ -62,6 +57,6 @@ public class LoginViewModel extends ViewModel {
                             Log.e("LoginViewModel", "Error: " + throwable.getMessage());
                             error.setValue("Login failed. Please try again."); // Provide a user-friendly error message
                         }
-                );
-    }
+                       );
+}
 }
