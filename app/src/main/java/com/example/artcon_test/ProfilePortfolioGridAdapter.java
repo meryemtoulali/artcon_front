@@ -9,7 +9,7 @@ import android.widget.ImageView;
 
 public class ProfilePortfolioGridAdapter extends BaseAdapter {
     private Context context;
-    private int[] portfolioImages;
+    private final int[] portfolioImages;
 //        LayoutInflater inflter;
         public ProfilePortfolioGridAdapter(Context applicationContext, int[] portfolioImages) {
             this.context = applicationContext;

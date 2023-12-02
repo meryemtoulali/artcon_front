@@ -23,7 +23,7 @@ public class ProfilePortfolioFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile_portfolio, container, false);
 
-        int[] portfolioImages = {R.drawable.pfp1, R.drawable.image_22, R.drawable.image_22,
+        int[] portfolioImages = {R.drawable.image_22, R.drawable.image_22, R.drawable.image_22,
                 R.drawable.image_22, R.drawable.image_22, R.drawable.image_22,};
 
         gridView = view.findViewById(R.id.PortfolioGridView);
