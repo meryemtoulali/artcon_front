@@ -53,5 +53,15 @@
         <item name="android:stateListAnimator">@null</item>
     </style>
 
+    <style name="circleImageView" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="squircleImageView" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">15%</item>
+    </style>
+
     <style name="Theme.ArtCon_test" parent="Base.Theme.ArtCon_test" />
 </resources>
