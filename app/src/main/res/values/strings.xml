@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">ArtCon_test</string>
+    <string name="welcom_newuser">Welcom, User!</string>
+    <string name="setup_profile">Let\'s set up your profile</string>
+    <string name="add_profilepicture">Add a profile picture</string>
+    <string name="add_picture">Add photo</string>
+    <string name="skip">Skip</string>
+    <string name="Iam">I\'am</string>
+    <string name="an_artist">an artist</string>
+    <string name="looking_for_artists">looking for artists</string>
+    <string name="next">Continue</string>
+    <string name="Ispecialise">I specialize in...</string>
+    <string name="because">Because...</string>
+    <string name="tohire">I want to hire them</string>
+    <string name="tolikeart">I just like art</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

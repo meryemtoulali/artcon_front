@@ -34,7 +34,9 @@ public class MainActivity extends AppCompatActivity {
             viewModel.login(username, password);
         });
 
-        viewModel.getLoginResult().observe(this, this::handleLoginResult);
+//        viewModel.getLoginResult().observe(this, this::handleLoginResult);
+        Intent intent = new Intent(this, ProfileSetup.class);
+        startActivity(intent);
     }
 
     private void handleLoginResult(LoginResponse result) {
@@ -43,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
             // Show a toast message
             Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show();
             // Navigate to another activity
-            Intent intent = new Intent(this, LoggedActivity.class);
+            Intent intent = new Intent(this, ProfileSetup.class);
             startActivity(intent);
             finish(); // Optional: finish the current activity to prevent going back with the back button
         } else {
