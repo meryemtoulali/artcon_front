@@ -1,12 +1,15 @@
 package com.example.artcon_test.fragment;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.artcon_test.R;
 
@@ -55,12 +58,61 @@ public class setupAccounttype extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+//        if (savedInstanceState == null) {
+//            getChildFragmentManager()
+//                    .beginTransaction()
+//                    .setReorderingAllowed(true)
+//                    .add(R.id.setup_profile_fragment, new setupProfilepicture(), null)
+//                    .commit();
+//        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_setup_accounttype, container, false);
+        View view = inflater.inflate(R.layout.fragment_setup_accounttype, container, false);
+        TextView artist = view.findViewById(R.id.artist);
+        TextView not_artist = view.findViewById(R.id.normalUser);
+
+        artist.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //Change the color of the background;
+                        Drawable selected = ContextCompat.getDrawable(getContext(),R.drawable.account_type_selected);
+                        artist.setBackground(selected);
+                        Drawable not_selected = ContextCompat.getDrawable(getContext(),R.drawable.account_type);
+                        not_artist.setBackground(not_selected);
+                        //Remove the fragment
+                        getChildFragmentManager().popBackStack();
+                        //Load the new one
+                        loadFragment(new accounttype_artist());
+                    }
+                }
+        );
+        not_artist.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Drawable selected = ContextCompat.getDrawable(getContext(),R.drawable.account_type_selected);
+                        not_artist.setBackground(selected);
+                        Drawable not_selected = ContextCompat.getDrawable(getContext(),R.drawable.account_type);
+                        artist.setBackground(not_selected);
+                        //Remove the fragment
+                        getChildFragmentManager().popBackStack();
+                        //Load the new one
+                        loadFragment(new accounttype_notartist());
+                    }
+                }
+        );
+        return view;
+    }
+
+    private void loadFragment(Fragment fragment) {
+        getChildFragmentManager()
+                .beginTransaction()
+                .replace(R.id.account_type, fragment)
+                .commit();
     }
 }

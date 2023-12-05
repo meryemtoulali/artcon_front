@@ -50,12 +50,10 @@
                 android:gravity="center"
                 android:background="@drawable/account_type" />
         </LinearLayout>
-        <fragment
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/account_type"
-            android:name="com.example.artcon_test.fragment.accounttype_artist"
-            />
+            android:id="@+id/account_type"/>
         <Button
             android:layout_width="150sp"
             android:layout_height="50sp"
