@@ -58,13 +58,6 @@ public class setupAccounttype extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-//        if (savedInstanceState == null) {
-//            getChildFragmentManager()
-//                    .beginTransaction()
-//                    .setReorderingAllowed(true)
-//                    .add(R.id.setup_profile_fragment, new setupProfilepicture(), null)
-//                    .commit();
-//        }
     }
 
     @Override
