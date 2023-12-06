@@ -23,7 +23,7 @@
             android:layout_marginBottom="10dp"/>
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/bio"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Lorem ipsum dolor sit amet, consectetur adipiscing emit. Lorem ipsum dolor sit amet, consectetur"

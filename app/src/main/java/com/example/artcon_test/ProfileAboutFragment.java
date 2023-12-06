@@ -3,10 +3,15 @@ package com.example.artcon_test;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
+import com.example.artcon_test.viewmodel.ProfileViewModel;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -14,6 +19,12 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class ProfileAboutFragment extends Fragment {
+    private ProfileViewModel profileViewModel;
+    TextView bio;
+    TextView location;
+    TextView email;
+    TextView phoneNumber;
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -49,16 +60,54 @@ public class ProfileAboutFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        profileViewModel = new ViewModelProvider(this).get(ProfileViewModel.class);
+        Log.d("ProfileActivity//", "viewModel created in fragment: " + profileViewModel);
+        profileViewModel.getUserById("1");
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile_about, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_profile_about, container, false);
+        bio = rootView.findViewById(R.id.bio);
+        location = rootView.findViewById(R.id.location);
+        email = rootView.findViewById(R.id.email);
+        phoneNumber = rootView.findViewById(R.id.phone);
+
+        return rootView;
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        // Observe the user data
+        profileViewModel.getUserLiveData().observe(getViewLifecycleOwner(), user -> {
+            Log.d("ProfileActivity//", "Observer called in about fragment. User: " + user.toString());
+
+            if (user != null) {
+                // Update UI with user data
+                Log.d("ProfileActivity//", "user not null, user: " + user.toString());
+                bio.setText(user.getBio());
+                email.setText(user.getEmail());
+                phoneNumber.setText(user.getPhoneNumber());
+//                if (!TextUtils.isEmpty(user.getTitle())) {
+//                    titleTextView.setVisibility(View.VISIBLE);
+//                    titleTextView.setText(user.getTitle());
+//                } else {
+//                    // If the user's title is empty, hide the TextView
+//                    titleTextView.setVisibility(View.GONE);
+//                }
+                bio.setText(user.getBio());
+                email.setText(user.getEmail());
+                phoneNumber.setText(user.getPhoneNumber());
+            }
+        });
     }
 }

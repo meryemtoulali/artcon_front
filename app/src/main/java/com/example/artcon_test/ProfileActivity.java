@@ -1,29 +1,75 @@
 package com.example.artcon_test;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.example.artcon_test.viewmodel.ProfileViewModel;
 import com.google.android.material.tabs.TabLayout;
 import com.squareup.picasso.Picasso;
 
 public class ProfileActivity extends AppCompatActivity {
+    private ProfileViewModel profileViewModel;
+
     private TabLayout tabLayout;
     private ViewPager2 viewPager2;
     private ProfileFragmentAdapter adapter;
+
+    String TAG = "ProfileActivity//";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+        // bind to views
         ImageView pfpImageView = findViewById(R.id.pfpImage);
+        TextView fullname = findViewById(R.id.fullname);
+        TextView username = findViewById(R.id.username);
+        TextView title = findViewById(R.id.title);
+        TextView followers = findViewById(R.id.followers);
+        TextView following = findViewById(R.id.following);
         Picasso.get().setLoggingEnabled(true);
 
-        Picasso.get()
-                .load("https://www.googleapis.com/download/storage/v1/b/artcon_media/o/images%2FWaS0rB.jpg?generation=1701640478556637&alt=media")
-                .into(pfpImageView);
+        profileViewModel = new ViewModelProvider(this).get(ProfileViewModel.class);
+        Log.d(TAG, "viewModel created: " + profileViewModel);
+
+        // Call getUserById to fetch user data
+        profileViewModel.getUserById("1");
+        // Observe the user data
+        profileViewModel.getUserLiveData().observe(this, user -> {
+            Log.d(TAG, "Observer called. User: " + user.toString());
+
+            if (user != null) {
+                // Update UI with user data
+                Log.d(TAG, "user not null, picture: " + user.getPicture());
+                Picasso.get()
+                        .load(user.getPicture())
+                        .into(pfpImageView);
+                fullname.setText(user.getFirstname() + " " + user.getLastname());
+                username.setText(user.getUsername());
+//                if (!TextUtils.isEmpty(user.getTitle())) {
+//                    titleTextView.setVisibility(View.VISIBLE);
+//                    titleTextView.setText(user.getTitle());
+//                } else {
+//                    // If the user's title is empty, hide the TextView
+//                    titleTextView.setVisibility(View.GONE);
+//                }
+                following.setText(String.valueOf(user.getFollowingCount()) + " Following");
+                followers.setText(String.valueOf(user.getFollowersCount()) + " Followers");
+
+            }
+        });
+//        Picasso.get()
+//                .load("https://www.googleapis.com/download/storage/v1/b/artcon_media/o/images%2FWaS0rB.jpg?generation=1701640478556637&alt=media")
+//                .into(pfpImageView);
+
+        // tab logic
         tabLayout = findViewById(R.id.tabLayout);
         viewPager2 = findViewById(R.id.viewPager);
         tabLayout.addTab(tabLayout.newTab().setText("Portfolio"));
@@ -40,12 +86,10 @@ public class ProfileActivity extends AppCompatActivity {
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
-
             }
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
-
             }
         });
 
@@ -55,6 +99,7 @@ public class ProfileActivity extends AppCompatActivity {
                 tabLayout.selectTab(tabLayout.getTabAt(position));
             }
         });
+        // end of tab logic
 
 
     }
