@@ -1,3 +1,13 @@
 <resources>
-    <string name="app_name">ArtCon_test</string>
+    <string name="app_name">ArtCon</string>
+    <string name="app_slogan">Connecting creativity</string>
+    <string name="login_text">Please log in to your account</string>
+    <string name="forgot_pwd">Forgot password?</string>
+    <string name="forgot_pwd_2">Forgot password</string>
+    <string name="forgot_pwd_2_text">Enter your email to receive an email to reset your password.</string>
+    <string name="signup">Sign up</string>
+    <string-array name="gender_options">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
 </resources>

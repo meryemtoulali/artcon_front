@@ -29,6 +29,20 @@
         <item name="android:fontFamily">@font/ubuntu</item>
     </style>
 
+    <style name="Slogan">
+        <item name="android:fontFamily">@font/ubuntu</item>
+        <item name="backgroundTint">@null</item>
+        <item name="android:textColor">@color/whiteBase</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Text">
+        <item name="android:fontFamily">@font/ubuntu</item>
+        <item name="backgroundTint">@null</item>
+        <item name="android:textColor">@color/blackBase</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
     <style name="ActionButton" parent="Base.Theme.ArtCon_test" >
         <item name="android:background">@drawable/gradient_action</item>
         <item name="backgroundTint">@null</item>

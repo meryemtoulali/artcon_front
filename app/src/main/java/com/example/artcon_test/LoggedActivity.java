@@ -11,10 +11,6 @@ public class LoggedActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_logged);
-
-        // Add any additional logic or UI elements specific to LoggedInActivity
-
-        // Example: Update the text of a TextView
         TextView textViewExample = findViewById(R.id.textViewExample);
         textViewExample.setText("Welcome to the Logged In Activity!");
     }
