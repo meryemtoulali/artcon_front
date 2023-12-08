@@ -44,15 +44,18 @@ public class LoginActivity extends AppCompatActivity {
 
 
                 Call<LoginResponse> call = authService.login(loginRequest);
-                Log.d("slay",call.toString());
+                Log.d("salma",call.toString());
                 call.enqueue(new Callback<LoginResponse>() {
 
                     @Override
                     public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                         if (response.isSuccessful()){
+                            Log.d("salma","response is successful");
+
                             LoginResponse loginResponse = response.body();
                             handleLoginResponse(loginResponse);
                         } else {
+                            Log.d("salma","response is failed");
                             Toast.makeText(LoginActivity.this, "Login failed", Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -83,7 +86,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
     private void handleLoginResponse(LoginResponse loginResponse) {
-        if (loginResponse.isSuccess()) {
+        if (!loginResponse.getToken().isEmpty()) {
             String token = loginResponse.getToken();
             Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, LoggedActivity.class);
@@ -91,7 +94,7 @@ public class LoginActivity extends AppCompatActivity {
             finish();
         } else {
             String errorMessage = loginResponse.getMessage();
-            Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "error message", Toast.LENGTH_SHORT).show();
         }
     }
 }

@@ -32,4 +32,13 @@ public class LoginResponse {
     public void setMessage(String message) {
         this.message = message;
     }
+
+    @Override
+    public String toString() {
+        return "LoginResponse{" +
+                "token='" + token + '\'' +
+                ", success=" + success +
+                ", message='" + message + '\'' +
+                '}';
+    }
 }
