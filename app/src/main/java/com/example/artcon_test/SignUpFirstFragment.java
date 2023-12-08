@@ -12,11 +12,16 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+
+import com.example.artcon_test.viewmodel.SignupViewModel;
 
 public class SignUpFirstFragment extends Fragment {
+    SignupViewModel signupViewModel;
     private EditText usernameEditText, passwordEditText, confirmpwdEditText, emailEditText;
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_signup_first, container, false);
+        signupViewModel = new ViewModelProvider(requireActivity()).get(SignupViewModel.class);
 
         usernameEditText = view.findViewById(R.id.editTextUsernameSignUp);
         passwordEditText = view.findViewById(R.id.editTextPasswordSignUp);
@@ -29,6 +34,11 @@ public class SignUpFirstFragment extends Fragment {
             public void onClick(View v) {
                 // Validate input (add your validation logic)
                 if (isValidInput()) {
+                    Log.d("salma","perform signup called");
+
+                    signupViewModel.setUsername(usernameEditText.getText().toString());
+                    signupViewModel.setPassword(passwordEditText.getText().toString());
+                    signupViewModel.setEmail(emailEditText.getText().toString());
                     // Call the method in the hosting activity to navigate to the second step
                     ((SignupActivity) requireActivity()).navigateToSecondStep();
                 } else {

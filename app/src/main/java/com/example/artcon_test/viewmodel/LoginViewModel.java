@@ -7,11 +7,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 import com.example.artcon_test.network.AuthService;
 public class LoginViewModel extends ViewModel {
-    private static final String BASE_URL = "http://10.0.2.2:8080/";
+    private static final String BASE_URL = "http://192.168.1.13:8080/";
     private static Retrofit retrofit;
 
     public static AuthService getAuthService() {
-        Log.d("debug","this is me trying");
+        Log.d("salma","this is me trying");
         if (retrofit == null) {
             retrofit = new Retrofit.Builder()
                     .baseUrl(BASE_URL)

@@ -10,6 +10,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+
+import com.example.artcon_test.viewmodel.SignupViewModel;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -17,9 +20,11 @@ import java.util.Date;
 
 public class SignUpSecondFragment extends Fragment {
     private EditText firstNameEditText, lastNameEditText, genderEditText,phoneEditText, birthdayEditText, locationEditText;
+    SignupViewModel signupViewModel;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_signup_second, container, false);
+        signupViewModel = new ViewModelProvider(requireActivity()).get(SignupViewModel.class);
 
         firstNameEditText = view.findViewById(R.id.editTextFirstNameSignUp);
         lastNameEditText = view.findViewById(R.id.editTextLastNameSignUp);
@@ -35,6 +40,12 @@ public class SignUpSecondFragment extends Fragment {
                 // Validate input (add your validation logic)
                 if (isValidInput()) {
                     // Call the method in the hosting activity to perform sign-up
+                    signupViewModel.setFirstName(getFirstName());
+                    signupViewModel.setLastName(getLastName());
+                    signupViewModel.setGender(getGender());
+                    signupViewModel.setPhonenumber(getPhone());
+                    signupViewModel.setBirthday(getBirthday());
+                    signupViewModel.setLocation(getLocation());
                     ((SignupActivity) requireActivity()).performSignUp();
                 } else {
                     // Show an error message or handle invalid input
@@ -70,7 +81,7 @@ public class SignUpSecondFragment extends Fragment {
     public Date getBirthday() {
         if (birthdayEditText != null) {
             String dateString = birthdayEditText.getText().toString();
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd-mm-yyyy"); // Adjust the pattern based on your date format
+            SimpleDateFormat dateFormat = new SimpleDateFormat("mm/dd/yyyy"); // Adjust the pattern based on your date format
 
             try {
                 return dateFormat.parse(dateString);
