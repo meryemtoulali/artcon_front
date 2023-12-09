@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="categories" >
+        <item>Music</item>
+        <item>Painting</item>
+        <item>Photography</item>
+        <item>Theatre</item>
+        <item>Fashion</item>
+        <item>Writing</item>
+    </string-array>
+</resources>
