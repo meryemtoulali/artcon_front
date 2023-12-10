@@ -28,8 +28,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewLastNameSignUp" />
 
-    <EditText
+    <!--<EditText
         android:id="@+id/editTextGenderSignUp"
+        android:layout_width="280dp"
+        android:layout_height="47dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/grey_border"
+        android:padding="12dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewGenderSignUp" />-->
+    <Spinner
+        android:id="@+id/spinnerGenderSignUp"
         android:layout_width="280dp"
         android:layout_height="47dp"
         android:layout_marginStart="48dp"
@@ -70,7 +80,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="48dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="9dp"
         android:text="Birthday *"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextPhoneSignUp" />
@@ -81,10 +91,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="48dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="9dp"
         android:text="Phone number *"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextGenderSignUp" />
+        app:layout_constraintTop_toBottomOf="@+id/spinnerGenderSignUp" />
 
     <TextView
         android:id="@+id/textViewLastNameSignUp"
@@ -92,7 +102,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="48dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="9dp"
         android:text="Last name *"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextFirstNameSignUp" />
@@ -103,7 +113,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="48dp"
-        android:layout_marginTop="148dp"
+        android:layout_marginTop="180dp"
         android:text="First name *"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -119,18 +129,20 @@
         android:drawablePadding="10dp"
         android:inputType="text"
         android:padding="12dp"
-        android:hint="dd/mm/yy"
+        android:hint="mm/dd/yyyy"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewBirthdaySignUp" />
 
-    <EditText
-        android:id="@+id/editTextLocationSignUp"
+    <Spinner
+        android:id="@+id/spinnerLocationSignUp"
         android:layout_width="280dp"
         android:layout_height="47dp"
         android:layout_marginStart="48dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/grey_border"
         android:padding="12dp"
+        android:drawableStart="@drawable/morocco"
+        android:drawablePadding="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewLocationSignUp" />
 
@@ -140,7 +152,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="48dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="9dp"
         android:text="Location *"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextBirthdaySignUp" />
@@ -151,7 +163,7 @@
         android:layout_width="150dp"
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
-        android:layout_marginBottom="52dp"
+        android:layout_marginBottom="45dp"
         android:layout_height="wrap_content"
         android:text="Sign Up"
         app:layout_constraintBottom_toBottomOf="parent"
