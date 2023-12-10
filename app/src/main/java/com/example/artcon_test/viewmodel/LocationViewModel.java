@@ -1,17 +1,20 @@
 package com.example.artcon_test.viewmodel;
+
 import android.util.Log;
 
 import androidx.lifecycle.ViewModel;
+
+import com.example.artcon_test.network.AuthService;
+import com.example.artcon_test.network.LocationService;
+
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import com.example.artcon_test.network.AuthService;
-public class LoginViewModel extends ViewModel {
+public class LocationViewModel extends ViewModel {
     private static final String BASE_URL = "https://artcon-back.onrender.com/";
     private static Retrofit retrofit;
-
-    public static AuthService getAuthService() {
-        Log.d("salma","this is me trying");
+    public static LocationService getLocationService(){
+        Log.d("location","this is me trying once again");
         if (retrofit == null) {
             retrofit = new Retrofit.Builder()
                     .baseUrl(BASE_URL)
@@ -19,6 +22,7 @@ public class LoginViewModel extends ViewModel {
                     .build();
         }
 
-        return retrofit.create(AuthService.class);
+        return retrofit.create(LocationService.class);
     }
+
 }

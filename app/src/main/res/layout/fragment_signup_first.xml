@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="48dp"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="180dp"
         android:text="Username *"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -24,6 +24,8 @@
         android:background="@drawable/grey_border"
         android:padding="12dp"
         android:singleLine="true"
+        android:drawableStart="@drawable/username"
+        android:drawablePadding="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewUsernameSignUp" />
 
@@ -46,6 +48,8 @@
         android:layout_marginTop="16dp"
         android:background="@drawable/grey_border"
         android:padding="12dp"
+        android:drawableStart="@drawable/password"
+        android:drawablePadding="10dp"
         android:inputType="textPassword"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewPasswordSignUp" />
@@ -70,6 +74,8 @@
         android:layout_marginTop="16dp"
         android:background="@drawable/grey_border"
         android:padding="12dp"
+        android:drawableStart="@drawable/password"
+        android:drawablePadding="10dp"
         android:inputType="textPassword"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewConfirmPwdSignUp" />
@@ -95,6 +101,8 @@
         android:background="@drawable/grey_border"
         android:padding="12dp"
         android:singleLine="true"
+        android:drawableStart="@drawable/at"
+        android:drawablePadding="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewEmailSignUp" />
 
@@ -105,7 +113,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
-        android:layout_marginBottom="52dp"
+        android:layout_marginBottom="45dp"
         android:text="Continue"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
