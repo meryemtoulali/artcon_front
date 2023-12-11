@@ -13,5 +13,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "ArtCon_test"
+rootProject.name = "ArtCon"
 include(":app")
