@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">artcon_test</string>
+    <string name="title_activity_bottom_navbar">BottomNavbar</string>
+    <string name="title_home">Home</string>
+    <string name="title_search">Search</string>
+    <string name="title_add">Add</string>
+    <string name="title_job">Job</string>
+    <string name="title_profile">profile</string>
+
+</resources>

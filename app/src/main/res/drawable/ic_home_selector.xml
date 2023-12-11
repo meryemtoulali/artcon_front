@@ -1,0 +1,8 @@
+<!-- ic_home_selector.xml -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Pressed state -->
+    <item android:state_checked="true" android:drawable="@drawable/ic_home_activated" />
+    <!-- Default state -->
+    <item android:drawable="@drawable/ic_home" />
+</selector>
+
