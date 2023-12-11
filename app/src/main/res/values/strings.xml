@@ -1,5 +1,12 @@
 <resources>
     <string name="app_name">ArtCon</string>
+    <string name="title_activity_bottom_navbar">BottomNavbar</string>
+    <string name="title_home">Home</string>
+    <string name="title_search">Search</string>
+    <string name="title_add">Add</string>
+    <string name="title_job">Job</string>
+    <string name="title_profile">profile</string>
+
     <string name="app_slogan">Connecting creativity</string>
     <string name="login_text">Please log in to your account</string>
     <string name="forgot_pwd">Forgot password?</string>
