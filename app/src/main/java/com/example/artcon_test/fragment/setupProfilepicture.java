@@ -1,16 +1,22 @@
 package com.example.artcon_test.fragment;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
+import android.widget.ImageView;
 
 import com.example.artcon_test.R;
+import com.example.artcon_test.model.UpdateUserViewModel;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -27,6 +33,10 @@ public class setupProfilepicture extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    int SELECT_PICTURE = 200;
+    UpdateUserViewModel user;
+
+    ImageView pdp;
 
     public setupProfilepicture() {
         // Required empty public constructor
@@ -64,7 +74,37 @@ public class setupProfilepicture extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_setup_profilepicture, container, false);
+        View view = inflater.inflate(R.layout.fragment_setup_profilepicture, container, false);
+        Button addPhoto = view.findViewById(R.id.addPhoto);
+        pdp = view.findViewById(R.id.photo);
+
+        addPhoto.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        chooseImage();
+                    }
+                }
+        );
+        return view;
     }
 
+    private void chooseImage()
+    {
+        Intent galleryIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        pickImageLauncher.launch(galleryIntent);
+
+    }
+
+    private final ActivityResultLauncher<Intent> pickImageLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
+                    // Handle the selected image URI
+                    Uri selectedImageUri = result.getData().getData();
+                    // Now you can use the selectedImageUri to do whatever you need
+                    pdp.setImageURI(selectedImageUri);
+                }
+            }
+    );
 }

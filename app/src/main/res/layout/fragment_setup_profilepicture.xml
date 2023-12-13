@@ -27,7 +27,7 @@
 
 
         <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/shapeableImageView"
+            android:id="@+id/photo"
             android:layout_width="257dp"
             android:layout_height="258dp"
             android:src="@drawable/user_profile"
@@ -49,11 +49,11 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/shapeableImageView"
+            app:layout_constraintTop_toBottomOf="@+id/photo"
             app:layout_constraintVertical_bias="0.094" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/addPhoto"
             style="@style/ContinueButton"
             android:layout_width="150dp"
             android:layout_height="50dp"
@@ -63,7 +63,7 @@
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView3"
-            app:layout_constraintVertical_bias="0.152" />
+            app:layout_constraintVertical_bias="0.188" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

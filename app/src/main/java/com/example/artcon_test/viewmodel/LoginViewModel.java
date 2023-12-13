@@ -44,7 +44,7 @@ public class LoginViewModel extends ViewModel {
         return error;
     }
 
-    // Adjusted login method to use LoginRequest instead of User
+    // Adjusted login method to use LoginRequest instead of UpdateUserRequest
     public void login(String username, String password) {
         LoginRequest loginRequest = new LoginRequest(username, password);
 

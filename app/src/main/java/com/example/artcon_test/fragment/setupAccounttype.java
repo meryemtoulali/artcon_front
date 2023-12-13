@@ -5,13 +5,16 @@ import android.os.Bundle;
 
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.artcon_test.R;
+import com.example.artcon_test.model.UpdateUserViewModel;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -28,6 +31,7 @@ public class setupAccounttype extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    UpdateUserViewModel user;
 
     public setupAccounttype() {
         // Required empty public constructor
@@ -65,6 +69,7 @@ public class setupAccounttype extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_setup_accounttype, container, false);
+        user = new ViewModelProvider(requireActivity()).get(UpdateUserViewModel.class);
         TextView artist = view.findViewById(R.id.artist);
         TextView not_artist = view.findViewById(R.id.normalUser);
 
@@ -72,13 +77,16 @@ public class setupAccounttype extends Fragment {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        //Update the user type
+                        user.setType("artist");
+                        Log.d("Set up account type","type " + user.getType());
                         //Change the color of the background;
                         Drawable selected = ContextCompat.getDrawable(getContext(),R.drawable.account_type_selected);
                         artist.setBackground(selected);
                         Drawable not_selected = ContextCompat.getDrawable(getContext(),R.drawable.account_type);
                         not_artist.setBackground(not_selected);
                         //Remove the fragment
-                        getChildFragmentManager().popBackStack();
+//                        getChildFragmentManager().popBackStack();
                         //Load the new one
                         loadFragment(new accounttype_artist());
                     }
@@ -88,12 +96,14 @@ public class setupAccounttype extends Fragment {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        user.setType("not_artist");
+                        Log.d("Set up account type","type" + user.getType());
                         Drawable selected = ContextCompat.getDrawable(getContext(),R.drawable.account_type_selected);
                         not_artist.setBackground(selected);
                         Drawable not_selected = ContextCompat.getDrawable(getContext(),R.drawable.account_type);
                         artist.setBackground(not_selected);
                         //Remove the fragment
-                        getChildFragmentManager().popBackStack();
+//                        getChildFragmentManager().popBackStack();
                         //Load the new one
                         loadFragment(new accounttype_notartist());
                     }

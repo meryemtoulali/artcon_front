@@ -3,12 +3,28 @@ package com.example.artcon_test.fragment;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import com.example.artcon_test.R;
+import com.example.artcon_test.model.ArtistType;
+import com.example.artcon_test.model.UpdateUserViewModel;
+import com.example.artcon_test.network.ArtistTypeService;
+import com.example.artcon_test.viewmodel.ArtistTypeViewModel;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,6 +41,10 @@ public class accounttype_artist extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private List<ArtistType> artistTypes = new ArrayList<>();
+    private ArrayAdapter<String> artistTypeAdapter;
+    private Spinner spinner;
+    UpdateUserViewModel user;
 
     public accounttype_artist() {
         // Required empty public constructor
@@ -61,6 +81,68 @@ public class accounttype_artist extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_accounttype_artist, container, false);
+        View view = inflater.inflate(R.layout.fragment_accounttype_artist, container, false);
+        user = new ViewModelProvider(requireActivity()).get(UpdateUserViewModel.class);
+        spinner = view.findViewById(R.id.artist_title);
+        populateSpinnerDropdown();
+        spinner.setOnItemSelectedListener(
+                new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                        user.setTitle(spinner.getSelectedItem().toString());
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+
+                    }
+                }
+        );
+        return view;
     }
+
+    private void populateSpinnerDropdown() {
+        ArtistTypeService artistTypeService = ArtistTypeViewModel.getArtistTypeService();
+        Call<List<ArtistType>> call = artistTypeService.getArtistType();
+        call.enqueue(new Callback<List<ArtistType>>() {
+            @Override
+            public void onResponse(Call<List<ArtistType>> call, Response<List<ArtistType>> response) {
+                if (response.isSuccessful()) {
+                    Log.d("spinner","Success");
+                    artistTypes = response.body();
+                    setupArtistTypeDropdown();
+                } else {
+                    Log.d("spinner", "artist type response has failed!");
+                }
+            }
+            private void setupArtistTypeDropdown() {
+                List<String> ArtistTypeNames = new ArrayList<>();
+                Log.d("ArtistType","success setup");
+                Log.d("ArtistType", "artistTypes size: " + artistTypes.size());
+                ArtistTypeNames.add("Title"); // Add a hint or default value
+
+                for (ArtistType artistType : artistTypes) {
+                    Log.d("ArtistType", "artistTypes id: " + artistType.getArtist_type_name());
+                    Log.d("ArtistType", "artistTypes name: " + artistType.getArtist_type_name());
+                    ArtistTypeNames.add(artistType.getArtist_type_name());
+                }
+
+                artistTypeAdapter = new ArrayAdapter<>(
+                        requireContext(),
+                        android.R.layout.simple_spinner_item,
+                        ArtistTypeNames
+                );
+                artistTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+                spinner.setAdapter(artistTypeAdapter);
+            }
+
+            @Override
+            public void onFailure(Call<List<ArtistType>> call, Throwable t) {
+                Log.e("Artist Type", "Huge Error: " + t.getMessage());
+            }
+        });
+    }
+
+
 }

@@ -22,6 +22,7 @@
         app:layout_constraintVertical_bias="0.049" />
 
     <Spinner
+        android:id="@+id/artist_title"
         android:layout_width="300sp"
         android:layout_height="40sp"
         android:layout_gravity="center"

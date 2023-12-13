@@ -1,17 +1,146 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout3"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragment.setupInterests">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/profile_picture"/>
-    </LinearLayout>
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="328dp"
+        android:layout_height="50dp"
+        android:text="For a better experience, choose some of your interests:"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/step3"
+        app:layout_constraintVertical_bias="0.038" />
 
-</FrameLayout>
+    <ImageView
+        android:id="@+id/step3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="26dp"
+        android:layout_marginBottom="95dp"
+        android:src="@drawable/step3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.043" />
+
+    <GridLayout
+        android:layout_width="258dp"
+        android:layout_height="373dp"
+        android:layout_marginTop="40dp"
+        android:columnCount="2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView6"
+        app:layout_constraintVertical_bias="0.0">
+
+        <TextView
+            android:layout_width="103dp"
+            android:layout_height="39dp"
+            android:layout_margin="10sp"
+            android:background="@drawable/interest_not_selected"
+            android:gravity="center"
+            android:text="@string/photography" />
+
+        <TextView
+            android:layout_width="116dp"
+            android:layout_height="40dp"
+            android:layout_margin="10sp"
+            android:background="@drawable/interest_not_selected"
+            android:gravity="center"
+            android:text="@string/music" />
+
+        <TextView
+            android:layout_width="116dp"
+            android:layout_height="40dp"
+            android:layout_margin="10sp"
+            android:background="@drawable/interest_not_selected"
+            android:gravity="center"
+            android:text="@string/mixed_media" />
+
+        <TextView
+            android:layout_width="105dp"
+            android:layout_height="40dp"
+            android:layout_margin="10sp"
+            android:background="@drawable/interest_not_selected"
+            android:gravity="center"
+            android:text="@string/acting" />
+
+        <TextView
+            android:layout_width="103dp"
+            android:layout_height="40dp"
+            android:layout_margin="10sp"
+            android:background="@drawable/interest_not_selected"
+            android:gravity="center"
+            android:text="@string/design" />
+
+        <TextView
+            android:layout_width="106dp"
+            android:layout_height="40dp"
+            android:layout_margin="10sp"
+            android:background="@drawable/interest_not_selected"
+            android:gravity="center"
+            android:text="@string/painting" />
+
+        <TextView
+            android:layout_width="103dp"
+            android:layout_height="40dp"
+            android:layout_margin="10sp"
+            android:background="@drawable/interest_not_selected"
+            android:gravity="center"
+            android:text="@string/digital_art" />
+
+        <TextView
+            android:layout_width="103dp"
+            android:layout_height="40dp"
+            android:layout_margin="10sp"
+            android:background="@drawable/interest_not_selected"
+            android:gravity="center"
+            android:text="@string/comedy" />
+
+        <TextView
+            android:layout_width="103dp"
+            android:layout_height="40dp"
+            android:layout_margin="10sp"
+            android:background="@drawable/interest_not_selected"
+            android:gravity="center"
+            android:text="@string/animation" />
+
+        <TextView
+            android:layout_width="103dp"
+            android:layout_height="40dp"
+            android:layout_margin="10sp"
+            android:background="@drawable/interest_not_selected"
+            android:gravity="center"
+            android:text="@string/textile_art" />
+
+        <TextView
+            android:layout_width="103dp"
+            android:layout_height="40dp"
+            android:layout_margin="10sp"
+            android:background="@drawable/interest_not_selected"
+            android:gravity="center"
+            android:text="@string/dance" />
+
+        <TextView
+            android:layout_width="103dp"
+            android:layout_height="40dp"
+            android:layout_margin="10sp"
+            android:background="@drawable/interest_not_selected"
+            android:gravity="center"
+            android:text="@string/poetry" />
+    </GridLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
