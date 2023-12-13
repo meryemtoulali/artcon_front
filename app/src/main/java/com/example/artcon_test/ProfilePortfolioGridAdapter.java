@@ -7,22 +7,36 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
+import com.example.artcon_test.model.PortfolioPost;
+import com.squareup.picasso.Picasso;
+
+import java.util.List;
+
 public class ProfilePortfolioGridAdapter extends BaseAdapter {
     private Context context;
-    private final int[] portfolioImages;
-//        LayoutInflater inflter;
-        public ProfilePortfolioGridAdapter(Context applicationContext, int[] portfolioImages) {
+    private List<PortfolioPost> portfolio;
+
+    public List<PortfolioPost> getPortfolio() {
+        return portfolio;
+    }
+
+    public void setPortfolio(List<PortfolioPost> portfolio) {
+        this.portfolio = portfolio;
+    }
+
+    //        LayoutInflater inflter;
+        public ProfilePortfolioGridAdapter(Context applicationContext, List<PortfolioPost> portfolio) {
             this.context = applicationContext;
-            this.portfolioImages = portfolioImages;
+            this.portfolio = portfolio;
 //            inflter = (LayoutInflater.from(applicationContext));
         }
         @Override
         public int getCount() {
-            return portfolioImages.length;
+            return portfolio.size();
         }
         @Override
         public Object getItem(int position) {
-            return portfolioImages[position];
+            return portfolio.get(position);
         }
         @Override
         public long getItemId(int position) {
@@ -40,8 +54,12 @@ public class ProfilePortfolioGridAdapter extends BaseAdapter {
                 gridItemView = convertView;
             }
 
-            ImageView imageView = gridItemView.findViewById(R.id.preview); // assuming the ID is imageView
-            imageView.setImageResource(portfolioImages[position]);
+        ImageView imageView = gridItemView.findViewById(R.id.preview);
+        Picasso.get()
+                .load(portfolio.get(position).getMedia())
+                .into(imageView);
+        // assuming the ID is imageView
+//            imageView.setImageResource(portfolioImages[position]);
 
             return gridItemView;
 

@@ -4,38 +4,71 @@ import java.util.Date;
 
 public class User {
     private Integer id;
+    private String role;
     private String firstname;
     private String lastname;
     private String username;
     private String email;
     private String passwordHash;
     private String type;
+    private String title;
     private Date birthday;
     private String picture;
     private String banner;
     private String phoneNumber;
     private String bio;
-    private Integer followersCount;
-    private Integer followingCount;
+    private String location;
+    private Integer followers_count;
+    private Integer following_count;
 
     public User() {
     }
 
-    public User(Integer id, String firstname, String lastname, String username, String email, String passwordHash, String type, Date birthday, String picture, String banner, String phoneNumber, String bio, Integer followersCount, Integer followingCount) {
+
+    public User(Integer id, String role, String firstname, String lastname, String username, String email, String passwordHash, String type, String title, Date birthday, String picture, String banner, String phoneNumber, String bio, String location, Integer followersCount, Integer followingCount) {
+
         this.id = id;
+        this.role = role;
         this.firstname = firstname;
         this.lastname = lastname;
         this.username = username;
         this.email = email;
         this.passwordHash = passwordHash;
         this.type = type;
+        this.title = title;
         this.birthday = birthday;
         this.picture = picture;
         this.banner = banner;
         this.phoneNumber = phoneNumber;
         this.bio = bio;
-        this.followersCount = followersCount;
-        this.followingCount = followingCount;
+        this.location = location;
+        this.followers_count = followersCount;
+        this.following_count = followingCount;
+    }
+
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     public Integer getId() {
@@ -135,18 +168,42 @@ public class User {
     }
 
     public Integer getFollowersCount() {
-        return followersCount;
+        return followers_count;
     }
 
     public void setFollowersCount(Integer followersCount) {
-        this.followersCount = followersCount;
+        this.followers_count = followersCount;
     }
 
     public Integer getFollowingCount() {
-        return followingCount;
+        return following_count;
     }
 
     public void setFollowingCount(Integer followingCount) {
-        this.followingCount = followingCount;
+        this.following_count = followingCount;
+    }
+
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", role='" + role + '\'' +
+                ", firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", passwordHash='" + passwordHash + '\'' +
+                ", type='" + type + '\'' +
+                ", title='" + title + '\'' +
+                ", birthday=" + birthday +
+                ", picture='" + picture + '\'' +
+                ", banner='" + banner + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", bio='" + bio + '\'' +
+                ", location='" + location + '\'' +
+                ", followersCount=" + followers_count +
+                ", followingCount=" + following_count +
+                '}';
     }
 }

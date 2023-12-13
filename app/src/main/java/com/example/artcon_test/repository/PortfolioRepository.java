@@ -1,27 +1,21 @@
 package com.example.artcon_test.repository;
 
-import android.util.Log;
-
 import com.example.artcon_test.model.PortfolioPost;
-import com.example.artcon_test.model.User;
 import com.example.artcon_test.network.ApiConfig;
 import com.example.artcon_test.network.UserService;
 
-import java.io.IOException;
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava3.Result;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class UserRepository {
-    String TAG = "hatsunemiku";
+public class PortfolioRepository {
     private final UserService userService;
 
-    public UserRepository() {
+    public PortfolioRepository() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(ApiConfig.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -30,38 +24,31 @@ public class UserRepository {
         userService = retrofit.create(UserService.class);
     }
 
-    public void getUserById(String userId, UserCallback callback) {
+    public void getPortfolio(String userId, PortfolioCallback callback) {
+        Call<List<PortfolioPost>> call = userService.getUserPortfolio(userId);
 
-        Call<User> call = userService.getUserById(userId);
-
-        call.enqueue(new Callback<User>() {
+        call.enqueue(new Callback<List<PortfolioPost>>() {
             @Override
-            public void onResponse(Call<User> call, Response<User> response) {
+            public void onResponse(Call<List<PortfolioPost>> call, Response<List<PortfolioPost>> response) {
                 if (response.isSuccessful()) {
                     callback.onSuccess(response.body());
                 } else {
-                    callback.onError("Error fetching user data");
+                    callback.onError("Error fetching posts data");
                 }
             }
 
             @Override
-            public void onFailure(Call<User> call, Throwable t) {
+            public void onFailure(Call<List<PortfolioPost>> call, Throwable t) {
                 callback.onError("Network error: " + t.getMessage());
             }
         });
-
     }
 
-    // Callback interface for handling asynchronous responses
-    public interface UserCallback {
-        void onSuccess(User user);
+    public interface PortfolioCallback {
+        void onSuccess(List<PortfolioPost> posts);
 
         void onError(String errorMessage);
     }
-
-
-
-
 
 
 

@@ -1,7 +1,10 @@
 package com.example.artcon_test;
 
+import static android.text.TextUtils.isEmpty;
+
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -21,14 +24,14 @@ public class ProfileActivity extends AppCompatActivity {
     private ViewPager2 viewPager2;
     private ProfileFragmentAdapter adapter;
 
-    String TAG = "ProfileActivity//";
-
+    String TAG = "hatsunemiku";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         // bind to views
         ImageView pfpImageView = findViewById(R.id.pfpImage);
+        ImageView bannerImageView = findViewById(R.id.coverImage);
         TextView fullname = findViewById(R.id.fullname);
         TextView username = findViewById(R.id.username);
         TextView title = findViewById(R.id.title);
@@ -40,26 +43,29 @@ public class ProfileActivity extends AppCompatActivity {
         Log.d(TAG, "viewModel created: " + profileViewModel);
 
         // Call getUserById to fetch user data
-        profileViewModel.getUserById("1");
+        profileViewModel.getUserById("4");
         // Observe the user data
         profileViewModel.getUserLiveData().observe(this, user -> {
             Log.d(TAG, "Observer called. User: " + user.toString());
 
             if (user != null) {
                 // Update UI with user data
-                Log.d(TAG, "user not null, picture: " + user.getPicture());
+                Log.d(TAG, "user not null: " + user.toString());
                 Picasso.get()
                         .load(user.getPicture())
                         .into(pfpImageView);
+                Picasso.get()
+                        .load(user.getBanner())
+                        .into(bannerImageView);
                 fullname.setText(user.getFirstname() + " " + user.getLastname());
                 username.setText(user.getUsername());
-//                if (!TextUtils.isEmpty(user.getTitle())) {
-//                    titleTextView.setVisibility(View.VISIBLE);
-//                    titleTextView.setText(user.getTitle());
-//                } else {
-//                    // If the user's title is empty, hide the TextView
-//                    titleTextView.setVisibility(View.GONE);
-//                }
+                if (!isEmpty(user.getTitle())) {
+                    title.setVisibility(View.VISIBLE);
+                    title.setText(user.getTitle());
+                } else {
+                    // If the user's title is empty, hide the TextView
+                    title.setVisibility(View.GONE);
+                }
                 following.setText(String.valueOf(user.getFollowingCount()) + " Following");
                 followers.setText(String.valueOf(user.getFollowersCount()) + " Followers");
 
