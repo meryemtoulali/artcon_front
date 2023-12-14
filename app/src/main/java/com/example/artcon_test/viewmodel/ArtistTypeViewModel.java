@@ -21,7 +21,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ArtistTypeViewModel extends ViewModel {
 
     // Local http://192.168.100.10:8080
-    private static final String BASE_URL = "https://artcon-back.onrender.com/";
+    private static final String BASE_URL = "http://192.168.100.10:8080/";
     private static Retrofit retrofit;
     public static ArtistTypeService getArtistTypeService(){
         Log.d("ArtistType","Get Artist types");

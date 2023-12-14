@@ -97,6 +97,7 @@ public class setupAccounttype extends Fragment {
                     @Override
                     public void onClick(View v) {
                         user.setType("not_artist");
+                        user.setTitle(null);
                         Log.d("Set up account type","type" + user.getType());
                         Drawable selected = ContextCompat.getDrawable(getContext(),R.drawable.account_type_selected);
                         not_artist.setBackground(selected);

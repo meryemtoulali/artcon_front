@@ -19,7 +19,11 @@ import com.example.artcon_test.network.UserService;
 import com.example.artcon_test.viewmodel.UserViewModel;
 
 
+import java.io.File;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -79,12 +83,18 @@ public class ProfileSetup extends AppCompatActivity {
         UserService userService = UserViewModel.updateUserService();
         UpdateUserRequest updateUserRequest = new UpdateUserRequest();
 
+
         updateUserRequest.setTitle(user.getTitle());
         updateUserRequest.setType(user.getType());
 
+        MultipartBody.Part picturePart = prepareFilePart("picture", user.getPicture());
+
+        RequestBody type = RequestBody.create(MediaType.parse("text/plain"),user.getType());
+        RequestBody title = RequestBody.create(MediaType.parse("text/plain"),user.getTitle());
+
         Log.d("Update User","Data "+ updateUserRequest.getTitle() +" " + updateUserRequest.getType());
         Log.d("Update User","Update UpdateUserRequest called");
-        Call<Void> call = userService.updateUser(4,null,null,updateUserRequest);
+        Call<Void> call = userService.setupProfile(1,picturePart,title,type);
         Log.d("Update User","register call : " + call.toString());
         call.enqueue(new Callback<Void>() {
             @Override
@@ -96,6 +106,7 @@ public class ProfileSetup extends AppCompatActivity {
 
                 } else {
                     Log.d("Update user","Fail");
+                    Log.d("Fail", String.valueOf(response.errorBody()));
                     Toast.makeText(ProfileSetup.this, "Error", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -106,5 +117,10 @@ public class ProfileSetup extends AppCompatActivity {
                 Toast.makeText(ProfileSetup.this, "Huge Error", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private MultipartBody.Part prepareFilePart(String partName, File file) {
+        RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+        return MultipartBody.Part.createFormData(partName, file.getName(), requestBody);
     }
 }

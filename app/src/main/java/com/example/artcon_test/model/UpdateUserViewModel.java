@@ -2,6 +2,7 @@ package com.example.artcon_test.model;
 
 import androidx.lifecycle.ViewModel;
 
+import java.io.File;
 import java.util.Date;
 
 import retrofit2.http.Multipart;
@@ -16,11 +17,11 @@ public class UpdateUserViewModel extends ViewModel {
     private String title;
     private String type;
     private String username;
-    private Multipart picture;
+    private File picture;
     private Multipart banner;
     private Date birthday;
 
-    public UpdateUserViewModel(String bio, String firstname, String lastname, String location, String gender, String phone_number, String title, String type, String username, Multipart picture, Multipart banner, Date birthday) {
+    public UpdateUserViewModel(String bio, String firstname, String lastname, String location, String gender, String phone_number, String title, String type, String username, File picture, Multipart banner, Date birthday) {
         this.bio = bio;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -110,11 +111,11 @@ public class UpdateUserViewModel extends ViewModel {
         this.username = username;
     }
 
-    public Multipart getPicture() {
+    public File getPicture() {
         return picture;
     }
 
-    public void setPicture(Multipart picture) {
+    public void setPicture(File picture) {
         this.picture = picture;
     }
 

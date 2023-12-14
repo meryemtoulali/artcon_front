@@ -1,14 +1,19 @@
 package com.example.artcon_test.fragment;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +22,12 @@ import android.widget.ImageView;
 
 import com.example.artcon_test.R;
 import com.example.artcon_test.model.UpdateUserViewModel;
+
+import java.io.File;
+
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -77,6 +88,7 @@ public class setupProfilepicture extends Fragment {
         View view = inflater.inflate(R.layout.fragment_setup_profilepicture, container, false);
         Button addPhoto = view.findViewById(R.id.addPhoto);
         pdp = view.findViewById(R.id.photo);
+        user = new ViewModelProvider(requireActivity()).get(UpdateUserViewModel.class);
 
         addPhoto.setOnClickListener(
                 new View.OnClickListener() {
@@ -103,8 +115,33 @@ public class setupProfilepicture extends Fragment {
                     // Handle the selected image URI
                     Uri selectedImageUri = result.getData().getData();
                     // Now you can use the selectedImageUri to do whatever you need
+
                     pdp.setImageURI(selectedImageUri);
+                    Log.d("File test URI", String.valueOf(selectedImageUri));
+                    File selectedImageFile = uriToFile(selectedImageUri,getContext());
+                    Log.d("File test", String.valueOf(selectedImageFile));
+//                    MultipartBody.Part picturePart = prepareFilePart("picture", selectedImageFile);
+                    user.setPicture(selectedImageFile);
+
                 }
             }
     );
+
+    // Function to convert Uri to File
+    private File uriToFile(Uri uri, Context context) {
+        String filePath = "";
+        if (uri.getScheme().equals("content")) {
+            String[] projection = {MediaStore.Images.Media.DATA};
+            Cursor cursor = context.getContentResolver().query(uri, projection, null, null, null);
+            if (cursor != null) {
+                int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+                cursor.moveToFirst();
+                filePath = cursor.getString(column_index);
+                cursor.close();
+            }
+        } else if (uri.getScheme().equals("file")) {
+            filePath = uri.getPath();
+        }
+        return new File(filePath);
+    }
 }
