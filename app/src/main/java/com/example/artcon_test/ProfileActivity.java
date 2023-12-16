@@ -19,7 +19,7 @@ import com.squareup.picasso.Picasso;
 
 public class ProfileActivity extends AppCompatActivity {
     private boolean isArtist;
-    private String USER_ID = "1";
+    private String USER_ID = "4";
     private ProfileViewModel profileViewModel;
 
     private TabLayout tabLayout;
@@ -65,7 +65,7 @@ public class ProfileActivity extends AppCompatActivity {
                         .placeholder(R.drawable.picasso_placeholder)
                         .into(bannerImageView);
                 fullname.setText(user.getFirstname() + " " + user.getLastname());
-                username.setText(user.getUsername());
+                username.setText("@" + user.getUsername());
                 if (!isEmpty(user.getTitle())) {
                     title.setVisibility(View.VISIBLE);
                     title.setText(user.getTitle());

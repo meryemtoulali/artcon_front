@@ -54,7 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="5dp"
-            android:text="Name Surname"
+            android:text=""
             android:textAlignment="center"
             android:textColor="@color/blackBase"
             android:textSize="20sp"
@@ -66,7 +66,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="5dp"
-            android:text="\@username"
+            android:text=""
             android:textAlignment="center"
             android:textColor="@color/greyDark"
             android:textSize="16sp" />
@@ -77,7 +77,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="5dp"
-            android:text="Painter"
+            android:text=""
             android:textAlignment="center"
             android:textColor="@color/blackBase"
             android:textSize="18sp" />
@@ -96,7 +96,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="5dp"
                 android:layout_weight="1"
-                android:text="99 Followers"
+                android:text="0 Followers"
                 android:textAlignment="center"
                 android:textColor="@color/greyDark"
                 android:textSize="16sp" />
@@ -108,7 +108,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="5dp"
                 android:layout_weight="1"
-                android:text="99 Following"
+                android:text="0 Following"
                 android:textAlignment="center"
                 android:textColor="@color/greyDark"
                 android:textSize="16sp" />

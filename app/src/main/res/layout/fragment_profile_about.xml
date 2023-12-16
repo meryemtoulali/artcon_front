@@ -26,7 +26,7 @@
             android:id="@+id/bio"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing emit. Lorem ipsum dolor sit amet, consectetur"
+            android:text=""
             android:textColor="@color/blackBase"
             android:layout_marginBottom="15dp"/>
 
@@ -60,7 +60,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Rabat, Morocco"
+                android:text=""
                 android:textColor="@color/blackBase" />
         </LinearLayout>
         <LinearLayout
@@ -83,7 +83,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="example@gmail.com"
+                android:text=""
                 android:textColor="@color/blackBase" />
         </LinearLayout>
         <LinearLayout
@@ -106,7 +106,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="0656493837"
+                android:text=""
                 android:textColor="@color/blackBase" />
         </LinearLayout>
     </LinearLayout>
