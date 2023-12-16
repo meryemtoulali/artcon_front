@@ -18,6 +18,7 @@ import com.google.android.material.tabs.TabLayout;
 import com.squareup.picasso.Picasso;
 
 public class ProfileActivity extends AppCompatActivity {
+    private String USER_ID = "1";
     private ProfileViewModel profileViewModel;
 
     private TabLayout tabLayout;
@@ -43,7 +44,7 @@ public class ProfileActivity extends AppCompatActivity {
         Log.d(TAG, "viewModel created: " + profileViewModel);
 
         // Call getUserById to fetch user data
-        profileViewModel.getUserById("4");
+        profileViewModel.getUserById(USER_ID);
         // Observe the user data
         profileViewModel.getUserLiveData().observe(this, user -> {
             Log.d(TAG, "Observer called. User: " + user.toString());
@@ -71,9 +72,6 @@ public class ProfileActivity extends AppCompatActivity {
 
             }
         });
-//        Picasso.get()
-//                .load("https://www.googleapis.com/download/storage/v1/b/artcon_media/o/images%2FWaS0rB.jpg?generation=1701640478556637&alt=media")
-//                .into(pfpImageView);
 
         // tab logic
         tabLayout = findViewById(R.id.tabLayout);

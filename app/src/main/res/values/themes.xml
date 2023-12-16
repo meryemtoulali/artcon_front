@@ -63,5 +63,9 @@
         <item name="cornerSize">15%</item>
     </style>
 
+    <style name="CustomTabLayoutText" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">12sp</item>
+    </style>
+
     <style name="Theme.ArtCon_test" parent="Base.Theme.ArtCon_test" />
 </resources>

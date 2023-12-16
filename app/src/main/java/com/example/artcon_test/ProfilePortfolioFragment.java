@@ -13,6 +13,7 @@ import android.widget.GridView;
 import com.example.artcon_test.viewmodel.ProfileViewModel;
 
 public class ProfilePortfolioFragment extends Fragment {
+    private String USER_ID="1";
     private GridView gridView;
     private ProfilePortfolioGridAdapter gridAdapter;
     private ProfileViewModel viewModel;
@@ -43,7 +44,7 @@ public class ProfilePortfolioFragment extends Fragment {
         });
 
 
-        viewModel.getPortfolio("4");
+        viewModel.getPortfolio(USER_ID);
         //TODO: add user id from profile activity
 
 //
