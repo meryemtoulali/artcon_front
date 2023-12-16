@@ -20,15 +20,6 @@ public interface UserService {
 
     @Multipart
     @PUT("user/{userId}")
-    Call<Void> updateUser(
-            @Path("userId") int userId,
-            @Part MultipartBody.Part picture,
-//            @Part MultipartBody.Part banner,
-            @Part("updateUserRequest") RequestBody updateUserRequest
-    );
-
-    @Multipart
-    @PATCH("user/setup/{userId}")
     Call<Void> setupProfile(
             @Path("userId") int userId,
             @Part MultipartBody.Part picture,

@@ -1,20 +1,20 @@
 package com.example.artcon_test.model;
 
 public class Interest {
-    private Long interest_id;
+    private Long id;
     private String interest_name;
 
     public Interest(Long interest_id, String interest_name) {
-        this.interest_id = interest_id;
+        this.id = interest_id;
         this.interest_name = interest_name;
     }
 
-    public Long getInterest_id() {
-        return interest_id;
+    public Long getId() {
+        return id;
     }
 
-    public void setInterest_id(Long interest_id) {
-        this.interest_id = interest_id;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getInterest_name() {

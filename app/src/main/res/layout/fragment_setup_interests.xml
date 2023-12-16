@@ -33,11 +33,12 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.043" />
 
-    <GridLayout
-        android:layout_width="258dp"
-        android:layout_height="373dp"
+    <GridView
+        android:id="@+id/grid_interest"
+        android:layout_width="317dp"
+        android:layout_height="405dp"
         android:layout_marginTop="40dp"
-        android:columnCount="2"
+        android:numColumns="2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
@@ -45,102 +46,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView6"
         app:layout_constraintVertical_bias="0.0">
 
-        <TextView
-            android:layout_width="103dp"
-            android:layout_height="39dp"
-            android:layout_margin="10sp"
-            android:background="@drawable/interest_not_selected"
-            android:gravity="center"
-            android:text="@string/photography" />
-
-        <TextView
-            android:layout_width="116dp"
-            android:layout_height="40dp"
-            android:layout_margin="10sp"
-            android:background="@drawable/interest_not_selected"
-            android:gravity="center"
-            android:text="@string/music" />
-
-        <TextView
-            android:layout_width="116dp"
-            android:layout_height="40dp"
-            android:layout_margin="10sp"
-            android:background="@drawable/interest_not_selected"
-            android:gravity="center"
-            android:text="@string/mixed_media" />
-
-        <TextView
-            android:layout_width="105dp"
-            android:layout_height="40dp"
-            android:layout_margin="10sp"
-            android:background="@drawable/interest_not_selected"
-            android:gravity="center"
-            android:text="@string/acting" />
-
-        <TextView
-            android:layout_width="103dp"
-            android:layout_height="40dp"
-            android:layout_margin="10sp"
-            android:background="@drawable/interest_not_selected"
-            android:gravity="center"
-            android:text="@string/design" />
-
-        <TextView
-            android:layout_width="106dp"
-            android:layout_height="40dp"
-            android:layout_margin="10sp"
-            android:background="@drawable/interest_not_selected"
-            android:gravity="center"
-            android:text="@string/painting" />
-
-        <TextView
-            android:layout_width="103dp"
-            android:layout_height="40dp"
-            android:layout_margin="10sp"
-            android:background="@drawable/interest_not_selected"
-            android:gravity="center"
-            android:text="@string/digital_art" />
-
-        <TextView
-            android:layout_width="103dp"
-            android:layout_height="40dp"
-            android:layout_margin="10sp"
-            android:background="@drawable/interest_not_selected"
-            android:gravity="center"
-            android:text="@string/comedy" />
-
-        <TextView
-            android:layout_width="103dp"
-            android:layout_height="40dp"
-            android:layout_margin="10sp"
-            android:background="@drawable/interest_not_selected"
-            android:gravity="center"
-            android:text="@string/animation" />
-
-        <TextView
-            android:layout_width="103dp"
-            android:layout_height="40dp"
-            android:layout_margin="10sp"
-            android:background="@drawable/interest_not_selected"
-            android:gravity="center"
-            android:text="@string/textile_art" />
-
-        <TextView
-            android:layout_width="103dp"
-            android:layout_height="40dp"
-            android:layout_margin="10sp"
-            android:background="@drawable/interest_not_selected"
-            android:gravity="center"
-            android:text="@string/dance" />
-
-        <TextView
-            android:layout_width="103dp"
-            android:layout_height="40dp"
-            android:layout_margin="10sp"
-            android:background="@drawable/interest_not_selected"
-            android:gravity="center"
-            android:text="@string/poetry" />
-    </GridLayout>
+    </GridView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
