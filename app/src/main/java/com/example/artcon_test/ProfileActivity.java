@@ -18,6 +18,7 @@ import com.google.android.material.tabs.TabLayout;
 import com.squareup.picasso.Picasso;
 
 public class ProfileActivity extends AppCompatActivity {
+    private boolean isArtist;
     private String USER_ID = "1";
     private ProfileViewModel profileViewModel;
 
@@ -48,15 +49,20 @@ public class ProfileActivity extends AppCompatActivity {
         // Observe the user data
         profileViewModel.getUserLiveData().observe(this, user -> {
             Log.d(TAG, "Observer called. User: " + user.toString());
+            isArtist = "artist".equals(user.getType());
+            Log.d(TAG, "isArtist:" + isArtist);
 
             if (user != null) {
                 // Update UI with user data
                 Log.d(TAG, "user not null: " + user.toString());
+
                 Picasso.get()
                         .load(user.getPicture())
+                        .placeholder(R.drawable.picasso_placeholder)
                         .into(pfpImageView);
                 Picasso.get()
                         .load(user.getBanner())
+                        .placeholder(R.drawable.picasso_placeholder)
                         .into(bannerImageView);
                 fullname.setText(user.getFirstname() + " " + user.getLastname());
                 username.setText(user.getUsername());
@@ -71,21 +77,37 @@ public class ProfileActivity extends AppCompatActivity {
                 followers.setText(String.valueOf(user.getFollowersCount()) + " Followers");
 
             }
+            updateTabLayout(isArtist);
+
+
         });
 
-        // tab logic
+    }
+
+    private void updateTabLayout(boolean isArtist) {
+        Log.d(TAG, "isArtist in tab logic:" + isArtist);
+
         tabLayout = findViewById(R.id.tabLayout);
         viewPager2 = findViewById(R.id.viewPager);
-        tabLayout.addTab(tabLayout.newTab().setText("Portfolio"));
+
+        tabLayout.removeAllTabs(); // Clear existing tabs
+
+        if (isArtist) {
+            tabLayout.addTab(tabLayout.newTab().setText("Portfolio"));
+        }
+
         tabLayout.addTab(tabLayout.newTab().setText("Posts"));
         tabLayout.addTab(tabLayout.newTab().setText("About"));
+
         FragmentManager fragmentManager = getSupportFragmentManager();
-        adapter = new ProfileFragmentAdapter(fragmentManager, getLifecycle());
+        adapter = new ProfileFragmentAdapter(fragmentManager, getLifecycle(), USER_ID, isArtist);
         viewPager2.setAdapter(adapter);
+
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager2.setCurrentItem(tab.getPosition());
+                Log.d(TAG, "selected tab position:" + tab.getPosition());
             }
 
             @Override
@@ -103,9 +125,7 @@ public class ProfileActivity extends AppCompatActivity {
                 tabLayout.selectTab(tabLayout.getTabAt(position));
             }
         });
-        // end of tab logic
-
-
     }
+
 
 }

@@ -13,7 +13,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/image_22" />
+        app:srcCompat="@drawable/picasso_placeholder" />
 
     <ImageView
         android:id="@+id/coverRibbon"
@@ -30,7 +30,7 @@
         android:layout_height="110dp"
         android:layout_marginBottom="-20dp"
         android:padding="5dp"
-        android:src="@drawable/pfp1"
+        android:src="@drawable/picasso_placeholder"
         app:layout_constraintBottom_toBottomOf="@+id/coverRibbon"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

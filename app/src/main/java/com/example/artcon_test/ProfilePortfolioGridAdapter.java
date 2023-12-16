@@ -57,6 +57,7 @@ public class ProfilePortfolioGridAdapter extends BaseAdapter {
         ImageView imageView = gridItemView.findViewById(R.id.preview);
         Picasso.get()
                 .load(portfolio.get(position).getMedia())
+                .placeholder(R.drawable.picasso_placeholder)
                 .into(imageView);
         // assuming the ID is imageView
 //            imageView.setImageResource(portfolioImages[position]);
