@@ -98,6 +98,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         tabLayout.addTab(tabLayout.newTab().setText("Posts"));
         tabLayout.addTab(tabLayout.newTab().setText("About"));
+        tabLayout.setTabMode(TabLayout.MODE_FIXED);
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         adapter = new ProfileFragmentAdapter(fragmentManager, getLifecycle(), USER_ID, isArtist);
