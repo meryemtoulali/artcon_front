@@ -59,7 +59,18 @@ public class ProfileAboutFragment extends Fragment {
         location = rootView.findViewById(R.id.location);
         email = rootView.findViewById(R.id.email);
         phoneNumber = rootView.findViewById(R.id.phone);
+        profileViewModel.getUserLiveData().observe(getViewLifecycleOwner(), user -> {
+            Log.d(TAG, "Observer called in about fragment. User: " + user.toString());
 
+            if (user != null) {
+                Log.d(TAG, "user not null, user: " + user.toString());
+                Log.d(TAG, "user bio aaaaaaa: " + user.getBio());
+                bio.setText(user.getBio());
+                email.setText(user.getEmail());
+                phoneNumber.setText(user.getPhoneNumber());
+                location.setText(user.getLocation());
+            }
+        });
         return rootView;
     }
 
@@ -67,20 +78,6 @@ public class ProfileAboutFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // Observe the user data
-        profileViewModel.getUserLiveData().observe(getViewLifecycleOwner(), user -> {
-            Log.d(TAG, "Observer called in about fragment. User: " + user.toString());
 
-            if (user != null) {
-                // Update UI with user data
-                Log.d(TAG, "user not null, user: " + user.toString());
-                bio.setText(user.getBio());
-                email.setText(user.getEmail());
-                phoneNumber.setText(user.getPhoneNumber());
-                bio.setText(user.getBio());
-                email.setText(user.getEmail());
-                phoneNumber.setText(user.getPhoneNumber());
-            }
-        });
     }
 }

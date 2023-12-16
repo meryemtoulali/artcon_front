@@ -19,7 +19,7 @@ import com.squareup.picasso.Picasso;
 
 public class ProfileActivity extends AppCompatActivity {
     private boolean isArtist;
-    private String USER_ID = "4";
+    private String USER_ID = "1";
     private ProfileViewModel profileViewModel;
 
     private TabLayout tabLayout;

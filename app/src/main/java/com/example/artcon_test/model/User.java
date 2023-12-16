@@ -15,7 +15,7 @@ public class User {
     private Date birthday;
     private String picture;
     private String banner;
-    private String phoneNumber;
+    private String phone_number;
     private String bio;
     private String location;
     private Integer followers_count;
@@ -39,7 +39,7 @@ public class User {
         this.birthday = birthday;
         this.picture = picture;
         this.banner = banner;
-        this.phoneNumber = phoneNumber;
+        this.phone_number = phoneNumber;
         this.bio = bio;
         this.location = location;
         this.followers_count = followersCount;
@@ -152,11 +152,11 @@ public class User {
     }
 
     public String getPhoneNumber() {
-        return phoneNumber;
+        return phone_number;
     }
 
     public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+        this.phone_number = phoneNumber;
     }
 
     public String getBio() {
@@ -199,7 +199,7 @@ public class User {
                 ", birthday=" + birthday +
                 ", picture='" + picture + '\'' +
                 ", banner='" + banner + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
+                ", phoneNumber='" + phone_number + '\'' +
                 ", bio='" + bio + '\'' +
                 ", location='" + location + '\'' +
                 ", followersCount=" + followers_count +
