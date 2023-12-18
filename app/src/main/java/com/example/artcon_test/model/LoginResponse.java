@@ -2,8 +2,14 @@ package com.example.artcon_test.model;
 
 public class LoginResponse {
     private String token;
-    private boolean success;
-    private String message;
+    private String username;
+    private String userId;
+
+    public LoginResponse(String token, String username, String userId) {
+        this.token = token;
+        this.username = username;
+        this.userId = userId;
+    }
 
     public String getToken() {
         return token;
@@ -13,32 +19,28 @@ public class LoginResponse {
         this.token = token;
     }
 
-    public LoginResponse(String token) {
-        this.token = token;
+    public String getUsername() {
+        return username;
     }
 
-    public boolean isSuccess() {
-        return success;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public void setSuccess(boolean success) {
-        this.success = success;
+    public String getUserId() {
+        return userId;
     }
 
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     @Override
     public String toString() {
         return "LoginResponse{" +
                 "token='" + token + '\'' +
-                ", success=" + success +
-                ", message='" + message + '\'' +
+                ", username='" + username + '\'' +
+                ", userId='" + userId + '\'' +
                 '}';
     }
 }

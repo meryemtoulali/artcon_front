@@ -1,5 +1,6 @@
 package com.example.artcon_test;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -22,6 +23,7 @@ import retrofit2.Response;
 
 
 public class LoginActivity extends AppCompatActivity {
+    String TAG = "hatsunemiku";
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,26 +46,25 @@ public class LoginActivity extends AppCompatActivity {
 
 
                 Call<LoginResponse> call = authService.login(loginRequest);
-                Log.d("salma",call.toString());
+                Log.d(TAG,call.toString());
                 call.enqueue(new Callback<LoginResponse>() {
 
                     @Override
                     public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                         if (response.isSuccessful()){
-                            Log.d("salma","response is successful");
-
+                            Log.d(TAG, "login successful: " + response);
                             LoginResponse loginResponse = response.body();
                             handleLoginResponse(loginResponse);
                         } else {
-                            Log.d("salma","response is failed");
+                            Log.d(TAG,"Login failed:" + response);
                             Toast.makeText(LoginActivity.this, "Login failed", Toast.LENGTH_SHORT).show();
                         }
                     }
 
                     @Override
                     public void onFailure(Call<LoginResponse> call, Throwable t) {
-                        Log.e("logactiv", "Error: " + t.getMessage());
-                        Toast.makeText(LoginActivity.this, "Fail Error", Toast.LENGTH_SHORT).show();
+                        Log.e(TAG,"Login failed:: " + t.getMessage());
+                        Toast.makeText(LoginActivity.this, "Login failed", Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -87,14 +88,22 @@ public class LoginActivity extends AppCompatActivity {
     }
     private void handleLoginResponse(LoginResponse loginResponse) {
         if (!loginResponse.getToken().isEmpty()) {
-            String token = loginResponse.getToken();
+//            setContentView(R.layout.activity_onboarding);
+
+            SharedPreferences preferences = getSharedPreferences("AuthPrefs", MODE_PRIVATE);
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putString("token", loginResponse.getToken());
+            editor.putString("userId", loginResponse.getUserId());
+            editor.putString("username", loginResponse.getUsername());
+            editor.putBoolean("isLoggedIn", true);
+            editor.apply();
+
             Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(this, LoggedActivity.class);
+            Intent intent = new Intent(this, BottomNavbarActivity.class);
             startActivity(intent);
             finish();
         } else {
-            String errorMessage = loginResponse.getMessage();
-            Toast.makeText(this, "error message", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Login failed", Toast.LENGTH_SHORT).show();
         }
     }
 }
