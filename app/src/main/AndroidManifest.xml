@@ -17,31 +17,29 @@
         android:theme="@style/Theme.ArtCon_test"
         android:usesCleartextTraffic="true"
         tools:targetApi="31"
->      <activity
+>
+        <activity
+            android:name=".OnBoardingActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".SignupActivity"
             android:exported="false" />
         <activity
             android:name=".ForgotPasswordActivity"
             android:exported="false" />
         <activity
-            android:name=".OnBoardingActivity"
-            android:exported="true">
-
-        <activity
             android:name=".BottomNavbarActivity"
             android:exported="false"
             android:label="@string/title_activity_bottom_navbar" />
-
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:label="@string/app_name">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:label="@string/app_name"/>
         <activity
             android:name=".LoginActivity"
             android:exported="false"/>

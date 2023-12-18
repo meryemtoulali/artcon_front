@@ -5,9 +5,10 @@ import androidx.lifecycle.ViewModel;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import com.example.artcon_test.network.ApiConfig;
 import com.example.artcon_test.network.AuthService;
 public class LoginViewModel extends ViewModel {
-    private static final String BASE_URL = "https://artcon-back.onrender.com/";
+    private static final String BASE_URL = ApiConfig.BASE_URL;
     private static Retrofit retrofit;
 
     public static AuthService getAuthService() {

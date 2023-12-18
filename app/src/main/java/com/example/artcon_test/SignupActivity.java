@@ -110,7 +110,7 @@ public class SignupActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         } else {
-            String errorMessage = loginResponse.getMessage();
+//            String errorMessage = loginResponse.getMessage();
             Toast.makeText(this, "errorMessage", Toast.LENGTH_SHORT).show();
         }
     }
