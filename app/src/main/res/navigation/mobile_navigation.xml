@@ -13,25 +13,25 @@
 
     <fragment
         android:id="@+id/navigation_search"
-        android:name="com.example.artcon_test.ui.home.HomeFragment"
+        android:name="com.example.artcon_test.ui.search.SearchFragment"
         android:label="@string/title_search"
         tools:layout="@layout/fragment_search" />
 
     <fragment
         android:id="@+id/navigation_add"
-        android:name="com.example.artcon_test.ui.job.JobFragment"
+        android:name="com.example.artcon_test.ui.add.AddFragment"
         android:label="@string/title_add"
         tools:layout="@layout/fragment_add" />
 
     <fragment
         android:id="@+id/navigation_job"
-        android:name="com.example.artcon_test.ui.add.AddFragment"
+        android:name="com.example.artcon_test.ui.job.JobFragment"
         android:label="@string/title_job"
         tools:layout="@layout/fragment_job" />
 
     <fragment
         android:id="@+id/navigation_profile"
-        android:name="com.example.artcon_test.ui.add.AddFragment"
+        android:name="com.example.artcon_test.ui.profile.ProfileFragment"
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_profile" />
 </navigation>
