@@ -10,7 +10,7 @@ public class JobViewModel extends ViewModel {
 
     public JobViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is dashboard fragment");
+        mText.setValue("This is Job fragment");
     }
 
     public LiveData<String> getText() {

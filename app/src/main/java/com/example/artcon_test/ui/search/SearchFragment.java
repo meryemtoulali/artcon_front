@@ -21,14 +21,14 @@ public class SearchFragment extends Fragment{
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        ProfileViewModel notificationsViewModel =
-                new ViewModelProvider(this).get(ProfileViewModel.class);
+        SearchViewModel searchViewModel =
+                new ViewModelProvider(this).get(SearchViewModel.class);
 
         binding = FragmentSearchBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         final TextView textView = binding.textSearch;
-        notificationsViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        searchViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 
