@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -27,6 +28,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class SignupActivity extends AppCompatActivity {
+    String TAG="hatsunemiku";
     SignupViewModel signupViewModel;
 
 
@@ -60,7 +62,7 @@ public class SignupActivity extends AppCompatActivity {
     }
 
     public void performSignUp() {
-        Log.d("salma","perform signup called");
+        Log.d(TAG, "perform signup called");
 
         String username = signupViewModel.getUsername();
         String password = signupViewModel.getPassword();
@@ -74,44 +76,47 @@ public class SignupActivity extends AppCompatActivity {
 
         AuthService authService = LoginViewModel.getAuthService();
         RegisterRequest registerRequest = new RegisterRequest(firstName,lastName,gender,phonenumber,birthday, location, username, email, password);
-        System.out.println(registerRequest.toString());
+        Log.d(TAG, "register request:" + registerRequest.toString());
         Call<LoginResponse> call = authService.register(registerRequest);
-        Log.d("slay","register call : " + call.toString());
+        Log.d(TAG,"register call : " + call.toString());
         call.enqueue(new Callback<LoginResponse>() {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
-                System.out.println(response.toString());
+                System.out.println(response);
                 if (response.isSuccessful()){
-                    Log.d("salma","register response is successful!");
+                    Log.d(TAG,"register successful: " + response);
 
                     LoginResponse loginResponse = response.body();
                     handleRequestResponse(loginResponse);
                 } else {
-                    Log.d("salma","register response has failed!");
-
-
+                    Log.d(TAG,"register failed: " + response);
                     Toast.makeText(SignupActivity.this, "Sign Up failed", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<LoginResponse> call, Throwable t) {
-                Log.e("salma", "Error: " + t.getMessage());
-                Toast.makeText(SignupActivity.this, "Huge Error", Toast.LENGTH_SHORT).show();
+                Log.e(TAG, "Register failed: " + t.getMessage());
+                Toast.makeText(SignupActivity.this, "Sign up failed", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     private void handleRequestResponse(LoginResponse loginResponse) {
         if (!loginResponse.getToken().isEmpty()) {
-            String token = loginResponse.getToken();
-            Toast.makeText(this, "Register successful", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(this, LoggedActivity.class);
+            SharedPreferences preferences = getSharedPreferences("AuthPrefs", MODE_PRIVATE);
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putString("token", loginResponse.getToken());
+            editor.putString("userId", loginResponse.getUserId());
+            editor.putString("username", loginResponse.getUsername());
+            editor.putBoolean("isLoggedIn", true);
+            editor.apply();
+            Toast.makeText(this, "Registered successfully", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, BottomNavbarActivity.class);
             startActivity(intent);
             finish();
         } else {
-//            String errorMessage = loginResponse.getMessage();
-            Toast.makeText(this, "errorMessage", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Register failed", Toast.LENGTH_SHORT).show();
         }
     }
 }

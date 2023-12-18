@@ -137,28 +137,28 @@ public class SignUpSecondFragment extends Fragment {
         if (firstNameEditText != null) {
             return firstNameEditText.getText().toString();
         } else {
-            return null; // Handle the case when the firstNameEditText is not initialized
+            return null;
         }
     }
     public String getLastName() {
         if (lastNameEditText != null) {
             return lastNameEditText.getText().toString();
         } else {
-            return null; // Handle the case when the firstNameEditText is not initialized
+            return null;
         }
     }
     public Date getBirthday() {
         if (birthdayEditText != null) {
             String dateString = birthdayEditText.getText().toString();
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd"); // Adjust the pattern based on your date format
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
 
             try {
                 return dateFormat.parse(dateString);
             } catch (ParseException e) {
-                e.printStackTrace(); // Handle the parse exception appropriately
+                e.printStackTrace();
             }
         }
-        return null; // Handle the case when the birthdayEditText is not initialized or parsing fails
+        return null;
     }
 
     // Method to get the location from the EditText field
@@ -171,7 +171,7 @@ public class SignUpSecondFragment extends Fragment {
                 return null;
             }
         } else {
-            return null; // Handle the case when the genderSpinner is not initialized
+            return null;
         }
     }
 
