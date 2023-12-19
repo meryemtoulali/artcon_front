@@ -1,5 +1,6 @@
 package com.example.artcon_test.ui.profile;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -21,6 +22,7 @@ import com.example.artcon_test.databinding.FragmentProfileBinding;
 import com.example.artcon_test.viewmodel.ProfileViewModel;
 import com.google.android.material.tabs.TabLayout;
 import com.squareup.picasso.Picasso;
+import android.content.Context;
 
 
 public class ProfileFragment extends Fragment {
@@ -29,7 +31,7 @@ public class ProfileFragment extends Fragment {
     private ViewPager2 viewPager2;
 
     private boolean isArtist;
-    private String USER_ID = "1";
+    private String USER_ID;
     private ProfileViewModel profileViewModel;
 
     private TabLayout tabLayout;
@@ -47,6 +49,11 @@ public class ProfileFragment extends Fragment {
         TextView followers = view.findViewById(R.id.followers);
         TextView following = view.findViewById(R.id.following);
         Picasso.get().setLoggingEnabled(true);
+
+        SharedPreferences preferences = requireActivity().getSharedPreferences("AuthPrefs", Context.MODE_PRIVATE);
+
+        USER_ID = preferences.getString("userId", null);
+
 
         profileViewModel = new ViewModelProvider(this).get(ProfileViewModel.class);
         Log.d(TAG, "viewModel created: " + profileViewModel);
