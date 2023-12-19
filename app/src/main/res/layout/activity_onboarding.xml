@@ -12,75 +12,69 @@
         android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:background="@drawable/mesh_gradient2"
-        app:layout_constraintStart_toStartOf="@+id/guideline"
+        android:background="@drawable/onboarding_mesh"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteY="0dp" />
 
-    <ImageView
-        android:id="@+id/icon"
-        android:layout_width="297dp"
-        android:layout_height="103dp"
-        android:layout_marginBottom="440dp"
-        android:src="@drawable/icon"
-        android:visibility="visible"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/slogan"
-        style="@style/Slogan"
-        android:layout_width="321dp"
-        android:layout_height="38dp"
-        android:gravity="center"
-        android:text="@string/app_slogan"
-        android:textSize="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/buttonLogin"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/mesh_gradient"
-        app:layout_constraintTop_toBottomOf="@+id/icon"
-        app:layout_constraintVertical_bias="0.093" />
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="297dp"
+            android:layout_height="103dp"
+            android:src="@drawable/icon"
+            android:visibility="visible"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="48dp" />
 
-    <Button
-        android:id="@+id/buttonLogin"
-        style="@style/CancelButton"
-        android:layout_width="238dp"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_marginStart="40dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginBottom="264dp"
-        android:text="Login"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
-        app:layout_constraintStart_toStartOf="parent" />
+        <TextView
+            android:id="@+id/slogan"
+            style="@style/Slogan"
+            android:layout_width="321dp"
+            android:layout_height="38dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="@string/app_slogan"
+            android:textSize="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/icon"
+            tools:layout_editor_absoluteX="37dp" />
 
-    <Button
-        android:id="@+id/buttonSignup"
-        style="@style/ActionButton"
-        android:layout_width="238dp"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_marginStart="@dimen/button_margin_start"
-        android:layout_marginTop="@dimen/button_margin_top"
-        android:layout_marginEnd="@dimen/button_margin_end"
-        android:text="Sign Up"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonLogin" />
+        <Button
+            android:id="@+id/buttonLogin"
+            style="@style/CancelButton"
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="80dp"
+            android:text="Login"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/slogan" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="2dp" />
+        <Button
+            android:id="@+id/buttonSignup"
+            style="@style/ActionButton"
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="20dp"
+            android:text="Sign Up"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/buttonLogin" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
