@@ -27,7 +27,6 @@ public class PostFragment extends Fragment {
             // If the post doesn't have an image, hide the ImageView
             postImage.setVisibility(View.GONE);
         }
-
         return view;
     }
 }
