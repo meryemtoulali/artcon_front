@@ -1,7 +1,9 @@
 package com.example.artcon_test;
 
+import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -13,7 +15,8 @@ import android.widget.GridView;
 
 import com.example.artcon_test.viewmodel.ProfileViewModel;
 
-public class ProfilePortfolioFragment extends Fragment {
+public class ProfilePortfolioFragment extends Fragment implements ProfilePortfolioGridAdapter.OnGridItemClickListener {
+    private OnPostClickListener onPostClickListener;
     private String TAG = "hatsunemiku";
     private static final String ARG_USER_ID = "userId";
     private ProfileViewModel profileViewModel;
@@ -25,6 +28,15 @@ public class ProfilePortfolioFragment extends Fragment {
         // Required empty public constructor
     }
 
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        try {
+            onPostClickListener = (OnPostClickListener) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString() + " must implement OnPostClickListener");
+        }
+    }
     public static ProfilePortfolioFragment newInstance(String userId) {
         ProfilePortfolioFragment fragment = new ProfilePortfolioFragment();
         Bundle args = new Bundle();
@@ -58,7 +70,7 @@ public class ProfilePortfolioFragment extends Fragment {
         profileViewModel.getPortfolioLiveData().observe(getViewLifecycleOwner(), portfolio -> {
             // Update gridAdapter with posts data
             if (gridAdapter == null) {
-                gridAdapter = new ProfilePortfolioGridAdapter(requireContext(), portfolio);
+                gridAdapter = new ProfilePortfolioGridAdapter(requireContext(), portfolio, this);
                 gridView.setAdapter(gridAdapter);
             } else {
                 gridAdapter.setPortfolio(portfolio);
@@ -71,4 +83,21 @@ public class ProfilePortfolioFragment extends Fragment {
 
         return view;
     }
+
+    @Override
+    public void onItemClick(int position) {
+        //grid adapter item click
+        Log.d(TAG, "grid item clicked");
+        handlePostClick();
+    }
+    private void handlePostClick() {
+        //replace profile fragment with portfoliopost fragment
+        Log.d(TAG, "in replace fragment function");
+
+        if (getActivity() instanceof OnPostClickListener) {
+            onPostClickListener.onPortfolioPostClick();
+        }
+    }
+
+
 }

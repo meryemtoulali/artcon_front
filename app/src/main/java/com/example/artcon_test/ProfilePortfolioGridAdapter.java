@@ -14,7 +14,13 @@ import java.util.List;
 
 public class ProfilePortfolioGridAdapter extends BaseAdapter {
     private Context context;
+
     private List<PortfolioPost> portfolio;
+    private OnGridItemClickListener onGridItemClickListener;
+
+    public interface OnGridItemClickListener {
+        void onItemClick(int position);
+    }
 
     public List<PortfolioPost> getPortfolio() {
         return portfolio;
@@ -25,10 +31,10 @@ public class ProfilePortfolioGridAdapter extends BaseAdapter {
     }
 
     //        LayoutInflater inflter;
-        public ProfilePortfolioGridAdapter(Context applicationContext, List<PortfolioPost> portfolio) {
+        public ProfilePortfolioGridAdapter(Context applicationContext, List<PortfolioPost> portfolio, OnGridItemClickListener listener) {
             this.context = applicationContext;
             this.portfolio = portfolio;
-//            inflter = (LayoutInflater.from(applicationContext));
+            this.onGridItemClickListener = listener;
         }
         @Override
         public int getCount() {
@@ -59,10 +65,16 @@ public class ProfilePortfolioGridAdapter extends BaseAdapter {
                 .load(portfolio.get(position).getMedia())
                 .placeholder(R.drawable.picasso_placeholder)
                 .into(imageView);
-        // assuming the ID is imageView
-//            imageView.setImageResource(portfolioImages[position]);
+        gridItemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (onGridItemClickListener != null) {
+                    onGridItemClickListener.onItemClick(position);
+                }
+            }
+        });
 
-            return gridItemView;
+        return gridItemView;
 
 
         }

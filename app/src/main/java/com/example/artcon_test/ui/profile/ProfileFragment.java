@@ -13,9 +13,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.example.artcon_test.OnPostClickListener;
+import com.example.artcon_test.PortfolioPostFragment;
 import com.example.artcon_test.ProfileFragmentAdapter;
 import com.example.artcon_test.R;
 import com.example.artcon_test.databinding.FragmentProfileBinding;
@@ -25,7 +28,7 @@ import com.squareup.picasso.Picasso;
 import android.content.Context;
 
 
-public class ProfileFragment extends Fragment {
+public class ProfileFragment extends Fragment implements OnPostClickListener {
 
 //    private FragmentProfileBinding binding;
     private ViewPager2 viewPager2;
@@ -142,6 +145,16 @@ public class ProfileFragment extends Fragment {
                 tabLayout.selectTab(tabLayout.getTabAt(position));
             }
         });
+    }
+
+    @Override
+    public void onPortfolioPostClick() {
+        // Replace the entire ProfileFragment with the PortfolioPostFragment
+        PortfolioPostFragment portfolioPostFragment = new PortfolioPostFragment();
+        FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.nav_host_fragment_activity_bottom_navbar, portfolioPostFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
 
