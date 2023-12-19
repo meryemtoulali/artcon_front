@@ -9,16 +9,17 @@
 
     <TextView
         android:id="@+id/textView6"
-        android:layout_width="328dp"
+        android:layout_width="320dp"
         android:layout_height="50dp"
+        android:layout_marginHorizontal="10sp"
         android:text="For a better experience, choose some of your interests:"
-        android:textSize="22sp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/step3"
-        app:layout_constraintVertical_bias="0.038" />
+        app:layout_constraintVertical_bias="0.067" />
 
     <ImageView
         android:id="@+id/step3"
@@ -38,7 +39,7 @@
         android:layout_width="317dp"
         android:layout_height="405dp"
         android:layout_marginTop="40dp"
-        android:numColumns="2"
+        android:numColumns="3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"

@@ -1,15 +1,18 @@
 package com.example.artcon_test.fragment;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -105,10 +108,25 @@ public class setupInterests extends Fragment {
             }
         });
 
+        ((GridView) view.findViewById(R.id.grid_interest)).setOnItemClickListener(
+                new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+                        TextView textView = view.findViewById(R.id.interest_text);
+                        Drawable selected = ContextCompat.getDrawable(getContext(),R.drawable.interest_selected);
+
+                        textView.setBackground(selected);
+
+                        Interest interest = interests.get(position);
+
+                    }
+                }
+        );
 
         return view;
     }
+
 
     public class InterestAdapter extends ArrayAdapter<Interest> {
 
