@@ -1,31 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="wrap_content"
+    android:paddingBottom="40dp">
 
     <TextView
         android:id="@+id/textViewUsernameSignUp"
         style="@style/Text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="180dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="30dp"
         android:text="Username *"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/editTextUsernameSignUp"
-        android:layout_width="280dp"
+        android:layout_width="0dp"
         android:layout_height="47dp"
-        android:layout_marginStart="48dp"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
         android:background="@drawable/grey_border"
-        android:padding="12dp"
-        android:singleLine="true"
         android:drawableStart="@drawable/username"
         android:drawablePadding="10dp"
+        android:padding="12dp"
+        android:singleLine="true"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewUsernameSignUp" />
 
@@ -34,7 +38,7 @@
         style="@style/Text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="52dp"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="28dp"
         android:text="Password *"
         app:layout_constraintStart_toStartOf="parent"
@@ -42,15 +46,17 @@
 
     <EditText
         android:id="@+id/editTextPasswordSignUp"
-        android:layout_width="280dp"
+        android:layout_width="0dp"
         android:layout_height="47dp"
-        android:layout_marginStart="52dp"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
         android:background="@drawable/grey_border"
-        android:padding="12dp"
         android:drawableStart="@drawable/password"
         android:drawablePadding="10dp"
         android:inputType="textPassword"
+        android:padding="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewPasswordSignUp" />
 
@@ -60,7 +66,7 @@
         style="@style/Text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="52dp"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="28dp"
         android:text="Confirm password *"
         app:layout_constraintStart_toStartOf="parent"
@@ -68,15 +74,17 @@
 
     <EditText
         android:id="@+id/editTextConfirmPwdSignUp"
-        android:layout_width="280dp"
+        android:layout_width="0dp"
         android:layout_height="47dp"
-        android:layout_marginStart="52dp"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
         android:background="@drawable/grey_border"
-        android:padding="12dp"
         android:drawableStart="@drawable/password"
         android:drawablePadding="10dp"
         android:inputType="textPassword"
+        android:padding="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewConfirmPwdSignUp" />
 
@@ -85,7 +93,7 @@
         style="@style/Text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="28dp"
         android:text="Email *"
         app:layout_constraintStart_toStartOf="parent"
@@ -94,15 +102,17 @@
 
     <EditText
         android:id="@+id/editTextEmailSignUp"
-        android:layout_width="280dp"
+        android:layout_width="0dp"
         android:layout_height="47dp"
-        android:layout_marginStart="48dp"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
         android:background="@drawable/grey_border"
-        android:padding="12dp"
-        android:singleLine="true"
         android:drawableStart="@drawable/at"
         android:drawablePadding="10dp"
+        android:padding="12dp"
+        android:singleLine="true"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewEmailSignUp" />
 
@@ -111,13 +121,10 @@
         style="@style/ContinueButton"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginBottom="45dp"
+        android:layout_marginTop="40dp"
         android:text="Continue"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextConfirmPwdSignUp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
