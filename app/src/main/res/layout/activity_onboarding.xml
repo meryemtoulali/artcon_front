@@ -28,9 +28,10 @@
             android:layout_height="103dp"
             android:src="@drawable/icon"
             android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="48dp" />
+            tools:ignore="MissingConstraints" />
 
         <TextView
             android:id="@+id/slogan"

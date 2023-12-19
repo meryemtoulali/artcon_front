@@ -1,30 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="wrap_content"
+    android:paddingBottom="40dp">
 
 
     <EditText
         android:id="@+id/editTextFirstNameSignUp"
-        android:layout_width="280dp"
+        android:layout_width="-0dp"
         android:layout_height="47dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
         android:background="@drawable/grey_border"
         android:padding="12dp"
         android:singleLine="true"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewFirstNameSignUp" />
 
     <EditText
         android:id="@+id/editTextLastNameSignUp"
-        android:layout_width="280dp"
+        android:layout_width="0dp"
         android:layout_height="47dp"
-        android:layout_marginStart="48dp"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
         android:background="@drawable/grey_border"
         android:padding="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewLastNameSignUp" />
 
@@ -40,12 +45,14 @@
         app:layout_constraintTop_toBottomOf="@+id/textViewGenderSignUp" />-->
     <Spinner
         android:id="@+id/spinnerGenderSignUp"
-        android:layout_width="280dp"
+        android:layout_width="0dp"
         android:layout_height="47dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
         android:background="@drawable/grey_border"
         android:padding="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewGenderSignUp" />
 
@@ -54,23 +61,25 @@
         style="@style/Text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="9dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
         android:text="Gender *"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextLastNameSignUp" />
 
     <EditText
         android:id="@+id/editTextPhoneSignUp"
-        android:layout_width="280dp"
+        android:layout_width="0dp"
         android:layout_height="47dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
         android:background="@drawable/grey_border"
+        android:digits="0123456789"
         android:hint="+212"
         android:inputType="phone"
-        android:digits="0123456789"
         android:padding="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewPhoneSignUp" />
 
@@ -79,8 +88,8 @@
         style="@style/Text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="9dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
         android:text="Birthday *"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextPhoneSignUp" />
@@ -90,8 +99,8 @@
         style="@style/Text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="9dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
         android:text="Phone number *"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinnerGenderSignUp" />
@@ -101,8 +110,8 @@
         style="@style/Text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="9dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
         android:text="Last name *"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextFirstNameSignUp" />
@@ -112,47 +121,51 @@
         style="@style/Text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="180dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="30dp"
         android:text="First name *"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/editTextBirthdaySignUp"
-        android:layout_width="280dp"
+        android:layout_width="0dp"
         android:layout_height="47dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
         android:background="@drawable/grey_border"
         android:drawableStart="@drawable/calendar"
         android:drawablePadding="10dp"
+        android:hint="YYYY/MM/DD"
         android:inputType="text"
         android:padding="12dp"
-        android:hint="mm/dd/yyyy"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewBirthdaySignUp" />
 
     <Spinner
         android:id="@+id/spinnerLocationSignUp"
-        android:layout_width="280dp"
+        android:layout_width="0dp"
         android:layout_height="47dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
         android:background="@drawable/grey_border"
-        android:padding="12dp"
         android:drawableStart="@drawable/morocco"
         android:drawablePadding="10dp"
+        android:padding="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewLocationSignUp" />
 
     <TextView
         android:id="@+id/textViewLocationSignUp"
         style="@style/Text"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="9dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
         android:text="Location *"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextBirthdaySignUp" />
@@ -161,15 +174,12 @@
         android:id="@+id/buttonSignUp"
         style="@style/ActionButton"
         android:layout_width="150dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginBottom="45dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
         android:text="Sign Up"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/spinnerLocationSignUp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
