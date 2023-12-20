@@ -7,14 +7,16 @@ import android.widget.ImageView;
 import androidx.annotation.DimenRes;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import com.example.artcon_test.databinding.ActivityBottomNavbarBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.example.artcon_test.OnPostClickListener;
 
-public class BottomNavbarActivity extends AppCompatActivity {
+public class BottomNavbarActivity extends AppCompatActivity implements OnPostClickListener {
 
     private ActivityBottomNavbarBinding binding;
     private AppBarConfiguration appBarConfiguration;
@@ -45,5 +47,15 @@ public class BottomNavbarActivity extends AppCompatActivity {
     public boolean onSupportNavigateUp() {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_bottom_navbar);
         return NavigationUI.navigateUp(navController, appBarConfiguration) || super.onSupportNavigateUp();
+    }
+
+    @Override
+    public void onPortfolioPostClick() {
+        // Replace the entire ProfileFragment with the PortfolioPostFragment
+        PortfolioPostFragment portfolioPostFragment = new PortfolioPostFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.nav_host_fragment_activity_bottom_navbar, portfolioPostFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 }

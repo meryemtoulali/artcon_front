@@ -8,6 +8,7 @@ public class PortfolioPost {
     private String title;
     private String caption;
     private String media;
+    private String username;
 
     public PortfolioPost() {
     }
@@ -58,6 +59,27 @@ public class PortfolioPost {
 
     public void setMedia(String media) {
         this.media = media;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+
+    @Override
+    public String toString() {
+        return "PortfolioPost{" +
+                "id=" + id +
+                ", date=" + date +
+                ", title='" + title + '\'' +
+                ", caption='" + caption + '\'' +
+                ", media='" + media + '\'' +
+                ", username='" + username + '\'' +
+                '}';
     }
 }
 

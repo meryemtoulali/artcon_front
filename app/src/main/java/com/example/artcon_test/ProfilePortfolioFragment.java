@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
 
+import com.example.artcon_test.model.PortfolioPost;
 import com.example.artcon_test.viewmodel.ProfileViewModel;
 
 public class ProfilePortfolioFragment extends Fragment implements ProfilePortfolioGridAdapter.OnGridItemClickListener {
@@ -52,7 +53,7 @@ public class ProfilePortfolioFragment extends Fragment implements ProfilePortfol
         if (getArguments() != null) {
             userId = getArguments().getString(ARG_USER_ID);
         }
-        profileViewModel = new ViewModelProvider(this).get(ProfileViewModel.class);
+        profileViewModel = new ViewModelProvider(requireActivity()).get(ProfileViewModel.class);
         Log.d(TAG, "viewModel created in portfolio fragment: " + profileViewModel);
 //        profileViewModel.getUserById(userId);
     }
@@ -88,6 +89,10 @@ public class ProfilePortfolioFragment extends Fragment implements ProfilePortfol
     public void onItemClick(int position) {
         //grid adapter item click
         Log.d(TAG, "grid item clicked");
+        PortfolioPost selectedPost = (PortfolioPost) gridAdapter.getItem(position);
+
+        Log.d(TAG, "selected post in grid adap: " + selectedPost);
+        profileViewModel.setSelectedPortfolioPost(selectedPost);
         handlePostClick();
     }
     private void handlePostClick() {

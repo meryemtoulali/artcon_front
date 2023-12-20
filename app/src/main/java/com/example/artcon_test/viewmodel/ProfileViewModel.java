@@ -71,4 +71,15 @@ public class ProfileViewModel extends ViewModel {
         return portfolioLiveData;
     }
 
+    private MutableLiveData<PortfolioPost> selectedPortfolioPostLiveData = new MutableLiveData<>();
+
+    public LiveData<PortfolioPost> getSelectedPortfolioPost() {
+        return selectedPortfolioPostLiveData;
+    }
+
+    public void setSelectedPortfolioPost(PortfolioPost selectedPost) {
+        selectedPortfolioPostLiveData.setValue(selectedPost);
+    }
+
+
 }
