@@ -13,10 +13,12 @@
         android:theme="@style/Theme.Artcon_test"
         tools:targetApi="31">
         <activity
+            android:name=".chat.ConversationsActivity"
+            android:exported="false" />
+        <activity
             android:name=".BottomNavbarActivity"
             android:exported="false"
             android:label="@string/title_activity_bottom_navbar" />
-
         <activity
             android:name=".MainActivity"
             android:exported="true"

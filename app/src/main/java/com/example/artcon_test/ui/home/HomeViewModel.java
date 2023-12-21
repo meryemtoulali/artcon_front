@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel;
 public class HomeViewModel extends ViewModel {
 
     private final MutableLiveData<String> mText;
+    private final MutableLiveData<Boolean> navigateToNextChat = new MutableLiveData<>();
 
     public HomeViewModel() {
         mText = new MutableLiveData<>();
@@ -15,5 +16,14 @@ public class HomeViewModel extends ViewModel {
 
     public LiveData<String> getText() {
         return mText;
+    }
+
+    public LiveData<Boolean> getNavigateToChat() {
+        return navigateToNextChat;
+    }
+
+    public void onFabClick() {
+        // Set the LiveData to true to signal the navigation action
+        navigateToNextChat.setValue(true);
     }
 }
