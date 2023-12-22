@@ -36,19 +36,25 @@ public class PortfolioPostFragment extends Fragment {
         ProfileViewModel profileViewModel = new ViewModelProvider(requireActivity()).get(ProfileViewModel.class);
         profileViewModel.getSelectedPortfolioPost().observe(getViewLifecycleOwner(), selectedPost -> {
         if (selectedPost != null){
-            Log.d("hatsuneMiku", "selected: " + selectedPost.toString());
+            Log.d("hatsuneMiku", "selected portfolio post: " + selectedPost.toString());
             ImageView portfolioImage = view.findViewById(R.id.portfolioImage);
             TextView portfolioTitle = view.findViewById(R.id.portfolioTitle);
             TextView portfolioDescription = view.findViewById(R.id.portfolioDescription);
             TextView username = view.findViewById(R.id.username);
-
+            TextView fullName = view.findViewById(R.id.fullName);
+            ImageView pfp = view.findViewById(R.id.pfp);
             Picasso.get()
                     .load(selectedPost.getMedia())
                     .placeholder(R.drawable.picasso_placeholder)
                     .into(portfolioImage);
             portfolioTitle.setText(selectedPost.getTitle());
             portfolioDescription.setText(selectedPost.getCaption());
-            username.setText(selectedPost.getUsername());
+            username.setText(selectedPost.getUser().getUsername());
+            fullName.setText(selectedPost.getUser().getFirstname() + " " + selectedPost.getUser().getLastname());
+            Picasso.get()
+                    .load(selectedPost.getUser().getPicture())
+                    .placeholder(R.drawable.picasso_placeholder)
+                    .into(pfp);
         }});
 
 

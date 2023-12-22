@@ -20,7 +20,6 @@ import com.example.artcon_test.model.PortfolioPost;
 import com.example.artcon_test.viewmodel.ProfileViewModel;
 
 public class ProfilePortfolioFragment extends Fragment implements ProfilePortfolioGridAdapter.OnGridItemClickListener {
-    private OnPostClickListener onPostClickListener;
     private String TAG = "hatsunemiku";
     private static final String ARG_USER_ID = "userId";
     private ProfileViewModel profileViewModel;
@@ -32,15 +31,6 @@ public class ProfilePortfolioFragment extends Fragment implements ProfilePortfol
         // Required empty public constructor
     }
 
-    @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-        try {
-            onPostClickListener = (OnPostClickListener) context;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(context.toString() + " must implement OnPostClickListener");
-        }
-    }
     public static ProfilePortfolioFragment newInstance(String userId) {
         ProfilePortfolioFragment fragment = new ProfilePortfolioFragment();
         Bundle args = new Bundle();
@@ -97,16 +87,7 @@ public class ProfilePortfolioFragment extends Fragment implements ProfilePortfol
         Log.d(TAG, "selected post in grid adap: " + selectedPost);
         // prepare viewmodel for portfolio post fragment
         profileViewModel.setSelectedPortfolioPost(selectedPost);
-//        handlePostClick();
         navigateToPortfolioPost();
-    }
-    private void handlePostClick() {
-        //replace profile fragment with portfoliopost fragment
-        Log.d(TAG, "in replace fragment function");
-
-        if (getActivity() instanceof OnPostClickListener) {
-            onPostClickListener.onPortfolioPostClick();
-        }
     }
 
     public void navigateToPortfolioPost() {
@@ -114,7 +95,5 @@ public class ProfilePortfolioFragment extends Fragment implements ProfilePortfol
         NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment);
         navController.navigate(R.id.action_profile_to_portfolio_post);
     }
-
-
 
 }

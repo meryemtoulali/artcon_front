@@ -31,7 +31,6 @@ public class ProfilePortfolioGridAdapter extends BaseAdapter {
         this.portfolio = portfolio;
     }
 
-    //        LayoutInflater inflter;
         public ProfilePortfolioGridAdapter(Context applicationContext, List<PortfolioPost> portfolio, OnGridItemClickListener listener) {
             this.context = applicationContext;
             this.portfolio = portfolio;

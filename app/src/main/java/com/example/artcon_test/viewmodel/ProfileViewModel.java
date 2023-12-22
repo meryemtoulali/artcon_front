@@ -23,9 +23,12 @@ public class ProfileViewModel extends ViewModel {
     private MutableLiveData<User> userLiveData = new MutableLiveData<>();
     private MutableLiveData<List<PortfolioPost>> portfolioLiveData = new MutableLiveData<>();
 
+    private MutableLiveData<PortfolioPost> selectedPortfolioPostLiveData = new MutableLiveData<>();
+    private final MutableLiveData<User> postOwner = new MutableLiveData<>();
+
+
 
     // Method to fetch user data
-
     public void getUserById(String userId) {
         Log.d(TAG, "called getUserById");
 
@@ -66,12 +69,9 @@ public class ProfileViewModel extends ViewModel {
         });
     }
 
-
     public LiveData<List<PortfolioPost>> getPortfolioLiveData() {
         return portfolioLiveData;
     }
-
-    private MutableLiveData<PortfolioPost> selectedPortfolioPostLiveData = new MutableLiveData<>();
 
     public LiveData<PortfolioPost> getSelectedPortfolioPost() {
         return selectedPortfolioPostLiveData;
