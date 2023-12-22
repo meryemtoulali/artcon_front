@@ -14,6 +14,8 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.artcon_test.R;
@@ -93,9 +95,6 @@ public class ProfileFragment extends Fragment {
             updateTabLayout(isArtist);
         });
         return view;
-
-
-
     }
 
     private void updateTabLayout(boolean isArtist) {
@@ -140,5 +139,6 @@ public class ProfileFragment extends Fragment {
             }
         });
     }
+
 
 }

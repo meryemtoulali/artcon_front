@@ -1,8 +1,11 @@
 package com.example.artcon_test.ui;
 
 import android.os.Bundle;
+import android.util.Log;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -16,7 +19,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.example.artcon_test.ui.profile.OnPostClickListener;
 
 public class MainNavActivity extends AppCompatActivity implements OnPostClickListener {
-
+String TAG ="hatsunemiku";
     private ActivityMainNavBinding binding;
     private AppBarConfiguration appBarConfiguration;
 
@@ -40,6 +43,27 @@ public class MainNavActivity extends AppCompatActivity implements OnPostClickLis
 //        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
 
+        // custom back call
+        final OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                Log.d(TAG, "Fragment back pressed invoked");
+
+                // Get the FragmentManager
+                FragmentManager fragmentManager = getSupportFragmentManager();
+
+                // Check if there are fragments in the back stack
+                if (fragmentManager.getBackStackEntryCount() > 0) {
+                    fragmentManager.popBackStack();
+
+                } else {
+                    setEnabled(false);
+                }
+            }
+        };
+        getOnBackPressedDispatcher().addCallback(this, callback);
+
+
     }
 
     @Override
@@ -58,4 +82,5 @@ public class MainNavActivity extends AppCompatActivity implements OnPostClickLis
         transaction.addToBackStack(null);
         transaction.commit();
     }
+
 }

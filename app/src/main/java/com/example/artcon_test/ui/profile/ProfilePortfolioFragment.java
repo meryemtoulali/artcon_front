@@ -6,6 +6,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -93,8 +95,10 @@ public class ProfilePortfolioFragment extends Fragment implements ProfilePortfol
         PortfolioPost selectedPost = (PortfolioPost) gridAdapter.getItem(position);
 
         Log.d(TAG, "selected post in grid adap: " + selectedPost);
+        // prepare viewmodel for portfolio post fragment
         profileViewModel.setSelectedPortfolioPost(selectedPost);
-        handlePostClick();
+//        handlePostClick();
+        navigateToPortfolioPost();
     }
     private void handlePostClick() {
         //replace profile fragment with portfoliopost fragment
@@ -104,6 +108,13 @@ public class ProfilePortfolioFragment extends Fragment implements ProfilePortfol
             onPostClickListener.onPortfolioPostClick();
         }
     }
+
+    public void navigateToPortfolioPost() {
+        Log.d(TAG, "executing navigate: action_profile_to_portfolio_post");
+        NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment);
+        navController.navigate(R.id.action_profile_to_portfolio_post);
+    }
+
 
 
 }

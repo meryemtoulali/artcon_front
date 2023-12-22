@@ -33,5 +33,22 @@
         android:id="@+id/navigation_profile"
         android:name="com.example.artcon_test.ui.profile.ProfileFragment"
         android:label="@string/title_profile"
-        tools:layout="@layout/activity_profile" />
+        tools:layout="@layout/activity_profile" >
+        <action
+            android:id="@+id/action_profile_to_portfolio_post"
+            app:destination="@id/navigation_portfolioPost" />
+        <action
+            android:id="@+id/action_profile_to_post"
+            app:destination="@id/navigation_post" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_portfolioPost"
+        android:name="com.example.artcon_test.ui.portfolioPost.PortfolioPostFragment"
+        android:label="Portfolio Post"
+        tools:layout="@layout/fragment_portfolio_post" />
+    <fragment
+        android:id="@+id/navigation_post"
+        android:name="com.example.artcon_test.ui.post.PostFragment"
+        android:label="Post"
+        tools:layout="@layout/fragment_post" />
 </navigation>
