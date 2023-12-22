@@ -3,9 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@android:color/white"
-    tools:context=".ui.portfolioPost.PortfolioPostFragment">
+    tools:context=".ui.portfolioPost.PortfolioPostFragment"
+    android:paddingBottom="16dp">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/profileImageCardView"
@@ -63,7 +64,7 @@
         android:layout_margin="16dp"
         app:cardCornerRadius="8dp"
         app:cardElevation="2dp"
-        app:layout_constraintBottom_toTopOf="@+id/postTextArea"
+        app:layout_constraintBottom_toTopOf="@+id/portfolioDescription"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profileImageCardView"
@@ -110,7 +111,7 @@
         android:text="Title"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/postTextArea"
+        app:layout_constraintBottom_toTopOf="@+id/portfolioDescription"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -129,15 +130,5 @@
         app:layout_constraintHorizontal_bias="0.517"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/portfolioTitle" />
-
-    <LinearLayout
-        android:id="@+id/likeLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/postTextArea" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
