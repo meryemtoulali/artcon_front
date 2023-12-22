@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
-    tools:context=".ProfilePortfolioFragment">
+    tools:context=".ui.profile.ProfilePortfolioFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -24,7 +24,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             tools:layoutManager="android.support.v7.widget.GridLayoutManager"
-            tools:listitem="@layout/profile_portfolio_grid_item"
+            tools:listitem="@layout/item_profile_portfolio"
             tools:spanCount="2" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 

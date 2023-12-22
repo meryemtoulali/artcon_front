@@ -10,10 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.artcon_test.databinding.FragmentProfileBinding;
 import com.example.artcon_test.databinding.FragmentSearchBinding;
-import com.example.artcon_test.ui.home.HomeViewModel;
-import com.example.artcon_test.ui.profile.ProfileViewModel;
 
 public class SearchFragment extends Fragment{
 

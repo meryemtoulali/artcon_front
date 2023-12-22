@@ -13,14 +13,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager2.widget.ViewPager2;
 
-import com.example.artcon_test.PortfolioPostFragment;
-import com.example.artcon_test.ProfileFragmentAdapter;
 import com.example.artcon_test.R;
-import com.example.artcon_test.databinding.FragmentProfileBinding;
 import com.example.artcon_test.viewmodel.ProfileViewModel;
 import com.google.android.material.tabs.TabLayout;
 import com.squareup.picasso.Picasso;
@@ -126,7 +122,6 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager2.setCurrentItem(tab.getPosition());
-                Log.d(TAG, "selected tab position:" + tab.getPosition());
             }
 
             @Override
@@ -146,12 +141,4 @@ public class ProfileFragment extends Fragment {
         });
     }
 
-
-
-
-//    @Override
-//    public void onDestroyView() {
-//        super.onDestroyView();
-//        binding = null;
-//    }
 }
