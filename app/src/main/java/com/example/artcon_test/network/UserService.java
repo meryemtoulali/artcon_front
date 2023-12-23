@@ -1,6 +1,7 @@
 package com.example.artcon_test.network;
 
 import com.example.artcon_test.model.PortfolioPost;
+import com.example.artcon_test.model.Post;
 import com.example.artcon_test.model.User;
 
 import java.util.List;
@@ -14,4 +15,7 @@ public interface UserService {
     Call<User> getUserById(@Path("userId") String userId);
     @GET("user/{userId}/portfolio")
     Call<List<PortfolioPost>> getUserPortfolio(@Path("userId") String userId);
+
+    @GET("user/{userId}/posts")
+    Call<List<Post>> getUserPostList(@Path("userId") String userId);
 }
