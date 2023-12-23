@@ -100,4 +100,9 @@ public class Conversation {
         // Add validation if needed
         this.status = status;
     }
+
+    public interface OnItemClickListener {
+        void onItemClick(Conversation conversation);
+    }
+
 }

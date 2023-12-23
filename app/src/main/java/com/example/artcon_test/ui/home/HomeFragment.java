@@ -42,7 +42,7 @@ public class HomeFragment extends Fragment {
         homeViewModel.getNavigateToChat().observe(getViewLifecycleOwner(), navigate -> {
             if (navigate) {
                 // Navigate to the next page when LiveData changes
-                Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_nextFragment);
+                Navigation.findNavController(view).navigate(R.id.nav_host_fragment_activity_bottom_navbar);
 
                 // Reset the LiveData value to false to avoid multiple navigations
                 homeViewModel.getNavigateToChat().setValue(false);

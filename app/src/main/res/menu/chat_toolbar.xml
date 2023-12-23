@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- Back button -->
+    <item
+        android:id="@+id/action_back"
+        android:icon="@drawable/ic_back"
+        android:title="Back"
+        app:showAsAction="always" />
+
+    <!-- Title (if you want a text title) -->
+    <item
+        android:id="@+id/action_title"
+        android:title="Title"
+        app:showAsAction="always" />
+
+    <!-- Add icon -->
+    <item
+        android:id="@+id/action_add"
+        android:icon="@drawable/ic_plus"
+        android:title="Add"
+        app:showAsAction="always" />
+
+    <!-- Three dots menu -->
+    <item
+        android:id="@+id/action_options"
+        android:icon="@drawable/ic_points"
+        android:title="More"
+        app:showAsAction="always">
+
+    </item>
+
+</menu>
