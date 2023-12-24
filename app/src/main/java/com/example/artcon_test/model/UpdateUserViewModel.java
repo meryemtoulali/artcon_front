@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel;
 
 import java.io.File;
 import java.util.Date;
+import java.util.List;
 
 import retrofit2.http.Multipart;
 
@@ -20,6 +21,8 @@ public class UpdateUserViewModel extends ViewModel {
     private File picture;
     private Multipart banner;
     private Date birthday;
+    private List<Interest> interests;
+    private List<Long> interestIds;
 
     public UpdateUserViewModel(String bio, String firstname, String lastname, String location, String gender, String phone_number, String title, String type, String username, File picture, Multipart banner, Date birthday) {
         this.bio = bio;
@@ -133,5 +136,21 @@ public class UpdateUserViewModel extends ViewModel {
 
     public void setBirthday(Date birthday) {
         this.birthday = birthday;
+    }
+
+    public List<Interest> getInterests() {
+        return interests;
+    }
+
+    public void setInterests(List<Interest> interests) {
+        this.interests = interests;
+    }
+
+    public List<Long> getInterestIds() {
+        return interestIds;
+    }
+
+    public void setInterestIds(List<Long> interestIds) {
+        this.interestIds = interestIds;
     }
 }

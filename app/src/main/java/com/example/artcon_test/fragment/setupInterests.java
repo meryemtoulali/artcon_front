@@ -1,5 +1,6 @@
 package com.example.artcon_test.fragment;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,11 +22,14 @@ import android.widget.TextView;
 
 import com.example.artcon_test.R;
 import com.example.artcon_test.model.Interest;
+import com.example.artcon_test.model.UpdateUserViewModel;
 import com.example.artcon_test.network.InterestService;
 import com.example.artcon_test.viewmodel.InterestViewModel;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -45,7 +50,9 @@ public class setupInterests extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    List<Interest> interests = new ArrayList<>();
+    private UpdateUserViewModel user;
+    private List<Interest> interests = new ArrayList<>();
+    private List<Long> interestId = new ArrayList<>();
 
     public setupInterests() {
         // Required empty public constructor
@@ -85,6 +92,7 @@ public class setupInterests extends Fragment {
         View view = inflater.inflate(R.layout.fragment_setup_interests, container, false);
 
         GridView gridView = (GridView) view.findViewById(R.id.grid_interest);
+        user = new ViewModelProvider(requireActivity()).get(UpdateUserViewModel.class);
 
         InterestService interestService = InterestViewModel.getInterests();
         Call<List<Interest>> call = interestService.getInterests();
@@ -113,13 +121,33 @@ public class setupInterests extends Fragment {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                        TextView textView = view.findViewById(R.id.interest_text);
-                        Drawable selected = ContextCompat.getDrawable(getContext(),R.drawable.interest_selected);
-
-                        textView.setBackground(selected);
-
                         Interest interest = interests.get(position);
 
+                        TextView textView = view.findViewById(R.id.interest_text);
+                        textView.setTextColor(getResources().getColor(R.color.blackBase));
+
+                        boolean isSelected = interest.isSelected();
+
+                        isSelected = !isSelected;
+
+                        // Update the interest object with the new selection state
+                        interest.setSelected(isSelected);
+
+                        if (isSelected) {
+                            // Change color when selected
+                            Drawable interest_selected = ContextCompat.getDrawable(getContext(),R.drawable.interest_selected);
+                            textView.setTextColor(getResources().getColor(R.color.whiteBase));
+                            textView.setBackground(interest_selected);
+                            interestId.add(interest.getId());
+                            user.setInterestIds(interestId);
+                        } else {
+                            // Return to normal color when not selected
+                            Drawable interest_notSelected = ContextCompat.getDrawable(getContext(),R.drawable.interest_not_selected);
+                            textView.setTextColor(getResources().getColor(R.color.blackBase));
+                            textView.setBackground(interest_notSelected);
+                            interestId.remove(interest.getId());
+                            user.setInterestIds(interestId);
+                        }
                     }
                 }
         );

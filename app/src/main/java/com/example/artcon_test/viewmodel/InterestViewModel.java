@@ -11,7 +11,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class InterestViewModel extends ViewModel {
-    private static final String BASE_URL = "http://100.89.26.137:8080/";
+    private static final String BASE_URL = "http://192.168.100.10:8080/";
     private static Retrofit retrofit;
 
     public static InterestService getInterests(){

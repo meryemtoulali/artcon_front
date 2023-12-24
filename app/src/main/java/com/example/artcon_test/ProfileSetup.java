@@ -83,9 +83,9 @@ public class ProfileSetup extends AppCompatActivity {
         UserService userService = UserViewModel.updateUserService();
         UpdateUserRequest updateUserRequest = new UpdateUserRequest();
 
-
         updateUserRequest.setTitle(user.getTitle());
         updateUserRequest.setType(user.getType());
+
 
         MultipartBody.Part picturePart = prepareFilePart("picture", user.getPicture());
 
@@ -94,9 +94,9 @@ public class ProfileSetup extends AppCompatActivity {
 
         Log.d("Update User","Data "+ updateUserRequest.getTitle() +" " + updateUserRequest.getType());
         Log.d("Update User","Update UpdateUserRequest called");
-        Call<Void> call = userService.setupProfile(1,picturePart,title,type);
-        Log.d("Update User","register call : " + call.toString());
-        call.enqueue(new Callback<Void>() {
+        Call<Void> setupProfile = userService.setupProfile(1,picturePart,title,type);
+        Log.d("Update User","register setupProfile : " + setupProfile.toString());
+        setupProfile.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 System.out.println(response.toString());
@@ -114,6 +114,29 @@ public class ProfileSetup extends AppCompatActivity {
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
                 Log.e("User update", "Error: " + t.getMessage());
+                Toast.makeText(ProfileSetup.this, "Huge Error", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        Call<Void> selectinterests = userService.selectInterests(1,user.getInterestIds());
+        selectinterests.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                System.out.println(response.toString());
+                if (response.isSuccessful()){
+                    Log.d("Update interests","OK");
+                    Toast.makeText(ProfileSetup.this, "User updated", Toast.LENGTH_SHORT).show();
+
+                } else {
+                    Log.d("Update interests","Fail");
+                    Log.d("Fail", String.valueOf(response.errorBody()));
+                    Toast.makeText(ProfileSetup.this, "Error", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Log.e("Update interests", "Error: " + t.getMessage());
                 Toast.makeText(ProfileSetup.this, "Huge Error", Toast.LENGTH_SHORT).show();
             }
         });

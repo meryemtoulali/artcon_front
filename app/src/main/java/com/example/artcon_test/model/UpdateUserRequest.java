@@ -1,6 +1,7 @@
 package com.example.artcon_test.model;
 
 import java.util.Date;
+import java.util.Set;
 
 import retrofit2.http.Multipart;
 
