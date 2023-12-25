@@ -13,14 +13,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager2.widget.ViewPager2;
 
-import com.example.artcon_test.PortfolioPostFragment;
 import com.example.artcon_test.ProfileFragmentAdapter;
 import com.example.artcon_test.R;
-import com.example.artcon_test.databinding.FragmentProfileBinding;
 import com.example.artcon_test.viewmodel.ProfileViewModel;
 import com.google.android.material.tabs.TabLayout;
 import com.squareup.picasso.Picasso;

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="0dp"
+        android:layout_height="64dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/pfpImagePeople"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_marginEnd="19dp"
+            android:src="@drawable/profile_picture_placeholder"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/circleImageView"
+            app:strokeColor="@android:color/white"
+            app:strokeWidth="5dp" />
+
+        <TextView
+            android:id="@+id/fullnamePeople"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="7dp"
+            android:layout_marginBottom="5dp"
+            android:layout_toRightOf="@id/pfpImagePeople"
+            android:text="full name"
+            android:textColor="@color/blackBase"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/usernamePeople"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="7dp"
+            android:layout_marginTop="11dp"
+            android:layout_toRightOf="@id/fullnamePeople"
+            android:text="username"
+            android:textAlignment="center"
+            android:textColor="@color/greyDark"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/titlePeople"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/fullnamePeople"
+            android:layout_marginBottom="10dp"
+            android:layout_toRightOf="@id/pfpImagePeople"
+            android:text="Title"
+            android:textColor="@color/blackBase"
+            android:textSize="18sp" />
+
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
