@@ -7,13 +7,10 @@ import androidx.lifecycle.ViewModelProvider;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.artcon_test.fragment.setupAccounttype;
-import com.example.artcon_test.fragment.setupInterests;
 import com.example.artcon_test.fragment.setupProfilepicture;
-import com.example.artcon_test.model.UpdateUserRequest;
 import com.example.artcon_test.model.UpdateUserViewModel;
 import com.example.artcon_test.network.UserService;
 import com.example.artcon_test.viewmodel.UserViewModel;
@@ -37,11 +34,23 @@ public class ProfileSetup extends AppCompatActivity {
     RequestBody title;
     MultipartBody.Part picturePart;
 
+    ImageView arrowback;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_setup);
         user = new ViewModelProvider(this).get(UpdateUserViewModel.class);
+        arrowback = findViewById(R.id.imageView);
+
+        arrowback.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        finish();
+                    }
+                }
+        );
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                     .setReorderingAllowed(true)
