@@ -1,22 +1,24 @@
 package com.example.artcon_test.model;
 
 import java.util.Date;
+import java.util.List;
 
 public class Post {
     private Integer id;
-    private Date date;
     private String description;
-    private String postImgURL;
-    private String likes;
     private User user;
+    private List<MediaFile> mediaFiles;
+    private Integer likes;
+    private Date dateTime;
 
-    public Post(Integer id, Date date, String description, String postImgURL, String likes, User user) {
+    public Post(Integer id, String description, User user, List<MediaFile> mediaFiles, Integer likes, Date dateTime) {
+
         this.id = id;
-        this.date = date;
         this.description = description;
-        this.postImgURL = postImgURL;
-        this.likes = likes;
         this.user = user;
+        this.mediaFiles = mediaFiles;
+        this.likes = likes;
+        this.dateTime = dateTime;
     }
 
     public Integer getId() {
@@ -27,36 +29,12 @@ public class Post {
         this.id = id;
     }
 
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
     public String getDescription() {
         return description;
     }
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public String getPostImgURL() {
-        return postImgURL;
-    }
-
-    public void setPostImgURL(String postImgURL) {
-        this.postImgURL = postImgURL;
-    }
-
-    public String getLikes() {
-        return likes;
-    }
-
-    public void setLikes(String likes) {
-        this.likes = likes;
     }
 
     public User getUser() {
@@ -66,4 +44,43 @@ public class Post {
     public void setUser(User user) {
         this.user = user;
     }
+
+    public List<MediaFile> getMediaFiles() {
+        return mediaFiles;
+    }
+
+    public void setMediaFiles(List<MediaFile> mediaFiles) {
+        this.mediaFiles = mediaFiles;
+    }
+
+    public Integer getLikes() {
+        return likes;
+    }
+
+    public void setLikes(Integer likes) {
+        this.likes = likes;
+    }
+
+    public Date getDateTime() {
+        return dateTime;
+    }
+
+    public void setDateTime(Date dateTime) {
+        this.dateTime = dateTime;
+    }
+
+    @Override
+    public String
+    toString() {
+        return "Post{" +
+                "id=" + id +
+                ", description='" + description + '\'' +
+
+                ", mediaFiles.get(0) =" + mediaFiles.get(0).toString() +
+                ", likes=" + likes +
+                ", dateTime=" + dateTime +
+                '}';
+    }
 }
+
+

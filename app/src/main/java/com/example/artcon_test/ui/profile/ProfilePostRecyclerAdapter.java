@@ -1,10 +1,11 @@
 package com.example.artcon_test.ui.profile;
 
+
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -12,7 +13,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.artcon_test.R;
-import com.example.artcon_test.model.PortfolioPost;
 import com.example.artcon_test.model.Post;
 import com.squareup.picasso.Picasso;
 
@@ -20,12 +20,12 @@ import java.util.List;
 
 public class ProfilePostRecyclerAdapter extends RecyclerView.Adapter<ProfilePostRecyclerAdapter.PostViewHolder> {
     private Context context;
-
     private List<Post> postList;
 
     public List<Post> getPostList() {
         return postList;
     }
+    private static String TAG = "hatsunemiku";
 
     public void setPostList(List<Post> postList) {
         this.postList = postList;
@@ -46,7 +46,8 @@ public class ProfilePostRecyclerAdapter extends RecyclerView.Adapter<ProfilePost
     }
     @Override
     public int getItemCount() {
-        return postList.size();
+        if(postList != null) return postList.size();
+        else return 0;
     }
 
     public static class PostViewHolder extends RecyclerView.ViewHolder {
@@ -73,8 +74,11 @@ public class ProfilePostRecyclerAdapter extends RecyclerView.Adapter<ProfilePost
 
         public void bind(Post post) {
             // Bind the data to your views here
+            Log.d(TAG, "post image URL: "+ post.getMediaFiles().get(0).getMediafile_url());
+            Log.d(TAG, "post mediafiles 0: "+ post.getMediaFiles().get(0));
+            Log.d(TAG, "post mediafiles: "+ post.getMediaFiles());
             Picasso.get()
-                    .load(post.getPostImgURL())
+                    .load(post.getMediaFiles().get(0).getMediafile_url())
                     .placeholder(R.drawable.picasso_placeholder)
                     .into(postImage);
             Picasso.get()
@@ -84,7 +88,7 @@ public class ProfilePostRecyclerAdapter extends RecyclerView.Adapter<ProfilePost
             username.setText(post.getUser().getUsername());
             fullName.setText(post.getUser().getFirstname() + " " + post.getUser().getLastname());
             postTextArea.setText(post.getDescription());
-            likeCount.setText(post.getLikes());
+            likeCount.setText(String.valueOf(post.getLikes()));
 //            commentCount.setText(post.getCommentCount());
         }
     }

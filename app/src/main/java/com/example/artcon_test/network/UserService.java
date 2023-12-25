@@ -16,6 +16,6 @@ public interface UserService {
     @GET("user/{userId}/portfolio")
     Call<List<PortfolioPost>> getUserPortfolio(@Path("userId") String userId);
 
-    @GET("user/{userId}/posts")
+    @GET("post/owner/{userId}")
     Call<List<Post>> getUserPostList(@Path("userId") String userId);
 }

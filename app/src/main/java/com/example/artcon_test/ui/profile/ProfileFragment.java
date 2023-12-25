@@ -63,13 +63,13 @@ public class ProfileFragment extends Fragment {
 
         // Observe the user data
         profileViewModel.getUserLiveData().observe(getViewLifecycleOwner(), user -> {
-            Log.d(TAG, "Observer called. User: " + user.toString());
+//            Log.d(TAG, "Observer called. User: " + user.toString());
             isArtist = "artist".equals(user.getType());
             Log.d(TAG, "isArtist:" + isArtist);
 
             if (user != null) {
                 // Update UI with user data
-                Log.d(TAG, "user not null: " + user.toString());
+//                Log.d(TAG, "user not null: " + user.toString());
 
                 Picasso.get()
                         .load(user.getPicture())

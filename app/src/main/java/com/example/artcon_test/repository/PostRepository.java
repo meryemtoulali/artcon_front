@@ -1,5 +1,8 @@
 package com.example.artcon_test.repository;
 
+import android.util.Log;
+
+import com.example.artcon_test.model.MediaFile;
 import com.example.artcon_test.model.PortfolioPost;
 import com.example.artcon_test.model.Post;
 import com.example.artcon_test.network.ApiConfig;
@@ -15,6 +18,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class PostRepository {
     private final UserService userService;
+    String TAG ="hatsunemiku";
 
     public PostRepository() {
         Retrofit retrofit = new Retrofit.Builder()
@@ -32,7 +36,19 @@ public class PostRepository {
             @Override
             public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
                 if (response.isSuccessful()) {
-                    callback.onSuccess(response.body());
+                    List<Post> posts = response.body();
+
+                    Log.d(TAG, "received posts:" + response.body());
+                    for (Post post : posts) {
+                        List<MediaFile> mediaFiles = post.getMediaFiles();
+                        if (mediaFiles != null && !mediaFiles.isEmpty()) {
+                            Log.d(TAG, "MediaFiles for post " + post.getId() + ": " + mediaFiles);
+                        } else {
+                            Log.d(TAG, "No MediaFiles for post " + post.getId());
+                        }
+                    }                    callback.onSuccess(posts);
+
+
                 } else {
                     callback.onError("Error fetching posts data");
                 }

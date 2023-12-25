@@ -38,7 +38,7 @@ public class ProfilePostsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        Log.d(TAG, "creating posts fragment");
         if (getArguments() != null) {
             userId = getArguments().getString(ARG_USER_ID);
         }
@@ -54,16 +54,15 @@ public class ProfilePostsFragment extends Fragment {
         RecyclerView recyclerView = view.findViewById(R.id.postRecyclerView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
+        postRecyclerAdapter = new ProfilePostRecyclerAdapter();
+        recyclerView.setAdapter(postRecyclerAdapter);
+        Log.d(TAG, "created view recycler: " + recyclerView.toString());
+        profileViewModel.getPostList(userId);
         profileViewModel.getPostListLiveData().observe(getViewLifecycleOwner(), postList -> {
             // Update recycler adapter with post list data
-            if (postRecyclerAdapter == null) {
-                postRecyclerAdapter = new ProfilePostRecyclerAdapter();
-                recyclerView.setAdapter(postRecyclerAdapter);
-            } else {
                 postRecyclerAdapter.setPostList(postList);
                 postRecyclerAdapter.notifyDataSetChanged();
-            }
-        });
+            });
         return view;
     }
 }

@@ -44,8 +44,8 @@ public class ProfileViewModel extends ViewModel {
             public void onSuccess(User user) {
                 // Update LiveData with the retrieved user data
                 userLiveData.postValue(user);
-                Log.d(TAG, "successfully posted to userLiveData :");
-                Log.d(TAG, user.toString());
+                Log.d(TAG, "updated userLiveData");
+//                Log.d(TAG, user.toString());
 
             }
 
@@ -92,7 +92,14 @@ public class ProfileViewModel extends ViewModel {
         postRepository.getPostList(userId, new PostRepository.PostCallback() {
             @Override
             public void onSuccess(List<Post> postList) {
+
                 postListLiveData.postValue(postList);
+                if (postList != null) {
+                    for (Post post : postList) {
+                        Log.d(TAG, "Post in livedata: " + post.toString() +"\n\n");
+                    }
+                }
+
             }
 
             @Override
