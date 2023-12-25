@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="22dp"
+    android:layout_margin="2dp"
     >
 
     <androidx.cardview.widget.CardView
@@ -21,21 +21,19 @@
         >
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:padding="4dp"
-            android:layout_width="match_parent"
+            android:layout_width="339dp"
             android:layout_height="match_parent"
-            android:layout_margin="20dp">
+            android:layout_margin="20dp"
+            android:padding="4dp">
 
             <com.makeramen.roundedimageview.RoundedImageView
                 android:id="@+id/imageProfile"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
-                android:background="@drawable/profile_picture"
                 android:scaleType="centerCrop"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:riv_oval="true">
-            </com.makeramen.roundedimageview.RoundedImageView>
+                app:riv_oval="true" />
 
             <View
                 android:id="@+id/viewSupporter"
@@ -47,62 +45,59 @@
 
             <TextView
                 android:id="@+id/textName"
-                android:layout_width="0dp"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
+                android:layout_marginStart="5dp"
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:textColor="@color/black"
                 android:textSize="13sp"
                 app:layout_constraintBottom_toTopOf="@id/viewSupporter"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/imageProfile" />
+                app:layout_constraintHorizontal_bias="0.072"
+                app:layout_constraintStart_toEndOf="@id/imageProfile"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0" />
 
             <TextView
                 android:id="@+id/textUsername"
-                android:layout_width="0dp"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginBottom="4dp"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:textColor="@color/black"
+                android:textColor="@color/SearchGrey"
                 android:textSize="13sp"
-                app:layout_constraintBottom_toBottomOf="@id/textName"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/viewSupporter"
                 app:layout_constraintStart_toEndOf="@id/textName" />
 
             <TextView
                 android:id="@+id/LastMessage"
-                android:layout_width="0dp"
+                android:layout_width="255dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="4dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="8dp"
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:textColor="@color/grey"
                 android:textSize="10sp"
-                app:layout_constraintBottom_toTopOf="@id/viewSupporter"
-                app:layout_constraintEnd_toEndOf="@id/imageProfile"
                 app:layout_constraintStart_toEndOf="@id/imageProfile"
                 app:layout_constraintTop_toBottomOf="@id/textName" />
 
             <TextView
                 android:id="@+id/timestamp"
-                android:layout_width="0dp"
+                android:layout_width="70dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
+                android:layout_marginTop="32dp"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:textColor="@color/grey"
+                android:textColor="@color/SearchGrey"
                 android:textSize="10sp"
-                app:layout_constraintBottom_toBottomOf="@id/viewSupporter"
-                app:layout_constraintEnd_toEndOf="@id/imageProfile"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="@id/imageProfile"
-                app:layout_constraintTop_toBottomOf="@id/textUsername"
-                app:layout_constraintVertical_bias="1.0" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.959"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textUsername" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

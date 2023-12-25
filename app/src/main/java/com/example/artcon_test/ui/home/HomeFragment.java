@@ -13,8 +13,8 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.artcon_test.R;
-import com.example.artcon_test.databinding.FragmentHomeBinding;
 import com.example.artcon_test.chat.Controller.MessageActivity;
+import com.example.artcon_test.databinding.FragmentHomeBinding;
 
 public class HomeFragment extends Fragment {
 

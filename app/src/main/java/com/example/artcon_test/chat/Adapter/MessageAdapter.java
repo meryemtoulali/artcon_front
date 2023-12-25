@@ -38,9 +38,12 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
         // Load profile image using Glide
         Glide.with(holder.itemView.getContext())
                 .load(message.getProfileImageUrl())
-                .placeholder(R.drawable.profile_picture) // Optional placeholder if you want to show a default image
+                .placeholder(R.drawable.profile)
                 .into(holder.imageProfile);
+
     }
+
+
 
     @Override
     public int getItemCount() {

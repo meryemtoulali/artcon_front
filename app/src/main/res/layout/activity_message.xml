@@ -4,10 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".chat.ConversationsActivity"
-    android:layout_marginTop="20dp"
-    >
-
+    tools:context=".chat.Controller.MessageActivity"
+    android:layout_marginTop="10dp">
 
     <ImageView
         android:id="@+id/action_back"
@@ -88,8 +86,5 @@
             android:layout_height="match_parent"
             android:padding="8dp" />
     </RelativeLayout>
-
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

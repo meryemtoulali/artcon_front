@@ -8,8 +8,14 @@ public class Message {
     private String content;
     private String timestamp;
 
-    public Message(String messageId, String s, String johnDoe, String johndoe, String s1, String s2) {
+    // Constructor to match the data
+    public Message(String messageId, String profileImageUrl, String senderName, String senderUsername, String content, String timestamp) {
         this.messageId = messageId;
+        this.profileImageUrl = profileImageUrl;
+        this.senderName = senderName;
+        this.senderUsername = senderUsername;
+        this.content = content;
+        this.timestamp = timestamp;
     }
 
     public String getMessageId() {
@@ -21,7 +27,8 @@ public class Message {
     }
 
     public String getProfileImageUrl() {
-        return profileImageUrl;
+        return "https://via.placeholder.com/150";
+//        return profileImageUrl;
     }
 
     public void setProfileImageUrl(String profileImageUrl) {

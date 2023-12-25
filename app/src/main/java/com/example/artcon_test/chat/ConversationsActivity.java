@@ -24,10 +24,10 @@ public class ConversationsActivity extends AppCompatActivity implements Conversa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_conversations);
 
-        // Setting up the toolbar
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(null);
+//        // Setting up the toolbar
+//        Toolbar toolbar = findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
+//        getSupportActionBar().setTitle(null);
 
         setupRecyclerView();
         // loadConversations(); // Uncomment when ready to fetch data from the backend

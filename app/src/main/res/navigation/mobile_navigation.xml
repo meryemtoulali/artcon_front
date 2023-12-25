@@ -10,6 +10,11 @@
         android:name="com.example.artcon_test.ui.home.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/navigation_chat"
+        android:name="com.example.artcon_test.ui.home.HomeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/activity_conversations" />
 
     <fragment
         android:id="@+id/navigation_search"

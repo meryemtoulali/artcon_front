@@ -6,5 +6,7 @@
     <string name="title_add">Add</string>
     <string name="title_job">Job</string>
     <string name="title_profile">profile</string>
+    <string name="search">Search</string>
+    <string name="chat">Chat</string>
 
 </resources>
