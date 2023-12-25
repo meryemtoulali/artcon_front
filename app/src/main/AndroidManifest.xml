@@ -16,6 +16,10 @@
             android:name=".chat.ConversationsActivity"
             android:exported="false" />
         <activity
+            android:name=".chat.Controller.MessageActivity">
+        </activity>
+
+        <activity
             android:name=".BottomNavbarActivity"
             android:exported="false"
             android:label="@string/title_activity_bottom_navbar" />

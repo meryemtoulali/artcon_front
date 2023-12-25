@@ -17,80 +17,93 @@
         app:layout_constraintTop_toTopOf="parent"
         android:layout_margin="10dp"
         app:cardCornerRadius="16dp"
-        app:cardStrokeColor="#3C3C45"
-        app:cardStrokeWidth="2dp"
+        app:cardBackgroundColor="@color/white"
         >
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:padding="4dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="20dp"
-            >
+            android:layout_margin="20dp">
 
-            <ImageView
-                android:id="@+id/profilePictureImageView"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/imageProfile"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:background="@drawable/profile_picture"
                 android:scaleType="centerCrop"
-                android:src="@drawable/profile_picture"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"/>
+                app:riv_oval="true">
+            </com.makeramen.roundedimageview.RoundedImageView>
+
+            <View
+                android:id="@+id/viewSupporter"
+                android:layout_width="1dp"
+                android:layout_height="1dp"
+                app:layout_constraintBottom_toBottomOf="@id/imageProfile"
+                app:layout_constraintStart_toEndOf="@id/imageProfile"
+                app:layout_constraintTop_toTopOf="@id/imageProfile" />
 
             <TextView
-                android:id="@+id/userNameTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Username"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:layout_constraintTop_toTopOf="@id/profilePictureImageView"
-                app:layout_constraintStart_toEndOf="@id/profilePictureImageView"
-                app:layout_constraintHorizontal_chainStyle="packed"
-                android:layout_marginStart="8dp"/>
-
-            <TextView
-                android:id="@+id/pseudoTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
-                android:text="Pseudo"
-                android:textSize="14sp"
-                app:layout_constraintStart_toEndOf="@id/userNameTextView"
-                tools:layout_editor_absoluteY="4dp" />
-
-            <TextView
-                android:id="@+id/lastMessageTextView"
+                android:id="@+id/textName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Last Message"
-                android:textSize="14sp"
-                app:layout_constraintTop_toBottomOf="@id/userNameTextView"
-                app:layout_constraintStart_toEndOf="@id/profilePictureImageView"
-                app:layout_constraintEnd_toStartOf="@id/timestampTextView"
                 android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"/>
+                android:layout_marginEnd="8dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="@color/black"
+                android:textSize="13sp"
+                app:layout_constraintBottom_toTopOf="@id/viewSupporter"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/imageProfile" />
 
             <TextView
-                android:id="@+id/timestampTextView"
-                android:layout_width="wrap_content"
+                android:id="@+id/textUsername"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Timestamp"
-                android:textSize="12sp"
-                app:layout_constraintTop_toTopOf="@id/lastMessageTextView"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="@color/black"
+                android:textSize="13sp"
+                app:layout_constraintBottom_toBottomOf="@id/textName"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="16dp"/>
+                app:layout_constraintStart_toEndOf="@id/textName" />
 
             <TextView
-                android:id="@+id/statusTextView"
-                android:layout_width="wrap_content"
+                android:id="@+id/LastMessage"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Status"
-                android:textSize="12sp"
-                app:layout_constraintTop_toBottomOf="@id/lastMessageTextView"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"/>
+                android:layout_marginEnd="4dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="@color/grey"
+                android:textSize="10sp"
+                app:layout_constraintBottom_toTopOf="@id/viewSupporter"
+                app:layout_constraintEnd_toEndOf="@id/imageProfile"
+                app:layout_constraintStart_toEndOf="@id/imageProfile"
+                app:layout_constraintTop_toBottomOf="@id/textName" />
+
+            <TextView
+                android:id="@+id/timestamp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="@color/grey"
+                android:textSize="10sp"
+                app:layout_constraintBottom_toBottomOf="@id/viewSupporter"
+                app:layout_constraintEnd_toEndOf="@id/imageProfile"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="@id/imageProfile"
+                app:layout_constraintTop_toBottomOf="@id/textUsername"
+                app:layout_constraintVertical_bias="1.0" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

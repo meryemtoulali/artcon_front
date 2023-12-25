@@ -59,6 +59,17 @@ dependencies {
     implementation ("androidx.navigation:navigation-ui-ktx:2.4.1")
     implementation ("androidx.cardview:cardview:1.0.0")
     implementation ("androidx.appcompat:appcompat:1.3.1")
+    implementation ("com.makeramen:roundedimageview:2.3.0")
+    implementation ("com.github.bumptech.glide:glide:4.12.0")
+    annotationProcessor ("com.github.bumptech.glide:compiler:4.12.0")
+    implementation ("com.github.bumptech.glide:glide:4.12.0")
+    annotationProcessor ("com.github.bumptech.glide:compiler:4.12.0")
+    implementation ("com.google.android.material:material:1.4.0")
+    implementation ("androidx.constraintlayout:constraintlayout:2.1.3")
+
+
+
+
 
 
 }

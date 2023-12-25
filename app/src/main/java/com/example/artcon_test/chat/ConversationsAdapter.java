@@ -62,12 +62,12 @@ public class ConversationsAdapter extends RecyclerView.Adapter<ConversationsAdap
 
         public ViewHolder(View itemView) {
             super(itemView);
-            profilePictureImageView = itemView.findViewById(R.id.profilePictureImageView);
-            userNameTextView = itemView.findViewById(R.id.userNameTextView);
-            pseudoTextView = itemView.findViewById(R.id.pseudoTextView);
-            lastMessageTextView = itemView.findViewById(R.id.lastMessageTextView);
-            timestampTextView = itemView.findViewById(R.id.timestampTextView);
-            statusTextView = itemView.findViewById(R.id.statusTextView);
+            profilePictureImageView = itemView.findViewById(R.id.imageProfile);
+            userNameTextView = itemView.findViewById(R.id.textName);
+            pseudoTextView = itemView.findViewById(R.id.textUsername);
+            lastMessageTextView = itemView.findViewById(R.id.LastMessage);
+            timestampTextView = itemView.findViewById(R.id.timestamp);
+//            statusTextView = itemView.findViewById(R.id.statusTextView);
         }
     }
 

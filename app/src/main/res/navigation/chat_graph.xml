@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/chat_graph"
+    app:startDestination="@+id/fragment_home">
+
+    <!-- Other destinations -->
+
+    <fragment
+        android:id="@+id/fragment_home"
+        android:name="com.example.artcon_test.ui.home.HomeFragment"
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_home">
+
+        <!-- Action to navigate to activity_conversations.xml -->
+        <action
+            android:id="@+id/action_fragment_home_to_conversationsActivity"
+            app:destination="@+id/conversationsActivity" />
+    </fragment>
+
+    <activity
+        android:id="@+id/conversationsActivity"
+        android:name="com.example.artcon_test.chat.Controller.MessageActivity"
+        android:label="ConversationsActivity" />
+
+</navigation>
