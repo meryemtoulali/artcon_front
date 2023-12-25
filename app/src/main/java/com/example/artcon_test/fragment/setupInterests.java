@@ -16,10 +16,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.artcon_test.ProfileSetup;
 import com.example.artcon_test.R;
 import com.example.artcon_test.model.Interest;
 import com.example.artcon_test.model.UpdateUserViewModel;
@@ -91,6 +94,22 @@ public class setupInterests extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_setup_interests, container, false);
 
+        // Submit button
+        Button submit = view.findViewById(R.id.next_button);
+        submit.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (interestId.size() < 1){
+                            Toast.makeText(getContext(), "Choose at least one interest", Toast.LENGTH_SHORT).show();
+                        } else {
+                            user.setInterestIds(interestId);
+                            ((ProfileSetup) requireActivity()).updateUser();
+                        }
+                    }
+                }
+        );
+
         GridView gridView = (GridView) view.findViewById(R.id.grid_interest);
         user = new ViewModelProvider(requireActivity()).get(UpdateUserViewModel.class);
 
@@ -133,21 +152,25 @@ public class setupInterests extends Fragment {
                         // Update the interest object with the new selection state
                         interest.setSelected(isSelected);
 
-                        if (isSelected) {
-                            // Change color when selected
-                            Drawable interest_selected = ContextCompat.getDrawable(getContext(),R.drawable.interest_selected);
-                            textView.setTextColor(getResources().getColor(R.color.whiteBase));
-                            textView.setBackground(interest_selected);
-                            interestId.add(interest.getId());
-                            user.setInterestIds(interestId);
-                        } else {
-                            // Return to normal color when not selected
-                            Drawable interest_notSelected = ContextCompat.getDrawable(getContext(),R.drawable.interest_not_selected);
-                            textView.setTextColor(getResources().getColor(R.color.blackBase));
-                            textView.setBackground(interest_notSelected);
-                            interestId.remove(interest.getId());
-                            user.setInterestIds(interestId);
-                        }
+                            if (isSelected) {
+                                if (interestId.size() < 3){
+                                // Change color when selected
+                                Drawable interest_selected = ContextCompat.getDrawable(getContext(),R.drawable.interest_selected);
+                                textView.setTextColor(getResources().getColor(R.color.whiteBase));
+                                textView.setBackground(interest_selected);
+                                interestId.add(interest.getId());
+                                } else {
+                                    Toast.makeText(getContext(), "You can choose only 3", Toast.LENGTH_SHORT).show();
+                                }
+                            } else {
+                                // Return to normal color when not selected
+                                Drawable interest_notSelected = ContextCompat.getDrawable(getContext(),R.drawable.interest_not_selected);
+                                textView.setTextColor(getResources().getColor(R.color.blackBase));
+                                textView.setBackground(interest_notSelected);
+                                interestId.remove(interest.getId());
+                            }
+
+
                     }
                 }
         );

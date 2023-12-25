@@ -33,6 +33,9 @@ public class ProfileSetup extends AppCompatActivity {
     // Variables
     int step = 1;
     UpdateUserViewModel user;
+    RequestBody type;
+    RequestBody title;
+    MultipartBody.Part picturePart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,33 +48,9 @@ public class ProfileSetup extends AppCompatActivity {
                     .add(R.id.setup_profile_fragment, new setupProfilepicture(), null)
                     .commit();
         }
-
-
-//        loadFragment(new setupProfilepicture());
-//        TextView next_button = findViewById(R.id.skip_button);
-        Button next_button = findViewById(R.id.next_button);
-        next_button.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (step == 1){
-                            loadFragment(new setupAccounttype());
-                            step = 2;
-                        }
-                        else if (step == 2){
-                            loadFragment(new setupInterests());
-                            step = 3;
-                        }
-                        else if (step == 3){
-                            updateUser();
-                        }
-                    }
-                }
-        );
-
     }
 
-    private void loadFragment(Fragment fragment) {
+    public void loadFragment(Fragment fragment) {
         getSupportFragmentManager()
                 .beginTransaction()
                 .setCustomAnimations(R.anim.slide_in, R.anim.fade_out)
@@ -79,23 +58,21 @@ public class ProfileSetup extends AppCompatActivity {
                 .commit();
     }
     // update user
-    private void updateUser(){
+    public void updateUser(){
         UserService userService = UserViewModel.updateUserService();
-        UpdateUserRequest updateUserRequest = new UpdateUserRequest();
 
-        updateUserRequest.setTitle(user.getTitle());
-        updateUserRequest.setType(user.getType());
+        if ( user.getPicture() != null){
+            picturePart = prepareFilePart("picture", user.getPicture());
+        }
 
+        type = RequestBody.create(MediaType.parse("text/plain"),user.getType());
 
-        MultipartBody.Part picturePart = prepareFilePart("picture", user.getPicture());
+        if ( user.getTitle() != null) {
+            title = RequestBody.create(MediaType.parse("text/plain"),user.getTitle());
+        }
 
-        RequestBody type = RequestBody.create(MediaType.parse("text/plain"),user.getType());
-        RequestBody title = RequestBody.create(MediaType.parse("text/plain"),user.getTitle());
-
-        Log.d("Update User","Data "+ updateUserRequest.getTitle() +" " + updateUserRequest.getType());
-        Log.d("Update User","Update UpdateUserRequest called");
         Call<Void> setupProfile = userService.setupProfile(1,picturePart,title,type);
-        Log.d("Update User","register setupProfile : " + setupProfile.toString());
+
         setupProfile.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
@@ -125,7 +102,7 @@ public class ProfileSetup extends AppCompatActivity {
                 System.out.println(response.toString());
                 if (response.isSuccessful()){
                     Log.d("Update interests","OK");
-                    Toast.makeText(ProfileSetup.this, "User updated", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ProfileSetup.this, "Interest selected", Toast.LENGTH_SHORT).show();
 
                 } else {
                     Log.d("Update interests","Fail");
@@ -143,6 +120,9 @@ public class ProfileSetup extends AppCompatActivity {
     }
 
     private MultipartBody.Part prepareFilePart(String partName, File file) {
+        if (file == null){
+            return null;
+        }
         RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), file);
         return MultipartBody.Part.createFormData(partName, file.getName(), requestBody);
     }

@@ -11,8 +11,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.artcon_test.ProfileSetup;
 import com.example.artcon_test.R;
 import com.example.artcon_test.model.UpdateUserViewModel;
 
@@ -70,6 +72,10 @@ public class setupAccounttype extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_setup_accounttype, container, false);
         user = new ViewModelProvider(requireActivity()).get(UpdateUserViewModel.class);
+        // Next Button
+        Button next = view.findViewById(R.id.next_button);
+        next.setEnabled(false);
+        // Artist type
         TextView artist = view.findViewById(R.id.artist);
         TextView not_artist = view.findViewById(R.id.normalUser);
 
@@ -77,6 +83,8 @@ public class setupAccounttype extends Fragment {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        //Enable the next button
+                        next.setEnabled(true);
                         //Update the user type
                         user.setType("artist");
                         Log.d("Set up account type","type " + user.getType());
@@ -96,8 +104,9 @@ public class setupAccounttype extends Fragment {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        //Enable the next button
+                        next.setEnabled(true);
                         user.setType("not_artist");
-                        user.setTitle(null);
                         Log.d("Set up account type","type" + user.getType());
                         Drawable selected = ContextCompat.getDrawable(getContext(),R.drawable.account_type_selected);
                         not_artist.setBackground(selected);
@@ -107,6 +116,15 @@ public class setupAccounttype extends Fragment {
 //                        getChildFragmentManager().popBackStack();
                         //Load the new one
                         loadFragment(new accounttype_notartist());
+                    }
+                }
+        );
+
+        next.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ((ProfileSetup) requireActivity()).loadFragment(new setupInterests());
                     }
                 }
         );

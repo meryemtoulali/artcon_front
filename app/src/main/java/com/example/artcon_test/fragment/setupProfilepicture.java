@@ -20,6 +20,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.example.artcon_test.ProfileSetup;
 import com.example.artcon_test.R;
 import com.example.artcon_test.model.UpdateUserViewModel;
 
@@ -87,6 +88,8 @@ public class setupProfilepicture extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_setup_profilepicture, container, false);
         Button addPhoto = view.findViewById(R.id.addPhoto);
+        // Skip button
+        Button next = view.findViewById(R.id.next_button);
         pdp = view.findViewById(R.id.photo);
         user = new ViewModelProvider(requireActivity()).get(UpdateUserViewModel.class);
 
@@ -95,6 +98,16 @@ public class setupProfilepicture extends Fragment {
                     @Override
                     public void onClick(View v) {
                         chooseImage();
+                    }
+                }
+        );
+
+        // Next button
+        next.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ((ProfileSetup) requireActivity()).loadFragment(new setupAccounttype());
                     }
                 }
         );
