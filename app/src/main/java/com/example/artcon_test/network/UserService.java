@@ -18,4 +18,19 @@ public interface UserService {
 
     @GET("post/owner/{userId}")
     Call<List<Post>> getUserPostList(@Path("userId") String userId);
+
+    @Multipart
+    @PUT("user/{userId}")
+    Call<Void> setupProfile(
+            @Path("userId") int userId,
+            @Part MultipartBody.Part picture,
+            @Part("title") RequestBody title,
+            @Part("type") RequestBody type
+    );
+
+    @PUT("user/update-interest/{userId}")
+    Call<Void> selectInterests(
+            @Path("userId") int userId,
+            @Body List<Long> interests
+    );
 }

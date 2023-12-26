@@ -25,4 +25,32 @@
     <string name="title_notifications">Notifications</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="app_name">ArtCon_test</string>
+    <string name="welcom_newuser">Welcom, User!</string>
+    <string name="setup_profile">Let\'s set up your profile</string>
+    <string name="add_profilepicture">Add a profile picture</string>
+    <string name="add_picture">Add photo</string>
+    <string name="skip">Skip</string>
+    <string name="Iam">I\'am</string>
+    <string name="an_artist">an artist</string>
+    <string name="looking_for_artists">looking for artists</string>
+    <string name="next">Continue</string>
+    <string name="Ispecialise">I specialize in...</string>
+    <string name="because">Because...</string>
+    <string name="tohire">I want to hire them</string>
+    <string name="tolikeart">I just like art</string>
+    <string name="poetry">Poetry</string>
+    <string name="photography">Photography</string>
+    <string name="mixed_media">Mixed media</string>
+    <string name="music">Music</string>
+    <string name="painting">Painting</string>
+    <string name="acting">Acting</string>
+    <string name="design">Design</string>
+    <string name="digital_art">Digital art</string>
+    <string name="textile_art">Textile art</string>
+    <string name="dance">Dance</string>
+    <string name="animation">Animation</string>
+    <string name="comedy">Comedy</string>
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
