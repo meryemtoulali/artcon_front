@@ -39,4 +39,7 @@ public interface UserService {
             @Path("userId") String userId,
             @Body List<Long> interests
     );
+
+    @GET("user/home")
+    Call<List<Post>> getHome();
 }
