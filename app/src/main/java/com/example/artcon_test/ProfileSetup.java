@@ -4,8 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,7 +13,6 @@ import android.widget.Toast;
 import com.example.artcon_test.fragment.setupProfilepicture;
 import com.example.artcon_test.model.UpdateUserViewModel;
 import com.example.artcon_test.network.UserService;
-import com.example.artcon_test.ui.MainNavActivity;
 import com.example.artcon_test.viewmodel.UserViewModel;
 
 
@@ -38,8 +35,6 @@ public class ProfileSetup extends AppCompatActivity {
     MultipartBody.Part picturePart;
 
     ImageView arrowback;
-    private String userId;
-    private String TAG = "hatsunemiku";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,12 +42,6 @@ public class ProfileSetup extends AppCompatActivity {
         setContentView(R.layout.activity_profile_setup);
         user = new ViewModelProvider(this).get(UpdateUserViewModel.class);
         arrowback = findViewById(R.id.imageView);
-        SharedPreferences preferences = getSharedPreferences("AuthPrefs", MODE_PRIVATE);
-        userId=preferences.getString("userId",null);
-        Log.d(TAG, "AuthPrefs isLoggedIn:" + preferences.getBoolean("isLoggedIn",false));
-        Log.d(TAG, "AuthPrefs userId:" + preferences.getString("userId",null));
-        Log.d(TAG, "AuthPrefs username:" + preferences.getString("username",null));
-        Log.d(TAG, "AuthPrefs token:" + preferences.getString("token",null));
 
         arrowback.setOnClickListener(
                 new View.OnClickListener() {
@@ -91,7 +80,7 @@ public class ProfileSetup extends AppCompatActivity {
             title = RequestBody.create(MediaType.parse("text/plain"),user.getTitle());
         }
 
-        Call<Void> setupProfile = userService.setupProfile(userId,picturePart,title,type);
+        Call<Void> setupProfile = userService.setupProfile(1,picturePart,title,type);
 
         setupProfile.enqueue(new Callback<Void>() {
             @Override
@@ -100,11 +89,6 @@ public class ProfileSetup extends AppCompatActivity {
                 if (response.isSuccessful()){
                     Log.d("Update user","OK");
                     Toast.makeText(ProfileSetup.this, "User updated", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(ProfileSetup.this, MainNavActivity.class);
-                    startActivity(intent);
-                    finish();
-
-
 
                 } else {
                     Log.d("Update user","Fail");
@@ -120,7 +104,7 @@ public class ProfileSetup extends AppCompatActivity {
             }
         });
 
-        Call<Void> selectinterests = userService.selectInterests(userId,user.getInterestIds());
+        Call<Void> selectinterests = userService.selectInterests(1,user.getInterestIds());
         selectinterests.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
@@ -128,7 +112,6 @@ public class ProfileSetup extends AppCompatActivity {
                 if (response.isSuccessful()){
                     Log.d("Update interests","OK");
                     Toast.makeText(ProfileSetup.this, "Interest selected", Toast.LENGTH_SHORT).show();
-
 
                 } else {
                     Log.d("Update interests","Fail");
