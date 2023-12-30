@@ -28,7 +28,7 @@ public interface UserService {
     @Multipart
     @PUT("user/{userId}")
     Call<Void> setupProfile(
-            @Path("userId") int userId,
+            @Path("userId") String userId,
             @Part MultipartBody.Part picture,
             @Part("title") RequestBody title,
             @Part("type") RequestBody type
@@ -36,7 +36,7 @@ public interface UserService {
 
     @PUT("user/update-interest/{userId}")
     Call<Void> selectInterests(
-            @Path("userId") int userId,
+            @Path("userId") String userId,
             @Body List<Long> interests
     );
 

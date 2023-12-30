@@ -5,6 +5,7 @@ import android.util.Log;
 import androidx.lifecycle.ViewModel;
 
 import com.example.artcon_test.model.ArtistType;
+import com.example.artcon_test.network.ApiConfig;
 import com.example.artcon_test.network.ApiService;
 import com.example.artcon_test.network.ArtistTypeService;
 
@@ -21,7 +22,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ArtistTypeViewModel extends ViewModel {
 
     // Local http://192.168.100.10:8080
-    private static final String BASE_URL = "http://192.168.100.10:8080/";
+    private static final String BASE_URL = ApiConfig.BASE_URL;
     private static Retrofit retrofit;
     public static ArtistTypeService getArtistTypeService(){
         Log.d("ArtistType","Get Artist types");
