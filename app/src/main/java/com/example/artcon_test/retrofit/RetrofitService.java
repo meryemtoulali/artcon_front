@@ -14,7 +14,7 @@ public class RetrofitService {
 
     private void initializeRetrofit() {
         retrofit = new Retrofit.Builder()
-                .baseUrl("http://localhost:8080/")
+                .baseUrl("https://artcon-back.onrender.com/")
                 .addConverterFactory(GsonConverterFactory.create(new Gson()))
                 .build();
     }

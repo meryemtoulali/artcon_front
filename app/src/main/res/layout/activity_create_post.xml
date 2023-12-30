@@ -115,6 +115,16 @@
             android:textColor="@color/blackBase"
             android:textSize="18sp" />
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView_Gallery_Images"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbarStyle="outsideInset"
+            android:scrollbars="vertical"
+            android:layout_marginTop="5dp"
+
+            />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
