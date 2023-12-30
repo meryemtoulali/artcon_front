@@ -6,8 +6,14 @@ import com.example.artcon_test.model.User;
 
 import java.util.List;
 
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.Multipart;
+import retrofit2.http.PUT;
+import retrofit2.http.Part;
 import retrofit2.http.Path;
 
 public interface UserService {
@@ -33,4 +39,7 @@ public interface UserService {
             @Path("userId") int userId,
             @Body List<Long> interests
     );
+
+    @GET("user/home")
+    Call<List<Post>> getHome();
 }
