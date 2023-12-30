@@ -6,8 +6,14 @@ import com.example.artcon_test.model.User;
 
 import java.util.List;
 
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.Multipart;
+import retrofit2.http.PUT;
+import retrofit2.http.Part;
 import retrofit2.http.Path;
 
 public interface UserService {
@@ -22,7 +28,7 @@ public interface UserService {
     @Multipart
     @PUT("user/{userId}")
     Call<Void> setupProfile(
-            @Path("userId") int userId,
+            @Path("userId") String userId,
             @Part MultipartBody.Part picture,
             @Part("title") RequestBody title,
             @Part("type") RequestBody type
@@ -30,7 +36,7 @@ public interface UserService {
 
     @PUT("user/update-interest/{userId}")
     Call<Void> selectInterests(
-            @Path("userId") int userId,
+            @Path("userId") String userId,
             @Body List<Long> interests
     );
 }
