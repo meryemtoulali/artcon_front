@@ -13,23 +13,28 @@ import retrofit2.http.Query;
 
 import com.example.artcon_test.model.AddPostRes;
 import com.example.artcon_test.model.Category;
+import com.example.artcon_test.model.Interest;
 import com.example.artcon_test.model.LoginRequest;
 import com.example.artcon_test.model.LoginResponse;
+
+import java.util.List;
+import java.util.Optional;
 
 public interface ApiService {
     @POST("login")
     Single<LoginResponse> login(@Body LoginRequest request);
 
+   @GET("/interest/all")
+   Call<List<Interest>> getAllInterests();
+
+
     @Multipart
     @POST("/post/add")
-    Call<AddPostRes> addpost(@Part("post_owner") Integer user_id,
-                             //get current username from Shared Preferences
-                             @Part("post_description") RequestBody descriptionText,
-                             @Part MultipartBody.Part image,
-                             @Part("post_category") RequestBody category);
-
-   // @GET("getCategoryId")
-    //Call<Category> getCategoryId(@Query("categoryName") String categoryName);
-
+    Call<AddPostRes> submitPost(
+            @Part("user_id") Integer userId,
+            @Part("description") String description,
+            @Part List<MultipartBody.Part> mediafiles,
+            @Part("interest_id") Long interestId
+    );
 }
 
