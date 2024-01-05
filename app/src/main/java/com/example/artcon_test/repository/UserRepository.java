@@ -51,8 +51,8 @@ public class UserRepository {
 
     }
 
-    public void getHome(PostRepository.PostCallback callback) {
-        Call<List<Post>> call = userService.getHome();
+    public void getHome(String userId,PostRepository.PostCallback callback) {
+        Call<List<Post>> call = userService.getHomeFeed(userId);
 
         call.enqueue(new Callback<List<Post>>() {
             @Override

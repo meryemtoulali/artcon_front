@@ -40,6 +40,8 @@ public interface UserService {
             @Body List<Long> interests
     );
 
-    @GET("user/home")
-    Call<List<Post>> getHome();
+    @GET("user/{userId}/home")
+    Call<List<Post>> getHomeFeed(
+            @Path("userId") String userId
+    );
 }

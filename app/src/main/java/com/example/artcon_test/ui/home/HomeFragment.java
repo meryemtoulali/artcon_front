@@ -1,5 +1,8 @@
 package com.example.artcon_test.ui.home;
 
+import static android.content.Context.MODE_PRIVATE;
+
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -8,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -19,15 +23,24 @@ import com.example.artcon_test.ui.profile.ProfilePostRecyclerAdapter;
 public class HomeFragment extends Fragment {
 
     private String TAG = "HOME FRAGMENT";
-
+    private String userId;
     private FragmentHomeBinding binding;
     private RecyclerView recyclerView;
+    HomeViewModel homeViewModel;
     private ProfilePostRecyclerAdapter postRecyclerAdapter;
+
+    //On create method
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
+        SharedPreferences preferences = requireActivity().getSharedPreferences("AuthPrefs", MODE_PRIVATE);
+        userId=preferences.getString("userId",null);
+    }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        HomeViewModel homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
+
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
@@ -39,7 +52,7 @@ public class HomeFragment extends Fragment {
         postRecyclerAdapter = new ProfilePostRecyclerAdapter();
         recyclerView.setAdapter(postRecyclerAdapter);
         Log.d(TAG, "created view recycler: " + recyclerView.toString());
-        homeViewModel.getHome();
+        homeViewModel.getHome(userId);
         homeViewModel.getHomeLiveData().observe(getViewLifecycleOwner(), postList -> {
             // Update recycler adapter with post list data
             postRecyclerAdapter.setPostList(postList);

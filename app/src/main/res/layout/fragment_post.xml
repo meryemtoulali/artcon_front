@@ -99,7 +99,7 @@
         android:layout_marginTop="8dp"
         android:background="?android:attr/selectableItemBackground"
         android:contentDescription="Like Button"
-        android:src="@drawable/ic_like"
+        android:src="@drawable/like_icone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/postTextArea" />
 
@@ -119,7 +119,7 @@
         android:layout_marginStart="8dp"
         android:background="?android:attr/selectableItemBackground"
         android:contentDescription="Comment Button"
-        android:src="@drawable/ic_comment"
+        android:src="@drawable/comment_icon"
         app:layout_constraintStart_toEndOf="@+id/likeCount"
         app:layout_constraintTop_toTopOf="@+id/likeCount" />
 

@@ -36,8 +36,8 @@ public class HomeViewModel extends ViewModel {
 
     //Posts
 
-    public void getHome() {
-        userRepository.getHome(new PostRepository.PostCallback() {
+    public void getHome(String userId) {
+        userRepository.getHome(userId,new PostRepository.PostCallback() {
             @Override
             public void onSuccess(List<Post> postList) {
                 HomeLiveData.postValue(postList);
