@@ -51,4 +51,17 @@
         android:name="com.example.artcon_test.ui.post.PostFragment"
         android:label="Post"
         tools:layout="@layout/fragment_post" />
+    <fragment
+        android:id="@+id/navigation_add_post"
+        android:name="com.example.artcon_test.ui.post.AddPostFragment"
+        android:label="Create Post"
+        tools:layout="@layout/fragment_add_post">
+        <action
+            android:id="@+id/action_navigation_add_post_to_navigation_home2"
+            app:destination="@id/navigation_home" />
+    </fragment>
+    <action
+        android:id="@+id/action_global_navigation_add_post"
+        app:destination="@id/navigation_add_post" />
+
 </navigation>
