@@ -61,11 +61,11 @@ public class ProfileAboutFragment extends Fragment {
         email = rootView.findViewById(R.id.email);
         phoneNumber = rootView.findViewById(R.id.phone);
         profileViewModel.getUserLiveData().observe(getViewLifecycleOwner(), user -> {
-            Log.d(TAG, "Observer called in about fragment. User: " + user.toString());
+//            Log.d(TAG, "Observer called in about fragment. User: " + user.toString());
 
             if (user != null) {
-                Log.d(TAG, "user not null, user: " + user.toString());
-                Log.d(TAG, "user bio aaaaaaa: " + user.getBio());
+//                Log.d(TAG, "user not null, user: " + user.toString());
+//                Log.d(TAG, "user bio aaaaaaa: " + user.getBio());
                 bio.setText(user.getBio());
                 email.setText(user.getEmail());
                 phoneNumber.setText(user.getPhoneNumber());

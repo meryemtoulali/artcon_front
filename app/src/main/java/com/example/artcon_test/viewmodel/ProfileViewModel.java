@@ -9,8 +9,10 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.artcon_test.model.PortfolioPost;
+import com.example.artcon_test.model.Post;
 import com.example.artcon_test.model.User;
 import com.example.artcon_test.repository.PortfolioRepository;
+import com.example.artcon_test.repository.PostRepository;
 import com.example.artcon_test.repository.UserRepository;
 
 import java.util.List;
@@ -20,11 +22,16 @@ public class ProfileViewModel extends ViewModel {
 
     private final UserRepository userRepository = new UserRepository();
     private final PortfolioRepository portfolioRepository = new PortfolioRepository();
+    private final PostRepository postRepository = new PostRepository();
     private MutableLiveData<User> userLiveData = new MutableLiveData<>();
     private MutableLiveData<List<PortfolioPost>> portfolioLiveData = new MutableLiveData<>();
 
     private MutableLiveData<PortfolioPost> selectedPortfolioPostLiveData = new MutableLiveData<>();
-    private final MutableLiveData<User> postOwner = new MutableLiveData<>();
+
+    private MutableLiveData<List<Post>> postListLiveData = new MutableLiveData<>();
+    private MutableLiveData<Post> selectedPostLiveData = new MutableLiveData<>();
+
+
 
 
 
@@ -37,8 +44,8 @@ public class ProfileViewModel extends ViewModel {
             public void onSuccess(User user) {
                 // Update LiveData with the retrieved user data
                 userLiveData.postValue(user);
-                Log.d(TAG, "successfully posted to userLiveData :");
-                Log.d(TAG, user.toString());
+                Log.d(TAG, "updated userLiveData");
+//                Log.d(TAG, user.toString());
 
             }
 
@@ -80,6 +87,33 @@ public class ProfileViewModel extends ViewModel {
     public void setSelectedPortfolioPost(PortfolioPost selectedPost) {
         selectedPortfolioPostLiveData.setValue(selectedPost);
     }
+
+    public void getPostList(String userId) {
+        postRepository.getPostList(userId, new PostRepository.PostCallback() {
+            @Override
+            public void onSuccess(List<Post> postList) {
+
+                postListLiveData.postValue(postList);
+                if (postList != null) {
+                    for (Post post : postList) {
+                        Log.d(TAG, "Post in livedata: " + post.toString() +"\n\n");
+                    }
+                }
+
+            }
+
+            @Override
+            public void onError(String errorMessage) {
+                Log.e(TAG, errorMessage);
+            }
+        });
+    }
+
+    public LiveData<List<Post>> getPostListLiveData() {
+        return postListLiveData;
+    }
+
+
 
 
 }

@@ -3,8 +3,8 @@ package com.example.artcon_test.repository;
 import android.util.Log;
 
 import com.example.artcon_test.model.MediaFile;
+import com.example.artcon_test.model.PortfolioPost;
 import com.example.artcon_test.model.Post;
-import com.example.artcon_test.model.User;
 import com.example.artcon_test.network.ApiConfig;
 import com.example.artcon_test.network.UserService;
 
@@ -16,11 +16,11 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class UserRepository {
-    String TAG = "hatsunemiku";
+public class PostRepository {
     private final UserService userService;
+    String TAG ="hatsunemiku";
 
-    public UserRepository() {
+    public PostRepository() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(ApiConfig.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -29,30 +29,8 @@ public class UserRepository {
         userService = retrofit.create(UserService.class);
     }
 
-    public void getUserById(String userId, UserCallback callback) {
-
-        Call<User> call = userService.getUserById(userId);
-
-        call.enqueue(new Callback<User>() {
-            @Override
-            public void onResponse(Call<User> call, Response<User> response) {
-                if (response.isSuccessful()) {
-                    callback.onSuccess(response.body());
-                } else {
-                    callback.onError("Error fetching user data");
-                }
-            }
-
-            @Override
-            public void onFailure(Call<User> call, Throwable t) {
-                callback.onError("Network error: " + t.getMessage());
-            }
-        });
-
-    }
-
-    public void getHome(String userId,PostRepository.PostCallback callback) {
-        Call<List<Post>> call = userService.getHomeFeed(userId);
+    public void getPostList(String userId, PostCallback callback) {
+        Call<List<Post>> call = userService.getUserPostList(userId);
 
         call.enqueue(new Callback<List<Post>>() {
             @Override
@@ -68,8 +46,9 @@ public class UserRepository {
                         } else {
                             Log.d(TAG, "No MediaFiles for post " + post.getId());
                         }
-                    }
-                    callback.onSuccess(posts);
+                    }                    callback.onSuccess(posts);
+
+
                 } else {
                     callback.onError("Error fetching posts data");
                 }
@@ -82,10 +61,12 @@ public class UserRepository {
         });
     }
 
-    // Callback interface for handling asynchronous responses
-    public interface UserCallback {
-        void onSuccess(User user);
+    public interface PostCallback {
+        void onSuccess(List<Post> postList);
 
         void onError(String errorMessage);
     }
+
+
+
 }

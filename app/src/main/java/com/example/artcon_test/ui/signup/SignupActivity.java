@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.artcon_test.ProfileSetup;
 import com.example.artcon_test.ui.MainNavActivity;
 import com.example.artcon_test.R;
 import com.example.artcon_test.model.LoginResponse;
@@ -151,7 +152,7 @@ public class SignupActivity extends AppCompatActivity {
             editor.putBoolean("isLoggedIn", true);
             editor.apply();
             Toast.makeText(this, "Registered successfully", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(this, MainNavActivity.class);
+            Intent intent = new Intent(this, ProfileSetup.class);
             startActivity(intent);
             finish();
         } else {
