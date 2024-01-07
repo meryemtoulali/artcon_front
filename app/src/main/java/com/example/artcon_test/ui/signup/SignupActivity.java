@@ -16,10 +16,15 @@ import com.example.artcon_test.R;
 import com.example.artcon_test.model.LoginResponse;
 import com.example.artcon_test.model.RegisterRequest;
 import com.example.artcon_test.network.AuthService;
+import com.example.artcon_test.utilities.Constants;
 import com.example.artcon_test.viewmodel.LoginViewModel;
 import com.example.artcon_test.viewmodel.SignupViewModel;
+import com.example.artcon_test.databinding.ActivitySignupBinding;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 
 import java.util.Date;
+import java.util.HashMap;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -28,6 +33,7 @@ import retrofit2.Response;
 public class SignupActivity extends AppCompatActivity {
     String TAG="hatsunemiku";
     SignupViewModel signupViewModel;
+    private ActivitySignupBinding binding;
 
 
     @Override
@@ -86,6 +92,14 @@ public class SignupActivity extends AppCompatActivity {
 
                     LoginResponse loginResponse = response.body();
                     handleRequestResponse(loginResponse);
+                    // Assuming you have collected all the user information and created a RegisterRequest object
+                    RegisterRequest registerRequest = new RegisterRequest(
+                             firstName, lastName, gender, phonenumber, birthday, location, username, email, password
+                    );
+
+// Call the saveUserToFirestore function and pass the RegisterRequest object as an argument
+                    saveUserToFirestore(registerRequest,loginResponse);
+
                 } else {
                     Log.d(TAG,"register failed: " + response);
                     Toast.makeText(SignupActivity.this, "Sign Up failed", Toast.LENGTH_SHORT).show();
@@ -98,6 +112,33 @@ public class SignupActivity extends AppCompatActivity {
                 Toast.makeText(SignupActivity.this, "Sign up failed", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void saveUserToFirestore(RegisterRequest registerRequest, LoginResponse loginResponse) {
+        Log.d(TAG, "Saving user data to Firestore: " + registerRequest.toString());
+
+        FirebaseFirestore database = FirebaseFirestore.getInstance();
+        HashMap<String, Object> user = new HashMap<>();
+        user.put(Constants.KEY_TOKEN, loginResponse.getToken());
+        user.put(Constants.KEY_USER_ID, loginResponse.getUserId());
+        user.put(Constants.KEY_USERNAME, registerRequest.getUsername());
+        user.put(Constants.KEY_EMAIL, registerRequest.getEmail());
+        user.put(Constants.KEY_FIRSTNAME, registerRequest.getFirstname());
+        user.put(Constants.KEY_LASTNAME, registerRequest.getLastname());
+        user.put(Constants.KEY_GENDER, registerRequest.getGender());
+        user.put(Constants.KEY_PHONENUMBER, registerRequest.getPhonenumber());
+        user.put(Constants.KEY_LOCATION, registerRequest.getLocation());
+
+        database.collection(Constants.KEY_COLLECTION_USERS)
+                .add(user)
+                .addOnSuccessListener(documentReference -> {
+                    Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                    Toast.makeText(SignupActivity.this, "User data saved successfully", Toast.LENGTH_SHORT).show();
+                })
+                .addOnFailureListener(e -> {
+                    Log.w(TAG, "Error adding document", e);
+                    Toast.makeText(SignupActivity.this, "Failed to save user data", Toast.LENGTH_SHORT).show();
+                });
     }
 
     private void handleRequestResponse(LoginResponse loginResponse) {

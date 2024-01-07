@@ -17,17 +17,27 @@ import com.example.artcon_test.R;
 import com.example.artcon_test.ui.signup.SignupActivity;
 import com.example.artcon_test.model.LoginRequest;
 import com.example.artcon_test.network.AuthService;
+import com.example.artcon_test.utilities.Constants;
 import com.example.artcon_test.viewmodel.LoginViewModel;
 import com.example.artcon_test.model.LoginResponse;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import android.content.Intent;
+
+import java.util.HashMap;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import com.example.artcon_test.databinding.ActivityLoginBinding;
+import com.google.firebase.firestore.SetOptions;
 
 
 public class LoginActivity extends AppCompatActivity {
     String TAG = "hatsunemiku";
+    private ActivityLoginBinding binding;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +51,8 @@ public class LoginActivity extends AppCompatActivity {
 
         AuthService authService = LoginViewModel.getAuthService();
 
+        binding = ActivityLoginBinding.inflate(getLayoutInflater());
+
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -48,9 +60,10 @@ public class LoginActivity extends AppCompatActivity {
                 String password = passwordEditText.getText().toString().trim();
                 LoginRequest loginRequest = new LoginRequest(username,password);
 
-
                 Call<LoginResponse> call = authService.login(loginRequest);
                 Log.d(TAG,call.toString());
+
+
                 call.enqueue(new Callback<LoginResponse>() {
 
                     @Override
@@ -59,6 +72,10 @@ public class LoginActivity extends AppCompatActivity {
                             Log.d(TAG, "login successful: " + response);
                             LoginResponse loginResponse = response.body();
                             handleLoginResponse(loginResponse);
+                            Log.d(TAG, "Token_Firebase: " + loginResponse.getToken());
+                            Log.d(TAG, "UserId_Firebase: " + loginResponse.getUserId());
+                            // Add data to Firestore after successful login.
+                            addDataToFirestore(loginResponse);
                         } else {
                             Log.d(TAG,"Login failed:" + response);
                             Toast.makeText(LoginActivity.this, "Login failed", Toast.LENGTH_SHORT).show();
@@ -110,4 +127,35 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(this, "Login failed", Toast.LENGTH_SHORT).show();
         }
     }
+
+
+
+    private void addDataToFirestore(LoginResponse loginResponse) {
+        FirebaseFirestore database = FirebaseFirestore.getInstance();
+        HashMap<String, Object> user = new HashMap<>();
+        user.put(Constants.KEY_TOKEN, loginResponse.getToken());
+        user.put(Constants.KEY_USER_ID, loginResponse.getUserId());
+        Log.d(TAG, "Data to be updated: " + user.toString());
+
+        String userId = loginResponse.getUserId(); // Get the userId from loginResponse
+
+        Log.d(TAG, "Updating Firestore document with userId: " + userId);
+        database.collection(Constants.KEY_COLLECTION_USERS)
+                .document(userId)
+                .set(user, SetOptions.merge()) // Using merge to update only the specified fields
+                .addOnSuccessListener(documentReference -> {
+                    Toast.makeText(getApplicationContext(), "Data updated", Toast.LENGTH_SHORT).show();
+                })
+                .addOnFailureListener(exception -> {
+                    Toast.makeText(getApplicationContext(), "Error updating document", Toast.LENGTH_SHORT).show();
+                    Log.e(TAG, "Error updating Firestore document: " + exception.getMessage());
+                });
+
+
+
+
+    }
+
+
+
 }
