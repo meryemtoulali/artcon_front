@@ -70,17 +70,25 @@ public class Post {
     }
 
     @Override
-    public String
-    toString() {
-        return "Post{" +
-                "id=" + id +
-                ", description='" + description + '\'' +
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Post{")
+                .append("id=").append(id)
+                .append(", description='").append(description).append('\'');
 
-                ", mediaFiles.get(0) =" + mediaFiles.get(0).toString() +
-                ", likes=" + likes +
-                ", dateTime=" + dateTime +
-                '}';
+        if (mediaFiles != null && !mediaFiles.isEmpty()) {
+            stringBuilder.append(", mediaFiles.get(0) =").append(mediaFiles.get(0).toString());
+        } else {
+            stringBuilder.append(", mediaFiles=[]");
+        }
+
+        stringBuilder.append(", likes=").append(likes)
+                .append(", dateTime=").append(dateTime)
+                .append('}');
+
+        return stringBuilder.toString();
     }
+
 }
 
 

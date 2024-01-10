@@ -37,17 +37,19 @@ public class PostRepository {
             public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
                 if (response.isSuccessful()) {
                     List<Post> posts = response.body();
-
-                    Log.d(TAG, "received posts:" + response.body());
-                    for (Post post : posts) {
-                        List<MediaFile> mediaFiles = post.getMediaFiles();
-                        if (mediaFiles != null && !mediaFiles.isEmpty()) {
-                            Log.d(TAG, "MediaFiles for post " + post.getId() + ": " + mediaFiles);
-                        } else {
-                            Log.d(TAG, "No MediaFiles for post " + post.getId());
+                    if (posts != null) {
+                        Log.d(TAG, "received posts:" + response.body());
+                        for (Post post : posts) {
+                            List<MediaFile> mediaFiles = post.getMediaFiles();
+                            if (mediaFiles != null && !mediaFiles.isEmpty()) {
+                                Log.d(TAG, "MediaFiles for post " + post.getId() + ": " + mediaFiles);
+                            } else {
+                                Log.d(TAG, "No MediaFiles for post " + post.getId());
+                            }
                         }
-                    }                    callback.onSuccess(posts);
+                    }
 
+                    callback.onSuccess(posts);
 
                 } else {
                     callback.onError("Error fetching posts data");
