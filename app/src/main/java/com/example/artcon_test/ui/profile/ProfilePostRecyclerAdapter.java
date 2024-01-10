@@ -82,11 +82,12 @@ public class ProfilePostRecyclerAdapter extends RecyclerView.Adapter<ProfilePost
                         .placeholder(R.drawable.picasso_placeholder)
                         .into(postImage);
             }
-            if(post.getUser().getPicture() != null && !post.getUser().getPicture().isEmpty())
-            Picasso.get()
-                    .load(post.getUser().getPicture())
-                    .placeholder(R.drawable.picasso_placeholder)
-                    .into(pfp);
+            if(post.getUser().getPicture() != null && !post.getUser().getPicture().isEmpty()) {
+                Picasso.get()
+                        .load(post.getUser().getPicture())
+                        .placeholder(R.drawable.picasso_placeholder)
+                        .into(pfp);
+            }
             username.setText(post.getUser().getUsername());
             fullName.setText(post.getUser().getFirstname() + " " + post.getUser().getLastname());
             postTextArea.setText(post.getDescription());
