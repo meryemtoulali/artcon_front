@@ -49,7 +49,7 @@ public class PortfolioPostFragment extends Fragment {
                     .into(portfolioImage);
             portfolioTitle.setText(selectedPost.getTitle());
             portfolioDescription.setText(selectedPost.getCaption());
-            username.setText(selectedPost.getUser().getUsername());
+            username.setText("@"+selectedPost.getUser().getUsername());
             fullName.setText(selectedPost.getUser().getFirstname() + " " + selectedPost.getUser().getLastname());
             Picasso.get()
                     .load(selectedPost.getUser().getPicture())
