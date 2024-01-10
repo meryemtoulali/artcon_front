@@ -156,8 +156,6 @@ public class AddPostFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 // Get the selected text
                 category = parent.getItemAtPosition(position).toString();
-                // Do something with the selected text
-                Toast.makeText(getActivity(), "Selected: " + category, Toast.LENGTH_SHORT).show();
 
                 //jadid
                 // Get the selected text
@@ -168,8 +166,6 @@ public class AddPostFragment extends Fragment {
                 selectedInterestId = findInterestIdByName(selectedInterestName);
 
                 Log.d("category", "category id is : "+ selectedInterestId);
-                // Do something with the selected interest ID
-                Toast.makeText(getActivity(), "Selected Interest ID: " + selectedInterestId, Toast.LENGTH_SHORT).show();
             }
         });
 

@@ -50,7 +50,7 @@
             android:padding="18dp"
             android:text="Choose a category for this post:"
             android:textColor="@color/blackBase"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
@@ -80,7 +80,7 @@
             android:padding="18dp"
             android:text="What do you want to talk about?"
             android:textColor="@color/blackBase"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
 
         <com.google.android.material.textfield.TextInputLayout
@@ -114,7 +114,7 @@
             android:padding="18dp"
             android:text="Upload media:"
             android:textColor="@color/blackBase"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView_Gallery_Images"
@@ -161,15 +161,16 @@
                         android:src="@drawable/upload_photo"/>
 
                 </RelativeLayout>
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
+                    android:layout_marginTop="10dp"
                     android:fontFamily="@font/ubuntu"
-                    android:textColor="@color/blackBase"
-                    android:textSize="18sp"
+                    android:gravity="center"
                     android:text="Photo"
-                    android:layout_marginTop="10dp"/>
+                    android:textColor="@color/blackBase"
+                    android:textSize="16sp" />
 
 
 
@@ -203,12 +204,12 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
+                    android:layout_marginTop="10dp"
                     android:fontFamily="@font/ubuntu"
-                    android:textColor="@color/blackBase"
-                    android:textSize="18sp"
+                    android:gravity="center"
                     android:text="Video"
-                    android:layout_marginTop="10dp"/>
+                    android:textColor="@color/blackBase"
+                    android:textSize="16sp" />
 
 
             </LinearLayout>
@@ -233,12 +234,12 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
+                    android:layout_marginTop="10dp"
                     android:fontFamily="@font/ubuntu"
-                    android:textColor="@color/blackBase"
-                    android:textSize="18sp"
+                    android:gravity="center"
                     android:text="Document"
-                    android:layout_marginTop="10dp"/>
+                    android:textColor="@color/blackBase"
+                    android:textSize="16sp" />
 
 
             </LinearLayout>
