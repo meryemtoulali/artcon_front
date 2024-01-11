@@ -24,6 +24,12 @@
         tools:layout="@layout/fragment_add" />
 
     <fragment
+        android:id="@+id/navigation_add_view"
+        android:name="com.example.artcon_test.ui.add.AddDetailsFragment"
+        android:label="Add Details"
+        tools:layout="@layout/fragment_add_details" />
+
+    <fragment
         android:id="@+id/navigation_job"
         android:name="com.example.artcon_test.ui.add.AddFragment"
         android:label="@string/title_job"
@@ -34,4 +40,5 @@
         android:name="com.example.artcon_test.ui.add.AddFragment"
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_profile" />
+
 </navigation>

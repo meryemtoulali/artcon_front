@@ -1,12 +1,7 @@
 package com.example.artcon_test;
 
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.view.MenuItem;
-import android.widget.ImageView;
-import androidx.annotation.DimenRes;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -18,6 +13,7 @@ public class BottomNavbarActivity extends AppCompatActivity {
 
     private ActivityBottomNavbarBinding binding;
     private AppBarConfiguration appBarConfiguration;
+    private NavController navController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,14 +27,26 @@ public class BottomNavbarActivity extends AppCompatActivity {
         navView.setAnimation(null);
         navView.setItemRippleColor(null);
 
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_bottom_navbar);
+        navView.setOnNavigationItemSelectedListener(item -> {
+            int itemId = item.getItemId();
+
+            if (itemId == R.id.navigation_add) {
+                // Naviguer vers la nouvelle destination (fragment) lorsque le bouton "Add" est cliqué
+                navController.navigate(R.id.navigation_add_view);
+                return true;
+            } else {
+                // Autres gestionnaires de clics
+                return false;
+            }
+        });
+
+        navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_bottom_navbar);
         appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.navigation_home, R.id.navigation_search, R.id.navigation_add, R.id.navigation_job, R.id.navigation_profile)
                 .build();
 
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
-
     }
 
     @Override
