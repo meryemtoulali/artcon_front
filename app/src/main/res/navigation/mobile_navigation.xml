@@ -59,7 +59,16 @@
         <action
             android:id="@+id/action_navigation_add_post_to_navigation_home2"
             app:destination="@id/navigation_home" />
+        <action
+            android:id="@+id/action_navigation_add_post_to_navigation_view_post"
+            app:destination="@id/navigation_view_post" />
+
     </fragment>
+    <fragment
+        android:id="@+id/navigation_view_post"
+        android:name="com.example.artcon_test.ui.post.ViewPostFragment"
+        android:label="View Post"
+        tools:layout="@layout/activity_view_post"/>
     <action
         android:id="@+id/action_global_navigation_add_post"
         app:destination="@id/navigation_add_post" />

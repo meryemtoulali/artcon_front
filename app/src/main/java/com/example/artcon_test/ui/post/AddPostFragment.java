@@ -4,7 +4,6 @@ import static android.content.Context.MODE_PRIVATE;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -40,7 +39,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.artcon_test.R;
 import com.example.artcon_test.model.AddPostRes;
 import com.example.artcon_test.model.Interest;
-import com.example.artcon_test.network.ApiService;
+import com.example.artcon_test.network.PostService;
 import com.example.artcon_test.retrofit.RetrofitService;
 import com.example.artcon_test.ui.RealPathUtil;
 import com.google.android.material.textfield.TextInputEditText;
@@ -113,9 +112,9 @@ public class AddPostFragment extends Fragment {
         ImageView videoPost = view.findViewById(R.id.videoView);
 
         RetrofitService retrofitService = new RetrofitService();
-        ApiService apiService = retrofitService.getRetrofit().create(ApiService.class);
+        PostService postService = retrofitService.getRetrofit().create(PostService.class);
 
-        Call<List<Interest>> call = apiService.getAllInterests();
+        Call<List<Interest>> call = postService.getAllInterests();
         call.enqueue(new Callback<List<Interest>>() {
             @Override
             public void onResponse(Call<List<Interest>> call, Response<List<Interest>> response) {
@@ -205,10 +204,11 @@ public class AddPostFragment extends Fragment {
             public void onClick(View v) {
 
                 Log.d("image", "on click");
-
+/*working
                 // Vérification des autorisations
                 if (ContextCompat.checkSelfPermission(getActivity(), android.Manifest.permission.READ_EXTERNAL_STORAGE)
                         != PackageManager.PERMISSION_GRANTED) {
+
                     Log.d("image", "no permission");
                     // Demander la permission si elle n'est pas accordée
                     //  requestPermissions(new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE},
@@ -216,10 +216,13 @@ public class AddPostFragment extends Fragment {
 
                     requestPermissions(new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE},
                             Read_Permission);
+
+
                 } else {
                     Log.d("image", "start image chooser");
+                         */
                     imageChooser();
-                }
+               // }
                 adjustRecyclerViewHeight();
             }
         });
@@ -370,7 +373,7 @@ public class AddPostFragment extends Fragment {
     @RequiresApi(api = Build.VERSION_CODES.N)
     public void addPost (Integer userId, String descriptionText, ArrayList<Uri> imageUris, Long interestId){
         RetrofitService retrofitService = new RetrofitService();
-        ApiService apiService = retrofitService.getRetrofit().create(ApiService.class);
+        PostService postService = retrofitService.getRetrofit().create(PostService.class);
 
         // Prepare the request body
         List<MultipartBody.Part> mediafiles = new ArrayList<>();
@@ -392,7 +395,7 @@ public class AddPostFragment extends Fragment {
         RequestBody reqInterestId = RequestBody.create(MediaType.parse("multipart/form-data"), String.valueOf(interestId));
 
         // Make the API call
-        apiService.submitPost(userId, descriptionText, mediafiles, interestId)
+        postService.submitPost(userId, descriptionText, mediafiles, interestId)
                 .enqueue(new Callback<AddPostRes>() {
                     @Override
                     public void onResponse(Call<AddPostRes> call, Response<AddPostRes> response) {
@@ -400,9 +403,16 @@ public class AddPostFragment extends Fragment {
                         if (response.isSuccessful()) {
                             AddPostRes postResponse = response.body();
                             if (postResponse.isSuccess()) {
+                                Integer postId = postResponse.getPostId();
+                                Log.d("id", String.valueOf(postId));
                                 Toast.makeText(getActivity(), postResponse.getMessage(), Toast.LENGTH_SHORT).show();
-                                navigateToFragment(R.id.action_navigation_add_post_to_navigation_home2);
-
+                                //
+                                Bundle result = new Bundle();
+                                result.putString("postId", String.valueOf(postId));
+                                getParentFragmentManager().setFragmentResult("postIdFromAnotherFrag", result);
+                                //action_navigation_add_post_to_navigation_view_post
+                                //navigateToFragment(R.id.action_navigation_add_post_to_navigation_home2); good
+                                navigateToFragment(R.id.action_navigation_add_post_to_navigation_view_post);
                             } else {
                                 Toast.makeText(getActivity(), "Failed to add post", Toast.LENGTH_SHORT).show();
                             }

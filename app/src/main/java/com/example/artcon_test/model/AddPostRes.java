@@ -12,6 +12,17 @@ public class AddPostRes {
     @SerializedName("message")
     private String message;
 
+    public Integer getPostId() {
+        return postId;
+    }
+
+    public void setPostId(Integer postId) {
+        this.postId = postId;
+    }
+
+    @SerializedName("postId")
+    private Integer postId;
+
     // Add any other fields you need to include in the response
 
     public boolean isSuccess() {

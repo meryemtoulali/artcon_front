@@ -34,6 +34,14 @@ android {
 }
 
 dependencies {
+
+    // Java language implementation
+    implementation ("androidx.fragment:fragment:1.5.5")
+    // Kotlin
+    implementation ("androidx.fragment:fragment-ktx:1.5.5")
+    // Testing Fragments in Isolation
+    debugImplementation ("androidx.fragment:fragment-testing:1.5.5")
+
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.11.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
