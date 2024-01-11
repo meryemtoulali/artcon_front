@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -17,23 +18,25 @@ public class SearchPeopleFragment extends Fragment {
 
     private FragmentSearchPeopleBinding binding;
     private PeopleAdapter peopleAdapter;
+    SearchViewModel searchViewModel;
     String TAG = "AllTooWell";
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        searchViewModel = new ViewModelProvider(requireParentFragment()).get(SearchViewModel.class);
+    }
+
+    @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        Log.d(TAG, "onCreateView: ");
+        Log.d(TAG, "onCreateView PeopleFragment");
         binding = FragmentSearchPeopleBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
 
-        // Initialize the adapter
         peopleAdapter = new PeopleAdapter();
         binding.peopleList.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.peopleList.setAdapter(peopleAdapter);
 
-        // Get the SearchViewModel instance
-        SearchViewModel searchViewModel = new ViewModelProvider(requireActivity()).get(SearchViewModel.class);
-
-        // Observe the list of people from the SearchViewModel
         searchViewModel.searchPeopleLiveData.observe(getViewLifecycleOwner(), users -> {
             Log.d(TAG, "setPeopleList in Fragment: " + users.toString());
             peopleAdapter.setPeopleList(users);

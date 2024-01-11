@@ -5,18 +5,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         tools:context=".ui.search.SearchFragment">
 
         <ImageView
             android:id="@+id/arrow_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="48dp"
             android:gravity="center"
             android:src="@drawable/arrow_back"
@@ -33,7 +34,7 @@
             android:layout_marginTop="40dp"
             android:gravity="center"
             android:text="@string/search"
-            android:textSize="28dp"
+            android:textSize="28sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.34"
@@ -58,7 +59,7 @@
             android:id="@+id/editTextSearch"
             android:layout_width="0dp"
             android:layout_height="47dp"
-            android:layout_marginStart="32dp"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="96dp"
             android:layout_marginEnd="32dp"
             android:background="@drawable/grey_border"
@@ -70,6 +71,7 @@
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
             android:singleLine="true"
+            android:imeOptions="actionSearch"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -80,12 +82,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="164dp"
-            android:layout_marginLeft="32dp"
+            android:layout_marginStart="20dp"
             android:foregroundGravity="center_vertical"
             app:layout_constraintTop_toTopOf="parent"
             >
 
-            <!-- child view -->
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -93,13 +94,12 @@
                 android:gravity="center"
                 android:orientation="horizontal">
 
-                <!-- LinearLayout children -->
                 <Button
                     android:id="@+id/buttonSearchPeople"
                     android:layout_width="119dp"
                     android:layout_height="40dp"
                     android:background="@drawable/grey_border"
-                    android:layout_marginRight="15dp"
+                    android:layout_marginEnd="15dp"
                     android:text="@string/search_people"
                     android:drawableLeft="@drawable/ic_profile_search"
                     android:textStyle="bold"
@@ -111,7 +111,7 @@
                     android:layout_width="119dp"
                     android:layout_height="40dp"
                     android:background="@drawable/grey_border"
-                    android:layout_marginRight="15dp"
+                    android:layout_marginEnd="15dp"
                     android:text="@string/search_posts"
                     android:drawableLeft="@drawable/ic_posts_search"
                     android:textStyle="bold"
@@ -123,7 +123,7 @@
                     android:layout_width="119dp"
                     android:layout_height="40dp"
                     android:background="@drawable/grey_border"
-                    android:layout_marginRight="15dp"
+                    android:layout_marginEnd="15dp"
                     android:text="@string/search_jobs"
                     android:drawableLeft="@drawable/ic_job_search"
                     android:textStyle="bold"
@@ -134,7 +134,7 @@
                     android:id="@+id/filter"
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
-                    android:layout_marginRight="32dp"
+                    android:layout_marginEnd="32dp"
                     android:gravity="center"
                     android:src="@drawable/filter"
                     tools:ignore="MissingConstraints" />
@@ -142,16 +142,17 @@
             </LinearLayout>
         </HorizontalScrollView>
 
-        <FrameLayout
+        <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragmentContainerSearch"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView"
-            android:visibility="visible">
-        </FrameLayout>
+            >
+        </androidx.fragment.app.FragmentContainerView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

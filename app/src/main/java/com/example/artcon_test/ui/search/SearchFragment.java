@@ -15,7 +15,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
@@ -28,7 +27,6 @@ public class SearchFragment extends Fragment{
     private FragmentSearchBinding binding;
     private Button lastSelectedButton;
     private SearchViewModel searchViewModel;
-    private Fragment currentFragment = null; // Track the current fragment
     String TAG = "AllTooWell";
 
 
@@ -47,24 +45,21 @@ public class SearchFragment extends Fragment{
         EditText editTextSearch = root.findViewById(R.id.editTextSearch);
 
         // works
-        editTextSearch.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                final int DRAWABLE_RIGHT = 2;
-                final int TOUCH_AREA_PADDING = 16;
-                if (event.getAction() == MotionEvent.ACTION_UP) {
-                    int drawableRight = editTextSearch.getRight();
-                    int drawableWidth = editTextSearch.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width();
-                    int touchAreaEnd = drawableRight + TOUCH_AREA_PADDING;
+        editTextSearch.setOnTouchListener((v, event) -> {
+            final int DRAWABLE_RIGHT = 2;
+            final int TOUCH_AREA_PADDING = 16;
+            if (event.getAction() == MotionEvent.ACTION_UP) {
+                int drawableRight = editTextSearch.getRight();
+                int drawableWidth = editTextSearch.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width();
+                int touchAreaEnd = drawableRight + TOUCH_AREA_PADDING;
 
-                    if (event.getRawX() >= (drawableRight - drawableWidth - TOUCH_AREA_PADDING) && event.getRawX() <= touchAreaEnd) {
-                        handleSearchIconTouch(editTextSearch);
-                        return true;
-                    }
-                    return false;
+                if (event.getRawX() >= (drawableRight - drawableWidth - TOUCH_AREA_PADDING) && event.getRawX() <= touchAreaEnd) {
+                    handleSearchIconTouch(editTextSearch);
+                    return true;
                 }
                 return false;
             }
+            return false;
         });
 
         // works
@@ -103,20 +98,29 @@ public class SearchFragment extends Fragment{
             switch (searchType) {
                 case "people" -> {
                     Log.d(TAG, "People HandleSearchButtonClick " + searchQuery);
-                    currentFragment = new SearchPeopleFragment();
-                    Bundle bundle = new Bundle();
-                    bundle.putString("searchQuery", searchQuery);
-                    currentFragment.setArguments(bundle);
-                    replaceFragment(currentFragment);
+                    replaceFragment(new SearchPeopleFragment());
                     changeButtonColor(binding.buttonSearchPeople);
                     searchViewModel.searchPeople(searchQuery).observe(getViewLifecycleOwner(), users -> {
                         Log.d(TAG, "People " + users);
+                    });
+                    searchViewModel.getToastMessage().observe(getViewLifecycleOwner(), message -> {
+                        if (message != null) {
+                            Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show();
+                        }
                     });
                 }
                 case "posts" -> {
                     Log.d(TAG, "Posts HandleSearchButtonClick " + searchQuery);
                     changeButtonColor(binding.buttonSearchPosts);
                     replaceFragment(new SearchPostsFragment());
+//                    searchViewModel.searchPosts(searchQuery).observe(getViewLifecycleOwner(), posts -> {
+//                        Log.d(TAG, "People " + posts);
+//                    });
+                    searchViewModel.getToastMessage().observe(getViewLifecycleOwner(), message -> {
+                        if (message != null) {
+                            Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 }
                 case "jobs" -> {
                     Log.d(TAG, "Jobs HandleSearchButtonClick " + searchQuery);
@@ -135,10 +139,6 @@ public class SearchFragment extends Fragment{
         Log.d(TAG,"HandleSearchIconTouch " + searchQuery);
         if (!searchQuery.isEmpty()) {
             binding.buttonSearchPeople.performClick();
-            //handleSearchButtonClick(searchViewModel.getCurrentSearchType());
-            searchViewModel.searchPeople(searchQuery).observe(getViewLifecycleOwner(), users -> {
-                Log.d(TAG, "search Fragment " + users);
-                    });
         } else {
             Toast.makeText(requireContext(), "Please enter a search query", Toast.LENGTH_SHORT).show();
             Log.d(TAG,"searchTypeError");
@@ -160,12 +160,12 @@ public class SearchFragment extends Fragment{
     // works
     private void replaceFragment(Fragment fragment) {
         Log.d(TAG, "Replacing fragment with: " + fragment.getClass().getSimpleName());
-        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragmentContainerSearch, fragment);
-        transaction.commitNow();
+        getChildFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragmentContainerSearch, fragment)
+                .commit();
         Log.d(TAG, "Is fragment visible: " + fragment.isVisible()); //false
     }
-
 
     @Override
     public void onDestroyView() {

@@ -17,15 +17,19 @@ import retrofit2.Response;
 
 public class SearchViewModel extends ViewModel {
 
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
     MutableLiveData<List<User>> searchPeopleLiveData = new MutableLiveData<>();
+    //MutableLiveData<List<Post>> searchPostsLiveData = new MutableLiveData<>();
+    private MutableLiveData<String> toastMessage = new MutableLiveData<>();
     private String currentSearchType = "people"; // Default search type
     String TAG = "AllTooWell";
 
     public SearchViewModel() {
         userRepository = new UserRepository();
     }
-
+    public LiveData<String> getToastMessage() {
+        return toastMessage;
+    }
     public LiveData<List<User>> searchPeople(String query) {
         userRepository.searchPeople(query).enqueue(new Callback<List<User>>() {
             @Override
@@ -34,6 +38,7 @@ public class SearchViewModel extends ViewModel {
                     List<User> users = response.body();
                     searchPeopleLiveData.setValue(users);
                     Log.d(TAG, "Success Response :" + users);
+                    toastMessage.setValue("Success Response");
                 } else {
                     Log.d(TAG, "fail MutableLiveData :");
                 }
@@ -41,15 +46,41 @@ public class SearchViewModel extends ViewModel {
 
             @Override
             public void onFailure(Call<List<User>> call, Throwable t) {
+                toastMessage.setValue("Network Error");
                 Log.d(TAG, "Huge error :");
             }
         });
         return searchPeopleLiveData;
     }
+//----------------------Search Posts---------------------
+
+//    public LiveData<List<Post>> searchPosts(String query) {
+//        postRepository.searchPosts(query).enqueue(new Callback<List<Post>>() {
+//            @Override
+//            public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
+//                if (response.isSuccessful()) {
+//                    List<Post> posts = response.body();
+//                    searchPostsLiveData.setValue(posts);
+//                    Log.d(TAG, "Success Response :" + posts);
+//                    toastMessage.setValue("Success Response");
+//                } else {
+//                    Log.d(TAG, "fail MutableLiveData :");
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<List<Post>> call, Throwable t) {
+//                toastMessage.setValue("Network Error");
+//                Log.d(TAG, "Huge error :");
+//            }
+//        });
+//        return searchPostsLiveData;
+//    }
+
+
     public String getCurrentSearchType() {
         return currentSearchType;
     }
-
     public void setCurrentSearchType(String searchType) {
         this.currentSearchType = searchType;
         Log.d(TAG, "setCurrentSearchType: " +searchType );

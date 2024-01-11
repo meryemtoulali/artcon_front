@@ -1,6 +1,8 @@
 package com.example.artcon_test;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,6 +14,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -60,27 +63,31 @@ public class SignUpSecondFragment extends Fragment {
         populateLocationDropdown();
 
         Button signUpButton = view.findViewById(R.id.buttonSignUp);
-        signUpButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Validate input (add your validation logic)
-                if (isValidInput()) {
-                    // Call the method in the hosting activity to perform sign-up
-                    signupViewModel.setFirstName(getFirstName());
-                    signupViewModel.setLastName(getLastName());
-                    signupViewModel.setGender(getGender());
-                    signupViewModel.setPhonenumber(getPhone());
-                    signupViewModel.setBirthday(getBirthday());
-                    signupViewModel.setLocation(getLocation());
-                    ((SignupActivity) requireActivity()).performSignUp();
-                } else {
-                    // Show an error message or handle invalid input
-                    Toast.makeText(requireContext(), "Please enter valid information", Toast.LENGTH_SHORT).show();
-                }
+        signUpButton.setOnClickListener(v -> {
+            // Validate input (add your validation logic)
+            if (isValidInput()) {
+                showButtonClickIndicator(signUpButton);
+                // Call the method in the hosting activity to perform sign-up
+                signupViewModel.setFirstName(getFirstName());
+                signupViewModel.setLastName(getLastName());
+                signupViewModel.setGender(getGender());
+                signupViewModel.setPhonenumber(getPhone());
+                signupViewModel.setBirthday(getBirthday());
+                signupViewModel.setLocation(getLocation());
+                ((SignupActivity) requireActivity()).performSignUp();
+            } else {
+                // Show an error message or handle invalid input
+                Toast.makeText(requireContext(), "Please enter valid information", Toast.LENGTH_SHORT).show();
             }
         });
 
         return view;
+    }
+
+    private void showButtonClickIndicator(Button signUpButton) {
+        Drawable originalBackground = signUpButton.getBackground();
+        signUpButton.setBackground(ContextCompat.getDrawable(requireContext(), R.drawable.selected_button));
+        new Handler().postDelayed(() -> signUpButton.setBackground(originalBackground), 1000);
     }
 
     private void populateLocationDropdown() {
@@ -150,7 +157,7 @@ public class SignUpSecondFragment extends Fragment {
     public Date getBirthday() {
         if (birthdayEditText != null) {
             String dateString = birthdayEditText.getText().toString();
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
             try {
                 return dateFormat.parse(dateString);
