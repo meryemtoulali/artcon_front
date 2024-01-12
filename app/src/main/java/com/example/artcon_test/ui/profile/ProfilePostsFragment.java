@@ -55,7 +55,7 @@ public class ProfilePostsFragment extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
 
-        postRecyclerAdapter = new ProfilePostRecyclerAdapter();
+        postRecyclerAdapter = new ProfilePostRecyclerAdapter(getContext());
         recyclerView.setAdapter(postRecyclerAdapter);
         Log.d(TAG, "created view recycler: " + recyclerView.toString());
 
