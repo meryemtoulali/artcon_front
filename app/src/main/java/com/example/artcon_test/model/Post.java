@@ -10,7 +10,7 @@ public class Post {
     private String description;
     private User user;
     private Interest interest;
-    private List<MultipartBody.Part> mediaFiles;
+    private List<MediaItem> mediaFiles;
     private Integer likes;
     private Date date;
 
@@ -46,11 +46,11 @@ public class Post {
         this.interest = interest;
     }
 
-    public List<MultipartBody.Part> getMediaFiles() {
+    public List<MediaItem> getMediaFiles() {
         return mediaFiles;
     }
 
-    public void setMediaFiles(List<MultipartBody.Part> mediaFiles) {
+    public void setMediaFiles(List<MediaItem> mediaFiles) {
         this.mediaFiles = mediaFiles;
     }
 
