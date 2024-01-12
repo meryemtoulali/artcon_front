@@ -20,6 +20,7 @@ import java.util.List;
 public class ProfileViewModel extends ViewModel {
     String TAG = "hatsunemiku";
 
+
     private final UserRepository userRepository = new UserRepository();
     private final PortfolioRepository portfolioRepository = new PortfolioRepository();
     private final PostRepository postRepository = new PostRepository();

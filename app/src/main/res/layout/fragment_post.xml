@@ -138,7 +138,6 @@
         app:layout_constraintStart_toEndOf="@+id/commentButton"
         app:layout_constraintTop_toTopOf="@+id/commentButton" />
 
-
     <ImageButton
         android:id="@+id/shareButton"
         android:layout_width="wrap_content"
@@ -160,7 +159,6 @@
         android:src="@drawable/ic_save"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/shareButton" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

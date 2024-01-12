@@ -14,13 +14,19 @@ import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.PUT;
 import retrofit2.http.Part;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface UserService {
     @GET("user/{userId}")
     Call<User> getUserById(@Path("userId") String userId);
+    @GET("user/search")
+    Call<List<User>> searchPeopleIgnoreCase(@Query("query") String query);
     @GET("user/{userId}/portfolio")
     Call<List<PortfolioPost>> getUserPortfolio(@Path("userId") String userId);
+    @POST("user/logout")
+    Call<Void> logout();
 
     @GET("post/owner/{userId}")
     Call<List<Post>> getUserPostList(@Path("userId") String userId);

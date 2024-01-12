@@ -5,7 +5,6 @@ import android.util.Log;
 import androidx.lifecycle.ViewModel;
 
 import com.example.artcon_test.network.ApiConfig;
-import com.example.artcon_test.network.AuthService;
 import com.example.artcon_test.network.LocationService;
 
 import retrofit2.Retrofit;

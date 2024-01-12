@@ -2,14 +2,15 @@ package com.example.artcon_test.ui.login;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.example.artcon_test.ui.MainNavActivity;
 import com.example.artcon_test.ui.ForgotPasswordActivity;
@@ -20,7 +21,7 @@ import com.example.artcon_test.network.AuthService;
 import com.example.artcon_test.viewmodel.LoginViewModel;
 import com.example.artcon_test.model.LoginResponse;
 import android.content.Intent;
-
+import android.graphics.drawable.Drawable;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -32,7 +33,6 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
         EditText usernameEditText = findViewById(R.id.editTextUsername);
         EditText passwordEditText = findViewById(R.id.editTextPassword);
         Button loginButton = findViewById(R.id.buttonLogin);
@@ -41,13 +41,13 @@ public class LoginActivity extends AppCompatActivity {
 
         AuthService authService = LoginViewModel.getAuthService();
 
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String username = usernameEditText.getText().toString().trim();
-                String password = passwordEditText.getText().toString().trim();
-                LoginRequest loginRequest = new LoginRequest(username,password);
+        loginButton.setOnClickListener(view -> {
+            String username = usernameEditText.getText().toString().trim();
+            String password = passwordEditText.getText().toString().trim();
+            LoginRequest loginRequest = new LoginRequest(username,password);
 
+            if(!username.isEmpty() && !password.isEmpty()){
+                showButtonClickIndicator(loginButton);
 
                 Call<LoginResponse> call = authService.login(loginRequest);
                 Log.d(TAG,call.toString());
@@ -71,28 +71,30 @@ public class LoginActivity extends AppCompatActivity {
                         Toast.makeText(LoginActivity.this, "Login failed", Toast.LENGTH_SHORT).show();
                     }
                 });
+            } else {
+                Toast.makeText(LoginActivity.this, "Fill the fields", Toast.LENGTH_SHORT).show();
             }
         });
 
-        signupTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this, SignupActivity.class);
-                startActivity(intent);
-            }
+        signupTextView.setOnClickListener(view -> {
+            Intent intent = new Intent(LoginActivity.this, SignupActivity.class);
+            startActivity(intent);
         });
 
-        forgotPassword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
-                startActivity(intent);
-            }
+        forgotPassword.setOnClickListener(view -> {
+            Intent intent = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
+            startActivity(intent);
         });
     }
+
+    private void showButtonClickIndicator(Button loginButton) {
+        Drawable originalBackground = loginButton.getBackground();
+        loginButton.setBackground(ContextCompat.getDrawable(this, R.drawable.selected_button));
+        new Handler().postDelayed(() -> loginButton.setBackground(originalBackground), 1000);
+    }
+
     private void handleLoginResponse(LoginResponse loginResponse) {
         if (!loginResponse.getToken().isEmpty()) {
-//            setContentView(R.layout.activity_onboarding);
 
             SharedPreferences preferences = getSharedPreferences("AuthPrefs", MODE_PRIVATE);
             SharedPreferences.Editor editor = preferences.edit();

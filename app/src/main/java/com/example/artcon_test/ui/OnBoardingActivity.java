@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 
 import com.example.artcon_test.R;
@@ -27,12 +26,6 @@ public class OnBoardingActivity extends AppCompatActivity {
         Log.d(TAG, "AuthPrefs username:" + preferences.getString("username",null));
         Log.d(TAG, "AuthPrefs token:" + preferences.getString("token",null));
 
-//        SharedPreferences.Editor editor = preferences.edit();
-////        editor.putString("token", "your_token_here");
-////        editor.putString("userId", "1");
-////        editor.remove("token");
-//        editor.putBoolean("isLoggedIn", false);
-//        editor.apply();
         boolean isLoggedIn = preferences.getBoolean("isLoggedIn", false);
         if (isLoggedIn) {
             Intent intent = new Intent(OnBoardingActivity.this, MainNavActivity.class);
@@ -41,24 +34,14 @@ public class OnBoardingActivity extends AppCompatActivity {
         } else {
             Button loginButton = findViewById(R.id.buttonLogin);
             Button signupButton = findViewById(R.id.buttonSignup);
-            loginButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(OnBoardingActivity.this, LoginActivity.class);
-                    startActivity(intent);
-                }
+            loginButton.setOnClickListener(view -> {
+                Intent intent = new Intent(OnBoardingActivity.this, LoginActivity.class);
+                startActivity(intent);
             });
-            signupButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(OnBoardingActivity.this, SignupActivity.class);
-                    startActivity(intent);
-                }
+            signupButton.setOnClickListener(view -> {
+                Intent intent = new Intent(OnBoardingActivity.this, SignupActivity.class);
+                startActivity(intent);
             });
         }
-
-
     }
-
-
 }
