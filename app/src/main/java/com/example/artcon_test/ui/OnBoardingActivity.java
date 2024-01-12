@@ -1,10 +1,13 @@
 package com.example.artcon_test.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.widget.Button;
 
@@ -35,13 +38,20 @@ public class OnBoardingActivity extends AppCompatActivity {
             Button loginButton = findViewById(R.id.buttonLogin);
             Button signupButton = findViewById(R.id.buttonSignup);
             loginButton.setOnClickListener(view -> {
+                showButtonClickIndicator(loginButton);
                 Intent intent = new Intent(OnBoardingActivity.this, LoginActivity.class);
                 startActivity(intent);
             });
             signupButton.setOnClickListener(view -> {
+                showButtonClickIndicator(signupButton);
                 Intent intent = new Intent(OnBoardingActivity.this, SignupActivity.class);
                 startActivity(intent);
             });
         }
+    }
+    private void showButtonClickIndicator(Button button) {
+        Drawable originalBackground = button.getBackground();
+        button.setBackground(ContextCompat.getDrawable(this, R.drawable.selected_button));
+        new Handler().postDelayed(() -> button.setBackground(originalBackground), 1000);
     }
 }

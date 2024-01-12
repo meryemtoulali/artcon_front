@@ -3,11 +3,11 @@
 
     <item
         android:id="@+id/menu_add_post"
-        android:title="Add post" />
+        android:title="@string/add_post" />
     <item
         android:id="@+id/menu_add_portfolio_post"
-        android:title="Add portfolio post" />
+        android:title="@string/add_portfolio_post" />
     <item
         android:id="@+id/menu_add_job_post"
-        android:title="Add job post" />
+        android:title="@string/add_job_post" />
 </menu>

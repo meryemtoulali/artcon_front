@@ -15,12 +15,10 @@ import android.widget.Toast;
 
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.artcon_test.R;
-import com.example.artcon_test.model.Interest;
 import com.example.artcon_test.model.LikeRequest;
 import com.example.artcon_test.model.LikeRes;
 import com.example.artcon_test.model.MediaItem;
@@ -52,7 +50,6 @@ public class PostFragment extends Fragment {
     boolean checkIfLiked = false;
 
     public PostFragment() {
-        // Required empty public constructor
     }
 
     // Method to create a new instance of PostFragment and pass the postId as an argument
@@ -292,25 +289,10 @@ public class PostFragment extends Fragment {
                                     Toast.makeText(getActivity(), "Failed to like post 2 ", Toast.LENGTH_SHORT).show();
                                 }
                             }));
-
                 }
 
             }
         });
-
-       // Call<Boolean> call2 = postService.hasUserLikedPost(userId, postId);
-
-        //===============================================================================
-
-      /*  ImageView postImage = view.findViewById(R.id.postImage);
-        if (!hasImage) {
-            // If the post doesn't have an image, hide the ImageView
-            postImage.setVisibility(View.GONE);
-        }*/
         return view;
     }
-
-
-
 }
-

@@ -2,11 +2,10 @@ package com.example.artcon_test.repository;
 
 import android.util.Log;
 
-import com.example.artcon_test.model.MediaFile;
 import com.example.artcon_test.model.MediaItem;
-import com.example.artcon_test.model.PortfolioPost;
 import com.example.artcon_test.model.Post;
 import com.example.artcon_test.network.ApiConfig;
+import com.example.artcon_test.network.PostService;
 import com.example.artcon_test.network.UserService;
 
 import java.util.List;
@@ -19,6 +18,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class PostRepository {
     private final UserService userService;
+    PostService postService;
     String TAG ="hatsunemiku";
 
     public PostRepository() {
@@ -28,6 +28,7 @@ public class PostRepository {
                 .build();
 
         userService = retrofit.create(UserService.class);
+        postService = retrofit.create(PostService.class);
     }
 
     public void getPostList(String userId, PostCallback callback) {
@@ -70,6 +71,7 @@ public class PostRepository {
         void onError(String errorMessage);
     }
 
-
-
+    public Call<List<Post>> searchPosts(String query) {
+        return postService.searchPostsIgnoreCase(query);
+    }
 }

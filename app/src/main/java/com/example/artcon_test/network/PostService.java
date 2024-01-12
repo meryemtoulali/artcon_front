@@ -2,7 +2,6 @@ package com.example.artcon_test.network;
 
 import okhttp3.MultipartBody;
 import retrofit2.Call;
-import retrofit2.CallAdapter;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
@@ -16,7 +15,6 @@ import retrofit2.http.Query;
 import com.example.artcon_test.model.LikeRequest;
 import com.example.artcon_test.model.LikeRes;
 import com.example.artcon_test.model.Post;
-import com.example.artcon_test.model.User;
 
 import java.util.List;
 
@@ -57,4 +55,6 @@ public interface PostService {
             @Path("postId") String postId
     );
 
+    @GET("post/search")
+    Call<List<Post>> searchPostsIgnoreCase(@Query("query") String query);
 }

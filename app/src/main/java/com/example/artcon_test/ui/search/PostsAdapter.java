@@ -13,15 +13,13 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.artcon_test.R;
-import com.example.artcon_test.model.User;
+import com.example.artcon_test.model.Post;
 import com.squareup.picasso.Picasso;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PostsAdapter /*extends RecyclerView.Adapter<PostsAdapter.ViewHolder> */{
+public class PostsAdapter /*extends RecyclerView.Adapter<PostsAdapter.ViewHolder>*/ {
 //    private List<Post> postsList = new ArrayList<>();
 //    String TAG = "AllTooWell";
 //

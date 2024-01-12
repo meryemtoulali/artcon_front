@@ -152,9 +152,11 @@ public class SearchFragment extends Fragment{
                     Log.d(TAG, "Posts HandleSearchButtonClick " + searchQuery);
                     changeButtonColor(binding.buttonSearchPosts);
                     replaceFragment(new SearchPostsFragment());
-//                    searchViewModel.searchPosts(searchQuery).observe(getViewLifecycleOwner(), posts -> {
-//                        Log.d(TAG, "Posts " + posts);
-//                    });
+                    // here
+                    searchViewModel.searchPosts(searchQuery).observe(getViewLifecycleOwner(), posts -> {
+                        Log.d(TAG, "Posts " + posts);
+                        Log.d(TAG,"posts res" + posts);
+                    });
                     searchViewModel.getToastMessage().observe(getViewLifecycleOwner(), message -> {
                         if (message != null) {
                             Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show();
@@ -203,7 +205,6 @@ public class SearchFragment extends Fragment{
                 .beginTransaction()
                 .replace(R.id.fragmentContainerSearch, fragment)
                 .commit();
-        Log.d(TAG, "Is fragment visible: " + fragment.isVisible());
     }
 
     @Override

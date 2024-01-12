@@ -16,7 +16,7 @@
         app:layout_constraintHorizontal_bias="0.086"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.036"></ImageView>
+        app:layout_constraintVertical_bias="0.036"/>
 
     <ImageView
         android:id="@+id/notification"
@@ -28,7 +28,7 @@
         app:layout_constraintHorizontal_bias="0.524"
         app:layout_constraintStart_toEndOf="@+id/logo"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.035"></ImageView>
+        app:layout_constraintVertical_bias="0.035"/>
 
     <ImageView
         android:id="@+id/chat"
@@ -57,8 +57,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/feed"
-        android:layout_width="344dp"
-        android:layout_height="580dp"
+        android:layout_width="345dp"
+        android:layout_height="640dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.492"

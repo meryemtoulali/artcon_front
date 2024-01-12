@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -21,6 +22,7 @@ public class SearchPeopleFragment extends Fragment {
     private FragmentSearchPeopleBinding binding;
     private PeopleAdapter peopleAdapter;
     SearchViewModel searchViewModel;
+    private ProgressBar progressBar;
     String TAG = "AllTooWell";
 
     @Override
@@ -35,9 +37,13 @@ public class SearchPeopleFragment extends Fragment {
         binding = FragmentSearchPeopleBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
 
+        progressBar = view.findViewById(R.id.progressBar);
+
         peopleAdapter = new PeopleAdapter();
         binding.peopleList.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.peopleList.setAdapter(peopleAdapter);
+
+        loading(true);
 
         searchViewModel.searchPeopleLiveData.observe(getViewLifecycleOwner(), users -> {
             Log.d(TAG, "setPeopleList in Fragment: " + users.toString());
@@ -49,9 +55,13 @@ public class SearchPeopleFragment extends Fragment {
             } else {
                 textViewNotFound.setVisibility(View.GONE);
             }
+            loading(false);
         });
-
         return view;
+    }
+
+    private void loading(boolean isLoading) {
+        progressBar.setVisibility(isLoading ? View.VISIBLE : View.INVISIBLE);
     }
 
     @Override
