@@ -29,4 +29,6 @@
     <string name="search_people">People</string>
     <string name="search_posts">Posts</string>
     <string name="search_jobs">Jobs</string>
+    <string name="logout">Logout</string>
+    <string name="setting">Setting</string>
 </resources>

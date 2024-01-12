@@ -10,5 +10,4 @@ import retrofit2.http.GET;
 public interface LocationService {
     @GET("location/all")
     Call<List<Location>> getLocations();
-
 }
