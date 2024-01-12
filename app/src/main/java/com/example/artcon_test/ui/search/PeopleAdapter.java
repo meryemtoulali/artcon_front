@@ -50,7 +50,7 @@ public class PeopleAdapter extends RecyclerView.Adapter<PeopleAdapter.ViewHolder
             holder.textViewTitle.setVisibility(View.GONE);
         }
         Picasso.get().load(user.getPicture())
-                .placeholder(R.drawable.profile_picture_placeholder) // Placeholder image
+                .placeholder(R.drawable.picasso_placeholder) // Placeholder image
                 .into(holder.imageViewProfile);
     }
 

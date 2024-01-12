@@ -24,6 +24,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/profile_header_ribbon" />
 
+    <ImageView
+        android:id="@+id/kebab_menu"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="25dp"
+        android:gravity="center"
+        android:src="@drawable/kebab_with_bg"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/pfpImage"
         android:layout_width="110dp"
