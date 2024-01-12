@@ -2,6 +2,7 @@ package com.example.artcon_test.ui.home;
 
 import static android.content.Context.MODE_PRIVATE;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,8 +18,10 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.artcon_test.chat.UsersActivity;
 import com.example.artcon_test.databinding.FragmentHomeBinding;
 import com.example.artcon_test.ui.profile.ProfilePostRecyclerAdapter;
+import com.example.artcon_test.utilities.Constants;
 
 public class HomeFragment extends Fragment {
 
@@ -46,6 +49,12 @@ public class HomeFragment extends Fragment {
         View root = binding.getRoot();
 
         recyclerView = binding.feed;
+        binding.chat.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), UsersActivity.class);
+            intent.putExtra(Constants.KEY_USER_ID, userId);
+            getActivity().startActivity(intent);
+        });
+
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);

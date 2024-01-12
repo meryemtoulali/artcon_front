@@ -6,6 +6,9 @@
     <string name="title_job">Job</string>
     <string name="title_profile">profile</string>
 
+    <string name="chat">Chat</string>
+    <string name="search">Search</string>
+
     <string name="app_slogan">Connecting creativity</string>
     <string name="login_text">Please log in to your account</string>
     <string name="forgot_pwd">Forgot password?</string>
@@ -23,7 +26,7 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
-  
+
     <string name="welcom_newuser">Welcom, User!</string>
     <string name="setup_profile">Let\'s set up your profile</string>
     <string name="add_profilepicture">Add a profile picture</string>
