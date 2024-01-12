@@ -21,7 +21,7 @@
             android:layout_width="64dp"
             android:layout_height="64dp"
             android:layout_marginEnd="5dp"
-            android:src="@drawable/profile_picture_placeholder"
+            android:src="@drawable/picasso_placeholder"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -38,7 +38,7 @@
             android:layout_marginRight="2dp"
             android:layout_marginBottom="5dp"
             android:layout_toRightOf="@id/pfpImagePeople"
-            android:text="full name"
+            android:text=""
             android:textColor="@color/blackBase"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -50,7 +50,7 @@
             android:layout_marginLeft="0dp"
             android:layout_marginTop="11dp"
             android:layout_toRightOf="@id/fullnamePeople"
-            android:text="username"
+            android:text=""
             android:textAlignment="center"
             android:textColor="@color/greyDark"
             android:textSize="16sp" />
@@ -61,7 +61,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/fullnamePeople"
             android:layout_toRightOf="@id/pfpImagePeople"
-            android:text="Title"
+            android:text=""
             android:textColor="@color/blackBase"
             android:textSize="18sp" />
 

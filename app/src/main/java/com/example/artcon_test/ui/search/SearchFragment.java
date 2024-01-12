@@ -203,7 +203,7 @@ public class SearchFragment extends Fragment{
                 .beginTransaction()
                 .replace(R.id.fragmentContainerSearch, fragment)
                 .commit();
-        Log.d(TAG, "Is fragment visible: " + fragment.isVisible()); //false
+        Log.d(TAG, "Is fragment visible: " + fragment.isVisible());
     }
 
     @Override

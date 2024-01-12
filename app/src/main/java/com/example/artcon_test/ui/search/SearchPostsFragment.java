@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -12,7 +13,8 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.example.artcon_test.databinding.FragmentSearchPeopleBinding;
+import com.example.artcon_test.R;
+import com.example.artcon_test.databinding.FragmentSearchPostsBinding;
 
 public class SearchPostsFragment extends Fragment {
 //    private FragmentSearchPostsBinding binding;
@@ -38,6 +40,13 @@ public class SearchPostsFragment extends Fragment {
 //        searchViewModel.searchPostsLiveData.observe(getViewLifecycleOwner(), posts -> {
 //            Log.d(TAG, "setPostsList in Fragment: " + posts.toString());
 //            postsAdapter.setPostsList(posts);
+//
+//            TextView textViewNotFound = view.findViewById(R.id.textViewNoResultFound);
+//                    if (posts.isEmpty()) {
+//                textViewNotFound.setVisibility(View.VISIBLE);
+//            } else {
+//                textViewNotFound.setVisibility(View.GONE);
+//            }
 //        });
 //
 //        return view;

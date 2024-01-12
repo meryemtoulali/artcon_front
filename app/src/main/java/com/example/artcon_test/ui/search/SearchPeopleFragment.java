@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -12,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.example.artcon_test.R;
 import com.example.artcon_test.databinding.FragmentSearchPeopleBinding;
 
 public class SearchPeopleFragment extends Fragment {
@@ -40,6 +42,13 @@ public class SearchPeopleFragment extends Fragment {
         searchViewModel.searchPeopleLiveData.observe(getViewLifecycleOwner(), users -> {
             Log.d(TAG, "setPeopleList in Fragment: " + users.toString());
             peopleAdapter.setPeopleList(users);
+
+            TextView textViewNotFound = view.findViewById(R.id.textViewNoResultFound);
+            if (users.isEmpty()) {
+                textViewNotFound.setVisibility(View.VISIBLE);
+            } else {
+                textViewNotFound.setVisibility(View.GONE);
+            }
         });
 
         return view;
