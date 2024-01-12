@@ -22,7 +22,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
-import com.example.artcon_test.LoginActivity;
+import com.example.artcon_test.ui.login.LoginActivity;
 import com.example.artcon_test.R;
 import com.example.artcon_test.databinding.FragmentSearchBinding;
 import com.example.artcon_test.viewmodel.LogoutViewModel;
@@ -32,8 +32,8 @@ public class SearchFragment extends Fragment{
 
     private FragmentSearchBinding binding;
     private Button lastSelectedButton;
-    private SearchViewModel searchViewModel;
     private LogoutViewModel logoutViewModel;
+    private SearchViewModel searchViewModel;
     String TAG = "AllTooWell";
 
 

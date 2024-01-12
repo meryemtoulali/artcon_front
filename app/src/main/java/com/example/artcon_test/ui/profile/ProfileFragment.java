@@ -19,8 +19,9 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager2.widget.ViewPager2;
 
-import com.example.artcon_test.PortfolioPostFragment;
-import com.example.artcon_test.ProfileFragmentAdapter;
+import com.example.artcon_test.ui.login.LoginActivity;
+import com.example.artcon_test.ui.portfolioPost.PortfolioPostFragment;
+import com.example.artcon_test.ui.profile.ProfileFragmentAdapter;
 import com.example.artcon_test.R;
 import com.example.artcon_test.viewmodel.LogoutViewModel;
 import com.example.artcon_test.viewmodel.ProfileViewModel;
