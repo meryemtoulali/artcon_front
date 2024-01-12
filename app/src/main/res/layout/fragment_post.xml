@@ -60,7 +60,9 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/postImageCardView"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+
+        android:layout_height="200dp"
+        android:foregroundGravity="center_horizontal"
         android:layout_margin="16dp"
         app:cardCornerRadius="8dp"
         app:cardElevation="2dp"
@@ -68,15 +70,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profileImageCardView"
-        app:layout_constraintVertical_bias="0.060000002">
+        app:layout_constraintVertical_bias="0.2"
+        android:visibility="visible"
+        >
 
-        <ImageView
-            android:id="@+id/postImage"
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/mediaViewPager"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            android:scaleType="centerCrop"
-            android:src="@drawable/image_22" />
+
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            />
+
     </androidx.cardview.widget.CardView>
     <TextView
         android:id="@+id/postTextArea"

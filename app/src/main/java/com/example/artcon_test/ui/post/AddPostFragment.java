@@ -200,10 +200,11 @@ public class AddPostFragment extends Fragment {
             public void onClick(View v) {
 
                 Log.d("image", "on click");
-
+/*working
                 // Vérification des autorisations
                 if (ContextCompat.checkSelfPermission(getActivity(), android.Manifest.permission.READ_EXTERNAL_STORAGE)
                         != PackageManager.PERMISSION_GRANTED) {
+
                     Log.d("image", "no permission");
                     // Demander la permission si elle n'est pas accordée
                     //  requestPermissions(new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE},
@@ -211,10 +212,13 @@ public class AddPostFragment extends Fragment {
 
                     requestPermissions(new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE},
                             Read_Permission);
+
+
                 } else {
                     Log.d("image", "start image chooser");
+                         */
                     imageChooser();
-                }
+               // }
                 adjustRecyclerViewHeight();
             }
         });
@@ -395,9 +399,16 @@ public class AddPostFragment extends Fragment {
                         if (response.isSuccessful()) {
                             AddPostRes postResponse = response.body();
                             if (postResponse.isSuccess()) {
+                                Integer postId = postResponse.getPostId();
+                                Log.d("id", String.valueOf(postId));
                                 Toast.makeText(getActivity(), postResponse.getMessage(), Toast.LENGTH_SHORT).show();
-                                navigateToFragment(R.id.action_navigation_add_post_to_navigation_home2);
-
+                                //
+                                Bundle result = new Bundle();
+                                result.putString("postId", String.valueOf(postId));
+                                getParentFragmentManager().setFragmentResult("postIdFromAnotherFrag", result);
+                                //action_navigation_add_post_to_navigation_view_post
+                                //navigateToFragment(R.id.action_navigation_add_post_to_navigation_home2); good
+                                navigateToFragment(R.id.action_navigation_add_post_to_navigation_view_post);
                             } else {
                                 Toast.makeText(getActivity(), "Failed to add post", Toast.LENGTH_SHORT).show();
                             }

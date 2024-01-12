@@ -3,6 +3,7 @@ package com.example.artcon_test.repository;
 import android.util.Log;
 
 import com.example.artcon_test.model.MediaFile;
+import com.example.artcon_test.model.MediaItem;
 import com.example.artcon_test.model.PortfolioPost;
 import com.example.artcon_test.model.Post;
 import com.example.artcon_test.network.ApiConfig;
@@ -40,7 +41,7 @@ public class PostRepository {
                     if (posts != null) {
                         Log.d(TAG, "received posts:" + response.body());
                         for (Post post : posts) {
-                            List<MediaFile> mediaFiles = post.getMediaFiles();
+                            List<MediaItem> mediaFiles = post.getMediaFiles();
                             if (mediaFiles != null && !mediaFiles.isEmpty()) {
                                 Log.d(TAG, "MediaFiles for post " + post.getId() + ": " + mediaFiles);
                             } else {
