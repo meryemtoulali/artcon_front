@@ -24,7 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
-            android:src="@drawable/profile_picture_placeholder" />
+            android:src="@drawable/picasso_placeholder" />
 
     </androidx.cardview.widget.CardView>
 
@@ -35,7 +35,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="7dp"
         android:layout_marginEnd="8dp"
-        android:text="John Doe"
+        android:text=""
         android:textColor="#323232"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -49,7 +49,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="28dp"
         android:layout_marginEnd="8dp"
-        android:text="Username"
+        android:text=""
         android:textColor="#9EA0A9"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -99,8 +99,8 @@
 
     <ImageButton
         android:id="@+id/likeButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="25dp"
+        android:layout_height="22dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:background="?android:attr/selectableItemBackground"
