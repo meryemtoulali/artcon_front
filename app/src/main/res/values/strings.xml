@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">ArtCon_test</string>
+    <string name="text_new_portfolio_post">New portfolio post</string>
+    <string name="description_to_upload">Upload a photo or video to showcase your work</string>
+    <string name="gallery">Gallery</string>
+    <string name="photo">Photo</string>
+    <string name="video">Video</string>
+
 </resources>
