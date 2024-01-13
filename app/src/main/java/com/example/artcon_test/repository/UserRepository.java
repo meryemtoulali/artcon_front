@@ -54,6 +54,34 @@ public class UserRepository {
 
     }
 
+    public void checkFollows(String followerId, String followingId, FollowCheckCallback callback) {
+        Call<Boolean> call = userService.checkFollows(followerId, followingId);
+        call.enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                if (response.isSuccessful()) {
+                    callback.onSuccess(response.body());
+                } else {
+                    callback.onError("Error checking follow status");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
+                callback.onError("Network error: " + t.getMessage());
+            }
+        });
+
+    }
+    public interface FollowCheckCallback {
+        void onSuccess(Boolean isFollowing);
+
+        void onError(String errorMessage);
+    }
+
+
+
+
     public void getHome(String userId,PostRepository.PostCallback callback) {
         Call<List<Post>> call = userService.getHomeFeed(userId);
 
@@ -89,7 +117,6 @@ public class UserRepository {
         return userService.searchPeopleIgnoreCase(query);
     }
 
-    // Callback interface for handling asynchronous responses
     public interface UserCallback {
         void onSuccess(User user);
 

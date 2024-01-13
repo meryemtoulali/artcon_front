@@ -50,4 +50,11 @@ public interface UserService {
     Call<List<Post>> getHomeFeed(
             @Path("userId") String userId
     );
+
+    @GET("followers/check/{followerId}/{followingId}")
+    Call<Boolean> checkFollows(
+            @Path("followerId") String followerId,
+            @Path("followingId") String followingId
+    );
+
 }

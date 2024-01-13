@@ -75,6 +75,14 @@
         <item name="android:stateListAnimator">@null</item>
     </style>
 
+    <style name="FollowButton" parent="Base.Theme.ArtCon_test" >
+        <item name="android:background">@drawable/follow_button_background</item>
+        <item name="backgroundTint">@null</item>
+        <item name="android:textColor">@color/blackBase</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:stateListAnimator">@null</item>
+    </style>
+
     <style name="circleImageView" parent="">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>

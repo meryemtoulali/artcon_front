@@ -19,8 +19,6 @@ import java.util.List;
 
 public class ProfileViewModel extends ViewModel {
     String TAG = "hatsunemiku";
-
-
     private final UserRepository userRepository = new UserRepository();
     private final PortfolioRepository portfolioRepository = new PortfolioRepository();
     private final PostRepository postRepository = new PostRepository();
@@ -45,9 +43,6 @@ public class ProfileViewModel extends ViewModel {
             public void onSuccess(User user) {
                 // Update LiveData with the retrieved user data
                 userLiveData.postValue(user);
-                Log.d(TAG, "updated userLiveData");
-//                Log.d(TAG, user.toString());
-
             }
 
             @Override
@@ -62,6 +57,11 @@ public class ProfileViewModel extends ViewModel {
     public LiveData<User> getUserLiveData() {
         return userLiveData;
     }
+
+    public void isFollowing(String followerId, String followingId, UserRepository.FollowCheckCallback callback) {
+        userRepository.checkFollows(followerId, followingId, callback);
+    }
+
 
     public void getPortfolio(String userId) {
         portfolioRepository.getPortfolio(userId, new PortfolioRepository.PortfolioCallback() {

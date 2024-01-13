@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
@@ -19,6 +20,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.example.artcon_test.repository.UserRepository;
 import com.example.artcon_test.ui.login.LoginActivity;
 import com.example.artcon_test.ui.portfolioPost.PortfolioPostFragment;
 import com.example.artcon_test.ui.profile.ProfileFragmentAdapter;
@@ -43,6 +45,8 @@ public class ProfileFragment extends Fragment {
     private TabLayout tabLayout;
     private ProfileFragmentAdapter adapter;
     private LogoutViewModel logoutViewModel;
+    private Button followButton;
+    String selectedUserId;
 
 
 
@@ -50,6 +54,11 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_profile, container, false);
+        Bundle args = getArguments();
+        if (args != null) {
+            selectedUserId = args.getString("userId");
+        }
+
         logoutViewModel = new ViewModelProvider(this).get(LogoutViewModel.class);
 
         ImageView pfpImageView = view.findViewById(R.id.pfpImage);
@@ -60,19 +69,24 @@ public class ProfileFragment extends Fragment {
         TextView followers = view.findViewById(R.id.followers);
         TextView following = view.findViewById(R.id.following);
         ImageView kebabMenu = view.findViewById(R.id.kebab_menu);
+        followButton = view.findViewById(R.id.followButton);
 
-        Picasso.get().setLoggingEnabled(true);
+        profileViewModel = new ViewModelProvider(this).get(ProfileViewModel.class);
 
         SharedPreferences preferences = requireActivity().getSharedPreferences("AuthPrefs", Context.MODE_PRIVATE);
 
         USER_ID = preferences.getString("userId", null);
+        if(selectedUserId != null){
+            followButton.setVisibility(View.VISIBLE);
+            profileViewModel.getUserById(selectedUserId);
+            observeFollowStatus(selectedUserId);
 
+        } else {
+            followButton.setVisibility(View.GONE);
+            profileViewModel.getUserById(USER_ID);
+        }
 
-        profileViewModel = new ViewModelProvider(this).get(ProfileViewModel.class);
-        Log.d(TAG, "viewModel created: " + profileViewModel);
-        // Call getUserById to fetch user data
-        profileViewModel.getUserById(USER_ID);
-
+        Picasso.get().setLoggingEnabled(true);
 
         // Observe the user data
         profileViewModel.getUserLiveData().observe(getViewLifecycleOwner(), user -> {
@@ -137,7 +151,6 @@ public class ProfileFragment extends Fragment {
     }
 
     private void updateTabLayout(boolean isArtist) {
-        Log.d(TAG, "isArtist in tab logic:" + isArtist);
 
         tabLayout = getView().findViewById(R.id.tabLayout);
         viewPager2 = getView().findViewById(R.id.viewPager);
@@ -160,7 +173,6 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager2.setCurrentItem(tab.getPosition());
-                Log.d(TAG, "selected tab position:" + tab.getPosition());
             }
 
             @Override
@@ -179,4 +191,24 @@ public class ProfileFragment extends Fragment {
             }
         });
     }
+
+    private void observeFollowStatus(String selectedUserId) {
+            profileViewModel.isFollowing(USER_ID, selectedUserId, new UserRepository.FollowCheckCallback() {
+                @Override
+                public void onSuccess(Boolean follows) {
+                    if (follows) {
+                        followButton.setText("Following");
+                    } else {
+                        followButton.setText("Follow");
+                    }
+                }
+
+                @Override
+                public void onError(String errorMessage) {
+                    // Handle error if needed
+                    Log.e(TAG, errorMessage);
+                }
+            });
+    }
+
 }
