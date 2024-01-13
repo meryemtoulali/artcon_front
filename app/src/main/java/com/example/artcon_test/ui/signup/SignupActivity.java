@@ -18,6 +18,7 @@ import com.example.artcon_test.model.LoginResponse;
 import com.example.artcon_test.model.RegisterRequest;
 import com.example.artcon_test.network.AuthService;
 import com.example.artcon_test.utilities.Constants;
+import com.example.artcon_test.utilities.PreferenceManager;
 import com.example.artcon_test.viewmodel.LoginViewModel;
 import com.example.artcon_test.viewmodel.SignupViewModel;
 import com.example.artcon_test.databinding.ActivitySignupBinding;
@@ -35,6 +36,7 @@ public class SignupActivity extends AppCompatActivity {
     String TAG="hatsunemiku";
     SignupViewModel signupViewModel;
     private ActivitySignupBinding binding;
+    private PreferenceManager preferenceManager;
 
 
     @Override
@@ -130,6 +132,7 @@ public class SignupActivity extends AppCompatActivity {
         user.put(Constants.KEY_PHONENUMBER, registerRequest.getPhonenumber());
         user.put(Constants.KEY_LOCATION, registerRequest.getLocation());
 
+
         database.collection(Constants.KEY_COLLECTION_USERS)
                 .add(user)
                 .addOnSuccessListener(documentReference -> {
@@ -147,7 +150,7 @@ public class SignupActivity extends AppCompatActivity {
             SharedPreferences preferences = getSharedPreferences("AuthPrefs", MODE_PRIVATE);
             SharedPreferences.Editor editor = preferences.edit();
             editor.putString("token", loginResponse.getToken());
-            editor.putString("userId", loginResponse.getUserId());
+            editor.putString("userId", loginResponse.getUserId()); // Save userId to SharedPreferences
             editor.putString("username", loginResponse.getUsername());
             editor.putBoolean("isLoggedIn", true);
             editor.apply();

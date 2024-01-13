@@ -2,6 +2,7 @@ package com.example.artcon_test.utilities;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 public class PreferenceManager {
     private final SharedPreferences sharedPreferences;
@@ -20,14 +21,15 @@ public class PreferenceManager {
         return sharedPreferences.getBoolean(key,false);
     }
 
-    public void putString(String key, String value){
+    // Example methods in PreferenceManager
+    public void putString(String key, String value) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(key,value);
+        editor.putString(key, value);
         editor.apply();
     }
 
-    public String getString(String key){
-        return sharedPreferences.getString(key,null);
+    public String getString(String key) {
+        return sharedPreferences.getString(key, null);
     }
 
     public void clear(){

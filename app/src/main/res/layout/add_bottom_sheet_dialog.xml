@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/grey_border">
+
+
+    <LinearLayout
+        android:id="@+id/layoutNewPost"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:padding="10dp"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New post"
+            android:textColor="@color/blackBase"
+            android:textSize="16sp"
+            android:layout_gravity="center_horizontal"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutNewPortfolioPost"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:padding="10dp"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New portfolio post"
+            android:textColor="@color/blackBase"
+            android:textSize="16sp"
+            android:layout_gravity="center_horizontal"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutNewJobPost"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:padding="10dp"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New job post"
+            android:textColor="@color/blackBase"
+            android:textSize="16sp"
+            android:layout_gravity="center_horizontal"/>
+    </LinearLayout>
+
+</LinearLayout>

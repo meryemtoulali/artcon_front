@@ -8,6 +8,7 @@
 
     <string name="chat">Chat</string>
     <string name="search">Search</string>
+    <string name="type_a_message">Write a message...</string>
 
     <string name="app_slogan">Connecting creativity</string>
     <string name="login_text">Please log in to your account</string>

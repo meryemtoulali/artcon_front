@@ -74,17 +74,20 @@ public class ProfilePostRecyclerAdapter extends RecyclerView.Adapter<ProfilePost
 
         public void bind(Post post) {
             // Bind the data to your views here
-            Log.d(TAG, "post image URL: "+ post.getMediaFiles().get(0).getMediafile_url());
-            Log.d(TAG, "post mediafiles 0: "+ post.getMediaFiles().get(0));
-            Log.d(TAG, "post mediafiles: "+ post.getMediaFiles());
-            Picasso.get()
-                    .load(post.getMediaFiles().get(0).getMediafile_url())
-                    .placeholder(R.drawable.picasso_placeholder)
-                    .into(postImage);
-            Picasso.get()
-                    .load(post.getUser().getPicture())
-                    .placeholder(R.drawable.picasso_placeholder)
-                    .into(pfp);
+            if(post.getMediaFiles() == null || post.getMediaFiles().isEmpty()){
+                postImage.setVisibility(View.GONE);
+            } else {
+                Picasso.get()
+                        .load(post.getMediaFiles().get(0).getMediafile_url())
+                        .placeholder(R.drawable.picasso_placeholder)
+                        .into(postImage);
+            }
+            if(post.getUser().getPicture() != null && !post.getUser().getPicture().isEmpty()) {
+                Picasso.get()
+                        .load(post.getUser().getPicture())
+                        .placeholder(R.drawable.picasso_placeholder)
+                        .into(pfp);
+            }
             username.setText(post.getUser().getUsername());
             fullName.setText(post.getUser().getFirstname() + " " + post.getUser().getLastname());
             postTextArea.setText(post.getDescription());

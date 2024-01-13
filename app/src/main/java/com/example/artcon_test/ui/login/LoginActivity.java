@@ -18,6 +18,7 @@ import com.example.artcon_test.ui.signup.SignupActivity;
 import com.example.artcon_test.model.LoginRequest;
 import com.example.artcon_test.network.AuthService;
 import com.example.artcon_test.utilities.Constants;
+import com.example.artcon_test.utilities.PreferenceManager;
 import com.example.artcon_test.viewmodel.LoginViewModel;
 import com.example.artcon_test.model.LoginResponse;
 import com.google.firebase.firestore.DocumentReference;
@@ -38,10 +39,16 @@ import com.google.firebase.firestore.SetOptions;
 public class LoginActivity extends AppCompatActivity {
     String TAG = "hatsunemiku";
     private ActivityLoginBinding binding;
+    private PreferenceManager preferenceManager;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        // Initialize PreferenceManager
+        preferenceManager = new PreferenceManager(getApplicationContext());
+
+
 
         EditText usernameEditText = findViewById(R.id.editTextUsername);
         EditText passwordEditText = findViewById(R.id.editTextPassword);
@@ -102,11 +109,39 @@ public class LoginActivity extends AppCompatActivity {
         forgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                signIn();
                 Intent intent = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
                 startActivity(intent);
             }
         });
     }
+
+    private void signIn() {
+        FirebaseFirestore database = FirebaseFirestore.getInstance();
+        String username = binding.editTextUsername.getText().toString().trim();
+
+        // Query Firestore for user data based on the username
+        database.collection(Constants.KEY_COLLECTION_USERS)
+                .whereEqualTo(Constants.KEY_USERNAME, username)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful() && task.getResult() != null && task.getResult().getDocuments().size() > 0) {
+                        DocumentSnapshot documentSnapshot = task.getResult().getDocuments().get(0);
+
+                        // Save user data to PreferenceManager
+                        preferenceManager.putString(Constants.KEY_USER_ID, documentSnapshot.getId());
+                        preferenceManager.putString(Constants.KEY_FIRSTNAME, documentSnapshot.getString(Constants.KEY_FIRSTNAME));
+                        preferenceManager.putString(Constants.KEY_LASTNAME, documentSnapshot.getString(Constants.KEY_LASTNAME));
+                        preferenceManager.putString(Constants.KEY_USERNAME, documentSnapshot.getString(Constants.KEY_USERNAME));
+
+                    } else {
+                        // Handle user not found or other errors
+                        Toast.makeText(LoginActivity.this, "User not found", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+
     private void handleLoginResponse(LoginResponse loginResponse) {
         if (!loginResponse.getToken().isEmpty()) {
 //            setContentView(R.layout.activity_onboarding);
@@ -118,6 +153,8 @@ public class LoginActivity extends AppCompatActivity {
             editor.putString("username", loginResponse.getUsername());
             editor.putBoolean("isLoggedIn", true);
             editor.apply();
+            // Set the user ID in PreferenceManager
+            preferenceManager.putString(Constants.KEY_USER_ID, loginResponse.getUserId());
 
             Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, MainNavActivity.class);
