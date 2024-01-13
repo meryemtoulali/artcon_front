@@ -10,6 +10,8 @@ public class Post {
     private User user;
     private List<MediaItem> mediaFiles;
     private Integer likes;
+
+    private Integer comments_count;
     private Date dateTime;
     private Interest interest;
     private Date date;
@@ -23,7 +25,6 @@ public class Post {
         this.likes = likes;
         this.dateTime = dateTime;
     }
-
 
     public Integer getId() {
         return id;
@@ -100,8 +101,6 @@ public class Post {
 
         return stringBuilder.toString();
     }
-
-
 
 
     public Date getDate() {
