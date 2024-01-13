@@ -7,7 +7,6 @@
     <string name="title_profile">profile</string>
 
     <string name="chat">Chat</string>
-    <string name="search">Search</string>
     <string name="type_a_message">Write a message...</string>
 
     <string name="app_slogan">Connecting creativity</string>
@@ -16,6 +15,7 @@
     <string name="forgot_pwd_2">Forgot password</string>
     <string name="forgot_pwd_2_text">Enter your email to receive an email to reset your password.</string>
     <string name="signup">Sign up</string>
+    <string name="search">Search</string>
     <string name="select_gender_hint">Select Gender</string>
     <string name="select_location_hint">Select Location</string>
     <string-array name="gender_array">
@@ -27,8 +27,7 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
-
-    <string name="welcom_newuser">Welcom, User!</string>
+    <string name="welcom_newuser">Welcome, User!</string>
     <string name="setup_profile">Let\'s set up your profile</string>
     <string name="add_profilepicture">Add a profile picture</string>
     <string name="add_picture">Add photo</string>
@@ -53,4 +52,15 @@
     <string name="dance">Dance</string>
     <string name="animation">Animation</string>
     <string name="comedy">Comedy</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="search_people">People</string>
+    <string name="search_posts">Posts</string>
+    <string name="search_jobs">Jobs</string>
+    <string name="logout">Logout</string>
+    <string name="no_result_found">No Results Found</string>
+    <string name="add_post">Add post</string>
+    <string name="add_portfolio_post">Add portfolio post</string>
+    <string name="add_job_post">Add job post</string>
+    <string name="edit_profile">Edit Profile</string>
+
 </resources>

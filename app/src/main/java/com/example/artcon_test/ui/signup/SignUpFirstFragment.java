@@ -34,17 +34,14 @@ public class SignUpFirstFragment extends Fragment {
         continueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Validate input (add your validation logic)
                 if (isValidInput()) {
                     Log.d("salma","perform signup called");
 
                     signupViewModel.setUsername(usernameEditText.getText().toString());
                     signupViewModel.setPassword(passwordEditText.getText().toString());
                     signupViewModel.setEmail(emailEditText.getText().toString());
-                    // Call the method in the hosting activity to navigate to the second step
                     ((SignupActivity) requireActivity()).navigateToSecondStep();
                 } else {
-                    // Show an error message or handle invalid input
                     Toast.makeText(requireContext(), "Please enter valid information", Toast.LENGTH_SHORT).show();
                 }
             }

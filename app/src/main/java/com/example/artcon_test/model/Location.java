@@ -8,9 +8,6 @@ public class Location {
         return id;
     }
 
-    public Location() {
-    }
-
     public Location(Integer id, String name) {
         this.id = id;
         this.name = name;

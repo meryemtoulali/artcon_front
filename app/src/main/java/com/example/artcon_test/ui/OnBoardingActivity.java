@@ -1,12 +1,14 @@
 package com.example.artcon_test.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 
 import com.example.artcon_test.R;
@@ -27,12 +29,6 @@ public class OnBoardingActivity extends AppCompatActivity {
         Log.d(TAG, "AuthPrefs username:" + preferences.getString("username",null));
         Log.d(TAG, "AuthPrefs token:" + preferences.getString("token",null));
 
-//        SharedPreferences.Editor editor = preferences.edit();
-////        editor.putString("token", "your_token_here");
-////        editor.putString("userId", "1");
-////        editor.remove("token");
-//        editor.putBoolean("isLoggedIn", false);
-//        editor.apply();
         boolean isLoggedIn = preferences.getBoolean("isLoggedIn", false);
         if (isLoggedIn) {
             Intent intent = new Intent(OnBoardingActivity.this, MainNavActivity.class);
@@ -41,24 +37,21 @@ public class OnBoardingActivity extends AppCompatActivity {
         } else {
             Button loginButton = findViewById(R.id.buttonLogin);
             Button signupButton = findViewById(R.id.buttonSignup);
-            loginButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(OnBoardingActivity.this, LoginActivity.class);
-                    startActivity(intent);
-                }
+            loginButton.setOnClickListener(view -> {
+                showButtonClickIndicator(loginButton);
+                Intent intent = new Intent(OnBoardingActivity.this, LoginActivity.class);
+                startActivity(intent);
             });
-            signupButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(OnBoardingActivity.this, SignupActivity.class);
-                    startActivity(intent);
-                }
+            signupButton.setOnClickListener(view -> {
+                showButtonClickIndicator(signupButton);
+                Intent intent = new Intent(OnBoardingActivity.this, SignupActivity.class);
+                startActivity(intent);
             });
         }
-
-
     }
-
-
+    private void showButtonClickIndicator(Button button) {
+        Drawable originalBackground = button.getBackground();
+        button.setBackground(ContextCompat.getDrawable(this, R.drawable.selected_button));
+        new Handler().postDelayed(() -> button.setBackground(originalBackground), 1000);
+    }
 }

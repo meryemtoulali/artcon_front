@@ -1,24 +1,158 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.search.SearchFragment">
+    android:layout_height="wrap_content"
+    >
 
-    <TextView
-        android:id="@+id/text_search"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        tools:context=".ui.search.SearchFragment">
 
+        <ImageView
+            android:id="@+id/arrow_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="48dp"
+            android:gravity="center"
+            android:src="@drawable/arrow_back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints"
+            />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/textViewSearch"
+            style="@style/Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:gravity="center"
+            android:text="@string/search"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.34"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints" />
+
+        <ImageView
+            android:id="@+id/kebab_menu"
+            android:layout_width="13dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="36dp"
+            android:gravity="center"
+            android:src="@drawable/kebab_menu"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.922"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints" />
+
+        <EditText
+            android:id="@+id/editTextSearch"
+            android:layout_width="0dp"
+            android:layout_height="47dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="96dp"
+            android:layout_marginEnd="32dp"
+            android:background="@drawable/grey_border"
+            android:backgroundTint="@color/greyLight"
+            android:drawableEnd="@drawable/search"
+            android:drawablePadding="10dp"
+            android:hint="@string/search"
+            android:padding="12dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:singleLine="true"
+            android:imeOptions="actionSearch"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <HorizontalScrollView
+            android:id="@+id/horizontalScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="164dp"
+            android:layout_marginStart="20dp"
+            android:foregroundGravity="center_vertical"
+            app:layout_constraintTop_toTopOf="parent"
+            >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:foregroundGravity="center"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/buttonSearchPeople"
+                    android:layout_width="119dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/grey_border"
+                    android:layout_marginEnd="15dp"
+                    android:text="@string/search_people"
+                    android:drawableLeft="@drawable/ic_profile_search"
+                    android:textStyle="bold"
+                    style="@style/CancelButton"
+                    />
+
+                <Button
+                    android:id="@+id/buttonSearchPosts"
+                    android:layout_width="119dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/grey_border"
+                    android:layout_marginEnd="15dp"
+                    android:text="@string/search_posts"
+                    android:drawableLeft="@drawable/ic_posts_search"
+                    android:textStyle="bold"
+                    style="@style/CancelButton"
+                    />
+
+                <Button
+                    android:id="@+id/buttonSearchJobs"
+                    android:layout_width="119dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/grey_border"
+                    android:layout_marginEnd="15dp"
+                    android:text="@string/search_jobs"
+                    android:drawableLeft="@drawable/ic_job_search"
+                    android:textStyle="bold"
+                    style="@style/CancelButton"
+                    />
+
+                <ImageView
+                    android:id="@+id/filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="32dp"
+                    android:gravity="center"
+                    android:src="@drawable/filter"
+                    tools:ignore="MissingConstraints" />
+
+            </LinearLayout>
+        </HorizontalScrollView>
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragmentContainerSearch"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView"
+            >
+        </androidx.fragment.app.FragmentContainerView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

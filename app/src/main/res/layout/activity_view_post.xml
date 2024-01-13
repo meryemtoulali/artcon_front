@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.post.ViewPostFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="4dp">
+
+            <ImageView
+                android:id="@+id/buttonBack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="20dp"
+                android:src="@drawable/arrow_back"
+                app:tint="@color/blackBase" />
+
+            <ImageView
+                android:id="@+id/buttonTopMenu"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="230dp"
+                android:layout_weight="1"
+                android:padding="17dp"
+                android:src="@drawable/three_dots"
+                app:tint="@color/blackBase" />
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/postFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="16dp"
+            android:fontFamily="@font/ubuntu"
+            android:padding="18dp"
+            android:text="Comments"
+            android:textColor="@color/blackBase"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+</ScrollView>

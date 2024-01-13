@@ -31,7 +31,6 @@ public class User implements Serializable {
 
 
     public User(Integer id,String userId,String token, String role, String firstname, String lastname, String username, String email, String passwordHash, String type, String title, Date birthday, String picture, String banner, String phoneNumber, String bio, String location, Integer followersCount, Integer followingCount) {
-
         this.id = id;
         this.userId = userId;
         this.token = token;
@@ -158,8 +157,8 @@ public class User implements Serializable {
         this.birthday = birthday;
     }
 
-    public Uri getPicture() {
-        return Uri.parse(picture);
+    public String getPicture() {
+        return picture;
     }
 
 

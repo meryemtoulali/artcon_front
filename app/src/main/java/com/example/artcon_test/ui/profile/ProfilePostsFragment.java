@@ -54,9 +54,11 @@ public class ProfilePostsFragment extends Fragment {
         RecyclerView recyclerView = view.findViewById(R.id.postRecyclerView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
-        postRecyclerAdapter = new ProfilePostRecyclerAdapter();
+
+        postRecyclerAdapter = new ProfilePostRecyclerAdapter(getContext());
         recyclerView.setAdapter(postRecyclerAdapter);
         Log.d(TAG, "created view recycler: " + recyclerView.toString());
+
         profileViewModel.getPostList(userId);
         profileViewModel.getPostListLiveData().observe(getViewLifecycleOwner(), postList -> {
             // Update recycler adapter with post list data
