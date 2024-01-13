@@ -28,6 +28,7 @@ import com.example.artcon_test.model.User;
 import com.example.artcon_test.network.PostService;
 import com.example.artcon_test.retrofit.RetrofitService;
 import com.example.artcon_test.ui.post.MediaAdapter;
+import com.example.artcon_test.ui.search.PeopleAdapter;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -36,7 +37,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapter.PostViewHolder> {
+public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder> {
     private List<Post> postList;
     private FrameLayout postContainer;
 
@@ -47,7 +48,7 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
     private final SharedPreferences sharedPreferences;
 
 
-    public PostRecyclerAdapter(Context context) {
+    public PostAdapter(Context context) {
         this.sharedPreferences = context.getSharedPreferences("AuthPrefs", Context.MODE_PRIVATE);
     }
     public void setPostList(List<Post> postList) {
@@ -63,7 +64,30 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
     @Override
     public void onBindViewHolder(@NonNull PostViewHolder holder, int position) {
         holder.bind(postList.get(position));
+        holder.itemView.findViewById(R.id.userArea).setOnClickListener(v -> {
+            String selectedUserId = postList.get(position).getUser().getId().toString();
+            onUserAreaClick(selectedUserId);
+        });
+
     }
+
+    public interface OnUserAreaClickListener {
+        void onUserAreaClick(String userId);
+    }
+
+    private OnUserAreaClickListener userAreaClickListener;
+    // Setter for the listener
+    public void setOnUserAreaClickListener(OnUserAreaClickListener listener) {
+        this.userAreaClickListener = listener;
+    }
+
+    // Method to handle item click and pass the user ID
+    private void onUserAreaClick(String userId) {
+        if (userAreaClickListener != null) {
+            userAreaClickListener.onUserAreaClick(userId);
+        }
+    }
+
 
     @Override
     public int getItemCount() {
