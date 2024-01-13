@@ -41,7 +41,7 @@ public class ProfileFragment extends Fragment {
 
     private boolean isArtist;
     private String USER_ID;
-    private String selectedUserId = "37";
+    private String selectedUserId;
 
     private ProfileViewModel profileViewModel;
 
@@ -56,10 +56,10 @@ public class ProfileFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_profile, container, false);
         Bundle args = getArguments();
-        if (args != null) {
-            selectedUserId = args.getString("userId");
-        }
 
+        if (args != null) {
+            selectedUserId = args.getString("selectedUserId");
+        }
         logoutViewModel = new ViewModelProvider(this).get(LogoutViewModel.class);
 
         ImageView pfpImageView = view.findViewById(R.id.pfpImage);
