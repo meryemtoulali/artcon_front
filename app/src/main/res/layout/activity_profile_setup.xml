@@ -67,10 +67,9 @@
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/setup_profile_fragment"
         android:layout_width="362dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
-        app:layout_constraintVertical_bias="0.11" />
+        app:layout_constraintTop_toBottomOf="@+id/textView2"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
