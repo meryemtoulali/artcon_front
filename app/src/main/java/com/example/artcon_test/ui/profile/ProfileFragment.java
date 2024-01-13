@@ -41,14 +41,14 @@ public class ProfileFragment extends Fragment {
 
     private boolean isArtist;
     private String USER_ID;
+    private String selectedUserId = "37";
+
     private ProfileViewModel profileViewModel;
 
     private TabLayout tabLayout;
     private ProfileFragmentAdapter adapter;
     private LogoutViewModel logoutViewModel;
     private Button followButton;
-    String selectedUserId;
-
 
 
     String TAG = "hatsunemiku";
@@ -92,7 +92,6 @@ public class ProfileFragment extends Fragment {
         // Observe the user data
         profileViewModel.getUserLiveData().observe(getViewLifecycleOwner(), user -> {
             isArtist = "artist".equals(user.getType());
-            Log.d(TAG, "isArtist:" + isArtist);
 
             if (user != null) {
                 // Update UI with user data
@@ -167,7 +166,13 @@ public class ProfileFragment extends Fragment {
         tabLayout.setTabMode(TabLayout.MODE_FIXED);
 
         FragmentManager fragmentManager = getChildFragmentManager();
-        adapter = new ProfileFragmentAdapter(fragmentManager, getLifecycle(), USER_ID, isArtist);
+        if(selectedUserId != null) {
+            adapter = new ProfileFragmentAdapter(fragmentManager, getLifecycle(), selectedUserId, isArtist);
+
+        } else {
+            adapter = new ProfileFragmentAdapter(fragmentManager, getLifecycle(), USER_ID, isArtist);
+
+        }
         viewPager2.setAdapter(adapter);
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -210,8 +215,10 @@ public class ProfileFragment extends Fragment {
                 @Override
                 public void onSuccess(Boolean follows) {
                     if (follows) {
+                        isFollowing = true;
                         followButton.setText("Following");
                     } else {
+                        isFollowing = false;
                         followButton.setText("Follow");
                     }
                 }
@@ -230,6 +237,7 @@ public class ProfileFragment extends Fragment {
             public void onSuccess() {
                 isFollowing = true;
                 followButton.setText("Unfollow");
+                Log.d(TAG, "follow successful");
             }
 
             @Override

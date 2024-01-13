@@ -80,7 +80,7 @@
         <item name="backgroundTint">@null</item>
         <item name="android:textColor">@color/blackBase</item>
         <item name="android:textStyle">normal</item>
-        <item name="android:stateListAnimator">@null</item>
+<!--        <item name="android:stateListAnimator">@null</item>-->
     </style>
 
     <style name="circleImageView" parent="">

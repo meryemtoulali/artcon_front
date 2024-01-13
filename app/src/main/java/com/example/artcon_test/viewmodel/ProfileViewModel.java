@@ -36,8 +36,6 @@ public class ProfileViewModel extends ViewModel {
 
     // Method to fetch user data
     public void getUserById(String userId) {
-        Log.d(TAG, "called getUserById");
-
         userRepository.getUserById(userId, new UserRepository.UserCallback() {
             @Override
             public void onSuccess(User user) {
@@ -102,14 +100,7 @@ public class ProfileViewModel extends ViewModel {
         postRepository.getPostList(userId, new PostRepository.PostCallback() {
             @Override
             public void onSuccess(List<Post> postList) {
-
                 postListLiveData.postValue(postList);
-                if (postList != null) {
-                    for (Post post : postList) {
-                        Log.d(TAG, "Post in livedata: " + post.toString() +"\n\n");
-                    }
-                }
-
             }
 
             @Override
