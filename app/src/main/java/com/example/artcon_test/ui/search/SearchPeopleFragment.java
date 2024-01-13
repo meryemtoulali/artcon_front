@@ -66,16 +66,9 @@ public class SearchPeopleFragment extends Fragment implements PeopleAdapter.OnUs
 
     @Override
     public void onUserItemClick(String userId) {
-        navigateToUserProfile(userId);
-    }
-
-    // Method to navigate to the user profile fragment
-    private void navigateToUserProfile(String userId) {
         Bundle args = new Bundle();
-        Log.d(TAG, "selected user: " + userId);
         args.putString("selectedUserId", userId);
         Navigation.findNavController(requireView()).navigate(R.id.action_navigation_search_to_navigation_profile, args);
-
     }
 
 

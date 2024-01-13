@@ -126,7 +126,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="5dp"
                 android:layout_weight="1"
-                android:text="0 Followers"
+                android:text="@string/followers"
                 android:textAlignment="center"
                 android:textColor="@color/greyDark"
                 android:textSize="16sp" />
@@ -138,7 +138,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="5dp"
                 android:layout_weight="1"
-                android:text="0 Following"
+                android:text="@string/following"
                 android:textAlignment="center"
                 android:textColor="@color/greyDark"
                 android:textSize="16sp" />

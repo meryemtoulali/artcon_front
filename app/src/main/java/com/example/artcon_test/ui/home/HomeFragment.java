@@ -8,26 +8,28 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.artcon_test.R;
 import com.example.artcon_test.databinding.FragmentHomeBinding;
-import com.example.artcon_test.ui.profile.ProfilePostRecyclerAdapter;
+import com.example.artcon_test.ui.profile.PostRecyclerAdapter;
+import com.example.artcon_test.ui.search.PeopleAdapter;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements PeopleAdapter.OnUserItemClickListener {
 
     private String TAG = "HOME FRAGMENT";
     private String userId;
     private FragmentHomeBinding binding;
     private RecyclerView recyclerView;
     HomeViewModel homeViewModel;
-    private ProfilePostRecyclerAdapter postRecyclerAdapter;
+    private PostRecyclerAdapter postRecyclerAdapter;
 
     //On create method
     @Override
@@ -49,7 +51,7 @@ public class HomeFragment extends Fragment {
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
-        postRecyclerAdapter = new ProfilePostRecyclerAdapter(getContext());
+        postRecyclerAdapter = new PostRecyclerAdapter(getContext());
         recyclerView.setAdapter(postRecyclerAdapter);
         Log.d(TAG, "created view recycler: " + recyclerView.toString());
         homeViewModel.getHome(userId);
@@ -59,6 +61,13 @@ public class HomeFragment extends Fragment {
             postRecyclerAdapter.notifyDataSetChanged();
         });
         return root;
+    }
+
+    @Override
+    public void onUserItemClick(String userId) {
+        Bundle args = new Bundle();
+        args.putString("selectedUserId", userId);
+        Navigation.findNavController(requireView()).navigate(R.id.action_navigation_search_to_navigation_profile, args);
     }
 
     @Override

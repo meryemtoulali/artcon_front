@@ -13,14 +13,9 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -33,7 +28,6 @@ import com.example.artcon_test.model.User;
 import com.example.artcon_test.network.PostService;
 import com.example.artcon_test.retrofit.RetrofitService;
 import com.example.artcon_test.ui.post.MediaAdapter;
-import com.example.artcon_test.ui.post.PostFragment;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -42,21 +36,18 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ProfilePostRecyclerAdapter extends RecyclerView.Adapter<ProfilePostRecyclerAdapter.PostViewHolder> {
+public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapter.PostViewHolder> {
     private List<Post> postList;
     private FrameLayout postContainer;
-    private Context context;
 
 
     public List<Post> getPostList() {
         return postList;
     }
-    private static String TAG = "hatsunemiku";
-    private SharedPreferences sharedPreferences;
+    private final SharedPreferences sharedPreferences;
 
 
-    public ProfilePostRecyclerAdapter(Context context) {
-        this.context = context;
+    public PostRecyclerAdapter(Context context) {
         this.sharedPreferences = context.getSharedPreferences("AuthPrefs", Context.MODE_PRIVATE);
     }
     public void setPostList(List<Post> postList) {

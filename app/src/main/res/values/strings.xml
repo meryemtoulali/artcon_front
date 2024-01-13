@@ -63,5 +63,7 @@
     <string name="sign_up">Sign Up</string>
     <string name="choose_interests">For a better experience, choose some of your interests:</string>
     <string name="follow">Follow</string>
+    <string name="followers">Followers</string>
+    <string name="following">Following</string>
 
 </resources>

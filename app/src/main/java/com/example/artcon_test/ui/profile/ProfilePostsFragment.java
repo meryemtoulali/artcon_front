@@ -20,7 +20,7 @@ public class ProfilePostsFragment extends Fragment {
     private static final String ARG_USER_ID = "userId";
     private ProfileViewModel profileViewModel;
     private String userId;
-    private ProfilePostRecyclerAdapter postRecyclerAdapter;
+    private PostRecyclerAdapter postRecyclerAdapter;
 
 
     public ProfilePostsFragment() {
@@ -55,7 +55,7 @@ public class ProfilePostsFragment extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
 
-        postRecyclerAdapter = new ProfilePostRecyclerAdapter(getContext());
+        postRecyclerAdapter = new PostRecyclerAdapter(getContext());
         recyclerView.setAdapter(postRecyclerAdapter);
         Log.d(TAG, "created view recycler: " + recyclerView.toString());
 
