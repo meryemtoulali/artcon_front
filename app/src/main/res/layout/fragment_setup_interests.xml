@@ -9,11 +9,12 @@
 
     <TextView
         android:id="@+id/textView6"
+        style="@style/Text"
         android:layout_width="320dp"
         android:layout_height="50dp"
         android:layout_marginHorizontal="10sp"
-        android:text="For a better experience, choose some of your interests:"
-        android:textSize="20sp"
+        android:text="@string/choose_interests"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.494"

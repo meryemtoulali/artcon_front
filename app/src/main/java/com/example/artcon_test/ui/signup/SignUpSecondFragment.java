@@ -68,7 +68,7 @@ public class SignUpSecondFragment extends Fragment {
         signUpButton.setOnClickListener(v -> {
             // Validate input (add your validation logic)
             if (isValidInput()) {
-                showButtonClickIndicator(signUpButton);
+//                showButtonClickIndicator(signUpButton);
                 // Call the method in the hosting activity to perform sign-up
                 signupViewModel.setFirstName(getFirstName());
                 signupViewModel.setLastName(getLastName());

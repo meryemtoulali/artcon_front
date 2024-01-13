@@ -29,14 +29,14 @@
     <string name="add_profilepicture">Add a profile picture</string>
     <string name="add_picture">Add photo</string>
     <string name="skip">Skip</string>
-    <string name="Iam">I\'am</string>
+    <string name="Iam">I am:</string>
     <string name="an_artist">an artist</string>
     <string name="looking_for_artists">looking for artists</string>
     <string name="next">Continue</string>
-    <string name="Ispecialise">I specialize in...</string>
-    <string name="because">Because...</string>
+    <string name="Ispecialise">I specialize in…</string>
+    <string name="because">Because…</string>
     <string name="tohire">I want to hire them</string>
-    <string name="tolikeart">I just like art</string>
+    <string name="tolikeart">I just like art!</string>
     <string name="poetry">Poetry</string>
     <string name="photography">Photography</string>
     <string name="mixed_media">Mixed media</string>
@@ -59,5 +59,8 @@
     <string name="add_portfolio_post">Add portfolio post</string>
     <string name="add_job_post">Add job post</string>
     <string name="edit_profile">Edit Profile</string>
+    <string name="login">Login</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="choose_interests">For a better experience, choose some of your interests:</string>
 
 </resources>

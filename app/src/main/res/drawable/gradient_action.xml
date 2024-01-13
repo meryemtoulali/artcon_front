@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android"
-    android:shape="rectangle">
-        <gradient
-            android:type="linear"
-            android:angle="45"
-            android:startColor="#AE89FE"
-            android:centerColor="#E3A7FF"
-            android:endColor="#FCDAFF"/>
-        <corners android:radius="100dp" />
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="#AE89FE">
+        <item android:id="@android:id/background">
+                <shape
+                    android:shape="rectangle">
+                        <gradient
+                            android:type="linear"
+                            android:angle="45"
+                            android:startColor="#AE89FE"
+                            android:centerColor="#E3A7FF"
+                            android:endColor="#FCDAFF"/>
+                        <corners android:radius="100dp" />
 
-</shape>
+                </shape>
+        </item>
+</ripple>

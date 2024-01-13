@@ -38,12 +38,12 @@ public class OnBoardingActivity extends AppCompatActivity {
             Button loginButton = findViewById(R.id.buttonLogin);
             Button signupButton = findViewById(R.id.buttonSignup);
             loginButton.setOnClickListener(view -> {
-                showButtonClickIndicator(loginButton);
+//                showButtonClickIndicator(loginButton);
                 Intent intent = new Intent(OnBoardingActivity.this, LoginActivity.class);
                 startActivity(intent);
             });
             signupButton.setOnClickListener(view -> {
-                showButtonClickIndicator(signupButton);
+//                showButtonClickIndicator(signupButton);
                 Intent intent = new Intent(OnBoardingActivity.this, SignupActivity.class);
                 startActivity(intent);
             });
