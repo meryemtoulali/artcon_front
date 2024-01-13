@@ -1,5 +1,7 @@
 package com.example.artcon_test.ui.profile;
 
+import static java.lang.Integer.parseInt;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -49,7 +51,8 @@ public class ProfileFragment extends Fragment {
     private ProfileFragmentAdapter adapter;
     private LogoutViewModel logoutViewModel;
     private Button followButton;
-
+    private TextView followers;
+private Integer followersCount;
 
     String TAG = "hatsunemiku";
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -67,7 +70,7 @@ public class ProfileFragment extends Fragment {
         TextView fullname = view.findViewById(R.id.fullname);
         TextView username = view.findViewById(R.id.username);
         TextView title = view.findViewById(R.id.title);
-        TextView followers = view.findViewById(R.id.followers);
+        followers = view.findViewById(R.id.followers);
         TextView following = view.findViewById(R.id.following);
         ImageView kebabMenu = view.findViewById(R.id.kebab_menu);
         followButton = view.findViewById(R.id.followButton);
@@ -112,6 +115,7 @@ public class ProfileFragment extends Fragment {
                     // If the user's title is empty, hide the TextView
                     title.setVisibility(View.GONE);
                 }
+                followersCount = user.getFollowersCount();
                 following.setText(String.valueOf(user.getFollowingCount()) + " Following");
                 followers.setText(String.valueOf(user.getFollowersCount()) + " Followers");
 
@@ -238,6 +242,8 @@ public class ProfileFragment extends Fragment {
                 isFollowing = true;
                 followButton.setText("Unfollow");
                 Log.d(TAG, "follow successful");
+                followersCount = followersCount + 1;
+                followers.setText(String.valueOf(followersCount) + " Followers");
             }
 
             @Override
@@ -253,6 +259,8 @@ public class ProfileFragment extends Fragment {
             public void onSuccess() {
                 isFollowing = false;
                 followButton.setText("Follow");
+                followersCount = followersCount - 1;
+                followers.setText(String.valueOf(followersCount) + " Following");
             }
 
             @Override
