@@ -37,6 +37,7 @@ public class ProfileFragment extends Fragment {
 
 //    private FragmentProfileBinding binding;
     private ViewPager2 viewPager2;
+    private boolean isFollowing;
 
     private boolean isArtist;
     private String USER_ID;
@@ -79,7 +80,7 @@ public class ProfileFragment extends Fragment {
         if(selectedUserId != null){
             followButton.setVisibility(View.VISIBLE);
             profileViewModel.getUserById(selectedUserId);
-            observeFollowStatus(selectedUserId);
+            setupFollowButton();
 
         } else {
             followButton.setVisibility(View.GONE);
@@ -192,7 +193,19 @@ public class ProfileFragment extends Fragment {
         });
     }
 
-    private void observeFollowStatus(String selectedUserId) {
+    private void setupFollowButton() {
+        observeFollowStatus();
+
+        followButton.setOnClickListener(v -> {
+            if (isFollowing) {
+                unfollowUser(USER_ID, selectedUserId);
+            } else {
+                followUser(USER_ID, selectedUserId);
+            }
+        });
+    }
+
+    private void observeFollowStatus() {
             profileViewModel.isFollowing(USER_ID, selectedUserId, new UserRepository.FollowCheckCallback() {
                 @Override
                 public void onSuccess(Boolean follows) {
@@ -211,4 +224,33 @@ public class ProfileFragment extends Fragment {
             });
     }
 
+    private void followUser(String currentUserId, String selectedUserId) {
+        profileViewModel.followUser(currentUserId, selectedUserId, new UserRepository.FollowCallback() {
+            @Override
+            public void onSuccess() {
+                isFollowing = true;
+                followButton.setText("Unfollow");
+            }
+
+            @Override
+            public void onError(String errorMessage) {
+                Log.e(TAG, errorMessage);
+            }
+        });
+    }
+
+    private void unfollowUser(String currentUserId, String selectedUserId) {
+        profileViewModel.unfollowUser(currentUserId, selectedUserId, new UserRepository.FollowCallback() {
+            @Override
+            public void onSuccess() {
+                isFollowing = false;
+                followButton.setText("Follow");
+            }
+
+            @Override
+            public void onError(String errorMessage) {
+                Log.e(TAG, errorMessage);
+            }
+        });
+    }
 }

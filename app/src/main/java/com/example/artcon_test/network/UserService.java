@@ -57,4 +57,17 @@ public interface UserService {
             @Path("followingId") String followingId
     );
 
+
+    @POST("follow/{followerId}/{followingId}")
+    Call<Void> followUser(
+            @Path("followerId") String followerId,
+            @Path("followingId") String followingId
+    );
+    @POST("unfollow/{followerId}/{followingId}")
+    Call<Void> unfollowUser(
+            @Path("followerId") String followerId,
+            @Path("followingId") String followingId
+    );
+
+
 }

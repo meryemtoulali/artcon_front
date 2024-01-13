@@ -80,6 +80,50 @@ public class UserRepository {
     }
 
 
+    public void followUser(String followerId, String followingId, FollowCallback callback) {
+        Call<Void> call = userService.followUser(followerId, followingId);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    callback.onSuccess();
+                } else {
+                    callback.onError("Error following user");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                callback.onError("Network error: " + t.getMessage());
+            }
+        });
+
+    }
+
+    public void unfollowUser(String followerId, String followingId, FollowCallback callback) {
+        Call<Void> call = userService.unfollowUser(followerId, followingId);
+
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    callback.onSuccess();
+                } else {
+                    callback.onError("Error unfollowing user");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                callback.onError("Network error: " + t.getMessage());
+            }
+        });
+    }
+
+    public interface FollowCallback {
+        void onSuccess();
+        void onError(String errorMessage);
+    }
 
 
     public void getHome(String userId,PostRepository.PostCallback callback) {

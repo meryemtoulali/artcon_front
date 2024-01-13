@@ -62,6 +62,15 @@ public class ProfileViewModel extends ViewModel {
         userRepository.checkFollows(followerId, followingId, callback);
     }
 
+    public void followUser(String followerId, String followingId, UserRepository.FollowCallback callback) {
+        userRepository.followUser(followerId, followingId, callback);
+    }
+
+    public void unfollowUser(String followerId, String followingId, UserRepository.FollowCallback callback) {
+        userRepository.unfollowUser(followerId, followingId, callback);
+    }
+
+
 
     public void getPortfolio(String userId) {
         portfolioRepository.getPortfolio(userId, new PortfolioRepository.PortfolioCallback() {
