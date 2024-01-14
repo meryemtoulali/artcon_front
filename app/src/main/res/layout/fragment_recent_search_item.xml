@@ -1,0 +1,27 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/ripple"
+    android:gravity="start|center_vertical"
+    android:focusable="true"
+    >
+
+    <TextView
+        android:id="@+id/recentSearchItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textColor="@color/blackBase"
+        android:textSize="20sp"
+        android:drawableStart="@drawable/search"
+        android:drawableEnd="@drawable/close1"
+        android:drawablePadding="8dp"
+        android:paddingBottom="14dp"
+        android:paddingTop="14dp"
+        android:paddingStart="6dp"
+        android:paddingEnd="6dp"
+        android:clickable="true"
+        android:focusable="true"
+        />
+</LinearLayout>

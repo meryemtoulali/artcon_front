@@ -26,7 +26,6 @@ import com.example.artcon_test.R;
 import com.example.artcon_test.databinding.FragmentHomeBinding;
 import com.example.artcon_test.ui.login.LoginActivity;
 import com.example.artcon_test.ui.profile.PostAdapter;
-import com.example.artcon_test.ui.search.PeopleAdapter;
 import com.example.artcon_test.viewmodel.LogoutViewModel;
 
 public class HomeFragment extends Fragment implements PostAdapter.OnUserAreaClickListener {
