@@ -142,10 +142,10 @@ private Integer followersCount;
         });
 
         followers.setOnClickListener(v -> {
-            Navigation.findNavController(requireView()).navigate(R.id.action_profile_to_followers);
+            Navigation.findNavController(requireView()).navigate(R.id.action_profile_to_followers, args);
         });
         following.setOnClickListener(v -> {
-            Navigation.findNavController(requireView()).navigate(R.id.action_profile_to_followers);
+            Navigation.findNavController(requireView()).navigate(R.id.action_profile_to_followers, args);
         });
 
 

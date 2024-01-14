@@ -33,14 +33,22 @@ public class FollowersListFragment extends Fragment implements PeopleAdapter.OnU
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         profileViewModel = new ViewModelProvider(this).get(ProfileViewModel.class);
-        SharedPreferences preferences = requireActivity().getSharedPreferences("AuthPrefs", MODE_PRIVATE);
-        userId=preferences.getString("userId",null);
+        Bundle args = getArguments();
+        if (args != null) {
+            userId = args.getString("selectedUserId");
+        }
+        if(userId == null){
+            SharedPreferences preferences = requireActivity().getSharedPreferences("AuthPrefs", MODE_PRIVATE);
+            userId=preferences.getString("userId",null);
+        }
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentFollowersListBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
+
+
 
         recyclerView = binding.followersList;
 
