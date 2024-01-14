@@ -72,7 +72,21 @@
         <action
             android:id="@+id/action_profile_to_post"
             app:destination="@id/navigation_post" />
+        <action
+            android:id="@+id/action_profile_to_followers"
+            app:destination="@id/navigation_followers" />
     </fragment>
+
+    <fragment
+        android:id="@+id/navigation_followers"
+        android:name="com.example.artcon_test.ui.profile.FollowersListFragment"
+        android:label="@string/followers"
+        tools:layout="@layout/fragment_followers_list" >
+        <action
+            android:id="@+id/action_followers_to_profile"
+            app:destination="@id/navigation_profile" />
+    </fragment>
+
     <fragment
         android:id="@+id/navigation_portfolioPost"
         android:name="com.example.artcon_test.ui.portfolioPost.PortfolioPostFragment"

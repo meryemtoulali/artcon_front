@@ -161,6 +161,15 @@ public class UserRepository {
         return userService.searchPeopleIgnoreCase(query);
     }
 
+    public Call<List<User>> getFollowersList(String userId) {
+        return userService.getFollowersList(userId);
+    }
+
+    public Call<List<User>> getFollowingList(String userId) {
+        return userService.getFollowingList(userId);
+    }
+
+
     public interface UserCallback {
         void onSuccess(User user);
 

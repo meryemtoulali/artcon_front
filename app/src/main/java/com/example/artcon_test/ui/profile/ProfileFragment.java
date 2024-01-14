@@ -20,6 +20,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.artcon_test.repository.UserRepository;
@@ -139,6 +140,14 @@ private Integer followersCount;
             });
             popup.show();
         });
+
+        followers.setOnClickListener(v -> {
+            Navigation.findNavController(requireView()).navigate(R.id.action_profile_to_followers);
+        });
+        following.setOnClickListener(v -> {
+            Navigation.findNavController(requireView()).navigate(R.id.action_profile_to_followers);
+        });
+
 
         return view;
     }
