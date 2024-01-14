@@ -26,14 +26,13 @@ import com.example.artcon_test.model.Post;
 import com.example.artcon_test.model.User;
 import com.example.artcon_test.network.PostService;
 import com.example.artcon_test.retrofit.RetrofitService;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-import okhttp3.MultipartBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import com.squareup.picasso.Picasso;
 
 
 public class PostFragment extends Fragment {

@@ -28,7 +28,6 @@ import com.example.artcon_test.model.User;
 import com.example.artcon_test.network.PostService;
 import com.example.artcon_test.retrofit.RetrofitService;
 import com.example.artcon_test.ui.post.MediaAdapter;
-import com.example.artcon_test.ui.search.PeopleAdapter;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;

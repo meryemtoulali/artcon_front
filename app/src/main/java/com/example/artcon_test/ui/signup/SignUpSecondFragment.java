@@ -21,7 +21,6 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.artcon_test.R;
 import com.example.artcon_test.model.Location;
 import com.example.artcon_test.network.LocationService;
-import com.example.artcon_test.ui.signup.SignupActivity;
 import com.example.artcon_test.viewmodel.LocationViewModel;
 import com.example.artcon_test.viewmodel.SignupViewModel;
 
