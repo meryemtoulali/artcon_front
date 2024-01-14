@@ -37,4 +37,6 @@ public class PreferenceManager {
         editor.clear();
         editor.apply();
     }
+
+
 }

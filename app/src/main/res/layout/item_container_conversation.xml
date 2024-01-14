@@ -23,7 +23,7 @@
             android:layout_margin="20dp"
             android:padding="4dp">
 
-            <ImageView
+            <com.makeramen.roundedimageview.RoundedImageView
                 android:id="@+id/imageProfile"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
@@ -69,7 +69,7 @@
                 app:layout_constraintStart_toEndOf="@id/textName" />
 
             <TextView
-                android:id="@+id/LastMessage"
+                android:id="@+id/textRecentMessage"
                 android:layout_width="255dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -77,7 +77,7 @@
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:textColor="@color/greyBase"
-                android:textSize="10sp"
+                android:textSize="12sp"
                 app:layout_constraintStart_toEndOf="@id/imageProfile"
                 app:layout_constraintTop_toBottomOf="@id/textName" />
 

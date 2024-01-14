@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
     android:padding="4dp"
     >
 <com.makeramen.roundedimageview.RoundedImageView
@@ -23,6 +24,11 @@
         android:layout_marginStart="4dp"
         android:layout_marginLeft="4dp"
         android:background="@drawable/background_received_message"
+        android:paddingStart="12sp"
+        android:paddingTop="8dp"
+        android:paddingEnd="12dp"
+        android:paddingBottom="8dp"
+        app:layout_constraintWidth_max="wrap"
         android:padding="12dp"
         android:textColor="@color/blackBase"
         android:textSize="13sp"
@@ -36,9 +42,12 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
+        android:layout_marginBottom="4dp"
         android:textColor="@color/greyBase"
-        android:textSize="10sp"
-        app:layout_constraintStart_toStartOf="@id/textMessage"
-        tools:layout_editor_absoluteY="47dp" />
+        android:textSize="8sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@id/textMessage" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,6 +2,8 @@ package com.example.artcon_test.ui.home;
 
 import static android.content.Context.MODE_PRIVATE;
 
+import static androidx.test.core.app.ApplicationProvider.getApplicationContext;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -19,6 +21,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.artcon_test.chat.UsersActivity;
+import com.example.artcon_test.chat.UsersFirstActivity;
 import com.example.artcon_test.databinding.FragmentHomeBinding;
 import com.example.artcon_test.ui.profile.ProfilePostRecyclerAdapter;
 import com.example.artcon_test.utilities.Constants;
@@ -44,29 +47,28 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         recyclerView = binding.feed;
+
         binding.chat.setOnClickListener(v -> {
-            Intent intent = new Intent(getActivity(), UsersActivity.class);
-            intent.putExtra(Constants.KEY_USER_ID, userId);
+            Intent intent = new Intent(getActivity(), UsersFirstActivity.class);
             getActivity().startActivity(intent);
         });
-
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         postRecyclerAdapter = new ProfilePostRecyclerAdapter(getContext());
         recyclerView.setAdapter(postRecyclerAdapter);
-        Log.d(TAG, "created view recycler: " + recyclerView.toString());
+
         homeViewModel.getHome(userId);
         homeViewModel.getHomeLiveData().observe(getViewLifecycleOwner(), postList -> {
             // Update recycler adapter with post list data
             postRecyclerAdapter.setPostList(postList);
             postRecyclerAdapter.notifyDataSetChanged();
         });
+
         return root;
     }
 

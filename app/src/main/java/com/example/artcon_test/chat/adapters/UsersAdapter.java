@@ -12,6 +12,8 @@ import com.example.artcon_test.R;
 import com.example.artcon_test.chat.listeners.UserListener;
 import com.example.artcon_test.databinding.ItemContainerConversationBinding;
 import com.example.artcon_test.chat.models.User;
+import com.example.artcon_test.chat.models.ChatMessage;
+
 import com.squareup.picasso.Picasso;
 
 import java.util.List;

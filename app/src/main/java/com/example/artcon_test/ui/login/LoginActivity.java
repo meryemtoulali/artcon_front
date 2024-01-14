@@ -1,6 +1,7 @@
 package com.example.artcon_test.ui.login;
 
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -23,15 +24,13 @@ import com.example.artcon_test.utilities.Constants;
 import com.example.artcon_test.utilities.PreferenceManager;
 import com.example.artcon_test.viewmodel.LoginViewModel;
 import com.example.artcon_test.model.LoginResponse;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import android.content.Intent;
-
 import java.util.HashMap;
 
-import android.graphics.drawable.Drawable;
+import android.content.Intent;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -40,9 +39,10 @@ import com.google.firebase.firestore.SetOptions;
 
 
 public class LoginActivity extends AppCompatActivity {
-    String TAG = "hatsunemiku";
+    private static final String TAG = "hatsunemiku";
     private ActivityLoginBinding binding;
     private PreferenceManager preferenceManager;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,8 +50,6 @@ public class LoginActivity extends AppCompatActivity {
 
         // Initialize PreferenceManager
         preferenceManager = new PreferenceManager(getApplicationContext());
-
-
 
         EditText usernameEditText = findViewById(R.id.editTextUsername);
         EditText passwordEditText = findViewById(R.id.editTextPassword);
@@ -63,26 +61,21 @@ public class LoginActivity extends AppCompatActivity {
 
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
 
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String username = usernameEditText.getText().toString().trim();
-                String password = passwordEditText.getText().toString().trim();
-                LoginRequest loginRequest = new LoginRequest(username,password);
+        loginButton.setOnClickListener(view -> {
+            String username = usernameEditText.getText().toString().trim();
+            String password = passwordEditText.getText().toString().trim();
+            LoginRequest loginRequest = new LoginRequest(username, password);
 
-        loginButton.setOnClickListener(
-            if(!username.isEmpty() && !password.isEmpty()){
+            if (!username.isEmpty() && !password.isEmpty()) {
                 showButtonClickIndicator(loginButton);
 
                 Call<LoginResponse> call = authService.login(loginRequest);
-                Log.d(TAG,call.toString());
-
+                Log.d(TAG, call.toString());
 
                 call.enqueue(new Callback<LoginResponse>() {
-
                     @Override
                     public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
-                        if (response.isSuccessful()){
+                        if (response.isSuccessful()) {
                             Log.d(TAG, "login successful: " + response);
                             LoginResponse loginResponse = response.body();
                             handleLoginResponse(loginResponse);
@@ -91,14 +84,14 @@ public class LoginActivity extends AppCompatActivity {
                             // Add data to Firestore after successful login.
                             addDataToFirestore(loginResponse);
                         } else {
-                            Log.d(TAG,"Login failed:" + response);
+                            Log.d(TAG, "Login failed:" + response);
                             Toast.makeText(LoginActivity.this, "Login failed", Toast.LENGTH_SHORT).show();
                         }
                     }
 
                     @Override
                     public void onFailure(Call<LoginResponse> call, Throwable t) {
-                        Log.e(TAG,"Login failed:: " + t.getMessage());
+                        Log.e(TAG, "Login failed:: " + t.getMessage());
                         Toast.makeText(LoginActivity.this, "Login failed", Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -112,13 +105,10 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        forgotPassword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                signIn();
-                Intent intent = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
-                startActivity(intent);
-            }
+        forgotPassword.setOnClickListener(view -> {
+            signIn();
+            Intent intent = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
+            startActivity(intent);
         });
     }
 
@@ -145,13 +135,6 @@ public class LoginActivity extends AppCompatActivity {
                         Toast.makeText(LoginActivity.this, "User not found", Toast.LENGTH_SHORT).show();
                     }
                 });
-    }
-
-
-        forgotPassword.setOnClickListener(view -> {
-            Intent intent = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
-            startActivity(intent);
-        });
     }
 
     private void showButtonClickIndicator(Button loginButton) {
@@ -182,8 +165,6 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-
-
     private void addDataToFirestore(LoginResponse loginResponse) {
         FirebaseFirestore database = FirebaseFirestore.getInstance();
         HashMap<String, Object> user = new HashMap<>();
@@ -204,12 +185,5 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Error updating document", Toast.LENGTH_SHORT).show();
                     Log.e(TAG, "Error updating Firestore document: " + exception.getMessage());
                 });
-
-
-
-
     }
-
-
-
 }
