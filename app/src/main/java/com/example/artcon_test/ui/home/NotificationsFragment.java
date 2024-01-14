@@ -23,14 +23,14 @@ public class NotificationsFragment extends Fragment {
     private String userId;
     private FragmentNotificationsBinding binding;
     private RecyclerView recyclerView;
-    NotificationsViewModel notificationsViewModel;
+//    NotificationsViewModel notificationsViewModel;
     private NotificationsAdapter adapter;
 
     //On create method
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        notificationsViewModel = new ViewModelProvider(this).get(NotificationsViewModel.class);
+//        notificationsViewModel = new ViewModelProvider(this).get(NotificationsViewModel.class);
         SharedPreferences preferences = requireActivity().getSharedPreferences("AuthPrefs", MODE_PRIVATE);
         userId=preferences.getString("userId",null);
     }
@@ -46,13 +46,13 @@ public class NotificationsFragment extends Fragment {
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new NotificationsAdapter(getContext());
-        recyclerView.setAdapter(adapter);
-        notificationsViewModel.getNotifications(userId);
-        notificationsViewModel.getNotificationsLiveData().observe(getViewLifecycleOwner(), notificationList -> {
-            adapter.setNotificationList(notificationList);
-            adapter.notifyDataSetChanged();
-        });
+//        adapter = new NotificationsAdapter(getContext());
+//        recyclerView.setAdapter(adapter);
+//        notificationsViewModel.getNotifications(userId);
+//        notificationsViewModel.getNotificationsLiveData().observe(getViewLifecycleOwner(), notificationList -> {
+//            adapter.setNotificationList(notificationList);
+//            adapter.notifyDataSetChanged();
+//        });
         return root;
     }
 
