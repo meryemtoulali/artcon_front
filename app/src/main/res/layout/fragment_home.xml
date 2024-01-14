@@ -45,6 +45,7 @@
     </ImageView>
 
     <ImageView
+        android:id="@+id/kebab_menu"
         android:layout_width="5dp"
         android:layout_height="25dp"
         android:src="@drawable/kebab_menu"

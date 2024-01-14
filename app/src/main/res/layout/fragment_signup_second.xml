@@ -29,6 +29,7 @@
         android:layout_marginEnd="32dp"
         android:background="@drawable/grey_border"
         android:padding="12dp"
+        android:singleLine="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewLastNameSignUp" />
@@ -137,9 +138,10 @@
         android:background="@drawable/grey_border"
         android:drawableStart="@drawable/calendar"
         android:drawablePadding="10dp"
-        android:hint="YYYY/MM/DD"
+        android:hint="@string/date_format"
         android:inputType="text"
         android:padding="12dp"
+        android:singleLine="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewBirthdaySignUp" />

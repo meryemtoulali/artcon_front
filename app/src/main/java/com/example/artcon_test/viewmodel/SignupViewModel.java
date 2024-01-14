@@ -9,7 +9,7 @@ public class SignupViewModel extends ViewModel {
     private String email;
     private String firstName;
     private String lastName;
-    Date birthday;
+    String birthday;
     private String location;
     private String gender;
     private String phonenumber;
@@ -54,11 +54,11 @@ public class SignupViewModel extends ViewModel {
         this.lastName = lastName;
     }
 
-    public Date getBirthday() {
+    public String getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Date birthday) {
+    public void setBirthday(String birthday) {
         this.birthday = birthday;
     }
 

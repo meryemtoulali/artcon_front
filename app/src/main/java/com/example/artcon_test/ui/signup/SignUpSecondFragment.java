@@ -21,7 +21,6 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.artcon_test.R;
 import com.example.artcon_test.model.Location;
 import com.example.artcon_test.network.LocationService;
-import com.example.artcon_test.ui.signup.SignupActivity;
 import com.example.artcon_test.viewmodel.LocationViewModel;
 import com.example.artcon_test.viewmodel.SignupViewModel;
 
@@ -43,6 +42,7 @@ public class SignUpSecondFragment extends Fragment {
     private ArrayAdapter<CharSequence> genderAdapter;
     private ArrayAdapter<String> locationAdapter;
     private List<Location> locations = new ArrayList<>();
+    private String TAG = "Birthdate";
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_signup_second, container, false);
@@ -66,19 +66,16 @@ public class SignUpSecondFragment extends Fragment {
 
         Button signUpButton = view.findViewById(R.id.buttonSignUp);
         signUpButton.setOnClickListener(v -> {
-            // Validate input (add your validation logic)
             if (isValidInput()) {
                 showButtonClickIndicator(signUpButton);
-                // Call the method in the hosting activity to perform sign-up
                 signupViewModel.setFirstName(getFirstName());
                 signupViewModel.setLastName(getLastName());
                 signupViewModel.setGender(getGender());
                 signupViewModel.setPhonenumber(getPhone());
-                signupViewModel.setBirthday(getBirthday());
+                signupViewModel.setBirthday(getFormattedBirthday());
                 signupViewModel.setLocation(getLocation());
                 ((SignupActivity) requireActivity()).performSignUp();
             } else {
-                // Show an error message or handle invalid input
                 Toast.makeText(requireContext(), "Please enter valid information", Toast.LENGTH_SHORT).show();
             }
         });
@@ -156,13 +153,14 @@ public class SignUpSecondFragment extends Fragment {
             return null;
         }
     }
-    public Date getBirthday() {
+    public String getFormattedBirthday() {
         if (birthdayEditText != null) {
             String dateString = birthdayEditText.getText().toString();
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-
+            SimpleDateFormat inputDateFormat = new SimpleDateFormat("yyyy/MM/dd");
+            SimpleDateFormat outputDateFormat = new SimpleDateFormat("yyyy-MM-dd");
             try {
-                return dateFormat.parse(dateString);
+                Date date = inputDateFormat.parse(dateString);
+                return outputDateFormat.format(date);
             } catch (ParseException e) {
                 e.printStackTrace();
             }
@@ -170,11 +168,24 @@ public class SignUpSecondFragment extends Fragment {
         return null;
     }
 
+//    public Date getBirthday() {
+//        if (birthdayEditText != null) {
+//            String dateString = birthdayEditText.getText().toString();
+//            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+//            try {
+//                return dateFormat.parse(dateString);
+//            } catch (ParseException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//        return null;
+//    }
+
     // Method to get the location from the EditText field
     public String getLocation() {
         if (locationSpinner != null) {
             String selectedLocation = locationSpinner.getSelectedItem().toString();
-            if (!selectedLocation.equals(getString(R.string.select_gender_hint))) {
+            if (!selectedLocation.equals(getString(R.string.select_location_hint))) {
                 return selectedLocation;
             } else {
                 return null;

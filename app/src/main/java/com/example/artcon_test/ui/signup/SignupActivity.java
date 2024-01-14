@@ -43,7 +43,7 @@ public class SignupActivity extends AppCompatActivity {
         arrowBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish(); // This will simulate a back button press
+                finish();
             }
         });
 
@@ -68,7 +68,7 @@ public class SignupActivity extends AppCompatActivity {
         String email = signupViewModel.getEmail();
         String firstName = signupViewModel.getFirstName();
         String lastName = signupViewModel.getLastName();
-        Date birthday = signupViewModel.getBirthday();
+        String birthday = signupViewModel.getBirthday();
         String location = signupViewModel.getLocation();
         String gender = signupViewModel.getGender();
         String phonenumber = signupViewModel.getPhonenumber();

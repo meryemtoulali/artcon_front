@@ -6,13 +6,13 @@ public class RegisterRequest {
     private String lastname;
     private String gender;
     private String phonenumber;
-    private Date birthday;
+    private String birthday;
     private String location;
     private String username;
     private String email;
     private String password;
 
-    public RegisterRequest(String firstname, String lastname, String gender, String phonenumber, Date birthday, String location, String username, String email, String password) {
+    public RegisterRequest(String firstname, String lastname, String gender, String phonenumber, String birthday, String location, String username, String email, String password) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.gender = gender;
@@ -59,11 +59,11 @@ public class RegisterRequest {
         this.phonenumber = phonenumber;
     }
 
-    public Date getBirthday() {
+    public String getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Date birthday) {
+    public void setBirthday(String birthday) {
         this.birthday = birthday;
     }
 

@@ -227,15 +227,14 @@ public class AddPostFragment extends Fragment {
         videoPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (ContextCompat.checkSelfPermission(getActivity(), android.Manifest.permission.READ_EXTERNAL_STORAGE)
-                        != PackageManager.PERMISSION_GRANTED) {
-                    Log.d("vedio", "no permission");
-                    // Demander la permission si elle n'est pas accordée
-                    requestPermissions(new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE},
-                            Read_Permission);
-                } else {
+//                if (ContextCompat.checkSelfPermission(getActivity(), android.Manifest.permission.READ_EXTERNAL_STORAGE)
+//                        != PackageManager.PERMISSION_GRANTED) {
+//                    Log.d("vedio", "no permission");
+//                    // Demander la permission si elle n'est pas accordée
+//                    requestPermissions(new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE},
+//                            Read_Permission);
+//                } else {
                     videoChooser();
-                }
                 adjustRecyclerViewHeight();
             }
         });
