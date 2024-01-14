@@ -75,7 +75,11 @@
         <action
             android:id="@+id/action_profile_to_followers"
             app:destination="@id/navigation_followers" />
+        <action
+            android:id="@+id/action_profile_to_following"
+            app:destination="@id/navigation_following" />
     </fragment>
+
 
     <fragment
         android:id="@+id/navigation_followers"
@@ -84,6 +88,16 @@
         tools:layout="@layout/fragment_followers_list" >
         <action
             android:id="@+id/action_followers_to_profile"
+            app:destination="@id/navigation_profile" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_following"
+        android:name="com.example.artcon_test.ui.profile.FollowingListFragment"
+        android:label="@string/following"
+        tools:layout="@layout/fragment_following_list" >
+        <action
+            android:id="@+id/action_following_to_profile"
             app:destination="@id/navigation_profile" />
     </fragment>
 

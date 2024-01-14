@@ -19,14 +19,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.artcon_test.R;
-import com.example.artcon_test.databinding.FragmentFollowersListBinding;
+import com.example.artcon_test.databinding.FragmentFollowingListBinding;
 import com.example.artcon_test.ui.search.PeopleAdapter;
 import com.example.artcon_test.viewmodel.ProfileViewModel;
 
-public class FollowersListFragment extends Fragment implements PeopleAdapter.OnUserItemClickListener {
+public class FollowingListFragment extends Fragment implements PeopleAdapter.OnUserItemClickListener {
     private String TAG = "hatsunemiku";
     private String userId;
-    private FragmentFollowersListBinding binding;
+    private FragmentFollowingListBinding binding;
     private RecyclerView recyclerView;
     private ProfileViewModel profileViewModel;
     private PeopleAdapter adapter;
@@ -49,29 +49,32 @@ public class FollowersListFragment extends Fragment implements PeopleAdapter.OnU
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        binding = FragmentFollowersListBinding.inflate(inflater, container, false);
+        binding = FragmentFollowingListBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
+
         progressBar = binding.progressBar;
-        recyclerView = binding.followersList;
-        loading(true);
+
+        recyclerView = binding.followingList;
+
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         adapter = new PeopleAdapter();
         adapter.setOnUserItemClickListener(this);
-        binding.followersList.setLayoutManager(new LinearLayoutManager(requireContext()));
-        binding.followersList.setAdapter(adapter);
+        binding.followingList.setLayoutManager(new LinearLayoutManager(requireContext()));
+        binding.followingList.setAdapter(adapter);
+        loading(true);
 
-
-        profileViewModel.getFollowersList(userId);
-        profileViewModel.getFollowersListLiveData().observe(getViewLifecycleOwner(), followers -> {
-            adapter.setPeopleList(followers);
-            TextView noFollowers = binding.noFollowers;
-            if (followers.isEmpty()) {
-                noFollowers.setVisibility(View.VISIBLE);
+        profileViewModel.getFollowingList(userId);
+        profileViewModel.getFollowingListLiveData().observe(getViewLifecycleOwner(), following -> {
+            adapter.setPeopleList(following);
+            TextView noFollowing = binding.noFollowing;
+            if (following.isEmpty()) {
+                noFollowing.setVisibility(View.VISIBLE);
             } else {
-                noFollowers.setVisibility(View.GONE);
+                noFollowing.setVisibility(View.GONE);
             }
             loading(false);
+
         });
         return view;
     }
@@ -80,7 +83,7 @@ public class FollowersListFragment extends Fragment implements PeopleAdapter.OnU
     public void onUserItemClick(String userId) {
         Bundle args = new Bundle();
         args.putString("selectedUserId", userId);
-        Navigation.findNavController(requireView()).navigate(R.id.action_followers_to_profile, args);
+        Navigation.findNavController(requireView()).navigate(R.id.action_following_to_profile, args);
     }
 
     @Override
@@ -92,4 +95,5 @@ public class FollowersListFragment extends Fragment implements PeopleAdapter.OnU
     private void loading(boolean isLoading) {
         progressBar.setVisibility(isLoading ? View.VISIBLE : View.INVISIBLE);
     }
+
 }

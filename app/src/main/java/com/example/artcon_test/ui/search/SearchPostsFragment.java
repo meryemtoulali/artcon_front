@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.example.artcon_test.R;
 import com.example.artcon_test.databinding.FragmentSearchPostsBinding;
 import com.example.artcon_test.ui.profile.PostAdapter;
+import com.example.artcon_test.viewmodel.SearchViewModel;
 
 public class SearchPostsFragment extends Fragment {
     private FragmentSearchPostsBinding binding;
@@ -44,7 +45,7 @@ public class SearchPostsFragment extends Fragment {
 
         loading(true);
 
-        searchViewModel.searchPostsLiveData.observe(getViewLifecycleOwner(), posts -> {
+        searchViewModel.getSearchPostsLiveData().observe(getViewLifecycleOwner(), posts -> {
             Log.d(TAG, "setPostsList in Fragment: " + posts.toString());
             postsAdapter.setPostList(posts);
 

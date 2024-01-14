@@ -1,7 +1,6 @@
 package com.example.artcon_test.ui.profile;
 
-import static java.lang.Integer.parseInt;
-
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -14,26 +13,22 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.example.artcon_test.R;
 import com.example.artcon_test.repository.UserRepository;
 import com.example.artcon_test.ui.login.LoginActivity;
-import com.example.artcon_test.ui.portfolioPost.PortfolioPostFragment;
-import com.example.artcon_test.ui.profile.ProfileFragmentAdapter;
-import com.example.artcon_test.R;
 import com.example.artcon_test.viewmodel.LogoutViewModel;
 import com.example.artcon_test.viewmodel.ProfileViewModel;
 import com.google.android.material.tabs.TabLayout;
 import com.squareup.picasso.Picasso;
-import android.content.Context;
-import android.widget.Toast;
 
 
 public class ProfileFragment extends Fragment {
@@ -145,7 +140,7 @@ private Integer followersCount;
             Navigation.findNavController(requireView()).navigate(R.id.action_profile_to_followers, args);
         });
         following.setOnClickListener(v -> {
-            Navigation.findNavController(requireView()).navigate(R.id.action_profile_to_followers, args);
+            Navigation.findNavController(requireView()).navigate(R.id.action_profile_to_following, args);
         });
 
 
@@ -229,7 +224,7 @@ private Integer followersCount;
                 public void onSuccess(Boolean follows) {
                     if (follows) {
                         isFollowing = true;
-                        followButton.setText("Following");
+                        followButton.setText("Unfollow");
                     } else {
                         isFollowing = false;
                         followButton.setText("Follow");

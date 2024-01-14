@@ -138,6 +138,30 @@ public class ProfileViewModel extends ViewModel {
         return followersListLiveData;
     }
 
+    public void getFollowingList(String userId) {
+        userRepository.getFollowingList(userId).enqueue(new Callback<List<User>>() {
+            @Override
+            public void onResponse(Call<List<User>> call, Response<List<User>> response) {
+                if (response.isSuccessful()) {
+                    List<User> followingList = response.body();
+                    followingListLiveData.postValue(followingList);
+                    Log.d(TAG, "Success Response :" + followingList);
+                } else {
+                    Log.d(TAG, "getFollowingList fail");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<User>> call, Throwable t) {
+                Log.d(TAG, "Following List failure :");
+            }
+        });
+    }
+
+    public LiveData<List<User>> getFollowingListLiveData() {
+        return followingListLiveData;
+    }
+
     public LiveData<List<Post>> getPostListLiveData() {
         return postListLiveData;
     }

@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     >
-
     <LinearLayout
         android:id="@+id/topBar"
         android:layout_width="match_parent"
@@ -41,7 +40,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:gravity="center"
-                android:text="@string/followers"
+                android:text="@string/following"
                 android:textSize="24sp"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -66,14 +65,13 @@
     </LinearLayout>
 
     <ScrollView
-        android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/topBar"
         tools:layout_editor_absoluteX="37dp">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/followers_list"
+            android:id="@+id/following_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -85,12 +83,12 @@
     </ScrollView>
 
     <TextView
-        android:id="@+id/noFollowers"
+        android:id="@+id/noFollowing"
         style="@style/Text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
-        android:text="@string/no_followers"
+        android:text="@string/no_following"
         android:textSize="18sp"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
@@ -109,4 +107,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/topBar" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

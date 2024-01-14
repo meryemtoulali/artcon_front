@@ -22,10 +22,11 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
-import com.example.artcon_test.ui.login.LoginActivity;
 import com.example.artcon_test.R;
 import com.example.artcon_test.databinding.FragmentSearchBinding;
+import com.example.artcon_test.ui.login.LoginActivity;
 import com.example.artcon_test.viewmodel.LogoutViewModel;
+import com.example.artcon_test.viewmodel.SearchViewModel;
 
 
 public class SearchFragment extends Fragment{
