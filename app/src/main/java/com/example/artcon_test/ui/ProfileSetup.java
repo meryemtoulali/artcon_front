@@ -1,8 +1,4 @@
-package com.example.artcon_test;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
+package com.example.artcon_test.ui;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,12 +8,15 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+
+import com.example.artcon_test.R;
 import com.example.artcon_test.fragment.setupProfilepicture;
 import com.example.artcon_test.model.UpdateUserViewModel;
 import com.example.artcon_test.network.UserService;
-import com.example.artcon_test.ui.MainNavActivity;
 import com.example.artcon_test.viewmodel.UserViewModel;
-
 
 import java.io.File;
 

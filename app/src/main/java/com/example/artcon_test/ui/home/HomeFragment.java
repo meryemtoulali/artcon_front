@@ -26,6 +26,7 @@ import com.example.artcon_test.R;
 import com.example.artcon_test.databinding.FragmentHomeBinding;
 import com.example.artcon_test.ui.login.LoginActivity;
 import com.example.artcon_test.ui.profile.PostAdapter;
+import com.example.artcon_test.viewmodel.HomeViewModel;
 import com.example.artcon_test.viewmodel.LogoutViewModel;
 
 public class HomeFragment extends Fragment implements PostAdapter.OnUserAreaClickListener {
@@ -34,10 +35,12 @@ public class HomeFragment extends Fragment implements PostAdapter.OnUserAreaClic
     private String userId;
     private FragmentHomeBinding binding;
     private RecyclerView recyclerView;
-    LogoutViewModel logoutViewModel;
     HomeViewModel homeViewModel;
     private PostAdapter postAdapter;
-    
+    private ImageView kebabMenu;
+    private LogoutViewModel logoutViewModel;
+
+
     //On create method
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -58,6 +61,7 @@ public class HomeFragment extends Fragment implements PostAdapter.OnUserAreaClic
         recyclerView = binding.feed;
         ImageView kebabMenu = root.findViewById(R.id.kebab_menu);
 
+        kebabMenu = binding.kebabMenu;
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         postAdapter = new PostAdapter(getContext());
@@ -88,6 +92,7 @@ public class HomeFragment extends Fragment implements PostAdapter.OnUserAreaClic
             });
             popup.show();
         });
+
         return root;
     }
 
@@ -97,6 +102,7 @@ public class HomeFragment extends Fragment implements PostAdapter.OnUserAreaClic
         args.putString("selectedUserId", userId);
         Navigation.findNavController(requireView()).navigate(R.id.action_home_to_profile, args);
     }
+
 
     private void clearUserSession() {
         SharedPreferences preferences = requireContext().getSharedPreferences("AuthPrefs", Context.MODE_PRIVATE);

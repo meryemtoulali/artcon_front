@@ -1,6 +1,8 @@
 package com.example.artcon_test.ui.login;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -8,20 +10,20 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
-import com.example.artcon_test.ui.MainNavActivity;
-import com.example.artcon_test.ui.ForgotPasswordActivity;
 import com.example.artcon_test.R;
-import com.example.artcon_test.ui.signup.SignupActivity;
 import com.example.artcon_test.model.LoginRequest;
-import com.example.artcon_test.network.AuthService;
-import com.example.artcon_test.viewmodel.LoginViewModel;
 import com.example.artcon_test.model.LoginResponse;
-import android.content.Intent;
-import android.graphics.drawable.Drawable;
+import com.example.artcon_test.network.AuthService;
+import com.example.artcon_test.ui.ForgotPasswordActivity;
+import com.example.artcon_test.ui.MainNavActivity;
+import com.example.artcon_test.ui.signup.SignupActivity;
+import com.example.artcon_test.viewmodel.LoginViewModel;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

@@ -24,6 +24,15 @@ public interface UserService {
     Call<User> getUserById(@Path("userId") String userId);
     @GET("user/search")
     Call<List<User>> searchPeopleIgnoreCase(@Query("query") String query);
+
+    @GET("user/{userId}/followers")
+    Call<List<User>> getFollowersList(@Path("userId") String userId);
+
+    @GET("user/{userId}/following")
+    Call<List<User>> getFollowingList(@Path("userId") String userId);
+
+
+
     @GET("user/{userId}/portfolio")
     Call<List<PortfolioPost>> getUserPortfolio(@Path("userId") String userId);
     @POST("user/logout")

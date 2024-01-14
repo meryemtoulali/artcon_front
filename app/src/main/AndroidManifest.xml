@@ -46,7 +46,7 @@
             android:name=".ui.login.LoginActivity"
             android:exported="false"/>
         <activity
-            android:name=".ProfileSetup"
+            android:name=".ui.ProfileSetup"
             android:exported="false" >
 
         </activity>

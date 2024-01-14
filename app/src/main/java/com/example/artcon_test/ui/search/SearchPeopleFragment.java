@@ -12,12 +12,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.artcon_test.R;
 import com.example.artcon_test.databinding.FragmentSearchPeopleBinding;
+import com.example.artcon_test.viewmodel.SearchViewModel;
 
 public class SearchPeopleFragment extends Fragment implements PeopleAdapter.OnUserItemClickListener {
 
@@ -49,7 +49,7 @@ public class SearchPeopleFragment extends Fragment implements PeopleAdapter.OnUs
 
         loading(true);
 
-        searchViewModel.searchPeopleLiveData.observe(getViewLifecycleOwner(), users -> {
+        searchViewModel.getSearchPeopleLiveData().observe(getViewLifecycleOwner(), users -> {
             Log.d(TAG, "setPeopleList in Fragment: " + users.toString());
             peopleAdapter.setPeopleList(users);
 

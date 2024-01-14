@@ -17,6 +17,10 @@ import com.example.artcon_test.repository.UserRepository;
 
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class ProfileViewModel extends ViewModel {
     String TAG = "hatsunemiku";
     private final UserRepository userRepository = new UserRepository();
@@ -30,8 +34,8 @@ public class ProfileViewModel extends ViewModel {
     private MutableLiveData<List<Post>> postListLiveData = new MutableLiveData<>();
     private MutableLiveData<Post> selectedPostLiveData = new MutableLiveData<>();
 
-
-
+    private MutableLiveData<List<User>> followersListLiveData = new MutableLiveData<>();
+    private MutableLiveData<List<User>> followingListLiveData = new MutableLiveData<>();
 
 
     // Method to fetch user data
@@ -108,6 +112,54 @@ public class ProfileViewModel extends ViewModel {
                 Log.e(TAG, errorMessage);
             }
         });
+    }
+
+    public void getFollowersList(String userId) {
+        userRepository.getFollowersList(userId).enqueue(new Callback<List<User>>() {
+            @Override
+            public void onResponse(Call<List<User>> call, Response<List<User>> response) {
+                if (response.isSuccessful()) {
+                    List<User> followersList = response.body();
+                    followersListLiveData.postValue(followersList);
+                    Log.d(TAG, "Success Response :" + followersList);
+                } else {
+                    Log.d(TAG, "getFollowersList fail");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<User>> call, Throwable t) {
+                Log.d(TAG, "Followers List failure :");
+            }
+        });
+    }
+
+    public LiveData<List<User>> getFollowersListLiveData() {
+        return followersListLiveData;
+    }
+
+    public void getFollowingList(String userId) {
+        userRepository.getFollowingList(userId).enqueue(new Callback<List<User>>() {
+            @Override
+            public void onResponse(Call<List<User>> call, Response<List<User>> response) {
+                if (response.isSuccessful()) {
+                    List<User> followingList = response.body();
+                    followingListLiveData.postValue(followingList);
+                    Log.d(TAG, "Success Response :" + followingList);
+                } else {
+                    Log.d(TAG, "getFollowingList fail");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<User>> call, Throwable t) {
+                Log.d(TAG, "Following List failure :");
+            }
+        });
+    }
+
+    public LiveData<List<User>> getFollowingListLiveData() {
+        return followingListLiveData;
     }
 
     public LiveData<List<Post>> getPostListLiveData() {

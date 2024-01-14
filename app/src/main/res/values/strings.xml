@@ -66,5 +66,7 @@
     <string name="follow">Follow</string>
     <string name="followers">Followers</string>
     <string name="following">Following</string>
+    <string name="no_followers">You don\'t have any followers.</string>
+    <string name="no_following">You haven\'t followed anyone yet.</string>
 
 </resources>
