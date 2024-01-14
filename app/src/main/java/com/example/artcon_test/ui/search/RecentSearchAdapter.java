@@ -23,11 +23,15 @@ public class RecentSearchAdapter extends RecyclerView.Adapter<RecentSearchAdapte
     private List<String> recentSearchList;
     private String TAG = "recent";
     private Context context;
-
-    public RecentSearchAdapter(List<String> recentSearchList) {
-            this.recentSearchList = recentSearchList;
-            Log.d(TAG, "RecentSearchAdapter: " + recentSearchList);
-            notifyDataSetChanged();
+    private OnItemClickListener onItemClickListener;
+    public interface OnItemClickListener {
+        void onItemClick(String searchQuery);
+    }
+    public RecentSearchAdapter(List<String> recentSearchList, OnItemClickListener onItemClickListener) {
+        this.recentSearchList = recentSearchList;
+        this.onItemClickListener = onItemClickListener;
+        Log.d(TAG, "RecentSearchAdapter: " + recentSearchList);
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -41,25 +45,29 @@ public class RecentSearchAdapter extends RecyclerView.Adapter<RecentSearchAdapte
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-            String recentSearch = recentSearchList.get(position);
-            holder.recentSearchItem.setText(recentSearch);
+        String recentSearch = recentSearchList.get(position);
+        holder.recentSearchItem.setText(recentSearch);
+        holder.recentSearchItem.setOnClickListener(v -> {
+            if (onItemClickListener != null) {
+                onItemClickListener.onItemClick(recentSearch);
+            }
+        });
+        holder.recentSearchItem.setOnTouchListener((v, event) -> {
+            final int DRAWABLE_RIGHT = 2;
+            final int TOUCH_AREA_PADDING = 20;
+            if (event.getAction() == MotionEvent.ACTION_UP) {
+                int drawableRight = holder.recentSearchItem.getRight();
+                int drawableWidth = holder.recentSearchItem.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width();
+                int touchAreaEnd = drawableRight + TOUCH_AREA_PADDING;
 
-            holder.recentSearchItem.setOnTouchListener((v, event) -> {
-                final int DRAWABLE_RIGHT = 2;
-                final int TOUCH_AREA_PADDING = 20;
-                if (event.getAction() == MotionEvent.ACTION_UP) {
-                    int drawableRight = holder.recentSearchItem.getRight();
-                    int drawableWidth = holder.recentSearchItem.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width();
-                    int touchAreaEnd = drawableRight + TOUCH_AREA_PADDING;
-
-                    if (event.getRawX() >= (drawableRight - drawableWidth - TOUCH_AREA_PADDING) && event.getRawX() <= touchAreaEnd) {
-                        removeItem(position);
-                        return true;
-                    }
-                    return false;
+                if (event.getRawX() >= (drawableRight - drawableWidth - TOUCH_AREA_PADDING) && event.getRawX() <= touchAreaEnd) {
+                    removeItem(position);
+                    return true;
                 }
                 return false;
-            });
+            }
+            return false;
+        });
     }
 
     private void removeItem(int position) {

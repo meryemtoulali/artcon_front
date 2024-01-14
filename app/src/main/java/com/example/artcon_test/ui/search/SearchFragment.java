@@ -187,8 +187,8 @@ public class SearchFragment extends Fragment{
         String searchQuery = editTextSearch.getText().toString().trim();
         Log.d(TAG,"HandleSearchIconTouch " + searchQuery);
         if (!searchQuery.isEmpty()) {
-            binding.buttonSearchPeople.performClick();
             saveRecentSearch(searchQuery);
+            binding.buttonSearchPeople.performClick();
         } else {
             Toast.makeText(requireContext(), "Please enter a search query", Toast.LENGTH_SHORT).show();
             Log.d(TAG,"searchTypeError");
