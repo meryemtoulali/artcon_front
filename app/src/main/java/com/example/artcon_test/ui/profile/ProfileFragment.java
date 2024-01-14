@@ -1,5 +1,7 @@
 package com.example.artcon_test.ui.profile;
 
+import static java.lang.Integer.parseInt;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -8,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
@@ -19,6 +22,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.example.artcon_test.repository.UserRepository;
 import com.example.artcon_test.ui.login.LoginActivity;
 import com.example.artcon_test.ui.portfolioPost.PortfolioPostFragment;
 import com.example.artcon_test.ui.profile.ProfileFragmentAdapter;
@@ -35,21 +39,30 @@ public class ProfileFragment extends Fragment {
 
 //    private FragmentProfileBinding binding;
     private ViewPager2 viewPager2;
+    private boolean isFollowing;
 
     private boolean isArtist;
     private String USER_ID;
+    private String selectedUserId;
+
     private ProfileViewModel profileViewModel;
 
     private TabLayout tabLayout;
     private ProfileFragmentAdapter adapter;
     private LogoutViewModel logoutViewModel;
-
-
+    private Button followButton;
+    private TextView followers;
+private Integer followersCount;
 
     String TAG = "hatsunemiku";
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_profile, container, false);
+        Bundle args = getArguments();
+
+        if (args != null) {
+            selectedUserId = args.getString("selectedUserId");
+        }
         logoutViewModel = new ViewModelProvider(this).get(LogoutViewModel.class);
 
         ImageView pfpImageView = view.findViewById(R.id.pfpImage);
@@ -57,27 +70,31 @@ public class ProfileFragment extends Fragment {
         TextView fullname = view.findViewById(R.id.fullname);
         TextView username = view.findViewById(R.id.username);
         TextView title = view.findViewById(R.id.title);
-        TextView followers = view.findViewById(R.id.followers);
+        followers = view.findViewById(R.id.followers);
         TextView following = view.findViewById(R.id.following);
         ImageView kebabMenu = view.findViewById(R.id.kebab_menu);
+        followButton = view.findViewById(R.id.followButton);
 
-        Picasso.get().setLoggingEnabled(true);
+        profileViewModel = new ViewModelProvider(this).get(ProfileViewModel.class);
 
         SharedPreferences preferences = requireActivity().getSharedPreferences("AuthPrefs", Context.MODE_PRIVATE);
 
         USER_ID = preferences.getString("userId", null);
+        if(selectedUserId != null){
+            followButton.setVisibility(View.VISIBLE);
+            profileViewModel.getUserById(selectedUserId);
+            setupFollowButton();
 
+        } else {
+            followButton.setVisibility(View.GONE);
+            profileViewModel.getUserById(USER_ID);
+        }
 
-        profileViewModel = new ViewModelProvider(this).get(ProfileViewModel.class);
-        Log.d(TAG, "viewModel created: " + profileViewModel);
-        // Call getUserById to fetch user data
-        profileViewModel.getUserById(USER_ID);
-
+        Picasso.get().setLoggingEnabled(true);
 
         // Observe the user data
         profileViewModel.getUserLiveData().observe(getViewLifecycleOwner(), user -> {
             isArtist = "artist".equals(user.getType());
-            Log.d(TAG, "isArtist:" + isArtist);
 
             if (user != null) {
                 // Update UI with user data
@@ -98,6 +115,7 @@ public class ProfileFragment extends Fragment {
                     // If the user's title is empty, hide the TextView
                     title.setVisibility(View.GONE);
                 }
+                followersCount = user.getFollowersCount();
                 following.setText(String.valueOf(user.getFollowingCount()) + " Following");
                 followers.setText(String.valueOf(user.getFollowersCount()) + " Followers");
 
@@ -137,7 +155,6 @@ public class ProfileFragment extends Fragment {
     }
 
     private void updateTabLayout(boolean isArtist) {
-        Log.d(TAG, "isArtist in tab logic:" + isArtist);
 
         tabLayout = getView().findViewById(R.id.tabLayout);
         viewPager2 = getView().findViewById(R.id.viewPager);
@@ -153,14 +170,19 @@ public class ProfileFragment extends Fragment {
         tabLayout.setTabMode(TabLayout.MODE_FIXED);
 
         FragmentManager fragmentManager = getChildFragmentManager();
-        adapter = new ProfileFragmentAdapter(fragmentManager, getLifecycle(), USER_ID, isArtist);
+        if(selectedUserId != null) {
+            adapter = new ProfileFragmentAdapter(fragmentManager, getLifecycle(), selectedUserId, isArtist);
+
+        } else {
+            adapter = new ProfileFragmentAdapter(fragmentManager, getLifecycle(), USER_ID, isArtist);
+
+        }
         viewPager2.setAdapter(adapter);
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager2.setCurrentItem(tab.getPosition());
-                Log.d(TAG, "selected tab position:" + tab.getPosition());
             }
 
             @Override
@@ -176,6 +198,74 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onPageSelected(int position) {
                 tabLayout.selectTab(tabLayout.getTabAt(position));
+            }
+        });
+    }
+
+    private void setupFollowButton() {
+        observeFollowStatus();
+
+        followButton.setOnClickListener(v -> {
+            if (isFollowing) {
+                unfollowUser(USER_ID, selectedUserId);
+            } else {
+                followUser(USER_ID, selectedUserId);
+            }
+        });
+    }
+
+    private void observeFollowStatus() {
+            profileViewModel.isFollowing(USER_ID, selectedUserId, new UserRepository.FollowCheckCallback() {
+                @Override
+                public void onSuccess(Boolean follows) {
+                    if (follows) {
+                        isFollowing = true;
+                        followButton.setText("Following");
+                    } else {
+                        isFollowing = false;
+                        followButton.setText("Follow");
+                    }
+                }
+
+                @Override
+                public void onError(String errorMessage) {
+                    // Handle error if needed
+                    Log.e(TAG, errorMessage);
+                }
+            });
+    }
+
+    private void followUser(String currentUserId, String selectedUserId) {
+        profileViewModel.followUser(currentUserId, selectedUserId, new UserRepository.FollowCallback() {
+            @Override
+            public void onSuccess() {
+                isFollowing = true;
+                followButton.setText("Unfollow");
+                Log.d(TAG, "follow successful");
+                followersCount = followersCount + 1;
+                followers.setText(String.valueOf(followersCount) + " Followers");
+            }
+
+            @Override
+            public void onError(String errorMessage) {
+                Log.e(TAG, errorMessage);
+            }
+        });
+    }
+
+    private void unfollowUser(String currentUserId, String selectedUserId) {
+        profileViewModel.unfollowUser(currentUserId, selectedUserId, new UserRepository.FollowCallback() {
+            @Override
+            public void onSuccess() {
+                isFollowing = false;
+                followButton.setText("Follow");
+                followersCount = followersCount - 1;
+                followers.setText(String.valueOf(followersCount) + " Following");
+            }
+
+            @Override
+            public void onError(String errorMessage) {
+                Log.e(TAG, errorMessage);
             }
         });
     }

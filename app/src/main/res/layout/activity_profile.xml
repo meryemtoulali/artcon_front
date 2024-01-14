@@ -41,6 +41,19 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 
+    <Button
+        android:id="@+id/followButton"
+        style="@style/FollowButton"
+        android:layout_width="wrap_content"
+        android:layout_height="38dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="25dp"
+        android:textSize="14sp"
+        android:text="@string/follow"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/pfpImage"
         android:layout_width="110dp"
@@ -113,7 +126,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="5dp"
                 android:layout_weight="1"
-                android:text="0 Followers"
+                android:text="@string/followers"
                 android:textAlignment="center"
                 android:textColor="@color/greyDark"
                 android:textSize="16sp" />
@@ -125,7 +138,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="5dp"
                 android:layout_weight="1"
-                android:text="0 Following"
+                android:text="@string/following"
                 android:textAlignment="center"
                 android:textColor="@color/greyDark"
                 android:textSize="16sp" />

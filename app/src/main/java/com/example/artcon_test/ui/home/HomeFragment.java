@@ -19,6 +19,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -36,8 +37,8 @@ public class HomeFragment extends Fragment {
     private RecyclerView recyclerView;
     LogoutViewModel logoutViewModel;
     HomeViewModel homeViewModel;
-    private ProfilePostRecyclerAdapter postRecyclerAdapter;
-
+    private PostAdapter postAdapter;
+    
     //On create method
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -77,16 +78,25 @@ public class HomeFragment extends Fragment {
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
-        postRecyclerAdapter = new ProfilePostRecyclerAdapter(getContext());
-        recyclerView.setAdapter(postRecyclerAdapter);
+        postAdapter = new PostAdapter(getContext());
+        postAdapter.setOnUserAreaClickListener(this);
+
+        recyclerView.setAdapter(postAdapter);
         Log.d(TAG, "created view recycler: " + recyclerView.toString());
         homeViewModel.getHome(userId);
         homeViewModel.getHomeLiveData().observe(getViewLifecycleOwner(), postList -> {
             // Update recycler adapter with post list data
-            postRecyclerAdapter.setPostList(postList);
-            postRecyclerAdapter.notifyDataSetChanged();
+            postAdapter.setPostList(postList);
+            postAdapter.notifyDataSetChanged();
         });
         return root;
+    }
+
+    @Override
+    public void onUserAreaClick(String userId) {
+        Bundle args = new Bundle();
+        args.putString("selectedUserId", userId);
+        Navigation.findNavController(requireView()).navigate(R.id.action_home_to_profile, args);
     }
 
     private void clearUserSession() {

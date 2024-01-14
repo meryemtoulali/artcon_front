@@ -43,11 +43,6 @@ public class PostRepository {
                         Log.d(TAG, "received posts:" + response.body());
                         for (Post post : posts) {
                             List<MediaItem> mediaFiles = post.getMediaFiles();
-                            if (mediaFiles != null && !mediaFiles.isEmpty()) {
-                                Log.d(TAG, "MediaFiles for post " + post.getId() + ": " + mediaFiles);
-                            } else {
-                                Log.d(TAG, "No MediaFiles for post " + post.getId());
-                            }
                         }
                     }
 

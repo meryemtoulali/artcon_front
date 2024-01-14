@@ -20,7 +20,7 @@ public class ProfilePostsFragment extends Fragment {
     private static final String ARG_USER_ID = "userId";
     private ProfileViewModel profileViewModel;
     private String userId;
-    private ProfilePostRecyclerAdapter postRecyclerAdapter;
+    private PostAdapter postAdapter;
 
 
     public ProfilePostsFragment() {
@@ -55,15 +55,15 @@ public class ProfilePostsFragment extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
 
-        postRecyclerAdapter = new ProfilePostRecyclerAdapter(getContext());
-        recyclerView.setAdapter(postRecyclerAdapter);
+        postAdapter = new PostAdapter(getContext());
+        recyclerView.setAdapter(postAdapter);
         Log.d(TAG, "created view recycler: " + recyclerView.toString());
 
         profileViewModel.getPostList(userId);
         profileViewModel.getPostListLiveData().observe(getViewLifecycleOwner(), postList -> {
             // Update recycler adapter with post list data
-                postRecyclerAdapter.setPostList(postList);
-                postRecyclerAdapter.notifyDataSetChanged();
+                postAdapter.setPostList(postList);
+                postAdapter.notifyDataSetChanged();
             });
         return view;
     }

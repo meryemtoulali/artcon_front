@@ -47,7 +47,7 @@ public class LoginActivity extends AppCompatActivity {
             LoginRequest loginRequest = new LoginRequest(username,password);
 
             if(!username.isEmpty() && !password.isEmpty()){
-                showButtonClickIndicator(loginButton);
+//                showButtonClickIndicator(loginButton);
 
                 Call<LoginResponse> call = authService.login(loginRequest);
                 Log.d(TAG,call.toString());

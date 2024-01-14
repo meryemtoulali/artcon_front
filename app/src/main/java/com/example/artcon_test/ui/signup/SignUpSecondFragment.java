@@ -67,7 +67,7 @@ public class SignUpSecondFragment extends Fragment {
         Button signUpButton = view.findViewById(R.id.buttonSignUp);
         signUpButton.setOnClickListener(v -> {
             if (isValidInput()) {
-                showButtonClickIndicator(signUpButton);
+//                showButtonClickIndicator(signUpButton);
                 signupViewModel.setFirstName(getFirstName());
                 signupViewModel.setLastName(getLastName());
                 signupViewModel.setGender(getGender());
@@ -167,19 +167,6 @@ public class SignUpSecondFragment extends Fragment {
         }
         return null;
     }
-
-//    public Date getBirthday() {
-//        if (birthdayEditText != null) {
-//            String dateString = birthdayEditText.getText().toString();
-//            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-//            try {
-//                return dateFormat.parse(dateString);
-//            } catch (ParseException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//        return null;
-//    }
 
     // Method to get the location from the EditText field
     public String getLocation() {
