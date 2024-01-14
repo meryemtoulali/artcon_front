@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -26,10 +25,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.artcon_test.R;
 import com.example.artcon_test.databinding.FragmentHomeBinding;
 import com.example.artcon_test.ui.login.LoginActivity;
-import com.example.artcon_test.ui.profile.ProfilePostRecyclerAdapter;
+import com.example.artcon_test.ui.profile.PostAdapter;
+import com.example.artcon_test.ui.search.PeopleAdapter;
 import com.example.artcon_test.viewmodel.LogoutViewModel;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements PostAdapter.OnUserAreaClickListener {
 
     private String TAG = "HOME FRAGMENT";
     private String userId;
@@ -59,6 +59,20 @@ public class HomeFragment extends Fragment {
         recyclerView = binding.feed;
         ImageView kebabMenu = root.findViewById(R.id.kebab_menu);
 
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(layoutManager);
+        postAdapter = new PostAdapter(getContext());
+        postAdapter.setOnUserAreaClickListener(this);
+
+        recyclerView.setAdapter(postAdapter);
+        Log.d(TAG, "created view recycler: " + recyclerView.toString());
+        homeViewModel.getHome(userId);
+        homeViewModel.getHomeLiveData().observe(getViewLifecycleOwner(), postList -> {
+            // Update recycler adapter with post list data
+            postAdapter.setPostList(postList);
+            postAdapter.notifyDataSetChanged();
+        });
+
         kebabMenu.setOnClickListener(v -> {
             PopupMenu popup = new PopupMenu(requireContext(), v);
             popup.getMenuInflater().inflate(R.menu.kebab_menu, popup.getMenu());
@@ -74,20 +88,6 @@ public class HomeFragment extends Fragment {
                 return false;
             });
             popup.show();
-        });
-
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-        recyclerView.setLayoutManager(layoutManager);
-        postAdapter = new PostAdapter(getContext());
-        postAdapter.setOnUserAreaClickListener(this);
-
-        recyclerView.setAdapter(postAdapter);
-        Log.d(TAG, "created view recycler: " + recyclerView.toString());
-        homeViewModel.getHome(userId);
-        homeViewModel.getHomeLiveData().observe(getViewLifecycleOwner(), postList -> {
-            // Update recycler adapter with post list data
-            postAdapter.setPostList(postList);
-            postAdapter.notifyDataSetChanged();
         });
         return root;
     }
