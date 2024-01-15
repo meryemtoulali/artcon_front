@@ -9,7 +9,15 @@ public class PortfolioPost {
     private String caption;
     private String media;
     private User user;
+    private Integer likes;
 
+    public Integer getLikes() {
+        return likes;
+    }
+
+    public void setLikes(Integer likes) {
+        this.likes = likes;
+    }
 
     public PortfolioPost() {
     }
