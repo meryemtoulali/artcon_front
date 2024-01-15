@@ -3,12 +3,16 @@ package com.example.artcon_test.fragment;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 import com.example.artcon_test.R;
+import com.example.artcon_test.model.UpdateUserViewModel;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,6 +29,7 @@ public class accounttype_notartist extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    UpdateUserViewModel user;
 
     public accounttype_notartist() {
         // Required empty public constructor
@@ -61,6 +66,23 @@ public class accounttype_notartist extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_accounttype_notartist, container, false);
+        View view = inflater.inflate(R.layout.fragment_accounttype_notartist, container, false);
+        user = new ViewModelProvider(requireActivity()).get(UpdateUserViewModel.class);
+        RadioGroup radioGroup = view.findViewById(R.id.radioGroup);
+        RadioButton radioButton1 = view.findViewById(R.id.radioButton1);
+        RadioButton radioButton2 = view.findViewById(R.id.radioButton2);
+
+        int selectedRadioButtonId = radioGroup.getCheckedRadioButtonId();
+
+        if (selectedRadioButtonId != -1){
+
+            if(selectedRadioButtonId == R.id.radioButton1){
+                user.setTitle("Organizer");
+            }
+            else {
+                user.setTitle("");
+            }
+        }
+        return view;
     }
 }

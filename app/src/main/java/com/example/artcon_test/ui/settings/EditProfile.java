@@ -157,12 +157,8 @@ public class EditProfile extends Fragment {
                 if (user.getBio() != null){
                     bioEditText.setText(user.getBio());
                 }
-                if (!TextUtils.isEmpty(user.getTitle())) {
-                    titleEditText.setVisibility(View.VISIBLE);
+                if (user.getTitle() != null){
                     titleEditText.setText(user.getTitle());
-                } else {
-                    // If the userViewModel's title is empty, hide the TextView
-                    titleEditText.setVisibility(View.GONE);
                 }
                 phonenumberEditText.setText(user.getPhoneNumber());
             }
