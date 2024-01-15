@@ -48,6 +48,7 @@
         <activity
             android:name=".ui.OnBoardingActivity"
             android:exported="true">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -76,6 +77,11 @@
             </intent-filter>
         </service>
 
+        <activity
+            android:name=".ui.ProfileSetup"
+            android:exported="false" >
+
+        </activity>
     </application>
 
 </manifest>

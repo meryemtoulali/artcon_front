@@ -6,9 +6,12 @@
 
     <TextView
         android:id="@+id/interest_text"
+        style="@style/Text"
         android:layout_width="wrap_content"
-        android:layout_height="39dp"
-        android:layout_margin="10sp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:textSize="12sp"
+        android:padding="3dp"
         android:background="@drawable/interest_not_selected"
         android:gravity="center"
         android:text="@string/photography"

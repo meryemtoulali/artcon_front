@@ -22,18 +22,26 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
-import com.example.artcon_test.ui.login.LoginActivity;
 import com.example.artcon_test.R;
 import com.example.artcon_test.databinding.FragmentSearchBinding;
+import com.example.artcon_test.ui.login.LoginActivity;
 import com.example.artcon_test.viewmodel.LogoutViewModel;
+import com.example.artcon_test.viewmodel.SearchViewModel;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
 
 
 public class SearchFragment extends Fragment{
 
+    private static final int MAX_RECENT_SEARCHES = 8;
     private FragmentSearchBinding binding;
     private Button lastSelectedButton;
     private LogoutViewModel logoutViewModel;
     private SearchViewModel searchViewModel;
+    private RecentSearchFragment recentSearchFragment;
     String TAG = "AllTooWell";
 
 
@@ -53,6 +61,7 @@ public class SearchFragment extends Fragment{
         EditText editTextSearch = root.findViewById(R.id.editTextSearch);
         ImageView kebabMenu = root.findViewById(R.id.kebab_menu);
 
+        replaceFragment(new RecentSearchFragment());
 
         // works
         editTextSearch.setOnTouchListener((v, event) -> {
@@ -127,7 +136,6 @@ public class SearchFragment extends Fragment{
         requireActivity().finish();
     }
 
-
     // works
     private void handleSearchButtonClick(String searchType) {
         String searchQuery = binding.editTextSearch.getText().toString().trim();
@@ -179,6 +187,7 @@ public class SearchFragment extends Fragment{
         String searchQuery = editTextSearch.getText().toString().trim();
         Log.d(TAG,"HandleSearchIconTouch " + searchQuery);
         if (!searchQuery.isEmpty()) {
+            saveRecentSearch(searchQuery);
             binding.buttonSearchPeople.performClick();
         } else {
             Toast.makeText(requireContext(), "Please enter a search query", Toast.LENGTH_SHORT).show();
@@ -205,6 +214,25 @@ public class SearchFragment extends Fragment{
                 .beginTransaction()
                 .replace(R.id.fragmentContainerSearch, fragment)
                 .commit();
+    }
+
+    @SuppressLint("MutatingSharedPrefs")
+    private void saveRecentSearch(String searchQuery) {
+        SharedPreferences preferences = requireContext().getSharedPreferences("SearchHistory", Context.MODE_PRIVATE);
+        Set<String> recentSearches = preferences.getStringSet("SearchHistory", new HashSet<>());
+
+        Log.d(TAG, "saveRecentSearch: " +recentSearches);
+        recentSearches.add(searchQuery);
+        Log.d(TAG, "saveRecentSearch: " +recentSearches);
+
+        if (recentSearches.size() > MAX_RECENT_SEARCHES) {
+            Iterator<String> iterator = recentSearches.iterator();
+            iterator.next();
+            iterator.remove();
+        }
+
+        preferences.edit().putStringSet("SearchHistory", recentSearches).apply();
+        Log.d(TAG, "saveRecentSearch: " + recentSearches);
     }
 
     @Override

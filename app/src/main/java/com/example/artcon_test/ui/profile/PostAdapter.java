@@ -1,8 +1,16 @@
 package com.example.artcon_test.ui.profile;
 
-
+import static android.app.PendingIntent.getActivity;
 import static android.view.View.GONE;
 
+import static androidx.test.platform.app.InstrumentationRegistry.getArguments;
+import android.os.Bundle;
+import static com.example.artcon_test.ui.post.PostFragment.ARG_POST_ID;
+
+import androidx.fragment.app.FragmentManager;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import com.example.artcon_test.ui.post.ViewPostFragment;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
@@ -13,14 +21,9 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -33,7 +36,6 @@ import com.example.artcon_test.model.User;
 import com.example.artcon_test.network.PostService;
 import com.example.artcon_test.retrofit.RetrofitService;
 import com.example.artcon_test.ui.post.MediaAdapter;
-import com.example.artcon_test.ui.post.PostFragment;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -42,21 +44,19 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ProfilePostRecyclerAdapter extends RecyclerView.Adapter<ProfilePostRecyclerAdapter.PostViewHolder> {
+public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder> {
     private List<Post> postList;
     private FrameLayout postContainer;
-    private Context context;
 
 
     public List<Post> getPostList() {
         return postList;
     }
-    private static String TAG = "hatsunemiku";
-    private SharedPreferences sharedPreferences;
+    private final SharedPreferences sharedPreferences;
 
+    private FragmentManager fragmentManager;
 
-    public ProfilePostRecyclerAdapter(Context context) {
-        this.context = context;
+    public PostAdapter(Context context) {
         this.sharedPreferences = context.getSharedPreferences("AuthPrefs", Context.MODE_PRIVATE);
     }
     public void setPostList(List<Post> postList) {
@@ -72,7 +72,30 @@ public class ProfilePostRecyclerAdapter extends RecyclerView.Adapter<ProfilePost
     @Override
     public void onBindViewHolder(@NonNull PostViewHolder holder, int position) {
         holder.bind(postList.get(position));
+        holder.itemView.findViewById(R.id.userArea).setOnClickListener(v -> {
+            String selectedUserId = postList.get(position).getUser().getId().toString();
+            onUserAreaClick(selectedUserId);
+        });
+
     }
+
+    public interface OnUserAreaClickListener {
+        void onUserAreaClick(String userId);
+    }
+
+    private OnUserAreaClickListener userAreaClickListener;
+    // Setter for the listener
+    public void setOnUserAreaClickListener(OnUserAreaClickListener listener) {
+        this.userAreaClickListener = listener;
+    }
+
+    // Method to handle item click and pass the user ID
+    private void onUserAreaClick(String userId) {
+        if (userAreaClickListener != null) {
+            userAreaClickListener.onUserAreaClick(userId);
+        }
+    }
+
 
     @Override
     public int getItemCount() {
@@ -82,18 +105,20 @@ public class ProfilePostRecyclerAdapter extends RecyclerView.Adapter<ProfilePost
 
     public class PostViewHolder extends RecyclerView.ViewHolder {
         // Declare your views here
+        private Integer postIdCurrent;
         private final View itemView;
         private final TextView fullName;
         private final TextView userName;
         private final ImageView profilePic;
         private final TextView desc;
         private final TextView likes;
+        private TextView commentCount;
         private final ViewPager2 viewPager2;
         private final ImageButton likeButton;
         private final CardView cardView;
         private MediaAdapter mediaAdapter;
         boolean checkIfLiked = false;
-
+        private ImageButton commentButton;
 
         public PostViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -103,13 +128,16 @@ public class ProfilePostRecyclerAdapter extends RecyclerView.Adapter<ProfilePost
             profilePic = itemView.findViewById(R.id.profileImage);
             desc = itemView.findViewById(R.id.postTextArea);
             likes = itemView.findViewById(R.id.likeCount);
+            commentCount = itemView.findViewById(R.id.commentCount);
             viewPager2 = itemView.findViewById(R.id.mediaViewPager);
             likeButton = itemView.findViewById(R.id.likeButton);
+            commentButton = itemView.findViewById(R.id.commentButton);
             cardView = itemView.findViewById(R.id.postImageCardView);
         }
 
         public void bind(Post post) {
             // Populate views with data from the Post object
+
             User postUser = post.getUser();
             String postFirstname = postUser.getFirstname();
             String postLastname = postUser.getLastname();
@@ -119,6 +147,8 @@ public class ProfilePostRecyclerAdapter extends RecyclerView.Adapter<ProfilePost
             List<MediaItem> mediaFiles = post.getMediaFiles();
             String postDesc = post.getDescription();
             Integer postLikes = post.getLikes();
+            Integer postIdCurrent = post.getId();
+            Integer postComments = post.getComments_count();
             // fill view with data
             fullName.setText(postFirstname +" "+ postLastname);
             String postAtUsername = "@"+ postUsername;
@@ -138,6 +168,7 @@ public class ProfilePostRecyclerAdapter extends RecyclerView.Adapter<ProfilePost
 
             desc.setText(postDesc);
             likes.setText(String.valueOf(post.getLikes()));
+            commentCount.setText(String.valueOf(postComments));
 
             // Set up the ViewPager2 with media files
 
@@ -292,9 +323,33 @@ public class ProfilePostRecyclerAdapter extends RecyclerView.Adapter<ProfilePost
                 }
             });
 
+            //onClick comment
+            commentButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.d("comment", "click");
+                    Log.d("comment", "about to navigate");
+
+                    Bundle result = new Bundle();
+                    result.putString("postId", String.valueOf(postIdCurrent));
+                    NavController navController = Navigation.findNavController(itemView);
+                    navController.navigate(R.id.action_global_navigation_view_post, result);
+
+
+                    //NavController navController = Navigation.findNavController(itemView);
+                    //navController.navigate(R.id.action_global_navigation_view_post);
+
+                    /*
+                    getParentFragmentManager().beginTransaction()
+                            .replace(R.id.fragment_container, viewPostFragment)
+                            .addToBackStack(null)
+                            .commit();*/
+                }
+
+            });
+
         }
 
     }
-
 
 }

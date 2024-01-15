@@ -48,7 +48,7 @@
         <item name="backgroundTint">@null</item>
         <item name="android:textColor">@color/whiteBase</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:stateListAnimator">@null</item>
+        <item name="android:stateListAnimator">@animator/button_press_animator</item>
     </style>
 
     <style name="ContinueButton" parent="Base.Theme.ArtCon_test" >
@@ -56,7 +56,7 @@
         <item name="backgroundTint">@null</item>
         <item name="android:textColor">@color/whiteBase</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:stateListAnimator">@null</item>
+        <item name="android:stateListAnimator">@animator/button_press_animator</item>
     </style>
 
     <style name="SelectedButton" parent="Base.Theme.ArtCon_test" >
@@ -72,7 +72,15 @@
         <item name="backgroundTint">@null</item>
         <item name="android:textColor">@color/blackBase</item>
         <item name="android:textStyle">normal</item>
-        <item name="android:stateListAnimator">@null</item>
+        <item name="android:stateListAnimator">@animator/button_press_animator</item>
+    </style>
+
+    <style name="FollowButton" parent="Base.Theme.ArtCon_test" >
+        <item name="android:background">@drawable/follow_button_background</item>
+        <item name="backgroundTint">@null</item>
+        <item name="android:textColor">@color/blackBase</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:stateListAnimator">@animator/button_press_animator</item>
     </style>
 
     <style name="circleImageView" parent="">

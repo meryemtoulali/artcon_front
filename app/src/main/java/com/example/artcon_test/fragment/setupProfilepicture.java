@@ -20,15 +20,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import com.example.artcon_test.ProfileSetup;
+import com.example.artcon_test.ui.ProfileSetup;
 import com.example.artcon_test.R;
 import com.example.artcon_test.model.UpdateUserViewModel;
 
 import java.io.File;
-
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
 
 /**
  * A simple {@link Fragment} subclass.

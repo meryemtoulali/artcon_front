@@ -1,5 +1,6 @@
 package com.example.artcon_test.ui.login;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -10,14 +11,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
-import com.example.artcon_test.ui.MainNavActivity;
-import com.example.artcon_test.ui.ForgotPasswordActivity;
 import com.example.artcon_test.R;
-import com.example.artcon_test.ui.signup.SignupActivity;
 import com.example.artcon_test.model.LoginRequest;
 import com.example.artcon_test.network.AuthService;
 import com.example.artcon_test.utilities.Constants;
@@ -30,6 +29,12 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 
 import android.content.Intent;
+import com.example.artcon_test.model.LoginResponse;
+import com.example.artcon_test.network.AuthService;
+import com.example.artcon_test.ui.ForgotPasswordActivity;
+import com.example.artcon_test.ui.MainNavActivity;
+import com.example.artcon_test.ui.signup.SignupActivity;
+import com.example.artcon_test.viewmodel.LoginViewModel;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -66,8 +71,10 @@ public class LoginActivity extends AppCompatActivity {
             String password = passwordEditText.getText().toString().trim();
             LoginRequest loginRequest = new LoginRequest(username, password);
 
-            if (!username.isEmpty() && !password.isEmpty()) {
-                showButtonClickIndicator(loginButton);
+//            if (!username.isEmpty() && !password.isEmpty()) {
+//                showButtonClickIndicator(loginButton);
+            if(!username.isEmpty() && !password.isEmpty()){
+//                showButtonClickIndicator(loginButton);
 
                 Call<LoginResponse> call = authService.login(loginRequest);
                 Log.d(TAG, call.toString());

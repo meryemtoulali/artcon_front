@@ -6,15 +6,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.VideoView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.artcon_test.R;
 import com.example.artcon_test.model.MediaItem;
-
-import android.widget.ImageView;
-import android.widget.VideoView;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -46,13 +46,17 @@ public class MediaAdapter extends RecyclerView.Adapter<MediaAdapter.ViewHolder> 
             if (url.contains(searchImg)) {
                 System.out.println("The img contains the string: " + searchImg);
                 foundImage = true;
-                // If you want to stop the loop after finding the first match, you can break here:
+                //  u can break
                 Log.d("media found", "ok image ");
 
                 // Display image
                 holder.imageView.setVisibility(View.VISIBLE);
                 holder.videoView.setVisibility(View.GONE);
-                holder.imageView.setImageURI(Uri.parse(mediaItem.getMediafile_url()));
+                //holder.imageView.setImageURI(Uri.parse(mediaItem.getMediafile_url()));
+                Picasso.get()
+                        .load(mediaItem.getMediafile_url())
+                        .placeholder(R.drawable.picasso_placeholder)
+                        .into(holder.imageView);
                 break;
             } else {
                 System.out.println("The img does not contain the string: " + searchImg);

@@ -94,16 +94,18 @@
 
     <TextView
         android:id="@+id/likeCount"
+        style="@style/Text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:layout_marginTop="2dp"
-        android:text="100 likes"
+        android:text="0 likes"
         app:layout_constraintStart_toEndOf="@+id/likeButton"
         app:layout_constraintTop_toTopOf="@+id/likeButton" />
 
     <TextView
         android:id="@+id/portfolioTitle"
+        style="@style/Text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
@@ -121,6 +123,7 @@
 
     <TextView
         android:id="@+id/portfolioDescription"
+        style="@style/Text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"

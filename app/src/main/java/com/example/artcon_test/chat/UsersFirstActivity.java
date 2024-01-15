@@ -101,6 +101,7 @@ public class UsersFirstActivity extends BasicActivity implements ConversionListe
             conversations.clear();  // Clear the list before adding new items
             for (DocumentChange documentChange : value.getDocumentChanges()) {
                 if (documentChange.getType() == DocumentChange.Type.ADDED) {
+
                     // Inside the eventListener, for Type.ADDED
                     String senderId = documentChange.getDocument().getString(Constants.KEY_SENDER_ID);
                     String receiverId = documentChange.getDocument().getString(Constants.KEY_RECEIVER_ID);
@@ -227,6 +228,7 @@ public class UsersFirstActivity extends BasicActivity implements ConversionListe
 
 
                     if (preferenceManager.getString(Constants.KEY_USER_ID).equals(senderId)) {
+
                         // Current user is the sender
                         chatMessage.conversionImage = documentChange.getDocument().getString(Constants.KEY_RECEIVER_IMAGE);
                         chatMessage.conversionFirstname = documentChange.getDocument().getString(Constants.KEY_RECEIVER_FIRSTNAME);

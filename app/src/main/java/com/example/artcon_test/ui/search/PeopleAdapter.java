@@ -35,7 +35,6 @@ public class PeopleAdapter extends RecyclerView.Adapter<PeopleAdapter.ViewHolder
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_search_people_item, parent, false);
         return new ViewHolder(itemView);
-
     }
 
     @Override
@@ -52,7 +51,33 @@ public class PeopleAdapter extends RecyclerView.Adapter<PeopleAdapter.ViewHolder
         Picasso.get().load(user.getPicture())
                 .placeholder(R.drawable.picasso_placeholder) // Placeholder image
                 .into(holder.imageViewProfile);
+
+        // view profile onclick
+        holder.itemView.setOnClickListener(v -> {
+            String selectedUserId = peopleList.get(position).getId().toString();
+            onUserItemClick(selectedUserId);
+        });
+
     }
+
+    public interface OnUserItemClickListener {
+        void onUserItemClick(String userId);
+    }
+
+    private OnUserItemClickListener userItemClickListener;
+    // Setter for the listener
+    public void setOnUserItemClickListener(OnUserItemClickListener listener) {
+        this.userItemClickListener = listener;
+    }
+
+    // Method to handle item click and pass the user ID
+    private void onUserItemClick(String userId) {
+        if (userItemClickListener != null) {
+            userItemClickListener.onUserItemClick(userId);
+        }
+    }
+
+
 
     @Override
     public int getItemCount() {

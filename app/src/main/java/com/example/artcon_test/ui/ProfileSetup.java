@@ -1,8 +1,4 @@
-package com.example.artcon_test;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
+package com.example.artcon_test.ui;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -13,6 +9,11 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+
+import com.example.artcon_test.R;
 import com.example.artcon_test.fragment.setupProfilepicture;
 import com.example.artcon_test.model.LoginResponse;
 import com.example.artcon_test.model.RegisterRequest;
@@ -24,7 +25,6 @@ import com.example.artcon_test.utilities.Constants;
 import com.example.artcon_test.utilities.PreferenceManager;
 import com.example.artcon_test.viewmodel.UserViewModel;
 import com.google.firebase.firestore.FirebaseFirestore;
-
 
 import java.io.File;
 import java.util.HashMap;

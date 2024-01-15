@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.artcon_test.ProfileSetup;
+import com.example.artcon_test.ui.ProfileSetup;
 import com.example.artcon_test.R;
 import com.example.artcon_test.model.UpdateUserViewModel;
 

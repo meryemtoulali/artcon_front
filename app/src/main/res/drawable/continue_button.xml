@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android"
-    android:shape="rectangle">
-    <solid
-        android:color="@color/purpleBase"/>
-    <corners android:radius="100dp" />
-
-</shape>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="#AA6E4BCC">
+    <item android:id="@android:id/background">
+        <shape
+            android:shape="rectangle">
+            <solid
+                android:color="@color/purpleBase"/>
+            <corners android:radius="100dp" />
+        </shape>
+    </item>
+</ripple>

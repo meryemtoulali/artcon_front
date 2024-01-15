@@ -9,31 +9,27 @@
 
     <TextView
         android:id="@+id/textView7"
-        android:layout_width="328dp"
+        style="@style/Text"
+        android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_marginVertical="10sp"
+        android:layout_marginStart="30dp"
         android:text="@string/Ispecialise"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.049" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
         android:id="@+id/artist_title"
-        android:layout_width="300sp"
+        android:layout_width="0dp"
         android:layout_height="40sp"
         android:layout_gravity="center"
         android:layout_marginVertical="10sp"
-        android:layout_marginTop="538dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
         android:background="@drawable/spinner"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView7"
-        app:layout_constraintVertical_bias="0.0"></Spinner>
+        app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

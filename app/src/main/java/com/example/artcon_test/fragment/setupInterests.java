@@ -1,6 +1,5 @@
 package com.example.artcon_test.fragment;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -18,11 +17,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.GridView;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.artcon_test.ProfileSetup;
+import com.example.artcon_test.ui.ProfileSetup;
 import com.example.artcon_test.R;
 import com.example.artcon_test.model.Interest;
 import com.example.artcon_test.model.UpdateUserViewModel;
@@ -30,9 +28,7 @@ import com.example.artcon_test.network.InterestService;
 import com.example.artcon_test.viewmodel.InterestViewModel;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import retrofit2.Call;
 import retrofit2.Callback;

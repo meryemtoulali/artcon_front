@@ -15,7 +15,6 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.artcon_test.R;
-import com.example.artcon_test.ui.signup.SignupActivity;
 import com.example.artcon_test.viewmodel.SignupViewModel;
 
 public class SignUpFirstFragment extends Fragment {

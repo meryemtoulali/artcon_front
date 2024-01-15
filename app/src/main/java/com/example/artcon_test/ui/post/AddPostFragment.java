@@ -90,6 +90,7 @@ public class AddPostFragment extends Fragment {
     private final int SELECT_DOC =200;
 
     SharedPreferences sharedPreferences;
+    ViewGroup view;
 
     public AddPostFragment() {
         // Required empty public constructor
@@ -100,7 +101,7 @@ public class AddPostFragment extends Fragment {
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
-        ViewGroup view = (ViewGroup) inflater.inflate(R.layout.fragment_add_post, container, false);
+        view = (ViewGroup) inflater.inflate(R.layout.fragment_add_post, container, false);
 
         Log.d("hi", "ok");
 
@@ -217,8 +218,8 @@ public class AddPostFragment extends Fragment {
                 } else {
                     Log.d("image", "start image chooser");
                          */
-                    imageChooser();
-               // }
+                imageChooser();
+                // }
                 adjustRecyclerViewHeight();
             }
         });
@@ -227,15 +228,15 @@ public class AddPostFragment extends Fragment {
         videoPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (ContextCompat.checkSelfPermission(getActivity(), android.Manifest.permission.READ_EXTERNAL_STORAGE)
+              /*  if (ContextCompat.checkSelfPermission(getActivity(), android.Manifest.permission.READ_EXTERNAL_STORAGE)
                         != PackageManager.PERMISSION_GRANTED) {
                     Log.d("vedio", "no permission");
                     // Demander la permission si elle n'est pas accordée
                     requestPermissions(new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE},
                             Read_Permission);
-                } else {
+                } else {*/
                     videoChooser();
-                }
+               // }
                 adjustRecyclerViewHeight();
             }
         });
@@ -405,10 +406,17 @@ public class AddPostFragment extends Fragment {
                                 //
                                 Bundle result = new Bundle();
                                 result.putString("postId", String.valueOf(postId));
+
+                                //navigateToFragment(R.id.action_global_navigation_view_post);
+                                NavController navController = Navigation.findNavController(view);
+                                navController.navigate(R.id.action_global_navigation_view_post, result);
+
+                                /*Bundle result = new Bundle();
+                                result.putString("postId", String.valueOf(postId));
                                 getParentFragmentManager().setFragmentResult("postIdFromAnotherFrag", result);
                                 //action_navigation_add_post_to_navigation_view_post
                                 //navigateToFragment(R.id.action_navigation_add_post_to_navigation_home2); good
-                                navigateToFragment(R.id.action_navigation_add_post_to_navigation_view_post);
+                                navigateToFragment(R.id.action_global_navigation_view_post);*/
                             } else {
                                 Toast.makeText(getActivity(), "Failed to add post", Toast.LENGTH_SHORT).show();
                             }

@@ -15,7 +15,7 @@
         android:paddingStart="12dp"
         android:paddingTop="8dp"
         android:paddingEnd="12dp"
-        android:paddingBottom="8dp"
+        android:paddingBottom="25dp"
         app:layout_constraintWidth_max="wrap"
         android:textColor="@color/blackBase"
         android:textSize="15sp"

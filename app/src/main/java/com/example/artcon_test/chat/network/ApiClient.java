@@ -1,17 +1,15 @@
 package com.example.artcon_test.chat.network;
 
-import androidx.appcompat.app.AlertDialog;
-
 import retrofit2.Retrofit;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class ApiClient {
     private static Retrofit retrofit = null;
 
-    public static Retrofit getClient(){
-        if (retrofit == null){
+    public static Retrofit getClient() {
+        if (retrofit == null) {
             retrofit = new Retrofit.Builder()
-                    .baseUrl("https://fcm.googleapis.com/fcm/")
+                    .baseUrl("https://fcm.googleapis.com/")
                     .addConverterFactory(ScalarsConverterFactory.create())
                     .build();
         }

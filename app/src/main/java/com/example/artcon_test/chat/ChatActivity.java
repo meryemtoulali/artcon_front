@@ -73,8 +73,8 @@ public class ChatActivity extends BasicActivity  {
         chatMessages = new ArrayList<>();
         chatAdapter = new ChatAdapter(
                 chatMessages,
+                receiverUser.getUsername(),
                 preferenceManager.getString(Constants.KEY_USER_ID)
-
 //                getBitmapEncodedString(receiverUser.getPicture()),
         );
         binding.chatRecyclerView.setAdapter(chatAdapter);
@@ -199,10 +199,12 @@ public class ChatActivity extends BasicActivity  {
                     isReceiverAvailable = availability == 1;
                 }
                 receiverUser.setToken(value.getString(Constants.KEY_TOKEN));
-                if(receiverUser.getPicture() == null){
+                if(receiverUser.getUsername() == null){
+//                    receiverUser.getUsername() = value.getString(Constants.KEY_USERNAME);
+                    chatAdapter.notifyItemRangeChanged(0, chatMessages.size());
+
 //                    receiverUser.getPicture() = value.getString(Constants.KEY_IMAGE);
 //                    chatAdapter.setReceiverProfileImage(receiverUser.getPicture());
-                    chatAdapter.notifyItemRangeChanged(0, chatMessages.size());
                 }
             }
                 if (isReceiverAvailable){

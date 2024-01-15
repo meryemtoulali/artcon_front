@@ -1,8 +1,5 @@
 package com.example.artcon_test.ui.signup;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -11,14 +8,16 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.artcon_test.ProfileSetup;
-import com.example.artcon_test.ui.MainNavActivity;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
+
 import com.example.artcon_test.R;
 import com.example.artcon_test.model.LoginResponse;
 import com.example.artcon_test.model.RegisterRequest;
 import com.example.artcon_test.network.AuthService;
 import com.example.artcon_test.utilities.Constants;
 import com.example.artcon_test.utilities.PreferenceManager;
+import com.example.artcon_test.ui.ProfileSetup;
 import com.example.artcon_test.viewmodel.LoginViewModel;
 import com.example.artcon_test.viewmodel.SignupViewModel;
 import com.example.artcon_test.databinding.ActivitySignupBinding;
@@ -53,7 +52,7 @@ public class SignupActivity extends AppCompatActivity {
         arrowBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish(); // This will simulate a back button press
+                finish();
             }
         });
 
@@ -78,7 +77,7 @@ public class SignupActivity extends AppCompatActivity {
         String email = signupViewModel.getEmail();
         String firstName = signupViewModel.getFirstName();
         String lastName = signupViewModel.getLastName();
-        Date birthday = signupViewModel.getBirthday();
+        String birthday = signupViewModel.getBirthday();
         String location = signupViewModel.getLocation();
         String gender = signupViewModel.getGender();
         String phonenumber = signupViewModel.getPhonenumber();

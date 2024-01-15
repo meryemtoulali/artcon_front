@@ -11,6 +11,8 @@ import com.example.artcon_test.model.AddPostRes;
 import com.example.artcon_test.model.Interest;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
+import com.example.artcon_test.model.Comment;
+import com.example.artcon_test.model.CommentRequest;
 
 import com.example.artcon_test.model.LikeRequest;
 import com.example.artcon_test.model.LikeRes;
@@ -53,6 +55,16 @@ public interface PostService {
     @GET("/post/{postId}/likes")
     Call<Integer> getLikeCount (
             @Path("postId") String postId
+    );
+
+    @GET("/comment/byPost/{postId}")
+    Call<List<Comment>> getCommentsByPostId(
+            @Path("postId") String postId
+    );
+
+    @POST("/comment")
+    Call<Comment> comment(
+            @Body CommentRequest request
     );
 
     @GET("post/search")
