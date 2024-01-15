@@ -10,6 +10,7 @@ import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.PUT;
@@ -23,6 +24,15 @@ public interface UserService {
     Call<User> getUserById(@Path("userId") String userId);
     @GET("user/search")
     Call<List<User>> searchPeopleIgnoreCase(@Query("query") String query);
+
+    @GET("user/{userId}/followers")
+    Call<List<User>> getFollowersList(@Path("userId") String userId);
+
+    @GET("user/{userId}/following")
+    Call<List<User>> getFollowingList(@Path("userId") String userId);
+
+
+
     @GET("user/{userId}/portfolio")
     Call<List<PortfolioPost>> getUserPortfolio(@Path("userId") String userId);
     @POST("user/logout")
@@ -50,6 +60,7 @@ public interface UserService {
     Call<List<Post>> getHomeFeed(
             @Path("userId") String userId
     );
+
     @Multipart
     @PUT("user/{userId}")
     Call<Void> editprofile(
@@ -64,4 +75,23 @@ public interface UserService {
             @Part("bio") RequestBody bio,
             @Part("email") RequestBody email
     );
+
+    @GET("followers/check/{followerId}/{followingId}")
+    Call<Boolean> checkFollows(
+            @Path("followerId") String followerId,
+            @Path("followingId") String followingId
+    );
+
+
+    @POST("followers/follow/{followerId}/{followingId}")
+    Call<Void> followUser(
+            @Path("followerId") String followerId,
+            @Path("followingId") String followingId
+    );
+    @DELETE("followers/unfollow/{followerId}/{followingId}")
+    Call<Void> unfollowUser(
+            @Path("followerId") String followerId,
+            @Path("followingId") String followingId
+    );
+
 }

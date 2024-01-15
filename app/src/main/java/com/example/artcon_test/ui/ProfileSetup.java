@@ -1,25 +1,33 @@
-package com.example.artcon_test;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
+package com.example.artcon_test.ui;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Picture;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+
+import com.example.artcon_test.R;
 import com.example.artcon_test.fragment.setupProfilepicture;
+import com.example.artcon_test.model.LoginResponse;
+import com.example.artcon_test.model.RegisterRequest;
 import com.example.artcon_test.model.UpdateUserViewModel;
 import com.example.artcon_test.network.UserService;
 import com.example.artcon_test.ui.MainNavActivity;
+import com.example.artcon_test.ui.signup.SignupActivity;
+import com.example.artcon_test.utilities.Constants;
+import com.example.artcon_test.utilities.PreferenceManager;
 import com.example.artcon_test.viewmodel.UserViewModel;
-
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.io.File;
+import java.util.HashMap;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -29,6 +37,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ProfileSetup extends AppCompatActivity {
+    private PreferenceManager preferenceManager;
+
 
     // Variables
     int step = 1;
@@ -44,6 +54,7 @@ public class ProfileSetup extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        preferenceManager = new PreferenceManager(getApplicationContext());
         setContentView(R.layout.activity_profile_setup);
         user = new ViewModelProvider(this).get(UpdateUserViewModel.class);
         arrowback = findViewById(R.id.imageView);
@@ -80,6 +91,7 @@ public class ProfileSetup extends AppCompatActivity {
     // update user
     public void updateUser(){
         UserService userService = UserViewModel.updateUserService();
+
 
         if ( user.getPicture() != null){
             picturePart = prepareFilePart("picture", user.getPicture());
@@ -119,6 +131,9 @@ public class ProfileSetup extends AppCompatActivity {
                 Toast.makeText(ProfileSetup.this, "Huge Error", Toast.LENGTH_SHORT).show();
             }
         });
+
+
+
 
         Call<Void> selectinterests = userService.selectInterests(userId,user.getInterestIds());
         selectinterests.enqueue(new Callback<Void>() {

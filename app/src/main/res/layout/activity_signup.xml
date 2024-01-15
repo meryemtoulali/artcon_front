@@ -21,8 +21,7 @@
         android:gravity="center"
         android:src="@drawable/arrow_back"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <ImageView
         android:id="@+id/wordmark"
@@ -45,7 +44,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="110dp"
         android:text="@string/signup"
-        android:textSize="28dp"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

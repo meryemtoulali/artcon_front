@@ -1,24 +1,5 @@
 package com.example.artcon_test.ui.search;
 
-import static android.text.TextUtils.isEmpty;
-
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
-
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.artcon_test.R;
-import com.example.artcon_test.model.Post;
-import com.squareup.picasso.Picasso;
-
-import java.util.ArrayList;
-import java.util.List;
-
 public class PostsAdapter /*extends RecyclerView.Adapter<PostsAdapter.ViewHolder>*/ {
 //    private List<Post> postsList = new ArrayList<>();
 //    String TAG = "AllTooWell";

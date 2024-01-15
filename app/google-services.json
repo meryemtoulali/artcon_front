@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "275676475408",
+    "project_id": "artconchat",
+    "storage_bucket": "artconchat.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:275676475408:android:f895eee0a1a80c8665da95",
+        "android_client_info": {
+          "package_name": "com.example.artcon_test"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAdoLsC8vVj7mgkQLkLCQ6m5vnx0mU4SjI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

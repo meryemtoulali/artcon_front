@@ -13,79 +13,97 @@
         android:layout_height="wrap_content"
         tools:context=".ui.search.SearchFragment">
 
-        <ImageView
-            android:id="@+id/arrow_back"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/topBar"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="48dp"
-            android:gravity="center"
-            android:src="@drawable/arrow_back"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="MissingConstraints"
-            />
-
-        <TextView
-            android:id="@+id/textViewSearch"
-            style="@style/Text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:gravity="center"
-            android:text="@string/search"
-            android:textSize="28sp"
-            android:textStyle="bold"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="20dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.34"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="MissingConstraints" />
+            app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/kebab_menu"
-            android:layout_width="13dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="36dp"
-            android:gravity="center"
-            android:src="@drawable/kebab_menu"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.922"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="MissingConstraints" />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="start|center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/arrow_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:src="@drawable/arrow_back" />
+
+                <TextView
+                    android:id="@+id/titleNotifications"
+                    style="@style/Text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:gravity="center"
+                    android:text="@string/title_search"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
+                android:paddingHorizontal="16dp">
+
+                <ImageView
+                    android:id="@+id/kebab_menu"
+                    android:layout_width="13dp"
+                    android:layout_height="30dp"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:src="@drawable/kebab_menu" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
 
         <EditText
             android:id="@+id/editTextSearch"
             android:layout_width="0dp"
             android:layout_height="47dp"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="96dp"
-            android:layout_marginEnd="32dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="20dp"
             android:background="@drawable/grey_border"
             android:backgroundTint="@color/greyLight"
             android:drawableEnd="@drawable/search"
             android:drawablePadding="10dp"
             android:hint="@string/search"
+            android:textSize="16sp"
+            android:imeOptions="actionSearch"
             android:padding="12dp"
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
             android:singleLine="true"
-            android:imeOptions="actionSearch"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/topBar" />
 
         <HorizontalScrollView
             android:id="@+id/horizontalScrollView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="164dp"
             android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
             android:foregroundGravity="center_vertical"
-            app:layout_constraintTop_toTopOf="parent"
-            >
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextSearch">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -96,39 +114,36 @@
 
                 <Button
                     android:id="@+id/buttonSearchPeople"
+                    style="@style/CancelButton"
                     android:layout_width="119dp"
                     android:layout_height="40dp"
-                    android:background="@drawable/grey_border"
                     android:layout_marginEnd="15dp"
-                    android:text="@string/search_people"
+                    android:background="@drawable/grey_border"
                     android:drawableLeft="@drawable/ic_profile_search"
-                    android:textStyle="bold"
-                    style="@style/CancelButton"
-                    />
+                    android:text="@string/search_people"
+                    android:textStyle="bold" />
 
                 <Button
                     android:id="@+id/buttonSearchPosts"
+                    style="@style/CancelButton"
                     android:layout_width="119dp"
                     android:layout_height="40dp"
-                    android:background="@drawable/grey_border"
                     android:layout_marginEnd="15dp"
-                    android:text="@string/search_posts"
+                    android:background="@drawable/grey_border"
                     android:drawableLeft="@drawable/ic_posts_search"
-                    android:textStyle="bold"
-                    style="@style/CancelButton"
-                    />
+                    android:text="@string/search_posts"
+                    android:textStyle="bold" />
 
                 <Button
                     android:id="@+id/buttonSearchJobs"
+                    style="@style/CancelButton"
                     android:layout_width="119dp"
                     android:layout_height="40dp"
-                    android:background="@drawable/grey_border"
                     android:layout_marginEnd="15dp"
-                    android:text="@string/search_jobs"
+                    android:background="@drawable/grey_border"
                     android:drawableLeft="@drawable/ic_job_search"
-                    android:textStyle="bold"
-                    style="@style/CancelButton"
-                    />
+                    android:text="@string/search_jobs"
+                    android:textStyle="bold" />
 
                 <ImageView
                     android:id="@+id/filter"
@@ -146,13 +161,13 @@
             android:id="@+id/fragmentContainerSearch"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
             android:layout_marginBottom="32dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView"
-            >
-        </androidx.fragment.app.FragmentContainerView>
+            app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

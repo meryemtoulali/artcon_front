@@ -9,13 +9,44 @@
         android:id="@+id/navigation_home"
         android:name="com.example.artcon_test.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_home_to_profile"
+            app:destination="@id/navigation_profile" />
+        <action
+            android:id="@+id/action_home_to_notifications"
+            app:destination="@id/navigation_notifications" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_notifications"
+        android:name="com.example.artcon_test.ui.home.NotificationsFragment"
+        android:label="@string/title_notifications"
+        tools:layout="@layout/fragment_notifications">
+
+        <action
+            android:id="@+id/action_notifications_to_profile"
+            app:destination="@id/navigation_profile" />
+        <action
+            android:id="@+id/action_notifications_to_post"
+            app:destination="@id/navigation_view_post" />
+        <action
+            android:id="@+id/action_notifications_to_home"
+            app:destination="@id/navigation_home" />
+    </fragment>
+
 
     <fragment
         android:id="@+id/navigation_search"
         android:name="com.example.artcon_test.ui.search.SearchFragment"
         android:label="@string/title_search"
-        tools:layout="@layout/fragment_search" />
+        tools:layout="@layout/fragment_search">
+
+        <action
+            android:id="@+id/action_navigation_search_to_navigation_profile"
+            app:destination="@id/navigation_profile" />
+    </fragment>
+
 
     <fragment
         android:id="@+id/navigation_add"
@@ -33,7 +64,7 @@
         android:id="@+id/navigation_profile"
         android:name="com.example.artcon_test.ui.profile.ProfileFragment"
         android:label="@string/title_profile"
-        tools:layout="@layout/activity_profile" >
+        tools:layout="@layout/activity_profile">
         <action
             android:id="@+id/action_profile_to_portfolio_post"
             app:destination="@id/navigation_portfolioPost" />
@@ -41,9 +72,39 @@
             android:id="@+id/action_profile_to_post"
             app:destination="@id/navigation_post" />
         <action
+
             android:id="@+id/action_navigation_profile_to_edit_profile"
             app:destination="@id/edit_profile" />
+
+      <action
+            android:id="@+id/action_profile_to_followers"
+            app:destination="@id/navigation_followers" />
+        <action
+            android:id="@+id/action_profile_to_following"
+            app:destination="@id/navigation_following" />
     </fragment>
+
+
+    <fragment
+        android:id="@+id/navigation_followers"
+        android:name="com.example.artcon_test.ui.profile.FollowersListFragment"
+        android:label="@string/followers"
+        tools:layout="@layout/fragment_followers_list">
+        <action
+            android:id="@+id/action_followers_to_profile"
+            app:destination="@id/navigation_profile" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_following"
+        android:name="com.example.artcon_test.ui.profile.FollowingListFragment"
+        android:label="@string/following"
+        tools:layout="@layout/fragment_following_list">
+        <action
+            android:id="@+id/action_following_to_profile"
+            app:destination="@id/navigation_profile" />
+    </fragment>
+
     <fragment
         android:id="@+id/navigation_portfolioPost"
         android:name="com.example.artcon_test.ui.portfolioPost.PortfolioPostFragment"
@@ -72,6 +133,7 @@
         android:name="com.example.artcon_test.ui.post.ViewPostFragment"
         android:label="View Post"
         tools:layout="@layout/activity_view_post"/>
+
     <action
         android:id="@+id/action_global_navigation_add_post"
         app:destination="@id/navigation_add_post" />
@@ -80,5 +142,17 @@
         android:name="com.example.artcon_test.ui.settings.EditProfile"
         android:label="edit_profile"
         tools:layout="@layout/fragment_edit_profile" />
+
+        <action
+            android:id="@+id/action_global_navigation_add_post"
+            app:destination="@id/navigation_add_post" />
+        <action
+            android:id="@+id/action_global_navigation_view_post"
+            app:destination="@id/navigation_view_post">
+            <argument
+                android:name="postId"
+                app:argType="string" />
+        </action>
+
 
 </navigation>

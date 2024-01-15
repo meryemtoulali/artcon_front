@@ -1,4 +1,4 @@
-package com.example.artcon_test.ui.search;
+package com.example.artcon_test.viewmodel;
 
 import android.util.Log;
 
@@ -22,6 +22,15 @@ public class SearchViewModel extends ViewModel {
     private final UserRepository userRepository;
     private final PostRepository postRepository;
     MutableLiveData<List<User>> searchPeopleLiveData = new MutableLiveData<>();
+
+    public MutableLiveData<List<User>> getSearchPeopleLiveData() {
+        return searchPeopleLiveData;
+    }
+
+    public MutableLiveData<List<Post>> getSearchPostsLiveData() {
+        return searchPostsLiveData;
+    }
+
     MutableLiveData<List<Post>> searchPostsLiveData = new MutableLiveData<>();
     private MutableLiveData<String> toastMessage = new MutableLiveData<>();
     private String currentSearchType = "people"; // Default search type

@@ -1,4 +1,4 @@
-package com.example.artcon_test.ui.home;
+package com.example.artcon_test.viewmodel;
 
 import android.util.Log;
 

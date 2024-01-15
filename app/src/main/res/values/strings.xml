@@ -6,6 +6,9 @@
     <string name="title_job">Job</string>
     <string name="title_profile">profile</string>
 
+    <string name="chat">Chat</string>
+    <string name="type_a_message">Write a message...</string>
+
     <string name="app_slogan">Connecting creativity</string>
     <string name="login_text">Please log in to your account</string>
     <string name="forgot_pwd">Forgot password?</string>
@@ -29,14 +32,14 @@
     <string name="add_profilepicture">Add a profile picture</string>
     <string name="add_picture">Add photo</string>
     <string name="skip">Skip</string>
-    <string name="Iam">I\'am</string>
+    <string name="Iam">I am:</string>
     <string name="an_artist">an artist</string>
     <string name="looking_for_artists">looking for artists</string>
     <string name="next">Continue</string>
-    <string name="Ispecialise">I specialize in...</string>
-    <string name="because">Because...</string>
+    <string name="Ispecialise">I specialize in…</string>
+    <string name="because">Because…</string>
     <string name="tohire">I want to hire them</string>
-    <string name="tolikeart">I just like art</string>
+    <string name="tolikeart">I just like art!</string>
     <string name="poetry">Poetry</string>
     <string name="photography">Photography</string>
     <string name="mixed_media">Mixed media</string>
@@ -58,8 +61,7 @@
     <string name="add_post">Add post</string>
     <string name="add_portfolio_post">Add portfolio post</string>
     <string name="add_job_post">Add job post</string>
-    <string name="edit_profile">Edit Profile</string>
-    
+    <string name="edit_profile">Edit Profile</string>  
     <!-- Edit Profile -->
     <string name="username">Username</string>
     <string name="firstname">First name</string>
@@ -71,4 +73,14 @@
     <string name="phonenumber">Phone number</string>
     <string name="title">Title</string>
     <string name="bio">Bio</string>
+    <string name="date_format">yyyy/MM/dd</string>
+    <string name="login">Login</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="choose_interests">For a better experience, choose some of your interests:</string>
+    <string name="follow">Follow</string>
+    <string name="followers">Followers</string>
+    <string name="following">Following</string>
+    <string name="no_followers">You don\'t have any followers.</string>
+    <string name="no_following">You haven\'t followed anyone yet.</string>
+
 </resources>

@@ -1,16 +1,15 @@
 package com.example.artcon_test.ui.profile;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.example.artcon_test.R;
 import com.example.artcon_test.viewmodel.ProfileViewModel;
@@ -20,7 +19,7 @@ public class ProfilePostsFragment extends Fragment {
     private static final String ARG_USER_ID = "userId";
     private ProfileViewModel profileViewModel;
     private String userId;
-    private ProfilePostRecyclerAdapter postRecyclerAdapter;
+    private PostAdapter postAdapter;
 
 
     public ProfilePostsFragment() {
@@ -55,15 +54,15 @@ public class ProfilePostsFragment extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
 
-        postRecyclerAdapter = new ProfilePostRecyclerAdapter(getContext());
-        recyclerView.setAdapter(postRecyclerAdapter);
+        postAdapter = new PostAdapter(getContext());
+        recyclerView.setAdapter(postAdapter);
         Log.d(TAG, "created view recycler: " + recyclerView.toString());
 
         profileViewModel.getPostList(userId);
         profileViewModel.getPostListLiveData().observe(getViewLifecycleOwner(), postList -> {
             // Update recycler adapter with post list data
-                postRecyclerAdapter.setPostList(postList);
-                postRecyclerAdapter.notifyDataSetChanged();
+                postAdapter.setPostList(postList);
+                postAdapter.notifyDataSetChanged();
             });
         return view;
     }

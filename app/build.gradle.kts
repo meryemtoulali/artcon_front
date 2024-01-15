@@ -1,5 +1,6 @@
 plugins {
     id("com.android.application")
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -11,6 +12,7 @@ android {
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
+        multiDexEnabled = true
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -57,6 +59,21 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel:2.6.2")
     implementation("androidx.lifecycle:lifecycle-livedata:2.6.2")
 
+    //Firebase
+    implementation("com.google.firebase:firebase-inappmessaging-display:20.4.0")
+    implementation("com.google.firebase:firebase-firestore:24.10.0")
+    implementation("com.google.firebase:firebase-messaging:23.4.0")
+
+    //MultiDex
+    implementation ("androidx.multidex:multidex:2.0.1")
+
+    //Rounded Image View
+    implementation ("com.makeramen:roundedimageview:2.3.0")
+
+    //Retrofit
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation ("com.squareup.retrofit2:converter-scalars:2.9.0")
+
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
@@ -70,4 +87,5 @@ dependencies {
     implementation("com.karumi:dexter:6.2.3")
     implementation ("com.github.bumptech.glide:glide:4.16.0")
     annotationProcessor ("com.github.bumptech.glide:compiler:4.16.0")
+
 }

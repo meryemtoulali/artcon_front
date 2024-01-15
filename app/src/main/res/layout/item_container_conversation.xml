@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="8dp">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_margin="10dp"
+        app:cardCornerRadius="16dp"
+        app:cardBackgroundColor="@color/whiteBase"
+        >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="339dp"
+            android:layout_height="match_parent"
+            android:layout_margin="20dp"
+            android:padding="4dp">
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/imageProfile"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <View
+                android:id="@+id/viewSupporter"
+                android:layout_width="1dp"
+                android:layout_height="1dp"
+                app:layout_constraintBottom_toBottomOf="@id/imageProfile"
+                app:layout_constraintStart_toEndOf="@id/imageProfile"
+                app:layout_constraintTop_toTopOf="@id/imageProfile" />
+
+            <TextView
+                android:id="@+id/textName"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="@color/blackBase"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toTopOf="@id/viewSupporter"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.072"
+                app:layout_constraintStart_toEndOf="@id/imageProfile"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <TextView
+                android:id="@+id/textUsername"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="48dp"
+                android:layout_marginBottom="4dp"
+                android:paddingRight="0dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="@color/greyDark"
+                android:textSize="13sp"
+                app:layout_constraintBottom_toTopOf="@id/viewSupporter"
+                app:layout_constraintStart_toEndOf="@id/textName" />
+
+            <TextView
+                android:id="@+id/textRecentMessage"
+                android:layout_width="255dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="8dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="@color/greyBase"
+                android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@id/imageProfile"
+                app:layout_constraintTop_toBottomOf="@id/textName" />
+
+            <TextView
+                android:id="@+id/timestamp"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="@color/greyDark"
+                android:textSize="10sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.959"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textUsername" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

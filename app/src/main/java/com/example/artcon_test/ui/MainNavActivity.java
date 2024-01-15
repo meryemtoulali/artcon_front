@@ -2,12 +2,12 @@ package com.example.artcon_test.ui;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.MenuItem;
+import android.widget.PopupMenu;
+import android.widget.Toast;
 
-import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -16,12 +16,6 @@ import androidx.navigation.ui.NavigationUI;
 import com.example.artcon_test.R;
 import com.example.artcon_test.databinding.ActivityMainNavBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import android.view.Gravity;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.PopupMenu;
-import android.widget.Toast;
 
 public class MainNavActivity extends AppCompatActivity {
 String TAG ="hatsunemiku";

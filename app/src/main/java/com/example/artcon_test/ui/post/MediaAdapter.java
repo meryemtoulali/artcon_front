@@ -6,6 +6,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.VideoView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,9 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.artcon_test.R;
 import com.example.artcon_test.model.MediaItem;
 import com.squareup.picasso.Picasso;
-
-import android.widget.ImageView;
-import android.widget.VideoView;
 
 import java.util.List;
 

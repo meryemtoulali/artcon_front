@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    android:padding="4dp"
+    >
+
+    <TextView
+        android:id="@+id/textUsername"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="4dp"
+        android:textColor="@color/blackBase"
+        android:textSize="16sp"
+        app:layout_constraintTop_toTopOf="@id/textMessage"
+        app:layout_constraintEnd_toStartOf="@id/textMessage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@id/textMessage" />
+
+
+
+    <TextView
+        android:id="@+id/textMessage"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginLeft="12dp"
+        android:background="@drawable/background_received_message"
+        android:padding="12dp"
+        android:paddingStart="12sp"
+        android:paddingTop="8dp"
+        android:paddingEnd="12dp"
+        android:paddingBottom="8dp"
+        android:textColor="@color/blackBase"
+        android:textSize="15sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_max="wrap"
+        app:layout_constraintWidth_percent="0.75" />
+
+    <TextView
+        android:id="@+id/textDateTime"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="4dp"
+        android:textColor="@color/greyBase"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@id/textMessage" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

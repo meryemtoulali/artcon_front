@@ -16,11 +16,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.artcon_test.R;
 import com.example.artcon_test.databinding.FragmentSearchPostsBinding;
-import com.example.artcon_test.ui.profile.ProfilePostRecyclerAdapter;
+import com.example.artcon_test.ui.profile.PostAdapter;
+import com.example.artcon_test.viewmodel.SearchViewModel;
 
 public class SearchPostsFragment extends Fragment {
     private FragmentSearchPostsBinding binding;
-    private ProfilePostRecyclerAdapter postsAdapter;
+    private PostAdapter postsAdapter;
     SearchViewModel searchViewModel;
     private ProgressBar progressBar;
     String TAG = "AllTooWell";
@@ -38,13 +39,13 @@ public class SearchPostsFragment extends Fragment {
 
         progressBar = view.findViewById(R.id.progressBar);
 
-        postsAdapter = new ProfilePostRecyclerAdapter(requireContext());
+        postsAdapter = new PostAdapter(requireContext());
         binding.postsList.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.postsList.setAdapter(postsAdapter);
 
         loading(true);
 
-        searchViewModel.searchPostsLiveData.observe(getViewLifecycleOwner(), posts -> {
+        searchViewModel.getSearchPostsLiveData().observe(getViewLifecycleOwner(), posts -> {
             Log.d(TAG, "setPostsList in Fragment: " + posts.toString());
             postsAdapter.setPostList(posts);
 

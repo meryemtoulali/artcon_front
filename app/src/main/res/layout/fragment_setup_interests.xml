@@ -9,11 +9,12 @@
 
     <TextView
         android:id="@+id/textView6"
+        style="@style/Text"
         android:layout_width="320dp"
         android:layout_height="50dp"
         android:layout_marginHorizontal="10sp"
-        android:text="For a better experience, choose some of your interests:"
-        android:textSize="20sp"
+        android:text="@string/choose_interests"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.494"
@@ -54,12 +55,11 @@
         style="@style/ContinueButton"
         android:layout_width="170dp"
         android:layout_height="50dp"
+        android:layout_marginTop="30dp"
         android:text="@string/next"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/grid_interest"
-        app:layout_constraintVertical_bias="0.225" />
+        app:layout_constraintTop_toBottomOf="@+id/grid_interest"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
