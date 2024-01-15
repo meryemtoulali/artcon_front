@@ -11,6 +11,7 @@ import android.view.View;
 import com.example.artcon_test.chat.adapters.UsersAdapter;
 import com.example.artcon_test.chat.listeners.UserListener;
 import com.example.artcon_test.chat.models.User;
+import com.example.artcon_test.ui.MainNavActivity;
 import com.example.artcon_test.utilities.Constants;
 import com.example.artcon_test.utilities.PreferenceManager;
 import com.example.artcon_test.databinding.ActivityUsersBinding;
@@ -20,7 +21,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UsersActivity extends AppCompatActivity implements UserListener {
+public class UsersActivity extends BasicActivity implements UserListener {
 
     private ActivityUsersBinding binding;
     private PreferenceManager preferenceManager;
@@ -39,7 +40,14 @@ public class UsersActivity extends AppCompatActivity implements UserListener {
         binding.usersRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         // Fetch and display users
+        setListeners();
         getUsers();
+    }
+
+    private void setListeners(){
+        binding.actionBack.setOnClickListener(v ->
+                startActivity(new Intent(getApplicationContext(), MainNavActivity.class)));
+
     }
 
     private String getCurrentUserId() {
@@ -69,6 +77,7 @@ public class UsersActivity extends AppCompatActivity implements UserListener {
                             user.setPicture(queryDocumentSnapshot.getString(Constants.KEY_IMAGE));
                             user.setToken(queryDocumentSnapshot.getString(Constants.KEY_TOKEN));
                             user.setUserId(queryDocumentSnapshot.getString(Constants.KEY_USER_ID));
+                            user.setId(queryDocumentSnapshot.getId());
                             users.add(user);
                         }
                         if (users.size()>0){

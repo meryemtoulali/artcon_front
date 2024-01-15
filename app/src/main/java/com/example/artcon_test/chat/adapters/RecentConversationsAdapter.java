@@ -1,6 +1,5 @@
 package com.example.artcon_test.chat.adapters;
 
-import android.provider.Telephony;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -27,6 +26,11 @@ public class RecentConversationsAdapter extends RecyclerView.Adapter<RecentConve
         this.chatMessages = chatMessages;
         this.conversionListener = conversionListener;
     }
+
+//    private Bitmap getConversionImage (String encodedImage) {
+//        byte [] bytes = Base64.decode(encodedImage, Base64.DEFAULT);
+//        return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+//    }
 
     @NonNull
     @Override
@@ -74,7 +78,8 @@ public class RecentConversationsAdapter extends RecyclerView.Adapter<RecentConve
         void setData(ChatMessage chatMessage) {
             ImageView imageViewProfile;
             imageViewProfile = itemView.findViewById(R.id.imageProfile);
-            String fullName = chatMessage.conversionFirstname + chatMessage.conversionLastname;
+//            binding.imageProfile.setImageBitmap(getConversionImage(chatMessage.conversionImage));
+            String fullName = chatMessage.conversionFirstname + " " + chatMessage.conversionLastname;
             binding.textName.setText(fullName);
             binding.textUsername.setText(chatMessage.conversionUsername);
             binding.textRecentMessage.setText((chatMessage.message));

@@ -63,6 +63,20 @@
         app:layout_constraintTop_toBottomOf="@id/action_back"
         />
 
+    <TextView
+        android:id="@+id/textAvailability"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="2dp"
+        android:background="@color/success"
+        android:text="Online"
+        android:gravity="center"
+        android:textColor="@color/greyBase"
+        android:textSize="10sp"
+        android:visibility="visible"
+        app:layout_constraintTop_toBottomOf="@id/viewSupporter"
+        />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/chatRecyclerView"
         android:layout_width="match_parent"

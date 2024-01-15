@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.artcon_test.R;
 import com.example.artcon_test.chat.adapters.RecentConversationsAdapter;
@@ -16,15 +17,17 @@ import com.example.artcon_test.ui.MainNavActivity;
 import com.example.artcon_test.utilities.Constants;
 import com.example.artcon_test.utilities.PreferenceManager;
 import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class UsersFirstActivity extends AppCompatActivity implements ConversionListener {
+public class UsersFirstActivity extends BasicActivity implements ConversionListener {
     private PreferenceManager preferenceManager;
 
     private ActivityUsersFirstBinding binding;
@@ -40,8 +43,28 @@ public class UsersFirstActivity extends AppCompatActivity implements ConversionL
 
         setContentView(binding.getRoot());
         init();
+        getToken();
         setListeners();
         listenConversations();
+    }
+    private void showToast(String message) {
+        Toast.makeText(getApplicationContext(),message, Toast.LENGTH_SHORT).show();
+    }
+
+
+    private void getToken(){
+        FirebaseMessaging.getInstance().getToken().addOnSuccessListener(this :: updateToken);
+    }
+
+    private void updateToken(String token){
+        preferenceManager.putString(Constants.KEY_FCM_TOKEN, token);
+        FirebaseFirestore database = FirebaseFirestore.getInstance();
+        DocumentReference documentReference =
+                database.collection(Constants.KEY_COLLECTION_USERS).document(
+                        preferenceManager.getString(Constants.KEY_USER_ID)
+                );
+        documentReference.update(Constants.KEY_FCM_TOKEN, token)
+                .addOnFailureListener(e -> showToast("Unable to update token"));
     }
 
     private void init(){
@@ -63,11 +86,11 @@ public class UsersFirstActivity extends AppCompatActivity implements ConversionL
     private void listenConversations() {
         database.collection(Constants.KEY_COLLECTION_CONVERSATIONS)
                 .whereEqualTo(Constants.KEY_SENDER_ID, preferenceManager.getString(Constants.KEY_USER_ID))
-                .addSnapshotListener(senderEventListener);
+                .addSnapshotListener(eventListener);
 
         database.collection(Constants.KEY_COLLECTION_CONVERSATIONS)
                 .whereEqualTo(Constants.KEY_RECEIVER_ID, preferenceManager.getString(Constants.KEY_USER_ID))
-                .addSnapshotListener(receiverEventListener);
+                .addSnapshotListener(eventListener);
     }
 
     private final EventListener<QuerySnapshot> senderEventListener = (value, error) -> {
@@ -218,7 +241,7 @@ public class UsersFirstActivity extends AppCompatActivity implements ConversionL
                         Log.d("UsersFirstActivity2", "Firstname: " + chatMessage.conversionFirstname);
                         Log.d("UsersFirstActivity2", "Lastname: " + chatMessage.conversionLastname);
                         Log.d("UsersFirstActivity2", "Username: " + chatMessage.conversionUsername);
-                    } else if (preferenceManager.getString(Constants.KEY_USER_ID).equals(receiverId)) {
+                    } else {
                         // Current user is the receiver
                         chatMessage.conversionImage = documentChange.getDocument().getString(Constants.KEY_SENDER_IMAGE);
                         chatMessage.conversionFirstname = documentChange.getDocument().getString(Constants.KEY_SENDER_FIRSTNAME);
@@ -236,17 +259,6 @@ public class UsersFirstActivity extends AppCompatActivity implements ConversionL
                         Log.d("UsersFirstActivity2", "ID: " + chatMessage.conversionId);
                     }
 
-                    if (documentChange.getDocument().contains(Constants.KEY_RECEIVER_FIRSTNAME)) {
-                        chatMessage.conversionFirstname = documentChange.getDocument().getString(Constants.KEY_RECEIVER_FIRSTNAME);
-                    }
-                    if (documentChange.getDocument().contains(Constants.KEY_RECEIVER_LASTNAME)) {
-                        chatMessage.conversionLastname = documentChange.getDocument().getString(Constants.KEY_RECEIVER_LASTNAME);
-                    }
-                    if (documentChange.getDocument().contains(Constants.KEY_RECEIVER_USERNAME)) {
-                        chatMessage.conversionUsername = documentChange.getDocument().getString(Constants.KEY_RECEIVER_USERNAME);
-                    }
-
-
                     chatMessage.message = documentChange.getDocument().getString(Constants.KEY_LAST_MESSAGE);
                     chatMessage.dateObject = documentChange.getDocument().getDate(Constants.KEY_TIMESTAMP);
                     conversations.add(chatMessage);
@@ -256,8 +268,6 @@ public class UsersFirstActivity extends AppCompatActivity implements ConversionL
                     Log.d("ConversationDetails", "Actual Sender Firstname: " + chatMessage.conversionFirstname);
                     Log.d("ConversationDetails", "Actual Sender Lastname: " + chatMessage.conversionLastname);
                     Log.d("ConversationDetails", "Actual Sender Username: " + chatMessage.conversionUsername);
-
-
 
                 } else if (documentChange.getType() == DocumentChange.Type.MODIFIED) {
                     for (int i = 0; i < conversations.size(); i++){
@@ -276,7 +286,6 @@ public class UsersFirstActivity extends AppCompatActivity implements ConversionL
             binding.conversationsRecyclerView.smoothScrollToPosition(0);
             binding.conversationsRecyclerView.setVisibility(View.VISIBLE);
             binding.progressBar.setVisibility(View.GONE);
-
         }
     };
 

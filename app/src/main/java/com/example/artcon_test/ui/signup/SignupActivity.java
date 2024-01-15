@@ -48,6 +48,8 @@ public class SignupActivity extends AppCompatActivity {
         ImageView arrowBack = findViewById(R.id.arrow_back);
         AuthService authService = LoginViewModel.getAuthService();
 
+        preferenceManager = new PreferenceManager(getApplicationContext());
+
         arrowBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -132,10 +134,11 @@ public class SignupActivity extends AppCompatActivity {
         user.put(Constants.KEY_PHONENUMBER, registerRequest.getPhonenumber());
         user.put(Constants.KEY_LOCATION, registerRequest.getLocation());
 
-
         database.collection(Constants.KEY_COLLECTION_USERS)
                 .add(user)
                 .addOnSuccessListener(documentReference -> {
+                    preferenceManager.putBoolean(Constants.KEY_IS_SIGNED_IN, true);
+                    preferenceManager.putString(Constants.KEY_USER_ID, documentReference.getId());
                     Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
                     Toast.makeText(SignupActivity.this, "User data saved successfully", Toast.LENGTH_SHORT).show();
                 })

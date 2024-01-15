@@ -1,5 +1,6 @@
 package com.example.artcon_test.chat.adapters;
 
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -39,7 +40,6 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHold
         return new UserViewHolder(itemContainerConversationBinding);
     }
 
-    // Inside onBindViewHolder in UsersAdapter
     @Override
     public void onBindViewHolder(@NonNull UserViewHolder holder, int position) {
         holder.setUserData(users.get(position));
@@ -78,6 +78,8 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHold
             String fullName = user.getFirstname() + " " + user.getLastname();
             binding.textName.setText(fullName);
             binding.textUsername.setText(user.getUsername());
+            String pictureUri = user.getPicture();
+//            binding.imageProfile.setImageURI(Uri.parse(pictureUri));
             binding.getRoot().setOnClickListener(v -> userListener.onUserClicked(user));
         }
 
