@@ -59,5 +59,16 @@
     <string name="add_portfolio_post">Add portfolio post</string>
     <string name="add_job_post">Add job post</string>
     <string name="edit_profile">Edit Profile</string>
-
+    
+    <!-- Edit Profile -->
+    <string name="username">Username</string>
+    <string name="firstname">First name</string>
+    <string name="lastname">Last name</string>
+    <string name="gender">Gender</string>
+    <string name="email">Email</string>
+    <string name="banner">Banner</string>
+    <string name="addbanner">Add banner</string>
+    <string name="phonenumber">Phone number</string>
+    <string name="title">Title</string>
+    <string name="bio">Bio</string>
 </resources>

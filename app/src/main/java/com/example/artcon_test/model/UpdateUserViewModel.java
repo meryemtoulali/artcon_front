@@ -19,12 +19,12 @@ public class UpdateUserViewModel extends ViewModel {
     private String type;
     private String username;
     private File picture;
-    private Multipart banner;
+    private File banner;
     private Date birthday;
     private List<Interest> interests;
     private List<Long> interestIds;
 
-    public UpdateUserViewModel(String bio, String firstname, String lastname, String location, String gender, String phone_number, String title, String type, String username, File picture, Multipart banner, Date birthday) {
+    public UpdateUserViewModel(String bio, String firstname, String lastname, String location, String gender, String phone_number, String title, String type, String username, File picture, File banner, Date birthday) {
         this.bio = bio;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -122,11 +122,11 @@ public class UpdateUserViewModel extends ViewModel {
         this.picture = picture;
     }
 
-    public Multipart getBanner() {
+    public File getBanner() {
         return banner;
     }
 
-    public void setBanner(Multipart banner) {
+    public void setBanner(File banner) {
         this.banner = banner;
     }
 

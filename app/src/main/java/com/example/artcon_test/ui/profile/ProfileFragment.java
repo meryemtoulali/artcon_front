@@ -17,6 +17,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.artcon_test.ui.login.LoginActivity;
@@ -115,8 +117,11 @@ public class ProfileFragment extends Fragment {
                     navigateToLoginPage();
                     clearUserSession();
                     return true;
+                } else if (item.getItemId() == R.id.menu_edit) {
+                    NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment);
+                    navController.navigate(R.id.action_navigation_profile_to_edit_profile);
                 }
-                Toast.makeText(requireContext(), "Network Error", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(requireContext(), "Network Error", Toast.LENGTH_SHORT).show();
                 return false;
             });
             popup.show();
