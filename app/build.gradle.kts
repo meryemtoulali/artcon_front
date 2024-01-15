@@ -41,6 +41,7 @@ dependencies {
     implementation ("androidx.fragment:fragment:1.5.5")
     // Kotlin
     implementation ("androidx.fragment:fragment-ktx:1.5.5")
+    implementation("androidx.legacy:legacy-support-v4:1.0.0")
     // Testing Fragments in Isolation
     debugImplementation ("androidx.fragment:fragment-testing:1.5.5")
 

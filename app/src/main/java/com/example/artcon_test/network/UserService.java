@@ -80,4 +80,18 @@ public interface UserService {
     );
 
 
+    @Multipart
+    @PUT("user/{userId}")
+    Call<Void> editprofile(
+            @Path("userId") String userId,
+            @Part MultipartBody.Part picture,
+            @Part MultipartBody.Part banner,
+            @Part("title") RequestBody title,
+            @Part("username") RequestBody username,
+            @Part("firstname") RequestBody firstname,
+            @Part("lastname") RequestBody lastname,
+            @Part("phone_number") RequestBody phonenumber,
+            @Part("bio") RequestBody bio,
+            @Part("email") RequestBody email
+    );
 }

@@ -88,6 +88,9 @@
         <action
             android:id="@+id/action_followers_to_profile"
             app:destination="@id/navigation_profile" />
+        <action
+            android:id="@+id/action_navigation_profile_to_edit_profile"
+            app:destination="@id/edit_profile" />
     </fragment>
 
     <fragment
@@ -139,5 +142,13 @@
                 app:argType="string" />
         </action>
 
+    <action
+        android:id="@+id/action_global_navigation_add_post"
+        app:destination="@id/navigation_add_post" />
+    <fragment
+        android:id="@+id/edit_profile"
+        android:name="com.example.artcon_test.ui.settings.EditProfile"
+        android:label="edit_profile"
+        tools:layout="@layout/fragment_edit_profile" />
 
 </navigation>

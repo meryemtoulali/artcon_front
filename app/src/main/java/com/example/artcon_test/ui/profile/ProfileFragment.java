@@ -19,6 +19,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -33,7 +34,7 @@ import com.squareup.picasso.Picasso;
 
 public class ProfileFragment extends Fragment {
 
-//    private FragmentProfileBinding binding;
+    //    private FragmentProfileBinding binding;
     private ViewPager2 viewPager2;
     private boolean isFollowing;
 
@@ -48,7 +49,7 @@ public class ProfileFragment extends Fragment {
     private LogoutViewModel logoutViewModel;
     private Button followButton;
     private TextView followers;
-private Integer followersCount;
+    private Integer followersCount;
 
     String TAG = "hatsunemiku";
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -129,8 +130,10 @@ private Integer followersCount;
                     navigateToLoginPage();
                     clearUserSession();
                     return true;
+                } else if (item.getItemId() == R.id.menu_edit) {
+                    NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment);
+                    navController.navigate(R.id.action_navigation_profile_to_edit_profile);
                 }
-                Toast.makeText(requireContext(), "Network Error", Toast.LENGTH_SHORT).show();
                 return false;
             });
             popup.show();
@@ -219,24 +222,24 @@ private Integer followersCount;
     }
 
     private void observeFollowStatus() {
-            profileViewModel.isFollowing(USER_ID, selectedUserId, new UserRepository.FollowCheckCallback() {
-                @Override
-                public void onSuccess(Boolean follows) {
-                    if (follows) {
-                        isFollowing = true;
-                        followButton.setText("Unfollow");
-                    } else {
-                        isFollowing = false;
-                        followButton.setText("Follow");
-                    }
+        profileViewModel.isFollowing(USER_ID, selectedUserId, new UserRepository.FollowCheckCallback() {
+            @Override
+            public void onSuccess(Boolean follows) {
+                if (follows) {
+                    isFollowing = true;
+                    followButton.setText("Unfollow");
+                } else {
+                    isFollowing = false;
+                    followButton.setText("Follow");
                 }
+            }
 
-                @Override
-                public void onError(String errorMessage) {
-                    // Handle error if needed
-                    Log.e(TAG, errorMessage);
-                }
-            });
+            @Override
+            public void onError(String errorMessage) {
+                // Handle error if needed
+                Log.e(TAG, errorMessage);
+            }
+        });
     }
 
     private void followUser(String currentUserId, String selectedUserId) {

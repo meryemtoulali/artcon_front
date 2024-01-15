@@ -72,4 +72,16 @@
     <string name="no_followers">You don\'t have any followers.</string>
     <string name="no_following">You haven\'t followed anyone yet.</string>
 
+
+    <!-- Edit Profile -->
+    <string name="username">Username</string>
+    <string name="firstname">First name</string>
+    <string name="lastname">Last name</string>
+    <string name="gender">Gender</string>
+    <string name="email">Email</string>
+    <string name="banner">Banner</string>
+    <string name="addbanner">Add banner</string>
+    <string name="phonenumber">Phone number</string>
+    <string name="title">Title</string>
+    <string name="bio">Bio</string>
 </resources>
