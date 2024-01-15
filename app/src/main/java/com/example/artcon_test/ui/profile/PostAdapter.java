@@ -1,8 +1,16 @@
 package com.example.artcon_test.ui.profile;
 
-
+import static android.app.PendingIntent.getActivity;
 import static android.view.View.GONE;
 
+import static androidx.test.platform.app.InstrumentationRegistry.getArguments;
+import android.os.Bundle;
+import static com.example.artcon_test.ui.post.PostFragment.ARG_POST_ID;
+
+import androidx.fragment.app.FragmentManager;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import com.example.artcon_test.ui.post.ViewPostFragment;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
@@ -46,6 +54,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     }
     private final SharedPreferences sharedPreferences;
 
+    private FragmentManager fragmentManager;
 
     public PostAdapter(Context context) {
         this.sharedPreferences = context.getSharedPreferences("AuthPrefs", Context.MODE_PRIVATE);
@@ -96,18 +105,20 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
 
     public class PostViewHolder extends RecyclerView.ViewHolder {
         // Declare your views here
+        private Integer postIdCurrent;
         private final View itemView;
         private final TextView fullName;
         private final TextView userName;
         private final ImageView profilePic;
         private final TextView desc;
         private final TextView likes;
+        private TextView commentCount;
         private final ViewPager2 viewPager2;
         private final ImageButton likeButton;
         private final CardView cardView;
         private MediaAdapter mediaAdapter;
         boolean checkIfLiked = false;
-
+        private ImageButton commentButton;
 
         public PostViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -117,13 +128,16 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
             profilePic = itemView.findViewById(R.id.profileImage);
             desc = itemView.findViewById(R.id.postTextArea);
             likes = itemView.findViewById(R.id.likeCount);
+            commentCount = itemView.findViewById(R.id.commentCount);
             viewPager2 = itemView.findViewById(R.id.mediaViewPager);
             likeButton = itemView.findViewById(R.id.likeButton);
+            commentButton = itemView.findViewById(R.id.commentButton);
             cardView = itemView.findViewById(R.id.postImageCardView);
         }
 
         public void bind(Post post) {
             // Populate views with data from the Post object
+
             User postUser = post.getUser();
             String postFirstname = postUser.getFirstname();
             String postLastname = postUser.getLastname();
@@ -133,6 +147,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
             List<MediaItem> mediaFiles = post.getMediaFiles();
             String postDesc = post.getDescription();
             Integer postLikes = post.getLikes();
+            Integer postIdCurrent = post.getId();
+            Integer postComments = post.getComments_count();
             // fill view with data
             fullName.setText(postFirstname +" "+ postLastname);
             String postAtUsername = "@"+ postUsername;
@@ -152,6 +168,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
 
             desc.setText(postDesc);
             likes.setText(String.valueOf(post.getLikes()));
+            commentCount.setText(String.valueOf(postComments));
 
             // Set up the ViewPager2 with media files
 
@@ -306,9 +323,33 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
                 }
             });
 
+            //onClick comment
+            commentButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.d("comment", "click");
+                    Log.d("comment", "about to navigate");
+
+                    Bundle result = new Bundle();
+                    result.putString("postId", String.valueOf(postIdCurrent));
+                    NavController navController = Navigation.findNavController(itemView);
+                    navController.navigate(R.id.action_global_navigation_view_post, result);
+
+
+                    //NavController navController = Navigation.findNavController(itemView);
+                    //navController.navigate(R.id.action_global_navigation_view_post);
+
+                    /*
+                    getParentFragmentManager().beginTransaction()
+                            .replace(R.id.fragment_container, viewPostFragment)
+                            .addToBackStack(null)
+                            .commit();*/
+                }
+
+            });
+
         }
 
     }
-
 
 }

@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.artcon_test.databinding.FragmentRecentSearchBinding;
+import com.example.artcon_test.viewmodel.SearchViewModel;
 
 import java.util.ArrayList;
 import java.util.HashSet;

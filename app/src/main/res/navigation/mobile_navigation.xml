@@ -36,7 +36,6 @@
     </fragment>
 
 
-
     <fragment
         android:id="@+id/navigation_search"
         android:name="com.example.artcon_test.ui.search.SearchFragment"
@@ -65,7 +64,7 @@
         android:id="@+id/navigation_profile"
         android:name="com.example.artcon_test.ui.profile.ProfileFragment"
         android:label="@string/title_profile"
-        tools:layout="@layout/activity_profile" >
+        tools:layout="@layout/activity_profile">
         <action
             android:id="@+id/action_profile_to_portfolio_post"
             app:destination="@id/navigation_portfolioPost" />
@@ -85,7 +84,7 @@
         android:id="@+id/navigation_followers"
         android:name="com.example.artcon_test.ui.profile.FollowersListFragment"
         android:label="@string/followers"
-        tools:layout="@layout/fragment_followers_list" >
+        tools:layout="@layout/fragment_followers_list">
         <action
             android:id="@+id/action_followers_to_profile"
             app:destination="@id/navigation_profile" />
@@ -95,7 +94,7 @@
         android:id="@+id/navigation_following"
         android:name="com.example.artcon_test.ui.profile.FollowingListFragment"
         android:label="@string/following"
-        tools:layout="@layout/fragment_following_list" >
+        tools:layout="@layout/fragment_following_list">
         <action
             android:id="@+id/action_following_to_profile"
             app:destination="@id/navigation_profile" />
@@ -129,9 +128,16 @@
         android:name="com.example.artcon_test.ui.post.ViewPostFragment"
         android:label="View Post"
         tools:layout="@layout/activity_view_post"/>
-    <action
-        android:id="@+id/action_global_navigation_add_post"
-        app:destination="@id/navigation_add_post" />
+        <action
+            android:id="@+id/action_global_navigation_add_post"
+            app:destination="@id/navigation_add_post" />
+        <action
+            android:id="@+id/action_global_navigation_view_post"
+            app:destination="@id/navigation_view_post">
+            <argument
+                android:name="postId"
+                app:argType="string" />
+        </action>
 
 
 </navigation>

@@ -16,7 +16,16 @@ public class Post {
     private Interest interest;
     private Date date;
 
-    public Post(Integer id, String description, User user, List<MediaItem> mediaFiles, Integer likes, Date dateTime) {
+    public Integer getComments_count() {
+        return comments_count;
+    }
+
+    public void setComments_count(Integer comments_count) {
+        this.comments_count = comments_count;
+    }
+
+
+    public Post(Integer id, String description, User user, List<MediaItem> mediaFiles, Integer likes,Integer comments_count,  Date dateTime) {
 
         this.id = id;
         this.description = description;
@@ -24,6 +33,7 @@ public class Post {
         this.mediaFiles = mediaFiles;
         this.likes = likes;
         this.dateTime = dateTime;
+        this.comments_count = comments_count;
     }
 
     public Integer getId() {
