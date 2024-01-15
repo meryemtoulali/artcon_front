@@ -9,7 +9,11 @@
         android:id="@+id/navigation_home"
         android:name="com.example.artcon_test.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_view_post2"
+            app:destination="@id/navigation_view_post" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_search"
@@ -40,6 +44,9 @@
         <action
             android:id="@+id/action_profile_to_post"
             app:destination="@id/navigation_post" />
+        <action
+            android:id="@+id/action_navigation_profile_to_navigation_view_post"
+            app:destination="@id/navigation_view_post" />
     </fragment>
     <fragment
         android:id="@+id/navigation_portfolioPost"
@@ -72,5 +79,12 @@
     <action
         android:id="@+id/action_global_navigation_add_post"
         app:destination="@id/navigation_add_post" />
+    <action
+        android:id="@+id/action_global_navigation_view_post"
+        app:destination="@id/navigation_view_post" >
+        <argument
+            android:name="postId"
+            app:argType="string" />
+    </action>
 
 </navigation>

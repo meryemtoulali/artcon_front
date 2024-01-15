@@ -1,10 +1,16 @@
 package com.example.artcon_test.ui.profile;
 
 
+import static android.app.PendingIntent.getActivity;
 import static android.view.View.GONE;
+
+import static androidx.test.platform.app.InstrumentationRegistry.getArguments;
+
+import static com.example.artcon_test.ui.post.PostFragment.ARG_POST_ID;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +27,8 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -34,6 +42,7 @@ import com.example.artcon_test.network.PostService;
 import com.example.artcon_test.retrofit.RetrofitService;
 import com.example.artcon_test.ui.post.MediaAdapter;
 import com.example.artcon_test.ui.post.PostFragment;
+import com.example.artcon_test.ui.post.ViewPostFragment;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -46,6 +55,7 @@ public class ProfilePostRecyclerAdapter extends RecyclerView.Adapter<ProfilePost
     private List<Post> postList;
     private FrameLayout postContainer;
     private Context context;
+    private FragmentManager fragmentManager;
 
 
     public List<Post> getPostList() {
@@ -55,9 +65,10 @@ public class ProfilePostRecyclerAdapter extends RecyclerView.Adapter<ProfilePost
     private SharedPreferences sharedPreferences;
 
 
-    public ProfilePostRecyclerAdapter(Context context) {
+    public ProfilePostRecyclerAdapter(Context context, FragmentManager fragmentManager) {
         this.context = context;
         this.sharedPreferences = context.getSharedPreferences("AuthPrefs", Context.MODE_PRIVATE);
+        this.fragmentManager = fragmentManager;
     }
     public void setPostList(List<Post> postList) {
         this.postList = postList;
@@ -82,17 +93,22 @@ public class ProfilePostRecyclerAdapter extends RecyclerView.Adapter<ProfilePost
 
     public class PostViewHolder extends RecyclerView.ViewHolder {
         // Declare your views here
+        private Integer postIdCurrent;
         private final View itemView;
         private final TextView fullName;
         private final TextView userName;
         private final ImageView profilePic;
         private final TextView desc;
         private final TextView likes;
+
+        private TextView commentCount;
         private final ViewPager2 viewPager2;
         private final ImageButton likeButton;
         private final CardView cardView;
         private MediaAdapter mediaAdapter;
         boolean checkIfLiked = false;
+
+        private ImageButton commentButton;
 
 
         public PostViewHolder(@NonNull View itemView) {
@@ -103,8 +119,10 @@ public class ProfilePostRecyclerAdapter extends RecyclerView.Adapter<ProfilePost
             profilePic = itemView.findViewById(R.id.profileImage);
             desc = itemView.findViewById(R.id.postTextArea);
             likes = itemView.findViewById(R.id.likeCount);
+            commentCount = itemView.findViewById(R.id.commentCount);
             viewPager2 = itemView.findViewById(R.id.mediaViewPager);
             likeButton = itemView.findViewById(R.id.likeButton);
+            commentButton = itemView.findViewById(R.id.commentButton);
             cardView = itemView.findViewById(R.id.postImageCardView);
         }
 
@@ -119,6 +137,8 @@ public class ProfilePostRecyclerAdapter extends RecyclerView.Adapter<ProfilePost
             List<MediaItem> mediaFiles = post.getMediaFiles();
             String postDesc = post.getDescription();
             Integer postLikes = post.getLikes();
+            Integer postIdCurrent = post.getId();
+            Integer postComments = post.getComments_count();
             // fill view with data
             fullName.setText(postFirstname +" "+ postLastname);
             String postAtUsername = "@"+ postUsername;
@@ -138,6 +158,8 @@ public class ProfilePostRecyclerAdapter extends RecyclerView.Adapter<ProfilePost
 
             desc.setText(postDesc);
             likes.setText(String.valueOf(post.getLikes()));
+
+            commentCount.setText(String.valueOf(postComments));
 
             // Set up the ViewPager2 with media files
 
@@ -292,9 +314,33 @@ public class ProfilePostRecyclerAdapter extends RecyclerView.Adapter<ProfilePost
                 }
             });
 
+            //onClick comment
+            commentButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.d("comment", "click");
+
+                    Log.d("comment", "about to navigate");
+
+                    Bundle result = new Bundle();
+                    result.putString("postId", String.valueOf(postIdCurrent));
+                    NavController navController = Navigation.findNavController(itemView);
+                    navController.navigate(R.id.action_global_navigation_view_post, result);
+
+
+                    //NavController navController = Navigation.findNavController(itemView);
+                    //navController.navigate(R.id.action_global_navigation_view_post);
+
+                    /*
+                    getParentFragmentManager().beginTransaction()
+                            .replace(R.id.fragment_container, viewPostFragment)
+                            .addToBackStack(null)
+                            .commit();*/
+                    }
+
+            });
+
         }
 
     }
-
-
 }

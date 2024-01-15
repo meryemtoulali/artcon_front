@@ -38,7 +38,7 @@ public class SearchPostsFragment extends Fragment {
 
         progressBar = view.findViewById(R.id.progressBar);
 
-        postsAdapter = new ProfilePostRecyclerAdapter(requireContext());
+        postsAdapter = new ProfilePostRecyclerAdapter(requireContext(), getParentFragmentManager());
         binding.postsList.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.postsList.setAdapter(postsAdapter);
 

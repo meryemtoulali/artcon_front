@@ -15,6 +15,8 @@ import android.widget.Toast;
 
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -44,10 +46,15 @@ public class PostFragment extends Fragment {
     private boolean hasImage = true;
 
     // Add a constant for the argument key
-    private static final String ARG_POST_ID = "postId";
+    public static final String ARG_POST_ID = "postId";
     SharedPreferences sharedPreferences;
 
+    TextView commentCount;
+
     boolean checkIfLiked = false;
+
+
+    View view;
 
     public PostFragment() {
     }
@@ -66,7 +73,7 @@ public class PostFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_post, container, false);
+        view = inflater.inflate(R.layout.fragment_post, container, false);
 
         //=======================================
         // Access the arguments and update the UI accordingly
@@ -91,7 +98,10 @@ public class PostFragment extends Fragment {
                     List<MediaItem> mediaFiles = post.getMediaFiles();
                     String postDesc = post.getDescription();
                     Integer postLikes = post.getLikes();
+                    Integer postComments = post.getComments_count();
+                    Log.d("comment", "count" + postComments);
                     //comments count
+
 
 
                     //
@@ -121,6 +131,9 @@ public class PostFragment extends Fragment {
 
                     TextView likes = view.findViewById(R.id.likeCount);
                     likes.setText(String.valueOf(postLikes));
+
+                    TextView commentCount = view.findViewById(R.id.commentCount);
+                    commentCount.setText(String.valueOf(postComments));
 
                     viewPager2 = view.findViewById(R.id.mediaViewPager);
 //mediaFiles
@@ -293,6 +306,49 @@ public class PostFragment extends Fragment {
 
             }
         });
+
+        //
+        // Set up the comment button click listener
+        ImageButton commentButton = view.findViewById(R.id.commentButton);
+        commentButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("comment", "click");
+                // Check if the current fragment is already in ViewPostFragment
+                if (getParentFragment() instanceof ViewPostFragment) {
+                    Log.d("comment", "View");
+                    //  nothing
+                } else {
+                    Log.d("comment", "about to navigate");
+                    // Navigate to ViewPostFragment
+                    String postId = getArguments().getString(ARG_POST_ID);
+                    ViewPostFragment viewPostFragment = new ViewPostFragment();
+
+                    // Pass the postId to ViewPostFragment
+                    Bundle bundle = new Bundle();
+                    bundle.putString("postId", postId);
+                    viewPostFragment.setArguments(bundle);
+
+                    navigateToFragment(R.id.action_navigation_home_to_navigation_view_post2);
+                    /*
+                    getParentFragmentManager().beginTransaction()
+                            .replace(R.id.fragment_container, viewPostFragment)
+                            .addToBackStack(null)
+                            .commit();*/
+                }
+            }
+        });
+
         return view;
+    } // end oncreate
+
+    void updateCommentsCount(Integer count) {
+        commentCount = view.findViewById(R.id.commentCount);
+        commentCount.setText(String.valueOf(count));
+    }
+
+    private void navigateToFragment(int fragmentId) {
+        NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
+        navController.navigate(fragmentId);
     }
 }
