@@ -129,11 +129,11 @@ public class ChatActivity extends BasicActivity  {
                 data.put(Constants.KEY_MESSAGE,preferenceManager.getString(Constants.KEY_MESSAGE));
 
 
-                JSONObject body = new JSONObject();
-                body.put(Constants.REMOTE_MSG_DATA,data);
-                body.put(Constants.REMOTE_MSG_REGISTRATION_IDS, tokens);
+//                JSONObject body = new JSONObject();
+//                body.put(Constants.REMOTE_MSG_DATA,data);
+//                body.put(Constants.REMOTE_MSG_REGISTRATION_IDS, tokens);
 
-                sendNotification(body.toString());
+//                sendNotification(body.toString());
 
             } catch (Exception exception) {
                 showToast(exception.getMessage());
@@ -150,40 +150,40 @@ public class ChatActivity extends BasicActivity  {
         Toast.makeText(getApplicationContext(),message, Toast.LENGTH_SHORT).show();
     }
 
-    private void sendNotification (String messageBody) {
-        ApiClient.getClient().create(ApiService.class).sendMessage(
-                Constants.getRemoteMsgHeaders(),
-                messageBody
-        ).enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(@NonNull Call<String> call,@NonNull Response<String> response) {
-                if (response.isSuccessful()){
-                    try {
-                        if(response.body() != null){
-                            JSONObject responseJson = new JSONObject(response.body());
-                            JSONArray results = responseJson.getJSONArray("results");
-                            if (responseJson.getInt("failure") == 1) {
-                                JSONObject error = (JSONObject) results.get(0);
-                                showToast(error.getString("error"));
-                                return;
-                            }
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                    showToast("Notification sent successfully");
-                }else {
-                    showToast("Error: " + response.code());
-                }
-
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<String> call,@NonNull Throwable t) {
-                showToast(t.getMessage());
-            }
-        });
-    }
+//    private void sendNotification (String messageBody) {
+//        ApiClient.getClient().create(ApiService.class).sendMessage(
+//                Constants.getRemoteMsgHeaders(),
+//                messageBody
+//        ).enqueue(new Callback<String>() {
+//            @Override
+//            public void onResponse(@NonNull Call<String> call,@NonNull Response<String> response) {
+//                if (response.isSuccessful()){
+//                    try {
+//                        if(response.body() != null){
+//                            JSONObject responseJson = new JSONObject(response.body());
+//                            JSONArray results = responseJson.getJSONArray("results");
+//                            if (responseJson.getInt("failure") == 1) {
+//                                JSONObject error = (JSONObject) results.get(0);
+//                                showToast(error.getString("error"));
+//                                return;
+//                            }
+//                        }
+//                    } catch (JSONException e) {
+//                        e.printStackTrace();
+//                    }
+//                    showToast("Notification sent successfully");
+//                }else {
+//                    showToast("Error: " + response.code());
+//                }
+//
+//            }
+//
+//            @Override
+//            public void onFailure(@NonNull Call<String> call,@NonNull Throwable t) {
+//                showToast(t.getMessage());
+//            }
+//        });
+//    }
     private void listenerAvailabilityOfReceiver(){
         database.collection(Constants.KEY_COLLECTION_USERS).document(
                 receiverUser.getUserId()
@@ -207,11 +207,11 @@ public class ChatActivity extends BasicActivity  {
 //                    chatAdapter.setReceiverProfileImage(receiverUser.getPicture());
                 }
             }
-                if (isReceiverAvailable){
-                    binding.textAvailability.setVisibility(View.VISIBLE);
-                } else {
-                    binding.textAvailability.setVisibility(View.GONE);
-                }
+            if (isReceiverAvailable){
+                binding.textAvailability.setVisibility(View.VISIBLE);
+            } else {
+                binding.textAvailability.setVisibility(View.GONE);
+            }
 
         });
     }
@@ -265,7 +265,7 @@ public class ChatActivity extends BasicActivity  {
 
 
 
-        private void loadReceiverDetails(){
+    private void loadReceiverDetails(){
         receiverUser= (User) getIntent().getSerializableExtra(Constants.KEY_USER);
         binding.textUsername.setText(receiverUser.getUsername());
     }
@@ -282,9 +282,9 @@ public class ChatActivity extends BasicActivity  {
     }
 
     private void addConversion (HashMap<String, Object> conversion){
-            database.collection(Constants.KEY_COLLECTION_CONVERSATIONS)
-                    .add(conversion)
-                    .addOnSuccessListener(documentReference -> conversionId = documentReference.getId());
+        database.collection(Constants.KEY_COLLECTION_CONVERSATIONS)
+                .add(conversion)
+                .addOnSuccessListener(documentReference -> conversionId = documentReference.getId());
     }
 
     private void updateConversion (String message){
@@ -297,37 +297,37 @@ public class ChatActivity extends BasicActivity  {
     }
 
     private void checkForConversion(){
-            if (chatMessages.size() != 0){
-                checkConversionRemotely(
-                        preferenceManager.getString(Constants.KEY_USER_ID),
-                        receiverUser.getUserId()
-                );
-                checkConversionRemotely(
-                        receiverUser.getUserId(),
-                        preferenceManager.getString(Constants.KEY_USER_ID)
-                );
-            }
+        if (chatMessages.size() != 0){
+            checkConversionRemotely(
+                    preferenceManager.getString(Constants.KEY_USER_ID),
+                    receiverUser.getUserId()
+            );
+            checkConversionRemotely(
+                    receiverUser.getUserId(),
+                    preferenceManager.getString(Constants.KEY_USER_ID)
+            );
+        }
     }
     private void checkConversionRemotely(String senderId , String receiverId){
-            database.collection(Constants.KEY_COLLECTION_CONVERSATIONS)
-                    .whereEqualTo(Constants.KEY_SENDER_ID,senderId)
-                    .whereEqualTo(Constants.KEY_RECEIVER_ID,receiverId)
-                    .get()
-                    .addOnCompleteListener(conversionCompleteListener);
+        database.collection(Constants.KEY_COLLECTION_CONVERSATIONS)
+                .whereEqualTo(Constants.KEY_SENDER_ID,senderId)
+                .whereEqualTo(Constants.KEY_RECEIVER_ID,receiverId)
+                .get()
+                .addOnCompleteListener(conversionCompleteListener);
     }
 
     private final OnCompleteListener<QuerySnapshot> conversionCompleteListener = task -> {
-            if(task.isSuccessful() && task.getResult()!= null && task.getResult().getDocuments().size() > 0) {
-                DocumentSnapshot documentSnapshot = task.getResult().getDocuments().get(0);
-                conversionId = documentSnapshot.getId();
-            }
+        if(task.isSuccessful() && task.getResult()!= null && task.getResult().getDocuments().size() > 0) {
+            DocumentSnapshot documentSnapshot = task.getResult().getDocuments().get(0);
+            conversionId = documentSnapshot.getId();
+        }
     };
 
 
     @Override
     protected void onResume() {
-            super.onResume();
-            listenerAvailabilityOfReceiver();
-        }
+        super.onResume();
+        listenerAvailabilityOfReceiver();
+    }
 
 }

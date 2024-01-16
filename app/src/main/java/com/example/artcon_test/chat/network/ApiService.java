@@ -9,10 +9,6 @@ import retrofit2.http.Headers;
 import retrofit2.http.POST;
 
 public interface ApiService {
-    @Headers({
-            "Content-Type:application/json",
-            "Authorization:key=BGLylVPTMdAIRiW0FLQgYgjF_mKDb0FHrryz15s2ANamDQd1lrm-3Lup7-Cp1_xhpyALsGJODALk5AY5ZEHMA4c" // Replace with your server key
-    })
 
     @POST("fcm/send")
     Call<String> sendMessage(
